@@ -1,0 +1,2 @@
+# Windows skripta mora da zadrzi CRLF krajeve redova
+*.bat -text

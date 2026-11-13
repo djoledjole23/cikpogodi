@@ -26,6 +26,10 @@ cp .env.example .env.local   # pa popuni ključeve (vidi „Supabase” ispod)
 npm run dev                  # http://localhost:3000
 ```
 
+**Windows, bez kucanja komandi:** dvaput klikni `pokreni.bat`. Ako Node.js nije instaliran, skripta ga
+instalira (zvanični LTS paket preko winget-a), zatim instalira pakete, pokreće sajt i otvara
+`http://localhost:3000`.
+
 Bez ključeva sajt radi, ali registracija i prijava javljaju da nalozi nisu povezani.
 
 **Igra radi i bez Supabase-a.** Kad `DATABASE_URL` nije podešen, `npm run dev` sam napravi bazu u memoriji
