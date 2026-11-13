@@ -2,7 +2,7 @@
 
 Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript + Supabase, hosting na Vercelu.
 
-> Ovo je radna verzija README-a. Gotovi su **osnova, auth i segment 2 (Pogodi cenu)**.
+> Ovo je radna verzija README-a. Gotovi su **osnova, auth, segment 2 (Pogodi cenu) i segment 3 (Šta se više gugla)**.
 > Ostali segmenti, rezultat, rang lista, admin i deploy stižu redom.
 
 ## Šta je gotovo
@@ -16,6 +16,7 @@ Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript
 - Zvukovi (Web Audio, bez fajlova), dugme za zvuk, baner za kolačiće, PWA manifest i ikonice
 - **Igra** (`/igra`): jedna igra dnevno, nastavak posle osvežavanja, tajmer, bodovanje na serveru
 - **Segment 2, Pogodi cenu**: 10 artikala dnevno iz `data/products.json`, seed za 14 dana, skripta `update-cene`
+- **Segment 3, Šta se više gugla**: 8 parova dnevno iz `data/trends.json` (Google Trends, Srbija, 12 meseci)
 
 ## Pokretanje lokalno
 
@@ -88,8 +89,11 @@ Skripta napravi fajl u `supabase/seed/`. Otvori ga, nalepi u Supabase → SQL Ed
 Može da se pusti više puta: dan koji već ima pitanja se ne dira. Gotov fajl za prvih 14 dana
 (14–27. novembar 2026) je `supabase/seed/seed-2026-11-14-14d.sql`.
 
-Za sada skripta puni samo segment 2. Raspored: 10 artikala dnevno, bez istog naziva dvaput u danu,
-najviše 4 iz iste kategorije, bez ponavljanja od juče.
+Za sada skripta puni segmente 2 i 3:
+
+- **Cena:** 10 artikala dnevno, bez istog naziva dvaput u danu, najviše 4 iz iste kategorije, bez ponavljanja od juče.
+- **Gugla:** 8 parova dnevno, svaki iz druge teme (pa se nijedan pojam ne javlja dvaput u danu), nijedan par se
+  ne ponavlja u celom periodu. Sa 169 parova ima materijala za oko 20 dana bez ponavljanja.
 
 ## Cene
 
@@ -109,6 +113,24 @@ npm run update-cene -- --suvo   # samo pokaži šta bi se promenilo
 
 Skripta mora da se pokrene sa računara koji može do sajtova lanaca (tvoj računar, ne ovaj repo sam od sebe).
 
+## Google Trends
+
+`data/trends.json` drži prave brojeve iz Google Trends-a (Srbija, poslednjih 12 meseci). Javnog API-ja nema,
+pa se brojevi unose u fajl, a parovi se prave iz njega.
+
+- Fajl je podeljen na **grupe** do 5 pojmova. Jedna grupa = jedno poređenje u Trends-u, pa su pojmovi u njoj
+  na zajedničkoj skali. Pojmovi iz različitih grupa se ne porede.
+- `prosek` je prosečan nedeljni indeks (0–100) za 52 cele nedelje. To je broj koji Trends prikazuje kao
+  „prosek” pored grafikona, samo sa dve decimale.
+- `upit` je tačno ono što je ukucano u Trends: bez kvačica, kako ljudi najčešće kucaju (`cevapi`, ne `ćevapi`).
+- U igri se par prikazuje kao odnos: pojam koji se više tražio dobija 100, drugi srazmerno manje.
+- Par se **ne pravi** kad je manji prosek ispod 2 (pregrubo zaokruženo), kad je razlika ispod 10% (praktično
+  nerešeno) ili kad je jedan pojam više od 10 puta jači (preočigledno).
+
+Nova grupa: otvori `trends.google.com/trends/explore?geo=RS&date=today 12-m`, uporedi do 5 pojmova, prepiši
+proseke u fajl, promeni `period` i `datum_preuzimanja`, pa pusti `npm run seed`. Ručni unos kroz admin panel
+stiže sa adminom.
+
 ## Kako je složeno
 
 ```
@@ -116,7 +138,7 @@ src/config/quiz.config.ts   limiti, pragovi, poeni: sve što se podešava
 src/lib/scoring.ts          bodovanje (čiste funkcije, pokrivene testovima)
 src/lib/game/engine.ts      srce igre: ko sme da igra, koje je pitanje, vreme, poeni (sve na serveru)
 src/lib/game/segments/      po jedan fajl za svaki segment (šta ide u browser, kako se ocenjuje)
-src/lib/content/            čitanje products.json i raspored pitanja po danima
+src/lib/content/            čitanje products.json i trends.json, raspored pitanja po danima
 src/lib/db/                 veza sa bazom: Postgres (produkcija) ili baza u memoriji (razvoj i testovi)
 src/app/api/igra/route.ts   jedina ulazna tačka igre za browser
 src/components/game/        ekrani igre

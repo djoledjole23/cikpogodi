@@ -1,4 +1,4 @@
-import type { Ocena, SegmentStanje } from "./types";
+import type { Ocena, PrikazCena, PrikazGugla, SegmentStanje } from "./types";
 
 /**
  * Rečenica koja ide uz rezultat pitanja. Bira se po tome koliko je igrač bio blizu,
@@ -6,8 +6,7 @@ import type { Ocena, SegmentStanje } from "./types";
  */
 const izaberi = (lista: string[], seme: number) => lista[Math.abs(seme) % lista.length];
 
-export function komentarCena(ocena: Ocena, seme: number): string {
-  const p = ocena.prikaz;
+export function komentarCena(ocena: Ocena, p: PrikazCena, seme: number): string {
   if (p.unos === null) return izaberi(["Vreme! Kasa ne čeka.", "Dok si ti računao, red je otišao.", "Isteklo. Sledeći put brže."], seme);
   if (p.unos === p.prava) return izaberi(["U dinar! Ti radiš na kasi?", "U dinar. Svaka čast, majstore."], seme);
   if (ocena.poeni === ocena.maxPoena) {
@@ -17,6 +16,13 @@ export function komentarCena(ocena: Ocena, seme: number): string {
   if (p.unos < p.prava * 0.5) return izaberi(["Te cene su bile pre deset godina.", "E, da je bar toliko."], seme);
   if (p.unos > p.prava * 2) return izaberi(["Polako, nije ovo aerodrom.", "Ti kupuješ na benzinskoj pumpi?"], seme);
   return izaberi(["Ni blizu, ali svaka čast na hrabrosti.", "Kad si ti poslednji put bio u prodavnici?", "Ovo nije prošlo. Idemo dalje."], seme);
+}
+
+export function komentarGugla(ocena: Ocena, p: PrikazGugla, seme: number): string {
+  if (p.izbor === null) return izaberi(["Vreme! Sledeći put tapni odmah.", "Predugo si se dvoumio."], seme);
+  if (ocena.tacno) return izaberi(["Tako je. Znaš ti šta narod kuca.", "Ajde bre, pa to se zna!", "Pogodak!"], seme);
+  if (Math.min(p.indeksA, p.indeksB) >= 80) return izaberi(["Bilo je tesno, ali ne.", "Za dlaku. Narod je presudio."], seme);
+  return izaberi(["A ne. Narod misli drugačije.", "Ni blizu, ali svaka čast na hrabrosti.", "Ovaj put ne."], seme);
 }
 
 export function komentarSegmenta(s: SegmentStanje): string {

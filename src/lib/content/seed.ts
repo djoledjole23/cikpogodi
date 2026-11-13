@@ -1,6 +1,7 @@
 import { SEGMENTI } from "@/config/quiz.config";
 import { dodajDane } from "@/lib/time";
 import type { Proizvod } from "./products";
+import type { Par } from "./trends";
 
 /**
  * Raspored artikala po danima i SQL koji ga upisuje.
@@ -9,6 +10,7 @@ import type { Proizvod } from "./products";
  */
 
 const PO_DANU = SEGMENTI.find((s) => s.key === "cena")!.pitanja;
+const PAROVA_PO_DANU = SEGMENTI.find((s) => s.key === "gugla")!.pitanja;
 const NAJVISE_PO_KATEGORIJI = 4;
 
 /** Mali generator slučajnih brojeva sa semenom (mulberry32): isti datum → isti izbor. */
@@ -81,6 +83,42 @@ export function planCena(proizvodi: Proizvod[], pocetak: string, dana: number): 
   return plan;
 }
 
+export type DnevniPlanGugla = { datum: string; parovi: Par[] };
+
+/**
+ * Za svaki dan bira 8 parova: svaki iz druge teme (pa se nijedan pojam ne javlja dvaput u danu),
+ * i nijedan par se ne ponavlja u celom periodu.
+ */
+export function planGugla(parovi: Par[], pocetak: string, dana: number): DnevniPlanGugla[] {
+  const poTemi = new Map<string, Par[]>();
+  for (const p of parovi) poTemi.set(p.tema, [...(poTemi.get(p.tema) ?? []), p]);
+  const kljuc = (p: Par) => `${p.upitA}|${p.upitB}`;
+  const iskoriscen = new Set<string>();
+  const plan: DnevniPlanGugla[] = [];
+
+  for (let d = 0; d < dana; d++) {
+    const datum = dodajDane(pocetak, d);
+    const rnd = slucajni(semeIzTeksta(`gugla:${datum}`));
+    // Teme sa najviše neiskorišćenih parova idu prve (uz malo slučajnosti), da nijedna ne presuši pre kraja.
+    const teme = [...poTemi.entries()]
+      .map(([tema, lista]) => ({ tema, slobodni: lista.filter((p) => !iskoriscen.has(kljuc(p))), tezina: rnd() * 3 }))
+      .filter((t) => t.slobodni.length > 0)
+      .sort((x, y) => y.slobodni.length + y.tezina - (x.slobodni.length + x.tezina))
+      .slice(0, PAROVA_PO_DANU);
+    if (teme.length < PAROVA_PO_DANU) {
+      throw new Error(`Nema dovoljno parova za ${datum}: treba ${PAROVA_PO_DANU} različitih tema, a ostalo ih je ${teme.length}.`);
+    }
+    const izabrani = teme
+      .map((t) => t.slobodni[Math.floor(rnd() * t.slobodni.length)])
+      .map((p) => ({ p, k: rnd() }))
+      .sort((x, y) => x.k - y.k)
+      .map((x) => x.p);
+    for (const p of izabrani) iskoriscen.add(kljuc(p));
+    plan.push({ datum, parovi: izabrani });
+  }
+  return plan;
+}
+
 /** SQL tekst u jednostrukim navodnicima. */
 const q = (s: string) => `'${s.replace(/'/g, "''")}'`;
 
@@ -98,8 +136,20 @@ export function snapshotCena(p: Proizvod, datumCenovnika: string) {
   };
 }
 
-export function seedSql(opcije: { proizvodi: Proizvod[]; datumCenovnika: string; pocetak: string; dana: number }): string {
-  const { proizvodi, datumCenovnika, pocetak, dana } = opcije;
+/** Ono što se zamrzava uz pitanje „Šta se više gugla”. */
+export function snapshotGugla(p: Par) {
+  return { a: p.a, b: p.b, indeksA: p.indeksA, indeksB: p.indeksB, period: p.period, preuzeto: p.preuzeto };
+}
+
+export function seedSql(opcije: {
+  proizvodi: Proizvod[];
+  datumCenovnika: string;
+  /** Parovi za „Šta se više gugla”. Bez njih se pravi samo segment 2. */
+  parovi?: Par[];
+  pocetak: string;
+  dana: number;
+}): string {
+  const { proizvodi, datumCenovnika, parovi = [], pocetak, dana } = opcije;
   const redovi: string[] = [];
 
   redovi.push("-- Artikli (products.json). Postojeći se osvežavaju po barkodu.");
@@ -127,6 +177,38 @@ export function seedSql(opcije: { proizvodi: Proizvod[]; datumCenovnika: string;
   on conflict (quiz_date, segment, position) do nothing;`,
       );
     });
+  }
+
+  if (parovi.length) {
+    redovi.push(
+      "",
+      "-- Isto što i migracija 0002: ponovljeno ovde da seed radi i ako ona nije puštena.",
+      "create unique index if not exists trend_pairs_par_idx on public.trend_pairs (term_a, term_b, period);",
+      "",
+      "-- Parovi pojmova (trends.json). Postojeći se osvežavaju.",
+    );
+    for (const p of parovi) {
+      redovi.push(
+        `insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values (${q(p.a)}, ${q(p.b)}, ${p.indeksA}, ${p.indeksB}, ${q(p.period)}, ${q(p.preuzeto)})
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;`,
+      );
+    }
+    redovi.push("", "-- Dnevni kviz: segment 3 (Šta se više gugla).");
+    for (const dan of planGugla(parovi, pocetak, dana)) {
+      redovi.push(
+        `insert into public.daily_quiz (quiz_date, status, published_at) values (${q(dan.datum)}, 'published', now())
+  on conflict (quiz_date) do nothing;`,
+      );
+      dan.parovi.forEach((p, i) => {
+        redovi.push(
+          `insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select ${q(dan.datum)}, 3, ${i + 1}, id, ${q(JSON.stringify(snapshotGugla(p)))}::jsonb
+  from public.trend_pairs where term_a = ${q(p.a)} and term_b = ${q(p.b)} and period = ${q(p.period)}
+  on conflict (quiz_date, segment, position) do nothing;`,
+        );
+      });
+    }
   }
   return redovi.join("\n") + "\n";
 }

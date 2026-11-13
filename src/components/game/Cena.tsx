@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { IconCena, IconStikla, IconStrelica, IconVatra } from "@/components/icons";
+import { IconCena, IconStikla } from "@/components/icons";
 import { din } from "@/lib/format";
-import { komentarCena } from "@/lib/game/komentari";
-import type { Ocena, PitanjeCena } from "@/lib/game/types";
-import { Konfete, poletiDoZbira } from "./efekti";
+import type { Ocena, PitanjeCena, PrikazCena } from "@/lib/game/types";
+import { Konfete, Nalepnica } from "./efekti";
 
 const NAJVISE_CIFARA = 6;
 
@@ -101,36 +100,11 @@ export function CenaPitanje({
 
 // ───────────────────────── rezultat pitanja ─────────────────────────
 
-/**
- * Jedan pogled: šta si uneo, koliko stvarno košta, koliko si promašio i koliko si poena dobio.
- */
-export function CenaOcena({
-  ocena,
-  slika,
-  niz,
-  seme,
-  naDalje,
-  ceka,
-}: {
-  ocena: Ocena;
-  slika: string;
-  niz: number;
-  seme: number;
-  naDalje: () => void;
-  ceka: boolean;
-}) {
-  const p = ocena.prikaz;
-  const nalepnica = useRef<HTMLSpanElement>(null);
+/** Jedan pogled: šta si uneo, koliko stvarno košta, koliko si promašio i koliko si poena dobio. */
+export function CenaOcena({ ocena, prikaz: p, slika }: { ocena: Ocena; prikaz: PrikazCena; slika: string }) {
   const nivo = ocena.poeni === ocena.maxPoena ? "pun" : ocena.poeni > 0 ? "pola" : "nula";
-
-  useEffect(() => {
-    if (ocena.poeni > 0) poletiDoZbira(nalepnica.current, `+${ocena.poeni}`);
-  }, [ocena.poeni]);
-
   return (
-    <section className="g-ocena">
-      <h1 className="g-komentar">{komentarCena(ocena, seme)}</h1>
-
+    <>
       <div className={`g-rez ${nivo}`}>
         {ocena.poeni > 0 && <Konfete jacina={nivo === "pun" ? 2 : 1} />}
         <div className="g-rez-cene">
@@ -145,17 +119,9 @@ export function CenaOcena({
         </div>
         <div className="g-rez-dno">
           <span className="g-rez-procenat">{p.unos === null ? "bez odgovora" : p.procenat}</span>
-          <span ref={nalepnica} className="g-nalepnica">
-            {ocena.poeni > 0 ? `+${ocena.poeni}` : "0"} <small>{ocena.poeni === 1 ? "poen" : "poena"}</small>
-          </span>
+          <Nalepnica poeni={ocena.poeni} />
         </div>
       </div>
-
-      {niz >= 2 && (
-        <p className="g-niz">
-          <IconVatra size={22} /> x{niz} zaredom
-        </p>
-      )}
 
       <p className="g-opseg">
         U radnjama od <strong>{din(p.min)}</strong> do <strong>{din(p.max)}</strong>
@@ -168,11 +134,6 @@ export function CenaOcena({
       </p>
 
       <Artikal naziv={p.naziv} kolicina={p.kolicina} slika={slika} mali />
-
-      <button type="button" className="btn btn-lg g-dole" onClick={naDalje} disabled={ceka} autoFocus>
-        <span>{ceka ? "Stiže…" : "Dalje"}</span>
-        {!ceka && <IconStrelica size={26} />}
-      </button>
-    </section>
+    </>
   );
 }

@@ -57,7 +57,7 @@ export const cena: Rukovalac = {
     const unos = istek ? null : procitajUnos(odgovor);
     const poeni = unos === null ? 0 : poeniCena(unos, s.cena);
     return {
-      ocena: { tacno: poeni > 0, poeni, maxPoena: MAX_POENA, istek: unos === null && istek, prikaz: prikaz(s, unos) },
+      ocena: { tacno: poeni > 0, poeni, maxPoena: MAX_POENA, istek, prikaz: prikaz(s, unos) },
       sacuvaj: { unos },
     };
   },

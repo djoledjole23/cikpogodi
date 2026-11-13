@@ -1,6 +1,7 @@
 import { MAX_UKUPNO, SEGMENTI, TOLERANCIJA_MREZE_MS } from "@/config/quiz.config";
 import type { Db } from "@/lib/db/types";
 import { RUKOVAOCI } from "./segments";
+import { bezOdgovora } from "./types";
 import type { Identitet, OdgovorServera, SegmentStanje, Stanje, StavkaRezultata, Trenutno } from "./types";
 
 /**
@@ -175,7 +176,7 @@ function sastaviStanje(datum: string, igra: RedIgre | null, stavke: RedStavke[])
         pozicija: s.position,
         poeni: s.points ?? 0,
         maxPoena: r.maxPoena,
-        istek: s.answer === null || (prikaz.vrsta === "cena" && prikaz.unos === null),
+        istek: bezOdgovora(prikaz),
         prikaz,
       };
     });

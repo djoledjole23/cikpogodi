@@ -1,5 +1,6 @@
 import type { Ocena, Pitanje, Prikaz } from "../types";
 import { cena } from "./cena";
+import { gugla } from "./gugla";
 
 /**
  * Svaki segment ima svog „rukovaoca”: zna šta od pitanja sme da ode u browser,
@@ -23,4 +24,5 @@ export type Rukovalac = {
 /** Ključ je broj segmenta. Stavke kviza za segmente kojih ovde nema se preskaču. */
 export const RUKOVAOCI: Record<number, Rukovalac> = {
   2: cena,
+  3: gugla,
 };

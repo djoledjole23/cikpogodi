@@ -972,3 +972,993 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
   select '2026-11-27', 2, 10, id, '{"naziv":"Carnex jetrena pašteta","kolicina":"75 g","slika":"https://images.openfoodfacts.org/images/products/000/008/600/2783/front_de.7.400.jpg","cena":89,"min":79.99,"max":99.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '86002783'
   on conflict (quiz_date, segment, position) do nothing;
+
+-- Isto što i migracija 0002: ponovljeno ovde da seed radi i ako ona nije puštena.
+create unique index if not exists trend_pairs_par_idx on public.trend_pairs (term_a, term_b, period);
+
+-- Parovi pojmova (trends.json). Postojeći se osvežavaju.
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Ćevapi', 'Pljeskavica', 100, 89, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Ćevapi', 'Burek', 59, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Gibanica', 'Ćevapi', 60, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Burek', 'Pljeskavica', 100, 52, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Pljeskavica', 'Gibanica', 100, 67, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Burek', 'Sarma', 100, 53, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Burek', 'Gibanica', 100, 35, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Gibanica', 'Sarma', 66, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Novi Sad', 'Kragujevac', 100, 29, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Subotica', 'Novi Sad', 21, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Novi Sad', 'Čačak', 100, 17, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kragujevac', 'Subotica', 100, 74, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Čačak', 'Kragujevac', 58, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kragujevac', 'Zaječar', 100, 15, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Subotica', 'Čačak', 100, 78, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Zaječar', 'Subotica', 21, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Čačak', 'Zaječar', 100, 26, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Zlatibor', 'Kopaonik', 100, 40, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Divčibare', 'Zlatibor', 17, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kopaonik', 'Divčibare', 100, 44, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Stara planina', 'Kopaonik', 17, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kopaonik', 'Fruška gora', 100, 22, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Divčibare', 'Stara planina', 100, 38, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Fruška gora', 'Divčibare', 50, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Stara planina', 'Fruška gora', 76, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Sokobanja', 'Vrnjačka Banja', 56, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Banja Koviljača', 'Vrnjačka Banja', 11, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Banja Koviljača', 'Sokobanja', 21, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Sokobanja', 'Prolom Banja', 100, 12, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Sokobanja', 'Ribarska Banja', 100, 16, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Banja Koviljača', 'Prolom Banja', 100, 59, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Banja Koviljača', 'Ribarska Banja', 100, 76, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Ribarska Banja', 'Prolom Banja', 100, 78, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Turska', 'Grčka', 100, 82, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Egipat', 'Grčka', 21, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Crna Gora', 'Turska', 83, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Crna Gora', 'Egipat', 100, 20, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Egipat', 'Turska', 17, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Hrvatska', 'Turska', 87, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Hrvatska', 'Egipat', 100, 20, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Nikola Jokić', 'Dušan Vlahović', 100, 53, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Nikola Jokić', 'Bogdan Bogdanović', 100, 48, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Košarka', 'Fudbal', 63, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Fudbal', 'Tenis', 100, 46, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Odbojka', 'Fudbal', 22, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vaterpolo', 'Fudbal', 30, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Košarka', 'Tenis', 100, 73, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Odbojka', 'Košarka', 35, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vaterpolo', 'Košarka', 47, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Tenis', 'Odbojka', 100, 48, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Tenis', 'Vaterpolo', 100, 64, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vaterpolo', 'Odbojka', 100, 74, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Ceca', 'Aca Lukas', 100, 36, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Ceca', 'Zdravko Čolić', 100, 34, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Lepa Brena', 'Ceca', 27, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Aca Lukas', 'Lepa Brena', 100, 75, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Željko Joksimović', 'Aca Lukas', 21, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Zdravko Čolić', 'Lepa Brena', 100, 77, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Željko Joksimović', 'Zdravko Čolić', 21, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Lepa Brena', 'Željko Joksimović', 100, 28, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kafa', 'Čaj', 78, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kafa', 'Pivo', 100, 78, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kafa', 'Rakija', 100, 71, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Pivo', 'Čaj', 61, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vino', 'Čaj', 83, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Rakija', 'Čaj', 56, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vino', 'Pivo', 100, 74, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Rakija', 'Vino', 67, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('BMW', 'Audi', 100, 81, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Mercedes', 'BMW', 60, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Opel', 'BMW', 49, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Škoda', 'BMW', 31, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Audi', 'Mercedes', 100, 74, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Audi', 'Opel', 100, 61, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Audi', 'Škoda', 100, 38, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Opel', 'Mercedes', 83, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Škoda', 'Mercedes', 51, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Škoda', 'Opel', 62, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Halo oglasi', 'KupujemProdajem', 20, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('KupujemProdajem', 'Limundo', 100, 12, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Polovni automobili', 'Halo oglasi', 100, 18, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Limundo', 'Polovni automobili', 12, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Halo oglasi', 'Limundo', 100, 63, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Halo oglasi', 'Kupindo', 100, 35, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kupindo', 'Limundo', 54, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Palačinke', 'Krofne', 100, 32, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Baklava', 'Palačinke', 22, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vanilice', 'Krofne', 24, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Krofne', 'Baklava', 100, 69, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vanilice', 'Baklava', 34, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vanilice', 'Tulumbe', 100, 39, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Tulumbe', 'Baklava', 14, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Božić', 'Slava', 65, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Slava', 'Uskrs', 86, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Slava', 'Nova godina', 100, 89, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Božić', 'Uskrs', 56, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Božić', 'Nova godina', 74, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Nova godina', 'Uskrs', 77, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Loto', 'Vremenska prognoza', 10, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kurs evra', 'Horoskop', 43, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Horoskop', 'Loto', 87, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kurs evra', 'Loto', 37, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Jabuka', 'Šljiva', 100, 53, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Malina', 'Jabuka', 56, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Jabuka', 'Lubenica', 100, 21, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Jabuka', 'Grožđe', 100, 20, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Lubenica', 'Šljiva', 40, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Grožđe', 'Šljiva', 38, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Malina', 'Lubenica', 100, 38, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Malina', 'Grožđe', 100, 36, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('iPhone', 'Samsung', 100, 70, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Xiaomi', 'iPhone', 40, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Huawei', 'iPhone', 12, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Samsung', 'Xiaomi', 100, 57, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Samsung', 'Huawei', 100, 17, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Huawei', 'Xiaomi', 31, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Xiaomi', 'Nokia', 100, 13, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Huawei', 'Nokia', 100, 42, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Facebook', 'Instagram', 100, 64, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('TikTok', 'Instagram', 40, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Viber', 'Instagram', 11, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('WhatsApp', 'Instagram', 18, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('TikTok', 'Facebook', 26, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('WhatsApp', 'Facebook', 11, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Viber', 'TikTok', 27, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('WhatsApp', 'TikTok', 44, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('WhatsApp', 'Viber', 100, 60, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Paradajz', 'Krastavac', 100, 20, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Paradajz', 'Kupus', 100, 87, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Krastavac', 'Paprika', 20, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kupus', 'Paprika', 86, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Kupus', 'Krastavac', 100, 23, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Krompir', 'Krastavac', 100, 18, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Krompir', 'Kupus', 100, 80, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Pasulj', 'Gulaš', 100, 54, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Pasulj', 'Musaka', 100, 62, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Punjene paprike', 'Pasulj', 37, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Pasulj', 'Podvarak', 100, 26, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Musaka', 'Gulaš', 100, 87, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Gulaš', 'Punjene paprike', 100, 69, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Podvarak', 'Gulaš', 48, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Musaka', 'Punjene paprike', 100, 60, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Podvarak', 'Musaka', 42, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Punjene paprike', 'Podvarak', 100, 70, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Matematika', 'Srpski jezik', 100, 50, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Matematika', 'Engleski jezik', 100, 15, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Matematika', 'Istorija', 100, 76, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Matematika', 'Geografija', 100, 27, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Engleski jezik', 'Srpski jezik', 30, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Istorija', 'Srpski jezik', 100, 65, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Geografija', 'Srpski jezik', 55, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Istorija', 'Engleski jezik', 100, 20, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Geografija', 'Engleski jezik', 100, 56, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Geografija', 'Istorija', 35, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Klima', 'Frižider', 100, 37, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Klima', 'Veš mašina', 100, 31, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Klima', 'Šporet', 100, 27, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Klima', 'Usisivač', 100, 59, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Veš mašina', 'Frižider', 85, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Šporet', 'Frižider', 73, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Usisivač', 'Frižider', 100, 63, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Šporet', 'Veš mašina', 86, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Usisivač', 'Veš mašina', 100, 53, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Usisivač', 'Šporet', 100, 46, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Lala', 'Ruža', 25, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Orhideja', 'Ruža', 21, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Božur', 'Ruža', 25, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Orhideja', 'Lala', 83, 100, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Božur', 'Orhideja', 100, 82, '13.11.2025 – 13.11.2026', '2026-11-13')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+
+-- Dnevni kviz: segment 3 (Šta se više gugla).
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-14', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-14', 3, 1, id, '{"a":"Usisivač","b":"Šporet","indeksA":100,"indeksB":46,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Usisivač' and term_b = 'Šporet' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-14', 3, 2, id, '{"a":"Istorija","b":"Engleski jezik","indeksA":100,"indeksB":20,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Istorija' and term_b = 'Engleski jezik' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-14', 3, 3, id, '{"a":"BMW","b":"Audi","indeksA":100,"indeksB":81,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'BMW' and term_b = 'Audi' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-14', 3, 4, id, '{"a":"Gibanica","b":"Sarma","indeksA":66,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Gibanica' and term_b = 'Sarma' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-14', 3, 5, id, '{"a":"Košarka","b":"Fudbal","indeksA":63,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Košarka' and term_b = 'Fudbal' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-14', 3, 6, id, '{"a":"Limundo","b":"Polovni automobili","indeksA":12,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Limundo' and term_b = 'Polovni automobili' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-14', 3, 7, id, '{"a":"Musaka","b":"Punjene paprike","indeksA":100,"indeksB":60,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Musaka' and term_b = 'Punjene paprike' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-14', 3, 8, id, '{"a":"Kragujevac","b":"Zaječar","indeksA":100,"indeksB":15,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kragujevac' and term_b = 'Zaječar' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-15', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-15', 3, 1, id, '{"a":"Ribarska Banja","b":"Prolom Banja","indeksA":100,"indeksB":78,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Ribarska Banja' and term_b = 'Prolom Banja' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-15', 3, 2, id, '{"a":"Veš mašina","b":"Frižider","indeksA":85,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Veš mašina' and term_b = 'Frižider' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-15', 3, 3, id, '{"a":"Vino","b":"Pivo","indeksA":100,"indeksB":74,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Vino' and term_b = 'Pivo' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-15', 3, 4, id, '{"a":"Odbojka","b":"Fudbal","indeksA":22,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Odbojka' and term_b = 'Fudbal' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-15', 3, 5, id, '{"a":"Zlatibor","b":"Kopaonik","indeksA":100,"indeksB":40,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Zlatibor' and term_b = 'Kopaonik' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-15', 3, 6, id, '{"a":"Samsung","b":"Xiaomi","indeksA":100,"indeksB":57,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Samsung' and term_b = 'Xiaomi' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-15', 3, 7, id, '{"a":"TikTok","b":"Facebook","indeksA":26,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'TikTok' and term_b = 'Facebook' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-15', 3, 8, id, '{"a":"Audi","b":"Škoda","indeksA":100,"indeksB":38,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Audi' and term_b = 'Škoda' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-16', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-16', 3, 1, id, '{"a":"Pasulj","b":"Podvarak","indeksA":100,"indeksB":26,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Pasulj' and term_b = 'Podvarak' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-16', 3, 2, id, '{"a":"Klima","b":"Šporet","indeksA":100,"indeksB":27,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Klima' and term_b = 'Šporet' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-16', 3, 3, id, '{"a":"Facebook","b":"Instagram","indeksA":100,"indeksB":64,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Facebook' and term_b = 'Instagram' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-16', 3, 4, id, '{"a":"Matematika","b":"Geografija","indeksA":100,"indeksB":27,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Matematika' and term_b = 'Geografija' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-16', 3, 5, id, '{"a":"Banja Koviljača","b":"Prolom Banja","indeksA":100,"indeksB":59,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Banja Koviljača' and term_b = 'Prolom Banja' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-16', 3, 6, id, '{"a":"Divčibare","b":"Stara planina","indeksA":100,"indeksB":38,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Divčibare' and term_b = 'Stara planina' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-16', 3, 7, id, '{"a":"Egipat","b":"Grčka","indeksA":21,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Egipat' and term_b = 'Grčka' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-16', 3, 8, id, '{"a":"Čačak","b":"Zaječar","indeksA":100,"indeksB":26,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Čačak' and term_b = 'Zaječar' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-17', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-17', 3, 1, id, '{"a":"Zdravko Čolić","b":"Lepa Brena","indeksA":100,"indeksB":77,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Zdravko Čolić' and term_b = 'Lepa Brena' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-17', 3, 2, id, '{"a":"Škoda","b":"Opel","indeksA":62,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Škoda' and term_b = 'Opel' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-17', 3, 3, id, '{"a":"Punjene paprike","b":"Pasulj","indeksA":37,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Punjene paprike' and term_b = 'Pasulj' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-17', 3, 4, id, '{"a":"Subotica","b":"Čačak","indeksA":100,"indeksB":78,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Subotica' and term_b = 'Čačak' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-17', 3, 5, id, '{"a":"WhatsApp","b":"Instagram","indeksA":18,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'WhatsApp' and term_b = 'Instagram' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-17', 3, 6, id, '{"a":"Ćevapi","b":"Pljeskavica","indeksA":100,"indeksB":89,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Ćevapi' and term_b = 'Pljeskavica' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-17', 3, 7, id, '{"a":"Fudbal","b":"Tenis","indeksA":100,"indeksB":46,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Fudbal' and term_b = 'Tenis' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-17', 3, 8, id, '{"a":"Jabuka","b":"Lubenica","indeksA":100,"indeksB":21,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Jabuka' and term_b = 'Lubenica' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-18', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-18', 3, 1, id, '{"a":"Željko Joksimović","b":"Zdravko Čolić","indeksA":21,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Željko Joksimović' and term_b = 'Zdravko Čolić' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-18', 3, 2, id, '{"a":"Vaterpolo","b":"Košarka","indeksA":47,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Vaterpolo' and term_b = 'Košarka' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-18', 3, 3, id, '{"a":"Grožđe","b":"Šljiva","indeksA":38,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Grožđe' and term_b = 'Šljiva' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-18', 3, 4, id, '{"a":"Božić","b":"Uskrs","indeksA":56,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Božić' and term_b = 'Uskrs' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-18', 3, 5, id, '{"a":"Kafa","b":"Čaj","indeksA":78,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kafa' and term_b = 'Čaj' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-18', 3, 6, id, '{"a":"Paradajz","b":"Kupus","indeksA":100,"indeksB":87,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Paradajz' and term_b = 'Kupus' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-18', 3, 7, id, '{"a":"Geografija","b":"Istorija","indeksA":35,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Geografija' and term_b = 'Istorija' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-18', 3, 8, id, '{"a":"Musaka","b":"Gulaš","indeksA":100,"indeksB":87,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Musaka' and term_b = 'Gulaš' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-19', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-19', 3, 1, id, '{"a":"Audi","b":"Opel","indeksA":100,"indeksB":61,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Audi' and term_b = 'Opel' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-19', 3, 2, id, '{"a":"Jabuka","b":"Grožđe","indeksA":100,"indeksB":20,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Jabuka' and term_b = 'Grožđe' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-19', 3, 3, id, '{"a":"Kopaonik","b":"Divčibare","indeksA":100,"indeksB":44,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kopaonik' and term_b = 'Divčibare' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-19', 3, 4, id, '{"a":"Kupindo","b":"Limundo","indeksA":54,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kupindo' and term_b = 'Limundo' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-19', 3, 5, id, '{"a":"Xiaomi","b":"Nokia","indeksA":100,"indeksB":13,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Xiaomi' and term_b = 'Nokia' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-19', 3, 6, id, '{"a":"Zaječar","b":"Subotica","indeksA":21,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Zaječar' and term_b = 'Subotica' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-19', 3, 7, id, '{"a":"Usisivač","b":"Frižider","indeksA":100,"indeksB":63,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Usisivač' and term_b = 'Frižider' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-19', 3, 8, id, '{"a":"Turska","b":"Grčka","indeksA":100,"indeksB":82,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Turska' and term_b = 'Grčka' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-20', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-20', 3, 1, id, '{"a":"Pasulj","b":"Gulaš","indeksA":100,"indeksB":54,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Pasulj' and term_b = 'Gulaš' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-20', 3, 2, id, '{"a":"Geografija","b":"Engleski jezik","indeksA":100,"indeksB":56,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Geografija' and term_b = 'Engleski jezik' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-20', 3, 3, id, '{"a":"Klima","b":"Usisivač","indeksA":100,"indeksB":59,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Klima' and term_b = 'Usisivač' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-20', 3, 4, id, '{"a":"Ćevapi","b":"Burek","indeksA":59,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Ćevapi' and term_b = 'Burek' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-20', 3, 5, id, '{"a":"Rakija","b":"Čaj","indeksA":56,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Rakija' and term_b = 'Čaj' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-20', 3, 6, id, '{"a":"Viber","b":"Instagram","indeksA":11,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Viber' and term_b = 'Instagram' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-20', 3, 7, id, '{"a":"Audi","b":"Mercedes","indeksA":100,"indeksB":74,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Audi' and term_b = 'Mercedes' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-20', 3, 8, id, '{"a":"Vaterpolo","b":"Odbojka","indeksA":100,"indeksB":74,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Vaterpolo' and term_b = 'Odbojka' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-21', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-21', 3, 1, id, '{"a":"Tulumbe","b":"Baklava","indeksA":14,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Tulumbe' and term_b = 'Baklava' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-21', 3, 2, id, '{"a":"Gulaš","b":"Punjene paprike","indeksA":100,"indeksB":69,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Gulaš' and term_b = 'Punjene paprike' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-21', 3, 3, id, '{"a":"Malina","b":"Jabuka","indeksA":56,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Malina' and term_b = 'Jabuka' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-21', 3, 4, id, '{"a":"Huawei","b":"Nokia","indeksA":100,"indeksB":42,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Huawei' and term_b = 'Nokia' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-21', 3, 5, id, '{"a":"Banja Koviljača","b":"Ribarska Banja","indeksA":100,"indeksB":76,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Banja Koviljača' and term_b = 'Ribarska Banja' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-21', 3, 6, id, '{"a":"Pljeskavica","b":"Gibanica","indeksA":100,"indeksB":67,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Pljeskavica' and term_b = 'Gibanica' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-21', 3, 7, id, '{"a":"WhatsApp","b":"TikTok","indeksA":44,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'WhatsApp' and term_b = 'TikTok' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-21', 3, 8, id, '{"a":"Egipat","b":"Turska","indeksA":17,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Egipat' and term_b = 'Turska' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-22', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-22', 3, 1, id, '{"a":"Tenis","b":"Odbojka","indeksA":100,"indeksB":48,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Tenis' and term_b = 'Odbojka' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-22', 3, 2, id, '{"a":"Sokobanja","b":"Ribarska Banja","indeksA":100,"indeksB":16,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Sokobanja' and term_b = 'Ribarska Banja' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-22', 3, 3, id, '{"a":"Vanilice","b":"Krofne","indeksA":24,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Vanilice' and term_b = 'Krofne' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-22', 3, 4, id, '{"a":"Matematika","b":"Srpski jezik","indeksA":100,"indeksB":50,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Matematika' and term_b = 'Srpski jezik' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-22', 3, 5, id, '{"a":"Orhideja","b":"Ruža","indeksA":21,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Orhideja' and term_b = 'Ruža' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-22', 3, 6, id, '{"a":"TikTok","b":"Instagram","indeksA":40,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'TikTok' and term_b = 'Instagram' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-22', 3, 7, id, '{"a":"Rakija","b":"Vino","indeksA":67,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Rakija' and term_b = 'Vino' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-22', 3, 8, id, '{"a":"Kopaonik","b":"Fruška gora","indeksA":100,"indeksB":22,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kopaonik' and term_b = 'Fruška gora' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-23', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-23', 3, 1, id, '{"a":"Krastavac","b":"Paprika","indeksA":20,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Krastavac' and term_b = 'Paprika' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-23', 3, 2, id, '{"a":"Škoda","b":"Mercedes","indeksA":51,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Škoda' and term_b = 'Mercedes' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-23', 3, 3, id, '{"a":"Klima","b":"Veš mašina","indeksA":100,"indeksB":31,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Klima' and term_b = 'Veš mašina' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-23', 3, 4, id, '{"a":"Ceca","b":"Zdravko Čolić","indeksA":100,"indeksB":34,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Ceca' and term_b = 'Zdravko Čolić' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-23', 3, 5, id, '{"a":"Novi Sad","b":"Kragujevac","indeksA":100,"indeksB":29,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Novi Sad' and term_b = 'Kragujevac' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-23', 3, 6, id, '{"a":"Podvarak","b":"Gulaš","indeksA":48,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Podvarak' and term_b = 'Gulaš' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-23', 3, 7, id, '{"a":"Nova godina","b":"Uskrs","indeksA":77,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Nova godina' and term_b = 'Uskrs' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-23', 3, 8, id, '{"a":"Halo oglasi","b":"KupujemProdajem","indeksA":20,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Halo oglasi' and term_b = 'KupujemProdajem' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-24', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-24', 3, 1, id, '{"a":"Matematika","b":"Engleski jezik","indeksA":100,"indeksB":15,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Matematika' and term_b = 'Engleski jezik' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-24', 3, 2, id, '{"a":"Paradajz","b":"Krastavac","indeksA":100,"indeksB":20,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Paradajz' and term_b = 'Krastavac' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-24', 3, 3, id, '{"a":"Čačak","b":"Kragujevac","indeksA":58,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Čačak' and term_b = 'Kragujevac' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-24', 3, 4, id, '{"a":"Vanilice","b":"Tulumbe","indeksA":100,"indeksB":39,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Vanilice' and term_b = 'Tulumbe' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-24', 3, 5, id, '{"a":"Halo oglasi","b":"Kupindo","indeksA":100,"indeksB":35,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Halo oglasi' and term_b = 'Kupindo' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-24', 3, 6, id, '{"a":"Aca Lukas","b":"Lepa Brena","indeksA":100,"indeksB":75,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Aca Lukas' and term_b = 'Lepa Brena' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-24', 3, 7, id, '{"a":"Šporet","b":"Veš mašina","indeksA":86,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Šporet' and term_b = 'Veš mašina' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-24', 3, 8, id, '{"a":"Kafa","b":"Rakija","indeksA":100,"indeksB":71,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kafa' and term_b = 'Rakija' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-25', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-25', 3, 1, id, '{"a":"Hrvatska","b":"Turska","indeksA":87,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Hrvatska' and term_b = 'Turska' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-25', 3, 2, id, '{"a":"Stara planina","b":"Fruška gora","indeksA":76,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Stara planina' and term_b = 'Fruška gora' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-25', 3, 3, id, '{"a":"Kurs evra","b":"Loto","indeksA":37,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kurs evra' and term_b = 'Loto' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-25', 3, 4, id, '{"a":"Malina","b":"Lubenica","indeksA":100,"indeksB":38,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Malina' and term_b = 'Lubenica' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-25', 3, 5, id, '{"a":"Krompir","b":"Kupus","indeksA":100,"indeksB":80,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Krompir' and term_b = 'Kupus' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-25', 3, 6, id, '{"a":"Kragujevac","b":"Subotica","indeksA":100,"indeksB":74,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kragujevac' and term_b = 'Subotica' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-25', 3, 7, id, '{"a":"Samsung","b":"Huawei","indeksA":100,"indeksB":17,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Samsung' and term_b = 'Huawei' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-25', 3, 8, id, '{"a":"Geografija","b":"Srpski jezik","indeksA":55,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Geografija' and term_b = 'Srpski jezik' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-26', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-26', 3, 1, id, '{"a":"Istorija","b":"Srpski jezik","indeksA":100,"indeksB":65,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Istorija' and term_b = 'Srpski jezik' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-26', 3, 2, id, '{"a":"Kupus","b":"Paprika","indeksA":86,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Kupus' and term_b = 'Paprika' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-26', 3, 3, id, '{"a":"Lepa Brena","b":"Željko Joksimović","indeksA":100,"indeksB":28,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Lepa Brena' and term_b = 'Željko Joksimović' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-26', 3, 4, id, '{"a":"Klima","b":"Frižider","indeksA":100,"indeksB":37,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Klima' and term_b = 'Frižider' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-26', 3, 5, id, '{"a":"Krofne","b":"Baklava","indeksA":100,"indeksB":69,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Krofne' and term_b = 'Baklava' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-26', 3, 6, id, '{"a":"Crna Gora","b":"Turska","indeksA":83,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Crna Gora' and term_b = 'Turska' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-26', 3, 7, id, '{"a":"Odbojka","b":"Košarka","indeksA":35,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Odbojka' and term_b = 'Košarka' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-26', 3, 8, id, '{"a":"Huawei","b":"iPhone","indeksA":12,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Huawei' and term_b = 'iPhone' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-27', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-27', 3, 1, id, '{"a":"iPhone","b":"Samsung","indeksA":100,"indeksB":70,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'iPhone' and term_b = 'Samsung' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-27', 3, 2, id, '{"a":"Slava","b":"Uskrs","indeksA":86,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Slava' and term_b = 'Uskrs' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-27', 3, 3, id, '{"a":"Viber","b":"TikTok","indeksA":27,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Viber' and term_b = 'TikTok' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-27', 3, 4, id, '{"a":"Orhideja","b":"Lala","indeksA":83,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Orhideja' and term_b = 'Lala' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-27', 3, 5, id, '{"a":"Lubenica","b":"Šljiva","indeksA":40,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Lubenica' and term_b = 'Šljiva' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-27', 3, 6, id, '{"a":"Loto","b":"Vremenska prognoza","indeksA":10,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Loto' and term_b = 'Vremenska prognoza' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-27', 3, 7, id, '{"a":"Lepa Brena","b":"Ceca","indeksA":27,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Lepa Brena' and term_b = 'Ceca' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+  select '2026-11-27', 3, 8, id, '{"a":"Vaterpolo","b":"Fudbal","indeksA":30,"indeksB":100,"period":"13.11.2025 – 13.11.2026","preuzeto":"2026-11-13"}'::jsonb
+  from public.trend_pairs where term_a = 'Vaterpolo' and term_b = 'Fudbal' and period = '13.11.2025 – 13.11.2026'
+  on conflict (quiz_date, segment, position) do nothing;

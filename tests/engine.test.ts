@@ -1,13 +1,14 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { PGlite } from "@electric-sql/pglite";
 import { beforeAll, describe, expect, it } from "vitest";
 import { ucitajProizvode } from "@/lib/content/products";
-import { planCena, seedSql } from "@/lib/content/seed";
+import { planCena, planGugla, seedSql } from "@/lib/content/seed";
+import { ucitajTrendove } from "@/lib/content/trends";
 import { omotajPglite, SUPABASE_ZAMENA } from "@/lib/db/pglite";
 import type { Db } from "@/lib/db/types";
 import { GreskaIgre, odgovori, posaljiPitanje, stanjeIgre, zapocniIgru } from "@/lib/game/engine";
-import type { Identitet } from "@/lib/game/types";
+import type { Identitet, PrikazCena } from "@/lib/game/types";
 
 /**
  * Serverski deo igre na pravom Postgresu u memoriji: ista migracija, isti seed, isti SQL kao na sajtu.
@@ -17,7 +18,12 @@ let db: Db;
 
 const koren = join(__dirname, "..");
 const ucitani = ucitajProizvode(JSON.parse(readFileSync(join(koren, "data/products.json"), "utf8")));
+const trendovi = ucitajTrendove(JSON.parse(readFileSync(join(koren, "data/trends.json"), "utf8")));
 const POCETAK = "2026-11-14";
+const SEED = () =>
+  seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, parovi: trendovi.parovi, pocetak: POCETAK, dana: 14 });
+/** Dan sa samo jednim segmentom (gugla), sa poznatim indeksima. */
+const GUGLA_DAN = "2030-02-02";
 /** Poseban dan sa cenama zgodnim za granice: 200, 200, 100, 250 dinara. */
 const TEST_DAN = "2030-01-01";
 
@@ -28,8 +34,10 @@ const gost = (deviceId = uredjaj()): Identitet => ({ userId: null, deviceId });
 beforeAll(async () => {
   pg = new PGlite();
   await pg.exec(SUPABASE_ZAMENA);
-  await pg.exec(readFileSync(join(koren, "supabase/migrations/0001_init.sql"), "utf8"));
-  await pg.exec(seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, pocetak: POCETAK, dana: 14 }));
+  for (const f of readdirSync(join(koren, "supabase/migrations")).sort()) {
+    await pg.exec(readFileSync(join(koren, "supabase/migrations", f), "utf8"));
+  }
+  await pg.exec(SEED());
 
   const snap = (cena: number) =>
     JSON.stringify({ naziv: "Probni artikal", kolicina: "1 kom", slika: "https://example.com/x.jpg", cena, min: cena - 10, max: cena + 10, najjeftinije: "Lidl" });
@@ -40,6 +48,13 @@ beforeAll(async () => {
       ('${TEST_DAN}', 2, 2, 2, '${snap(200)}'),
       ('${TEST_DAN}', 2, 3, 3, '${snap(100)}'),
       ('${TEST_DAN}', 2, 4, 4, '${snap(250)}');
+    insert into public.daily_quiz (quiz_date, status) values ('${GUGLA_DAN}', 'published');
+    insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on) values
+      ('Levo', 'Desno', 100, 60, 'test', '2026-11-13'), ('Manje', 'Više', 40, 100, 'test', '2026-11-13'), ('Treće', 'Četvrto', 100, 89, 'test', '2026-11-13');
+    insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
+      select '${GUGLA_DAN}', 3, row_number() over (order by id), id,
+             jsonb_build_object('a', term_a, 'b', term_b, 'indeksA', index_a, 'indeksB', index_b, 'period', period)
+      from public.trend_pairs where period = 'test';
     insert into auth.users (id, email) values ('11111111-1111-4111-8111-111111111111', 'a@test.rs'), ('22222222-2222-4222-8222-222222222222', 'b@test.rs');
   `);
   db = omotajPglite(pg);
@@ -99,13 +114,13 @@ describe("products.json i seed", () => {
   });
 
   it("seed je upisan u bazu i može da se pusti ponovo bez duplikata", async () => {
-    await pg.exec(seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, pocetak: POCETAK, dana: 14 }));
+    await pg.exec(SEED());
     const [p] = await db.query<{ n: number }>("select count(*)::int as n from public.products");
     const [i] = await db.query<{ n: number }>(
       "select count(*)::int as n from public.daily_quiz_items where quiz_date between '2026-11-14' and '2026-11-27'",
     );
     expect(p.n).toBe(76);
-    expect(i.n).toBe(140);
+    expect(i.n).toBe(140 + 112); // 14 × (10 cena + 8 parova)
     const [cena] = await db.query<{ cena: number; price: number }>(
       `select (i.snapshot->>'cena')::int as cena, round(p.price_avg)::int as price
        from public.daily_quiz_items i join public.products p on p.id = i.product_id
@@ -129,7 +144,10 @@ describe("tok igre", () => {
     expect(s.status).toBe("u_toku");
     expect(s.trenutno).toMatchObject({ segment: 2, pozicija: 1, ukupno: 10, faza: "uvod" });
     expect(s.trenutno!.pitanje).toBeUndefined();
-    expect(s.segmenti).toEqual([expect.objectContaining({ n: 2, key: "cena", pitanja: 10, odgovoreno: 0, poeni: 0, max: 100 })]);
+    expect(s.segmenti).toEqual([
+      expect.objectContaining({ n: 2, key: "cena", pitanja: 10, odgovoreno: 0, poeni: 0, max: 100 }),
+      expect.objectContaining({ n: 3, key: "gugla", pitanja: 8, odgovoreno: 0, poeni: 0, max: 40 }),
+    ]);
   });
 
   it("pitanje ne nosi cenu ni opseg (ni pod kojim imenom)", async () => {
@@ -164,7 +182,7 @@ describe("tok igre", () => {
     expect(d.krajSegmenta).toMatchObject({ n: 2, poeni: 20, max: 40, odgovoreno: 4 });
     expect(d.stanje.status).toBe("zavrseno");
     expect(d.stanje.score).toBe(20);
-    expect(d.stanje.rezultat!.map((r) => [r.poeni, r.prikaz.unos, r.prikaz.prava])).toEqual([
+    expect(d.stanje.rezultat!.map((r) => [r.poeni, (r.prikaz as PrikazCena).unos, (r.prikaz as PrikazCena).prava])).toEqual([
       [10, 220, 200],
       [5, 221, 200],
       [5, 85, 100],
@@ -185,7 +203,7 @@ describe("tok igre", () => {
     await zapocniIgru(db, ja, TEST_DAN);
     const s1 = await posaljiPitanje(db, ja, TEST_DAN);
     const a = await odgovori(db, ja, TEST_DAN, { itemId: s1.trenutno!.itemId, odgovor: { unos: 199.6 } });
-    expect(a.ocena.prikaz.unos).toBe(200); // zaokruženo na dinar
+    expect((a.ocena.prikaz as PrikazCena).unos).toBe(200); // zaokruženo na dinar
     expect(a.ocena.poeni).toBe(10);
     const s2 = await posaljiPitanje(db, ja, TEST_DAN);
     const b = await odgovori(db, ja, TEST_DAN, { itemId: s2.trenutno!.itemId, odgovor: { unos: "200" } });
@@ -335,5 +353,117 @@ describe("jedna igra dnevno", () => {
     const s = await zapocniIgru(db, drugi, TEST_DAN);
     expect(s.status).toBe("zavrseno");
     expect(s.score).toBe(40);
+  });
+});
+
+describe("trends.json i parovi", () => {
+  it("par se pravi samo kad je razlika jasna, a brojevi dovoljno veliki", () => {
+    expect(trendovi.parovi.length).toBe(169);
+    for (const p of trendovi.parovi) {
+      expect(Math.max(p.indeksA, p.indeksB)).toBe(100);
+      expect(Math.min(p.indeksA, p.indeksB)).toBeGreaterThanOrEqual(10);
+      expect(Math.min(p.indeksA, p.indeksB)).toBeLessThanOrEqual(90);
+      expect(p.a).not.toBe(p.b);
+    }
+    // tačan odgovor nije uvek na istoj strani
+    const levo = trendovi.parovi.filter((p) => p.indeksA > p.indeksB).length;
+    expect(levo).toBeGreaterThan(60);
+    expect(levo).toBeLessThan(110);
+    // poznat primer iz fajla: burek 53,27 naspram ćevapa 31,17 → 100 : 59
+    const burek = trendovi.parovi.find((p) => [p.a, p.b].includes("Burek") && [p.a, p.b].includes("Ćevapi"))!;
+    expect([burek.indeksA, burek.indeksB].sort((x, y) => x - y)).toEqual([59, 100]);
+    // premalo pretraga → nema para
+    expect(trendovi.parovi.some((p) => [p.a, p.b].includes("Aleksandar Mitrović"))).toBe(false);
+    // praktično nerešeno (paradajz 38,83 / paprika 39,17) → nema para
+    expect(trendovi.parovi.some((p) => [p.a, p.b].includes("Paradajz") && [p.a, p.b].includes("Paprika"))).toBe(false);
+  });
+
+  it("odbija fajl u pogrešnom obliku", () => {
+    expect(() => ucitajTrendove({})).toThrow();
+    expect(() => ucitajTrendove({ period: "x", datum_preuzimanja: "2026-11-13", grupe: [{ tema: "T", pojmovi: [{ naziv: "A" }] }] })).toThrow();
+  });
+
+  it("14 dana po 8 parova: svaki iz druge teme, nijedan par se ne ponavlja", () => {
+    const plan = planGugla(trendovi.parovi, POCETAK, 14);
+    expect(plan.length).toBe(14);
+    const svi = new Set<string>();
+    for (const dan of plan) {
+      expect(dan.parovi.length).toBe(8);
+      expect(new Set(dan.parovi.map((p) => p.tema)).size).toBe(8);
+      const pojmovi = dan.parovi.flatMap((p) => [p.a, p.b]);
+      expect(new Set(pojmovi).size).toBe(16);
+      for (const p of dan.parovi) {
+        const k = [p.upitA, p.upitB].sort().join("|");
+        expect(svi.has(k)).toBe(false);
+        svi.add(k);
+      }
+    }
+    expect(svi.size).toBe(112);
+    expect(planGugla(trendovi.parovi, POCETAK, 14)).toEqual(plan); // isti raspored pri svakom pokretanju
+  });
+});
+
+describe("segment 3: šta se više gugla", () => {
+  it("pitanje nosi samo dva naziva, bez indeksa", async () => {
+    const ja = gost();
+    await zapocniIgru(db, ja, GUGLA_DAN);
+    const s = await posaljiPitanje(db, ja, GUGLA_DAN);
+    expect(s.trenutno!.pitanje).toEqual({ vrsta: "gugla", a: "Levo", b: "Desno" });
+    expect(s.trenutno!.limitMs).toBe(10000);
+    expect(JSON.stringify(s.trenutno)).not.toMatch(/indeks|tacan|snapshot/);
+  });
+
+  it("tačno = 5, netačno = 0, istek = 0; posle odgovora stižu oba indeksa", async () => {
+    const ja = gost();
+    await zapocniIgru(db, ja, GUGLA_DAN);
+    let s = await posaljiPitanje(db, ja, GUGLA_DAN);
+    const a = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" } });
+    expect(a.ocena).toMatchObject({ tacno: true, poeni: 5, maxPoena: 5 });
+    expect(a.ocena.prikaz).toEqual({ vrsta: "gugla", a: "Levo", b: "Desno", indeksA: 100, indeksB: 60, izbor: "a", tacan: "a", period: "test" });
+
+    s = await posaljiPitanje(db, ja, GUGLA_DAN);
+    const b = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" } });
+    expect(b.ocena).toMatchObject({ tacno: false, poeni: 0 });
+    expect(b.ocena.prikaz).toMatchObject({ izbor: "a", tacan: "b" });
+
+    s = await posaljiPitanje(db, ja, GUGLA_DAN);
+    const c = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" }, istek: true });
+    expect(c.ocena).toMatchObject({ tacno: false, poeni: 0, istek: true });
+    expect(c.ocena.prikaz).toMatchObject({ izbor: null, tacan: "a" });
+    expect(c.krajSegmenta).toMatchObject({ n: 3, poeni: 5, max: 15 });
+    expect(c.stanje.status).toBe("zavrseno");
+    expect(c.stanje.rezultat!.map((r) => [r.poeni, r.istek])).toEqual([[5, false], [0, false], [0, true]]);
+  });
+
+  it("gluposti umesto izbora su netačan odgovor, ne greška", async () => {
+    const ja = gost();
+    await zapocniIgru(db, ja, GUGLA_DAN);
+    for (const odgovor of [{ izbor: "c" }, { izbor: 1 }, "a"]) {
+      const s = await posaljiPitanje(db, ja, GUGLA_DAN);
+      const r = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor });
+      expect(r.ocena.poeni).toBe(0);
+    }
+  });
+
+  it("posle 10 sekundi (plus tolerancija) pitanje je propalo", async () => {
+    const ja = gost();
+    await zapocniIgru(db, ja, GUGLA_DAN);
+    const s = await posaljiPitanje(db, ja, GUGLA_DAN);
+    await pg.exec(`update public.play_answers set served_at = now() - interval '12 seconds' where item_id = ${s.trenutno!.itemId}
+                   and play_id = (select id from public.plays where device_id = '${ja.deviceId}' and quiz_date = '${GUGLA_DAN}')`);
+    await expect(
+      odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" } }),
+    ).rejects.toMatchObject({ kod: "nije_na_redu" });
+    expect((await stanjeIgre(db, ja, GUGLA_DAN)).trenutno).toMatchObject({ pozicija: 2, faza: "sledece" });
+  });
+
+  it("ceo dan iz seed-a: posle cene ide uvod u „Šta se više gugla”", async () => {
+    const ja = gost();
+    await zapocniIgru(db, ja, POCETAK);
+    let poslednji;
+    for (let i = 0; i < 10; i++) poslednji = await odigraj(ja, POCETAK, 100);
+    expect(poslednji!.krajSegmenta).toMatchObject({ n: 2 });
+    expect(poslednji!.stanje.status).toBe("u_toku");
+    expect(poslednji!.stanje.trenutno).toMatchObject({ segment: 3, pozicija: 1, ukupno: 8, faza: "uvod" });
   });
 });

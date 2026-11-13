@@ -6,10 +6,10 @@ export function smanjenoKretanje(): boolean {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-/** Broj koji se „vrti” do nove vrednosti. Uz smanjeno kretanje se samo promeni. */
-export function useBrojac(cilj: number, trajanjeMs = 500): number {
-  const [prikaz, setPrikaz] = useState(cilj);
-  const odakle = useRef(cilj);
+/** Broj koji se „vrti” do nove vrednosti (od `od`, ako je zadato). Uz smanjeno kretanje se samo promeni. */
+export function useBrojac(cilj: number, trajanjeMs = 500, od?: number): number {
+  const [prikaz, setPrikaz] = useState(od ?? cilj);
+  const odakle = useRef(od ?? cilj);
 
   useEffect(() => {
     const start = odakle.current;
@@ -99,4 +99,17 @@ export function poletiDoZbira(izvor: HTMLElement | null, tekst: string): number 
     )
     .finished.finally(() => leti.remove());
   return trajanje + 350;
+}
+
+/** Nalepnica sa poenima na rezultatu pitanja. Kad ima poena, oni odatle „odlete” u zbir. */
+export function Nalepnica({ poeni }: { poeni: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    if (poeni > 0) poletiDoZbira(ref.current, `+${poeni}`);
+  }, [poeni]);
+  return (
+    <span ref={ref} className={poeni > 0 ? "g-nalepnica" : "g-nalepnica nula"}>
+      {poeni > 0 ? `+${poeni}` : "0"} <small>poena</small>
+    </span>
+  );
 }

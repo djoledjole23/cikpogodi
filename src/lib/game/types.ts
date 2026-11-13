@@ -22,12 +22,21 @@ export type PitanjeCena = {
   slika: string;
 };
 
-export type Pitanje = PitanjeCena;
+export type PitanjeGugla = {
+  vrsta: "gugla";
+  /** Levi pojam. */
+  a: string;
+  /** Desni pojam. */
+  b: string;
+};
+
+export type Pitanje = PitanjeCena | PitanjeGugla;
 
 // ───── odgovori koje šalje browser ─────
 
 export type OdgovorCena = { unos: number };
-export type Odgovor = OdgovorCena;
+export type OdgovorGugla = { izbor: "a" | "b" };
+export type Odgovor = OdgovorCena | OdgovorGugla;
 
 // ───── šta se prikazuje posle odgovora ─────
 
@@ -45,7 +54,25 @@ export type PrikazCena = {
   najjeftinije: string;
 };
 
-export type Prikaz = PrikazCena;
+export type PrikazGugla = {
+  vrsta: "gugla";
+  a: string;
+  b: string;
+  /** Indeks 0–100 unutar para (češće traženi pojam je 100). */
+  indeksA: number;
+  indeksB: number;
+  /** Šta je igrač tapnuo, ili null ako je isteklo vreme. */
+  izbor: "a" | "b" | null;
+  tacan: "a" | "b";
+  period: string;
+};
+
+export type Prikaz = PrikazCena | PrikazGugla;
+
+/** Da li je pitanje ostalo bez odgovora (isteklo vreme). */
+export function bezOdgovora(p: Prikaz): boolean {
+  return p.vrsta === "cena" ? p.unos === null : p.izbor === null;
+}
 
 export type Ocena = {
   /** Za zvuk i niz tačnih: da li je pitanje donelo poene. */

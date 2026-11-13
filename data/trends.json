@@ -1,0 +1,229 @@
+{
+  "izvor": "Google Trends (trends.google.com), pretraga po pojmu",
+  "geo": "RS",
+  "period": "13.11.2025 – 13.11.2026",
+  "datum_preuzimanja": "2026-11-13",
+  "napomena": "Svaka grupa je jedno poređenje do 5 pojmova u Google Trends-u (Srbija, poslednjih 12 meseci). „prosek” je prosečan nedeljni indeks interesovanja (0–100) za 52 cele nedelje, na zajedničkoj skali unutar grupe. Pojmovi se porede samo unutar iste grupe. „upit” je tačno ono što je ukucano u Trends (bez kvačica, kako ljudi najčešće kucaju).",
+  "grupe": [
+    {
+      "tema": "Hrana",
+      "pojmovi": [
+        { "naziv": "Ćevapi", "upit": "cevapi", "prosek": 31.17 },
+        { "naziv": "Pljeskavica", "upit": "pljeskavica", "prosek": 27.63 },
+        { "naziv": "Burek", "upit": "burek", "prosek": 53.27 },
+        { "naziv": "Sarma", "upit": "sarma", "prosek": 28.33 },
+        { "naziv": "Gibanica", "upit": "gibanica", "prosek": 18.63 }
+      ]
+    },
+    {
+      "tema": "Gradovi",
+      "pojmovi": [
+        { "naziv": "Novi Sad", "upit": "novi sad", "prosek": 87.6 },
+        { "naziv": "Kragujevac", "upit": "kragujevac", "prosek": 25.17 },
+        { "naziv": "Subotica", "upit": "subotica", "prosek": 18.58 },
+        { "naziv": "Čačak", "upit": "cacak", "prosek": 14.56 },
+        { "naziv": "Zaječar", "upit": "zajecar", "prosek": 3.81 }
+      ]
+    },
+    {
+      "tema": "Planine",
+      "pojmovi": [
+        { "naziv": "Zlatibor", "upit": "zlatibor", "prosek": 34.62 },
+        { "naziv": "Kopaonik", "upit": "kopaonik", "prosek": 13.71 },
+        { "naziv": "Divčibare", "upit": "divcibare", "prosek": 6.02 },
+        { "naziv": "Stara planina", "upit": "stara planina", "prosek": 2.29 },
+        { "naziv": "Fruška gora", "upit": "fruska gora", "prosek": 3.02 }
+      ]
+    },
+    {
+      "tema": "Banje",
+      "pojmovi": [
+        { "naziv": "Vrnjačka Banja", "upit": "vrnjacka banja", "prosek": 55.17 },
+        { "naziv": "Sokobanja", "upit": "sokobanja", "prosek": 30.63 },
+        { "naziv": "Banja Koviljača", "upit": "banja koviljaca", "prosek": 6.29 },
+        { "naziv": "Prolom Banja", "upit": "prolom banja", "prosek": 3.69 },
+        { "naziv": "Ribarska Banja", "upit": "ribarska banja", "prosek": 4.75 }
+      ]
+    },
+    {
+      "tema": "Zemlje",
+      "pojmovi": [
+        { "naziv": "Grčka", "upit": "grcka", "prosek": 34.21 },
+        { "naziv": "Crna Gora", "upit": "crna gora", "prosek": 34.81 },
+        { "naziv": "Turska", "upit": "turska", "prosek": 41.71 },
+        { "naziv": "Egipat", "upit": "egipat", "prosek": 7.13 },
+        { "naziv": "Hrvatska", "upit": "hrvatska", "prosek": 36.29 }
+      ]
+    },
+    {
+      "tema": "Sportisti",
+      "pojmovi": [
+        { "naziv": "Nikola Jokić", "upit": "nikola jokic", "prosek": 27.63 },
+        { "naziv": "Dušan Vlahović", "upit": "dusan vlahovic", "prosek": 14.73 },
+        { "naziv": "Bogdan Bogdanović", "upit": "bogdan bogdanovic", "prosek": 13.35 },
+        { "naziv": "Aleksandar Mitrović", "upit": "aleksandar mitrovic", "prosek": 0.19 },
+        { "naziv": "Dušan Tadić", "upit": "dusan tadic", "prosek": 1.94 }
+      ]
+    },
+    {
+      "tema": "Sportovi",
+      "pojmovi": [
+        { "naziv": "Fudbal", "upit": "fudbal", "prosek": 20.9 },
+        { "naziv": "Košarka", "upit": "kosarka", "prosek": 13.15 },
+        { "naziv": "Tenis", "upit": "tenis", "prosek": 9.6 },
+        { "naziv": "Odbojka", "upit": "odbojka", "prosek": 4.6 },
+        { "naziv": "Vaterpolo", "upit": "vaterpolo", "prosek": 6.19 }
+      ]
+    },
+    {
+      "tema": "Pevači",
+      "pojmovi": [
+        { "naziv": "Ceca", "upit": "ceca", "prosek": 56.1 },
+        { "naziv": "Aca Lukas", "upit": "aca lukas", "prosek": 19.94 },
+        { "naziv": "Zdravko Čolić", "upit": "zdravko colic", "prosek": 19.35 },
+        { "naziv": "Lepa Brena", "upit": "lepa brena", "prosek": 14.88 },
+        { "naziv": "Željko Joksimović", "upit": "zeljko joksimovic", "prosek": 4.1 }
+      ]
+    },
+    {
+      "tema": "Pića",
+      "pojmovi": [
+        { "naziv": "Kafa", "upit": "kafa", "prosek": 42.37 },
+        { "naziv": "Čaj", "upit": "caj", "prosek": 54.06 },
+        { "naziv": "Pivo", "upit": "pivo", "prosek": 33.17 },
+        { "naziv": "Vino", "upit": "vino", "prosek": 44.63 },
+        { "naziv": "Rakija", "upit": "rakija", "prosek": 30.06 }
+      ]
+    },
+    {
+      "tema": "Automobili",
+      "pojmovi": [
+        { "naziv": "BMW", "upit": "bmw", "prosek": 84.94 },
+        { "naziv": "Audi", "upit": "audi", "prosek": 69.12 },
+        { "naziv": "Mercedes", "upit": "mercedes", "prosek": 50.81 },
+        { "naziv": "Opel", "upit": "opel", "prosek": 41.92 },
+        { "naziv": "Škoda", "upit": "skoda", "prosek": 26.15 }
+      ]
+    },
+    {
+      "tema": "Oglasi",
+      "pojmovi": [
+        { "naziv": "KupujemProdajem", "upit": "kupujemprodajem", "prosek": 79.63 },
+        { "naziv": "Polovni automobili", "upit": "polovni automobili", "prosek": 85.73 },
+        { "naziv": "Halo oglasi", "upit": "halo oglasi", "prosek": 15.65 },
+        { "naziv": "Limundo", "upit": "limundo", "prosek": 9.92 },
+        { "naziv": "Kupindo", "upit": "kupindo", "prosek": 5.4 }
+      ]
+    },
+    {
+      "tema": "Kolači",
+      "pojmovi": [
+        { "naziv": "Palačinke", "upit": "palacinke", "prosek": 76.63 },
+        { "naziv": "Krofne", "upit": "krofne", "prosek": 24.37 },
+        { "naziv": "Vanilice", "upit": "vanilice", "prosek": 5.83 },
+        { "naziv": "Baklava", "upit": "baklava", "prosek": 16.92 },
+        { "naziv": "Tulumbe", "upit": "tulumbe", "prosek": 2.29 }
+      ]
+    },
+    {
+      "tema": "Praznici",
+      "pojmovi": [
+        { "naziv": "Slava", "upit": "slava", "prosek": 7.88 },
+        { "naziv": "Božić", "upit": "bozic", "prosek": 5.15 },
+        { "naziv": "Uskrs", "upit": "uskrs", "prosek": 9.12 },
+        { "naziv": "Nova godina", "upit": "nova godina", "prosek": 7 },
+        { "naziv": "Vidovdan", "upit": "vidovdan", "prosek": 1.27 }
+      ]
+    },
+    {
+      "tema": "Svaki dan",
+      "pojmovi": [
+        { "naziv": "Vremenska prognoza", "upit": "vremenska prognoza", "prosek": 61.46 },
+        { "naziv": "Horoskop", "upit": "horoskop", "prosek": 5.35 },
+        { "naziv": "Kurs evra", "upit": "kurs evra", "prosek": 2.29 },
+        { "naziv": "Loto", "upit": "loto", "prosek": 6.17 },
+        { "naziv": "Slagalica", "upit": "slagalica", "prosek": 1 }
+      ]
+    },
+    {
+      "tema": "Voće",
+      "pojmovi": [
+        { "naziv": "Jabuka", "upit": "jabuka", "prosek": 55.81 },
+        { "naziv": "Šljiva", "upit": "sljiva", "prosek": 29.56 },
+        { "naziv": "Malina", "upit": "malina", "prosek": 31.46 },
+        { "naziv": "Lubenica", "upit": "lubenica", "prosek": 11.92 },
+        { "naziv": "Grožđe", "upit": "grozdje", "prosek": 11.25 }
+      ]
+    },
+    {
+      "tema": "Telefoni",
+      "pojmovi": [
+        { "naziv": "iPhone", "upit": "iphone", "prosek": 59.63 },
+        { "naziv": "Samsung", "upit": "samsung", "prosek": 41.79 },
+        { "naziv": "Xiaomi", "upit": "xiaomi", "prosek": 23.67 },
+        { "naziv": "Huawei", "upit": "huawei", "prosek": 7.23 },
+        { "naziv": "Nokia", "upit": "nokia", "prosek": 3.02 }
+      ]
+    },
+    {
+      "tema": "Mreže",
+      "pojmovi": [
+        { "naziv": "Instagram", "upit": "instagram", "prosek": 51.25 },
+        { "naziv": "Facebook", "upit": "facebook", "prosek": 80.17 },
+        { "naziv": "TikTok", "upit": "tiktok", "prosek": 20.67 },
+        { "naziv": "Viber", "upit": "viber", "prosek": 5.54 },
+        { "naziv": "WhatsApp", "upit": "whatsapp", "prosek": 9.19 }
+      ]
+    },
+    {
+      "tema": "Povrće",
+      "pojmovi": [
+        { "naziv": "Paradajz", "upit": "paradajz", "prosek": 38.83 },
+        { "naziv": "Paprika", "upit": "paprika", "prosek": 39.17 },
+        { "naziv": "Krastavac", "upit": "krastavac", "prosek": 7.71 },
+        { "naziv": "Kupus", "upit": "kupus", "prosek": 33.62 },
+        { "naziv": "Krompir", "upit": "krompir", "prosek": 42.27 }
+      ]
+    },
+    {
+      "tema": "Jela",
+      "pojmovi": [
+        { "naziv": "Pasulj", "upit": "pasulj", "prosek": 48.44 },
+        { "naziv": "Gulaš", "upit": "gulas", "prosek": 26.02 },
+        { "naziv": "Musaka", "upit": "musaka", "prosek": 29.83 },
+        { "naziv": "Punjene paprike", "upit": "punjene paprike", "prosek": 17.98 },
+        { "naziv": "Podvarak", "upit": "podvarak", "prosek": 12.54 }
+      ]
+    },
+    {
+      "tema": "Škola",
+      "pojmovi": [
+        { "naziv": "Matematika", "upit": "matematika", "prosek": 41.5 },
+        { "naziv": "Srpski jezik", "upit": "srpski jezik", "prosek": 20.56 },
+        { "naziv": "Engleski jezik", "upit": "engleski jezik", "prosek": 6.23 },
+        { "naziv": "Istorija", "upit": "istorija", "prosek": 31.65 },
+        { "naziv": "Geografija", "upit": "geografija", "prosek": 11.21 }
+      ]
+    },
+    {
+      "tema": "Kućni aparati",
+      "pojmovi": [
+        { "naziv": "Klima", "upit": "klima", "prosek": 25.52 },
+        { "naziv": "Frižider", "upit": "frizider", "prosek": 9.44 },
+        { "naziv": "Veš mašina", "upit": "ves masina", "prosek": 8 },
+        { "naziv": "Šporet", "upit": "sporet", "prosek": 6.87 },
+        { "naziv": "Usisivač", "upit": "usisivac", "prosek": 14.98 }
+      ]
+    },
+    {
+      "tema": "Cveće",
+      "pojmovi": [
+        { "naziv": "Ruža", "upit": "ruza", "prosek": 29.37 },
+        { "naziv": "Lala", "upit": "lala", "prosek": 7.27 },
+        { "naziv": "Orhideja", "upit": "orhideja", "prosek": 6.06 },
+        { "naziv": "Ljubičica", "upit": "ljubicica", "prosek": 0.9 },
+        { "naziv": "Božur", "upit": "bozur", "prosek": 7.4 }
+      ]
+    }
+  ]
+}

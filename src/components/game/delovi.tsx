@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { IconStrelica, SegmentIcon } from "@/components/icons";
+import { IconStrelica, IconVatra, SegmentIcon } from "@/components/icons";
 import { SoundToggle } from "@/components/SoundToggle";
 import { SEGMENTI } from "@/config/quiz.config";
 import { broj, din } from "@/lib/format";
 import { komentarSegmenta } from "@/lib/game/komentari";
-import type { SegmentStanje, Stanje } from "@/lib/game/types";
+import type { Prikaz, SegmentStanje, Stanje } from "@/lib/game/types";
 import { sfx } from "@/lib/sound";
 import { Konfete, useBrojac } from "./efekti";
 
@@ -129,6 +129,9 @@ export function Tajmer({
 
 // ───────────────────────── ekran pre segmenta ─────────────────────────
 
+// Napomena za „Kreni” i „Dalje”: dok zahtev traje dugme je samo označeno kao zauzeto (aria-disabled), ne i
+// stvarno isključeno. Isključeno dugme ne može da primi fokus, pa Enter na tastaturi ne bi radio.
+// Dupli klik ionako ne prolazi: Igra propušta samo jedan zahtev u isto vreme.
 export function UvodSegmenta({ segment, naKreni, ceka }: { segment: SegmentStanje; naKreni: () => void; ceka: boolean }) {
   const k = SEGMENTI.find((s) => s.n === segment.n)!;
   return (
@@ -152,7 +155,7 @@ export function UvodSegmenta({ segment, naKreni, ceka }: { segment: SegmentStanj
           do <strong>{segment.max}</strong> poena
         </li>
       </ul>
-      <button type="button" className="btn btn-lg g-dole" onClick={naKreni} disabled={ceka} autoFocus>
+      <button type="button" className="btn btn-lg g-dole" onClick={naKreni} aria-disabled={ceka} autoFocus>
         <span>{ceka ? "Stiže…" : "Kreni"}</span>
         {!ceka && <IconStrelica size={26} />}
       </button>
@@ -201,8 +204,8 @@ export function Kraj({ stanje }: { stanje: Stanje }) {
           <small> / {max}</small>
         </p>
         <p className="muted small">
-          Za sada se igra samo „Pogodi cenu”. Ostali segmenti, čuvanje rezultata i rang lista stižu u sledećim
-          koracima.
+Za sada se igraju „Pogodi cenu” i „Šta se više gugla”. Ostali segmenti, čuvanje rezultata i rang lista
+          stižu u sledećim koracima.
         </p>
       </div>
 
@@ -220,12 +223,7 @@ export function Kraj({ stanje }: { stanje: Stanje }) {
               .map((r) => (
                 <li key={r.pozicija} className={r.poeni > 0 ? "g-red" : "g-red promasaj"}>
                   <span className="g-red-tekst">
-                    <strong>
-                      {r.prikaz.naziv} <span className="muted">{r.prikaz.kolicina}</span>
-                    </strong>
-                    <span>
-                      Ti: {r.prikaz.unos === null ? "bez odgovora" : din(r.prikaz.unos)} · Prava: {din(r.prikaz.prava)}
-                    </span>
+                    <RedRezultata prikaz={r.prikaz} />
                   </span>
                   <span className="g-red-poeni">{r.poeni > 0 ? `+${r.poeni}` : "0"}</span>
                 </li>
@@ -237,6 +235,65 @@ export function Kraj({ stanje }: { stanje: Stanje }) {
       <Link href="/" className="btn">
         Na početnu
       </Link>
+    </section>
+  );
+}
+
+function RedRezultata({ prikaz: p }: { prikaz: Prikaz }) {
+  if (p.vrsta === "cena") {
+    return (
+      <>
+        <strong>
+          {p.naziv} <span className="muted">{p.kolicina}</span>
+        </strong>
+        <span>
+          Ti: {p.unos === null ? "bez odgovora" : din(p.unos)} · Prava: {din(p.prava)}
+        </span>
+      </>
+    );
+  }
+  const naziv = (strana: "a" | "b") => (strana === "a" ? p.a : p.b);
+  return (
+    <>
+      <strong>
+        {p.a} ili {p.b}
+      </strong>
+      <span>
+        Ti: {p.izbor === null ? "bez odgovora" : naziv(p.izbor)} · Više se gugla: {naziv(p.tacan)}
+      </span>
+    </>
+  );
+}
+
+// ───────────────────────── okvir rezultata pitanja ─────────────────────────
+
+/** Zajedničko za sve segmente: komentar gore, niz tačnih, sadržaj segmenta u sredini, „Dalje” dole. */
+export function OkvirOcene({
+  komentar,
+  niz,
+  children,
+  naDalje,
+  ceka,
+}: {
+  komentar: string;
+  niz: number;
+  children: ReactNode;
+  naDalje: () => void;
+  ceka: boolean;
+}) {
+  return (
+    <section className="g-ocena">
+      <h1 className="g-komentar">{komentar}</h1>
+      {children}
+      {niz >= 2 && (
+        <p className="g-niz">
+          <IconVatra size={22} /> x{niz} zaredom
+        </p>
+      )}
+      <button type="button" className="btn btn-lg g-dole" onClick={naDalje} aria-disabled={ceka} autoFocus>
+        <span>{ceka ? "Stiže…" : "Dalje"}</span>
+        {!ceka && <IconStrelica size={26} />}
+      </button>
     </section>
   );
 }

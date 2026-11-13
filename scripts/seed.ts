@@ -1,5 +1,6 @@
 /**
- * Pravi SQL koji u Supabase upisuje artikle i dnevni kviz (za sada segment „Pogodi cenu”).
+ * Pravi SQL koji u Supabase upisuje artikle, parove pojmova i dnevni kviz
+ * (za sada segmenti „Pogodi cenu” i „Šta se više gugla”).
  *
  *   npm run seed                      → 14 dana od sutra (po beogradskom vremenu)
  *   npm run seed -- 2026-12-01 30     → 30 dana od 1. decembra
@@ -10,7 +11,8 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { ucitajProizvode } from "../src/lib/content/products";
-import { planCena, seedSql } from "../src/lib/content/seed";
+import { planCena, planGugla, seedSql } from "../src/lib/content/seed";
+import { ucitajTrendove } from "../src/lib/content/trends";
 import { beogradskiDatum, dodajDane } from "../src/lib/time";
 
 const [, , argDatum, argDana] = process.argv;
@@ -23,7 +25,8 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(pocetak) || !Number.isInteger(dana) || dana < 1 
 
 const koren = join(__dirname, "..");
 const ucitani = ucitajProizvode(JSON.parse(readFileSync(join(koren, "data", "products.json"), "utf8")));
-const sql = seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, pocetak, dana });
+const trendovi = ucitajTrendove(JSON.parse(readFileSync(join(koren, "data", "trends.json"), "utf8")));
+const sql = seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, parovi: trendovi.parovi, pocetak, dana });
 
 const dir = join(koren, "supabase", "seed");
 mkdirSync(dir, { recursive: true });
@@ -38,4 +41,7 @@ if (ucitani.izbaceni.length) {
 const plan = planCena(ucitani.proizvodi, pocetak, dana);
 console.log(`\nKviz: ${plan[0].datum} → ${plan.at(-1)!.datum}`);
 console.log(`Primer (${plan[0].datum}): ${plan[0].artikli.map((a) => `${a.naziv} ${a.kolicina}`).join(", ")}`);
+const guglaPlan = planGugla(trendovi.parovi, pocetak, dana);
+console.log(`\nParova za „Šta se više gugla”: ${trendovi.parovi.length} (Google Trends, ${trendovi.period}, preuzeto ${trendovi.preuzeto})`);
+console.log(`Primer (${guglaPlan[0].datum}): ${guglaPlan[0].parovi.map((p) => `${p.a} / ${p.b}`).join(", ")}`);
 console.log(`\nSQL je u: ${fajl}\nNalepi ga u Supabase → SQL Editor → Run.`);

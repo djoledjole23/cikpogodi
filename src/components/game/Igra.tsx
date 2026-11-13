@@ -5,8 +5,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Ocena, SegmentStanje, Stanje, Trenutno } from "@/lib/game/types";
 import { haptika, sfx } from "@/lib/sound";
 import { api, NijeNaRedu } from "./api";
+import { komentarCena, komentarGugla } from "@/lib/game/komentari";
 import { CenaOcena, CenaPitanje } from "./Cena";
-import { KrajSegmenta, Kraj, Poruka, Tajmer, UvodSegmenta, Zaglavlje } from "./delovi";
+import { KrajSegmenta, Kraj, OkvirOcene, Poruka, Tajmer, UvodSegmenta, Zaglavlje } from "./delovi";
+import { GuglaOcena, GuglaPitanje } from "./Gugla";
 import { smanjenoKretanje } from "./efekti";
 
 /**
@@ -140,15 +142,27 @@ export function Igra() {
     return (
       <>
         <Zaglavlje segment={pitanje.segment} pozicija={pitanje.pozicija} ukupno={pitanje.ukupno} zbir={zbir} />
-        <CenaOcena
+        <OkvirOcene
           key={pitanje.itemId}
-          ocena={ocena}
-          slika={pitanje.pitanje?.slika ?? ""}
+          komentar={
+            ocena.prikaz.vrsta === "cena"
+              ? komentarCena(ocena, ocena.prikaz, pitanje.itemId)
+              : komentarGugla(ocena, ocena.prikaz, pitanje.itemId)
+          }
           niz={niz}
-          seme={pitanje.itemId}
           naDalje={() => dalje(ekran)}
           ceka={ceka}
-        />
+        >
+          {ocena.prikaz.vrsta === "cena" ? (
+            <CenaOcena
+              ocena={ocena}
+              prikaz={ocena.prikaz}
+              slika={pitanje.pitanje?.vrsta === "cena" ? pitanje.pitanje.slika : ""}
+            />
+          ) : (
+            <GuglaOcena ocena={ocena} prikaz={ocena.prikaz} />
+          )}
+        </OkvirOcene>
       </>
     );
   }
@@ -224,7 +238,21 @@ export function Igra() {
             zaustavljen={ceka}
             naIstek={() => void odgovori(stanje, null, true)}
           />
-          <CenaPitanje key={`p${t.itemId}`} pitanje={t.pitanje} zakljucano={ceka} naPotvrdi={(unos) => void odgovori(stanje, { unos })} />
+          {t.pitanje.vrsta === "cena" ? (
+            <CenaPitanje
+              key={`p${t.itemId}`}
+              pitanje={t.pitanje}
+              zakljucano={ceka}
+              naPotvrdi={(unos) => void odgovori(stanje, { unos })}
+            />
+          ) : (
+            <GuglaPitanje
+              key={`p${t.itemId}`}
+              pitanje={t.pitanje}
+              zakljucano={ceka}
+              naIzbor={(izbor) => void odgovori(stanje, { izbor })}
+            />
+          )}
         </>
       );
     }

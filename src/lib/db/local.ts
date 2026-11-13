@@ -2,6 +2,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ucitajProizvode } from "@/lib/content/products";
 import { seedSql } from "@/lib/content/seed";
+import { ucitajTrendove } from "@/lib/content/trends";
 import { beogradskiDatum } from "@/lib/time";
 import { omotajPglite, SUPABASE_ZAMENA } from "./pglite";
 import type { Db } from "./types";
@@ -20,9 +21,21 @@ export async function napraviLokalnuBazu(): Promise<Db> {
     await pg.exec(readFileSync(join(dir, fajl), "utf8"));
   }
 
-  const proizvodi = ucitajProizvode(JSON.parse(readFileSync(join(process.cwd(), "data", "products.json"), "utf8")));
-  await pg.exec(seedSql({ proizvodi: proizvodi.proizvodi, datumCenovnika: proizvodi.datumCenovnika, pocetak: beogradskiDatum(), dana: 14 }));
+  const podaci = (ime: string) => JSON.parse(readFileSync(join(process.cwd(), "data", ime), "utf8"));
+  const proizvodi = ucitajProizvode(podaci("products.json"));
+  const trendovi = ucitajTrendove(podaci("trends.json"));
+  await pg.exec(
+    seedSql({
+      proizvodi: proizvodi.proizvodi,
+      datumCenovnika: proizvodi.datumCenovnika,
+      parovi: trendovi.parovi,
+      pocetak: beogradskiDatum(),
+      dana: 14,
+    }),
+  );
 
-  console.log(`[lokalna baza] spremna: ${proizvodi.proizvodi.length} artikala, kviz za 14 dana od ${beogradskiDatum()}`);
+  console.log(
+    `[lokalna baza] spremna: ${proizvodi.proizvodi.length} artikala, ${trendovi.parovi.length} parova, kviz za 14 dana od ${beogradskiDatum()}`,
+  );
   return omotajPglite(pg);
 }
