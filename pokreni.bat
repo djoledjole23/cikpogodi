@@ -7,6 +7,12 @@ echo.
 echo  ===  Cik Pogodi: pokretanje na ovom racunaru  ===
 echo.
 
+rem --- 0) Ugasi stari server ako je ostao da radi ---
+for /f "tokens=5" %%p in ('netstat -ano ^| findstr ":3000 " ^| findstr LISTENING') do (
+  echo Gasim stari server...
+  taskkill /PID %%p /F >nul 2>nul
+)
+
 rem --- 1) Node.js ---
 where node >nul 2>nul
 if not errorlevel 1 goto imanode
@@ -36,9 +42,12 @@ echo.
 echo Pokrecem sajt. Za nekoliko sekundi otvorice se http://localhost:3000
 echo Ovaj prozor mora da ostane otvoren dok testiras. Gasi se sa Ctrl+C ili zatvaranjem prozora.
 echo.
-start "" /min cmd /c "timeout /t 8 /nobreak >nul & start http://localhost:3000"
+
 rem Proba na ovom racunaru: rang lista sa izmisljenim igracima, da se vidi kako izgleda.
+rem (Vazi samo dok DATABASE_URL nije popunjen.)
 set CP_PROBNA_LISTA=1
+
+start "" /min cmd /c "timeout /t 8 /nobreak >nul & start http://localhost:3000"
 call npm run dev
 goto kraj
 
