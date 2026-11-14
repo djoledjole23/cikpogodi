@@ -37,6 +37,8 @@ echo Pokrecem sajt. Za nekoliko sekundi otvorice se http://localhost:3000
 echo Ovaj prozor mora da ostane otvoren dok testiras. Gasi se sa Ctrl+C ili zatvaranjem prozora.
 echo.
 start "" /min cmd /c "timeout /t 8 /nobreak >nul & start http://localhost:3000"
+rem Proba na ovom racunaru: rang lista sa izmisljenim igracima, da se vidi kako izgleda.
+set CP_PROBNA_LISTA=1
 call npm run dev
 goto kraj
 

@@ -53,8 +53,12 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
   const ja = redovi.find((r) => r.ja);
   const jaIspodVrha = ja && !vrh.includes(ja) ? ja : null;
 
+  // Samo lokalna proba (pokreni.bat): na listi su izmišljeni nalozi, da se vidi kako izgleda.
+  const proba = process.env.CP_PROBNA_LISTA === "1" && !process.env.DATABASE_URL;
+
   return (
     <div className="stack-lg">
+      {proba && <p className="small muted">Probni podaci: ovi igrači su izmišljeni i vide se samo na tvom računaru.</p>}
       <nav className="tabs" aria-label="Period">
         {PERIODI.map((p) => (
           <Link key={p} href={p === "danas" ? "/rang-lista" : `/rang-lista?period=${p}`} className="tab" aria-current={p === period ? "page" : undefined}>
