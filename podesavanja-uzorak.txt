@@ -1,0 +1,35 @@
+# ============================================================
+#  CIK POGODI - podesavanja za ovaj racunar (fajl .env.local)
+#  Ovaj fajl NIKAD ne ide na GitHub.
+#
+#  Popuni prazna polja, SACUVAJ (Ctrl+S), zatvori Notepad,
+#  pa ponovo pokreni pokreni.bat
+# ============================================================
+
+
+# --- 1. Adresa sajta --------------------------------------
+# Za probu na ovom racunaru ostavi ovako kako jeste.
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+
+# --- 2. Supabase kljucevi ---------------------------------
+# Gde: supabase.com -> tvoj projekat -> Project Settings -> API Keys
+#
+# "Project URL" (izgleda kao https://abcdefgh.supabase.co)
+NEXT_PUBLIC_SUPABASE_URL=
+
+# "Publishable key" (stariji naziv: anon key). Ovaj kljuc SME da bude javan.
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
+
+# "Secret key" (stariji naziv: service_role key). TAJNA - nikome ne salji.
+SUPABASE_SECRET_KEY=
+
+
+# --- 3. Veza sa bazom -------------------------------------
+# Gde: Supabase -> zeleno dugme "Connect" (gore) -> kartica "Transaction pooler"
+# Kopiraj ceo red koji pocinje sa postgresql://
+# U njemu zameni [YOUR-PASSWORD] sifrom baze (onom koju si napravio uz projekat).
+# TAJNA - nikome ne salji.
+#
+# Dok je ovo prazno, igra radi na privremenoj bazi i rezultati se ne cuvaju.
+DATABASE_URL=
