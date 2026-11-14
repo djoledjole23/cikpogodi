@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { OAuthDugmad, RegistracijaForma } from "@/components/auth/forms";
+import { OAuthDugmad, OAuthRazdvojnik, RegistracijaForma } from "@/components/auth/forms";
 import { Page } from "@/components/Page";
 import { bezbedanNext } from "@/lib/auth";
 
@@ -26,7 +26,7 @@ async function Sadrzaj({ searchParams }: Pick<PageProps<"/registracija">, "searc
   return (
     <div className="stack-lg">
       <OAuthDugmad next={next} />
-      <p className="divider">ili mejlom</p>
+      <OAuthRazdvojnik />
       <RegistracijaForma next={next} />
       <p className="center">
         <Link href={`/prijava?next=${encodeURIComponent(next)}`} className="text-link tap">

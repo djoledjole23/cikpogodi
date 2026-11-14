@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { OAuthDugmad, RegistracijaForma } from "@/components/auth/forms";
+import { OAuthDugmad, OAuthRazdvojnik, RegistracijaForma } from "@/components/auth/forms";
 import type { Stanje } from "@/lib/game/types";
 import { sfx } from "@/lib/sound";
 
@@ -25,7 +25,7 @@ export function SacuvajRezultat({ stanje, naPreskoci }: { stanje: Stanje; naPres
       {stanje.nalozi ? (
         <>
           <OAuthDugmad next="/igra" />
-          <p className="divider">ili mejlom</p>
+          <OAuthRazdvojnik />
           <RegistracijaForma next="/igra" />
           <p className="center">
             <Link href="/prijava?next=/igra" className="text-link tap">

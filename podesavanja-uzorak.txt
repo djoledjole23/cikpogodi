@@ -34,3 +34,9 @@ SUPABASE_SECRET_KEY=
 #
 # Dok je ovo prazno, igra radi na privremenoj bazi i rezultati se ne cuvaju.
 DATABASE_URL=
+
+# --- Google / Apple prijava (neobavezno) ---
+# Dugmad "Nastavi sa Google" i "Nastavi sa Apple" su sakrivena dok ovde ne upišeš 1.
+# Upiši 1 TEK kada u Supabase-u (Authentication -> Sign In / Providers) uključiš i podesiš provajdera.
+NEXT_PUBLIC_OAUTH_GOOGLE=
+NEXT_PUBLIC_OAUTH_APPLE=

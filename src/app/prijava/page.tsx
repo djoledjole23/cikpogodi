@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { OAuthDugmad, PrijavaForma } from "@/components/auth/forms";
+import { OAuthDugmad, OAuthRazdvojnik, PrijavaForma } from "@/components/auth/forms";
 import { Page } from "@/components/Page";
 import { bezbedanNext } from "@/lib/auth";
 
@@ -42,7 +42,7 @@ async function Sadrzaj({ searchParams }: Pick<PageProps<"/prijava">, "searchPara
           </Link>
         </p>
       </div>
-      <p className="divider">ili</p>
+      <OAuthRazdvojnik tekst="ili" />
       <OAuthDugmad next={next} />
       <p className="center">
         <Link href={`/registracija?next=${encodeURIComponent(next)}`} className="text-link tap">

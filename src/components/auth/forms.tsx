@@ -29,14 +29,29 @@ function Greska({ stanje }: { stanje: StanjeForme }) {
 
 // ───────────────────────── Google / Apple ─────────────────────────
 
+type Provajder = "google" | "apple";
+
+/** Dugmad se vide tek kad je provajder stvarno povezan u Supabase-u. */
+const PROVAJDERI: Provajder[] = [
+  ...(process.env.NEXT_PUBLIC_OAUTH_GOOGLE === "1" ? (["google"] as const) : []),
+  ...(process.env.NEXT_PUBLIC_OAUTH_APPLE === "1" ? (["apple"] as const) : []),
+];
+
+const NAZIV: Record<Provajder, string> = { google: "Nastavi sa Google", apple: "Nastavi sa Apple" };
+const CEKA: Record<Provajder, string> = { google: "Otvaram Google\u2026", apple: "Otvaram Apple\u2026" };
+
+export function oauthUkljucen() {
+  return PROVAJDERI.length > 0;
+}
+
 export function OAuthDugmad({ next = "/" }: { next?: string }) {
   const [greska, setGreska] = useState<string | null>(null);
-  const [ceka, setCeka] = useState<"google" | "apple" | null>(null);
+  const [ceka, setCeka] = useState<Provajder | null>(null);
 
-  async function nastavi(provider: "google" | "apple") {
+  async function nastavi(provider: Provajder) {
     setGreska(null);
     if (!supabasePodesen()) {
-      setGreska("Prijava preko Google i Apple naloga još nije povezana.");
+      setGreska("Prijava preko Google i Apple naloga jo\u0161 nije povezana.");
       return;
     }
     setCeka(provider);
@@ -50,14 +65,15 @@ export function OAuthDugmad({ next = "/" }: { next?: string }) {
     }
   }
 
+  if (PROVAJDERI.length === 0) return null;
+
   return (
     <div className="stack">
-      <button type="button" className="btn btn-cream" onClick={() => nastavi("google")} disabled={ceka !== null}>
-        {ceka === "google" ? "Otvaram Google…" : "Nastavi sa Google"}
-      </button>
-      <button type="button" className="btn btn-cream" onClick={() => nastavi("apple")} disabled={ceka !== null}>
-        {ceka === "apple" ? "Otvaram Apple…" : "Nastavi sa Apple"}
-      </button>
+      {PROVAJDERI.map((p) => (
+        <button key={p} type="button" className="btn btn-cream" onClick={() => nastavi(p)} disabled={ceka !== null}>
+          {ceka === p ? CEKA[p] : NAZIV[p]}
+        </button>
+      ))}
       {greska && (
         <p className="form-error" role="alert">
           {greska}
@@ -65,6 +81,12 @@ export function OAuthDugmad({ next = "/" }: { next?: string }) {
       )}
     </div>
   );
+}
+
+/** Crta „ili mejlom” samo ako iznad/ispod stvarno ima OAuth dugmadi. */
+export function OAuthRazdvojnik({ tekst = "ili mejlom" }: { tekst?: string }) {
+  if (PROVAJDERI.length === 0) return null;
+  return <p className="divider">{tekst}</p>;
 }
 
 // ───────────────────────── Registracija ─────────────────────────
