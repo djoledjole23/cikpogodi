@@ -1,4 +1,4 @@
-import type { Ocena, PrikazCena, PrikazGugla, PrikazPesma, SegmentStanje } from "./types";
+import type { Ocena, PrikazCena, PrikazFilm, PrikazGugla, PrikazPesma, SegmentStanje } from "./types";
 
 /**
  * Rečenica koja ide uz rezultat pitanja. Bira se po tome koliko je igrač bio blizu,
@@ -37,6 +37,13 @@ export function komentarPesma(ocena: Ocena, p: PrikazPesma, seme: number): strin
   if (ocena.poeni === ocena.maxPoena) return izaberi(["Po prvom taktu! Ti ovo imaš u krvi.", "Dve sekunde i gotovo. Ajde bre!"], seme);
   if (p.slusanoMs <= 6000) return izaberi(["Brzo si to skapirao.", "Tako je. Uvo ti radi."], seme);
   return izaberi(["Tako je. Malo si se premišljao, al' dobro.", "Pogodak, i to posle lepog slušanja."], seme);
+}
+
+export function komentarFilm(ocena: Ocena, p: PrikazFilm, seme: number): string {
+  if (ocena.istek) return izaberi(["Vreme! Film je otišao u arhivu.", "Isteklo. Kraj projekcije."], seme);
+  if (p.neZnam) return izaberi(["Nema veze. Stavi ga na spisak za gledanje.", "Pošteno. Sad znaš šta da pustiš večeras."], seme);
+  if (!p.tacno) return izaberi(["A ne. Drugi film.", "Ni blizu, ali svaka čast na hrabrosti.", "Promašaj. Repriza je obavezna."], seme);
+  return izaberi(["Tako je! Ti si ovo gledao sto puta.", "Ajde bre, pa to se zna!", "Pogodak. Pravi filmofil."], seme);
 }
 
 export function komentarSegmenta(s: SegmentStanje): string {

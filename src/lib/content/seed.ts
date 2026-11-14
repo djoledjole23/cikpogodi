@@ -1,6 +1,7 @@
 import { SEGMENTI } from "@/config/quiz.config";
 import { dodajDane } from "@/lib/time";
 import { normalizuj } from "@/lib/match";
+import type { Film } from "./films";
 import type { Proizvod } from "./products";
 import { ZANROVI, type Pesma, type Zanr } from "./songs";
 import { ferDuel, napraviPar, type Par, type Pojam, type UcitaniTrendovi } from "./trends";
@@ -14,6 +15,7 @@ import { ferDuel, napraviPar, type Par, type Pojam, type UcitaniTrendovi } from 
 const PO_DANU = SEGMENTI.find((s) => s.key === "cena")!.pitanja;
 const PAROVA_PO_DANU = SEGMENTI.find((s) => s.key === "gugla")!.pitanja;
 const PESAMA_PO_DANU = SEGMENTI.find((s) => s.key === "pesma")!.pitanja;
+const FILMOVA_PO_DANU = SEGMENTI.find((s) => s.key === "film")!.pitanja;
 const NAJVISE_PO_KATEGORIJI = 4;
 
 /** Mali generator slučajnih brojeva sa semenom (mulberry32): isti datum → isti izbor. */
@@ -203,6 +205,35 @@ export function planPesama(pesme: Pesma[], pocetak: string, dana: number): Dnevn
   return plan;
 }
 
+export type DnevniPlanFilmova = { datum: string; filmovi: Film[] };
+
+/**
+ * Za svaki dan bira 3 kadra: prvo filmovi koji su najmanje puta bili, nasumično među jednakima.
+ * Film se ne ponavlja dok ima neiskorišćenih, a kad se krug završi, ne ponavlja se onaj od juče.
+ */
+export function planFilmova(filmovi: Film[], pocetak: string, dana: number): DnevniPlanFilmova[] {
+  if (filmovi.length < FILMOVA_PO_DANU) throw new Error("Premalo filmova za jedan dan.");
+  const koriscen = new Map<string, number>(filmovi.map((f) => [f.slika, 0]));
+  let juce = new Set<string>();
+  const plan: DnevniPlanFilmova[] = [];
+  for (let d = 0; d < dana; d++) {
+    const datum = dodajDane(pocetak, d);
+    const rnd = slucajni(semeIzTeksta(`film:${datum}`));
+    const kljuc = new Map(filmovi.map((f) => [f.slika, rnd()]));
+    const poRedu = [...filmovi].sort(
+      (a, b) =>
+        koriscen.get(a.slika)! - koriscen.get(b.slika)! ||
+        Number(juce.has(a.slika)) - Number(juce.has(b.slika)) ||
+        kljuc.get(a.slika)! - kljuc.get(b.slika)!,
+    );
+    const izabrani = poRedu.slice(0, FILMOVA_PO_DANU);
+    for (const f of izabrani) koriscen.set(f.slika, koriscen.get(f.slika)! + 1);
+    juce = new Set(izabrani.map((f) => f.slika));
+    plan.push({ datum, filmovi: izabrani });
+  }
+  return plan;
+}
+
 /** SQL tekst u jednostrukim navodnicima. */
 const q = (s: string) => `'${s.replace(/'/g, "''")}'`;
 
@@ -235,12 +266,14 @@ export function seedSql(opcije: {
   datumCenovnika: string;
   /** Katalog pesama za „Pogodi pesmu”. Bez njega se segment 1 ne pravi. */
   pesme?: Pesma[];
+  /** Kadrovi za „Pogodi domaći film/seriju”. Bez njih se segment 4 ne pravi. */
+  filmovi?: Film[];
   /** Pojmovi za „Šta se više gugla”. Bez njih se pravi samo segment 2. */
   trendovi?: Pick<UcitaniTrendovi, "pojmovi" | "period" | "preuzeto">;
   pocetak: string;
   dana: number;
 }): string {
-  const { proizvodi, datumCenovnika, pesme, trendovi, pocetak, dana } = opcije;
+  const { proizvodi, datumCenovnika, pesme, filmovi, trendovi, pocetak, dana } = opcije;
   const redovi: string[] = [];
 
   if (pesme?.length) {
@@ -337,5 +370,56 @@ export function seedSql(opcije: {
       });
     }
   }
+  if (filmovi?.length) {
+    redovi.push(
+      "",
+      "-- Isto što i migracija 0004: ponovljeno ovde da seed radi i ako ona nije puštena.",
+      `create table if not exists public.film_stills (
+  id bigint generated always as identity primary key,
+  film_id bigint not null references public.films (id) on delete cascade,
+  image_url text not null unique,
+  note text,
+  created_at timestamptz not null default now()
+);`,
+      "alter table public.film_stills enable row level security;",
+      "create unique index if not exists films_title_idx on public.films (title);",
+      `drop policy if exists "katalog filmova je javan" on public.films;`,
+      "alter table public.daily_quiz_items add column if not exists film_still_id bigint references public.film_stills (id);",
+      "alter table public.daily_quiz_items drop constraint if exists stavka_odgovara_segmentu;",
+      `alter table public.daily_quiz_items add constraint stavka_odgovara_segmentu check (
+  num_nonnulls(song_id, product_id, trend_pair_id, film_clip_id, film_still_id, rebus_id) = 1
+  and ((segment = 1 and song_id is not null) or (segment = 2 and product_id is not null) or (segment = 3 and trend_pair_id is not null)
+    or (segment = 4 and (film_clip_id is not null or film_still_id is not null)) or (segment = 5 and rebus_id is not null))
+);`,
+      "",
+      "-- Filmovi i serije (films.json) i njihovi kadrovi.",
+    );
+    for (const f of filmovi) {
+      const alias = f.alias.length ? `array[${f.alias.map(q).join(", ")}]::text[]` : "'{}'::text[]";
+      redovi.push(
+        `insert into public.films (title, aliases) values (${q(f.naslov)}, ${alias})
+  on conflict (title) do update set aliases = excluded.aliases, active = true;`,
+        `insert into public.film_stills (film_id, image_url) select id, ${q(f.slika)} from public.films where title = ${q(f.naslov)}
+  on conflict (image_url) do nothing;`,
+      );
+    }
+    redovi.push("", "-- Dnevni kviz: segment 4 (Pogodi domaći film/seriju). Dan koji već ima stavke se ne dira.");
+    for (const dan of planFilmova(filmovi, pocetak, dana)) {
+      redovi.push(
+        `insert into public.daily_quiz (quiz_date, status, published_at) values (${q(dan.datum)}, 'published', now())
+  on conflict (quiz_date) do nothing;`,
+      );
+      dan.filmovi.forEach((f, i) => {
+        const snapshot = { naslov: f.naslov, alias: f.alias, slika: f.slika };
+        redovi.push(
+          `insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select ${q(dan.datum)}, 4, ${i + 1}, id, ${q(JSON.stringify(snapshot))}::jsonb
+  from public.film_stills where image_url = ${q(f.slika)}
+  on conflict (quiz_date, segment, position) do nothing;`,
+        );
+      });
+    }
+  }
+
   return redovi.join("\n") + "\n";
 }

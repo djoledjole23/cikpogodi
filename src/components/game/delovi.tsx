@@ -174,7 +174,8 @@ export function UvodSegmenta({ segment, naKreni, ceka }: { segment: SegmentStanj
       <p className="lead">{segment.pravilo}</p>
       <ul className="g-uvod-cinjenice">
         <li>
-          <strong>{segment.pitanja}</strong> {segment.key === "pesma" ? "pesama" : segment.pitanja === 1 ? "pitanje" : "pitanja"}
+          <strong>{segment.pitanja}</strong>{" "}
+          {segment.key === "pesma" ? "pesama" : segment.key === "film" ? "kadra" : segment.pitanja === 1 ? "pitanje" : "pitanja"}
         </li>
         <li>
           {segment.key === "pesma" ? (
@@ -263,8 +264,7 @@ export function Kraj({ stanje }: { stanje: Stanje }) {
           <small> / {max}</small>
         </p>
         <p className="muted small">
-Za sada se igraju „Pogodi cenu” i „Šta se više gugla”. Ostali segmenti, čuvanje rezultata i rang lista
-          stižu u sledećim koracima.
+Rebus, čuvanje rezultata i rang lista stižu u sledećim koracima.
         </p>
       </div>
 
@@ -309,6 +309,14 @@ function RedRezultata({ prikaz: p }: { prikaz: Prikaz }) {
         <span>
           {p.tacno ? `Pogođeno posle ${sek} s slušanja` : p.neZnam ? "Ne znam" : p.odgovor ? `Ti: ${p.odgovor}` : "bez odgovora"}
         </span>
+      </>
+    );
+  }
+  if (p.vrsta === "film") {
+    return (
+      <>
+        <strong>{p.naslov}</strong>
+        <span>{p.tacno ? "Pogođeno" : p.neZnam ? "Ne znam" : p.odgovor ? `Ti: ${p.odgovor}` : "bez odgovora"}</span>
       </>
     );
   }

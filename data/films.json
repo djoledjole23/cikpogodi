@@ -1,0 +1,128 @@
+{
+  "napomena": "Kadrovi za „Pogodi domaći film/seriju”. Fotografije je dao vlasnik sajta (naziv fajla = naslov). U public/kadrovi su pod imenom koje ne odaje naslov (otisak sadržaja), ponovo kodirane bez metapodataka. alias su kraći ili drugačiji oblici naslova koji se takođe priznaju.",
+  "filmovi": [
+    {
+      "naslov": "Apsolutnih sto",
+      "alias": ["Apsolutnih 100"],
+      "slika": "/kadrovi/d9743ac1239e02.webp"
+    },
+    {
+      "naslov": "Balkanski špijun",
+      "slika": "/kadrovi/266f47b4bf4330.webp"
+    },
+    {
+      "naslov": "Greh njene majke",
+      "slika": "/kadrovi/98c04ce7ffd86f.webp"
+    },
+    {
+      "naslov": "Ivkova slava",
+      "slika": "/kadrovi/64db2b1fcfaceb.webp"
+    },
+    {
+      "naslov": "Južni vetar",
+      "slika": "/kadrovi/b54ac478dd9f9e.webp"
+    },
+    {
+      "naslov": "Kad porastem biću Kengur",
+      "alias": ["Kengur"],
+      "slika": "/kadrovi/2342208e45e0d5.webp"
+    },
+    {
+      "naslov": "Ko to tamo peva",
+      "slika": "/kadrovi/dfd186e39dc288.webp"
+    },
+    {
+      "naslov": "Lajanje na zvezde",
+      "slika": "/kadrovi/910755bdb2d3ed.webp"
+    },
+    {
+      "naslov": "Lepa sela lepo gore",
+      "alias": ["Lepa sela"],
+      "slika": "/kadrovi/27aca52c471053.webp"
+    },
+    {
+      "naslov": "Mali Budo",
+      "slika": "/kadrovi/8d3472b446bb96.webp"
+    },
+    {
+      "naslov": "Maratonci trče počasni krug",
+      "alias": ["Maratonci"],
+      "slika": "/kadrovi/26fcfdf6ce0b4e.webp"
+    },
+    {
+      "naslov": "Montevideo, Bog te video!",
+      "alias": ["Montevideo"],
+      "slika": "/kadrovi/c9bf06d591b178.webp"
+    },
+    {
+      "naslov": "Mrtav 'ladan",
+      "alias": ["Mrtav hladan"],
+      "slika": "/kadrovi/8cbcf42b3b8c7c.webp"
+    },
+    {
+      "naslov": "Munje!",
+      "slika": "/kadrovi/b78562811e4dfd.webp"
+    },
+    {
+      "naslov": "Nedelja",
+      "slika": "/kadrovi/3a05c0c3d6723a.webp"
+    },
+    {
+      "naslov": "Nož",
+      "slika": "/kadrovi/0f95a920c25413.webp"
+    },
+    {
+      "naslov": "Parada",
+      "slika": "/kadrovi/5d7b9193da21b5.webp"
+    },
+    {
+      "naslov": "Ranjeni orao",
+      "slika": "/kadrovi/051f731cbbfa6a.webp"
+    },
+    {
+      "naslov": "Sedam i po",
+      "alias": ["7 i po"],
+      "slika": "/kadrovi/51593cb69f6231.webp"
+    },
+    {
+      "naslov": "Senke nad Balkanom",
+      "slika": "/kadrovi/99e6fa37dacc76.webp"
+    },
+    {
+      "naslov": "Svadba",
+      "slika": "/kadrovi/3f44ee5376ac8f.webp"
+    },
+    {
+      "naslov": "Tesna koža",
+      "slika": "/kadrovi/3888635e9b8672.webp"
+    },
+    {
+      "naslov": "Toma",
+      "slika": "/kadrovi/35d341e7bddb04.webp"
+    },
+    {
+      "naslov": "Ubice mog oca",
+      "alias": ["Ubice moga oca"],
+      "slika": "/kadrovi/ce43a77331335f.webp"
+    },
+    {
+      "naslov": "Valter brani Sarajevo",
+      "alias": ["Valter"],
+      "slika": "/kadrovi/aea6ef7f9e918e.webp"
+    },
+    {
+      "naslov": "Varljivo leto '68",
+      "alias": ["Varljivo leto"],
+      "slika": "/kadrovi/69d278902e4c57.webp"
+    },
+    {
+      "naslov": "Zlatni dečko",
+      "slika": "/kadrovi/e21b6c218911f0.webp"
+    },
+    {
+      "naslov": "Zona Zamfirova",
+      "alias": ["Zona"],
+      "slika": "/kadrovi/0b6135f7ced4ae.webp"
+    }
+  ]
+}

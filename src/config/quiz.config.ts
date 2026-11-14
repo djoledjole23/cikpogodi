@@ -57,9 +57,9 @@ export const SEGMENTI: SegmentConfig[] = [
   {
     n: 4,
     key: "film",
-    naziv: "Pogodi film",
-    pravilo: "Pogledaj insert i upiši iz kog je filma.",
-    bodovanje: "3 inserta · tačno: 20",
+    naziv: "Pogodi domaći film/seriju",
+    pravilo: "Pogledaj kadar i upiši iz kog je domaćeg filma ili serije.",
+    bodovanje: "3 kadra · tačno: 20",
     pitanja: 3,
     max: 60,
     limitS: 30,

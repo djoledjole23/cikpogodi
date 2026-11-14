@@ -20,3 +20,10 @@ export function sopstveneSlike(koren: string = process.cwd()): Map<string, strin
   }
   return slike;
 }
+
+/** Adrese kadrova koji postoje u public/kadrovi (npr. „/kadrovi/9f2c….webp”). */
+export function postojeciKadrovi(koren: string = process.cwd()): Set<string> {
+  const dir = join(koren, "public", "kadrovi");
+  if (!existsSync(dir)) return new Set();
+  return new Set(readdirSync(dir).filter((f) => NASTAVCI.test(f)).map((f) => `/kadrovi/${f}`));
+}

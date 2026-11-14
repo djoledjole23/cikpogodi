@@ -2,8 +2,9 @@
 
 Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript + Supabase, hosting na Vercelu.
 
-> Ovo je radna verzija README-a. Gotovi su **osnova, auth, segment 1 (Pogodi pesmu), segment 2 (Pogodi cenu)
-> i segment 3 (Šta se više gugla)**. Film, rebus, rezultat, rang lista, admin i deploy stižu redom.
+> Ovo je radna verzija README-a. Gotovi su **osnova, auth, segment 1 (Pogodi pesmu), segment 2 (Pogodi cenu),
+> segment 3 (Šta se više gugla) i segment 4 (Pogodi domaći film/seriju)**. Rebus, rezultat, rang lista, admin
+> i deploy stižu redom.
 
 ## Šta je gotovo
 
@@ -20,6 +21,8 @@ Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript
 - **Segment 2, Pogodi cenu**: 10 artikala dnevno iz `data/products.json`, seed za 14 dana, skripta `update-cene`
 - **Segment 3, Šta se više gugla**: 8 duela dnevno iz `data/trends.json` (Google Trends, Srbija, 12 meseci).
   Pojmovi mogu biti iz različitih tema, a pobednik duela ostaje i dočekuje novog izazivača
+- **Segment 4, Pogodi domaći film/seriju**: 3 kadra dnevno iz `data/films.json`, naslov se kuca bez ponuđenih
+  odgovora (kvačice, ćirilica i sitne greške u kucanju se praštaju)
 - **Efekti**: odbrojavanje „3, 2, 1, Čik!”, tačkice po pitanjima i niz pogodaka u zaglavlju, meta sa iglom
   kod cene, pečati, zvezdice na kraju segmenta, konfete (sve poštuje „smanjeno kretanje”)
 
@@ -98,7 +101,7 @@ Skripta napravi fajl u `supabase/seed/`. Otvori ga, nalepi u Supabase → SQL Ed
 Može da se pusti više puta: dan koji već ima pitanja se ne dira. Gotov fajl za prvih 14 dana
 (14–27. novembar 2026) je `supabase/seed/seed-2026-11-14-14d.sql`.
 
-Za sada skripta puni segmente 1, 2 i 3:
+Za sada skripta puni segmente 1, 2, 3 i 4:
 
 - **Pesma:** 5 pesama dnevno: po jedna folk, rok, pop i trep, a peta je svaki dan iz drugog žanra. U jednom danu
   se nijedan izvođač ne javlja dvaput (ni kao gost na tuđoj pesmi). Pesme sa oznakom `prioritet` idu pre ostalih,
@@ -108,6 +111,22 @@ Za sada skripta puni segmente 1, 2 i 3:
   (gore ili dole), a na mesto gubitnika dolazi novi izazivač. Svih 9 pojmova u danu je iz različitih tema,
   izazivač pobedi 3 do 5 puta dnevno (da „uvek tapni šampiona” ne bude taktika) i nijedan duel se ne ponavlja
   u celom periodu.
+
+## Filmovi i serije
+
+„Pogodi domaći film/seriju”: igrač vidi kadar i kuca naslov. Nema ponuđenih odgovora ni spiska filmova u
+browseru; server poredi tolerantno (kvačice, ćirilica, jedna do dve greške u kucanju, kraći oblik naslova
+iz `alias`). Tačno nosi 20 poena, sve ostalo 0.
+
+- `data/films.json`: naslov, `alias` (npr. „Maratonci”) i adresa kadra.
+- Kadrovi su u `public/kadrovi/` pod imenom koje **ne odaje naslov** (otisak sadržaja, npr. `9f2c….webp`),
+  ponovo kodirani bez metapodataka i smanjeni na najviše 960 px. Fajl nazvan po filmu ne sme u taj folder:
+  učitavanje ga odbija, jer igrač vidi adresu slike.
+- Novi kadar: fotografiju nazovi po filmu, pretvori je u webp sa nasumičnim imenom, ubaci u `public/kadrovi/`,
+  dodaj red u `films.json` i pusti `npm run seed`. (Unos kroz admin panel stiže sa adminom.)
+- Raspored: 3 kadra dnevno, film se ne ponavlja dok ima neiskorišćenih i nikad dva dana zaredom.
+  28 kadrova pokriva 9 dana bez ponavljanja.
+- Kadrovi iz filmova pripadaju producentima. Koristi one za koje imaš dozvolu ili zvanični materijal za medije.
 
 ## Pesme
 
@@ -189,7 +208,7 @@ src/config/quiz.config.ts   limiti, pragovi, poeni: sve što se podešava
 src/lib/scoring.ts          bodovanje (čiste funkcije, pokrivene testovima)
 src/lib/game/engine.ts      srce igre: ko sme da igra, koje je pitanje, vreme, poeni (sve na serveru)
 src/lib/game/segments/      po jedan fajl za svaki segment (šta ide u browser, kako se ocenjuje)
-src/lib/content/            čitanje songs.json, products.json i trends.json, raspored pitanja po danima, sopstvene slike
+src/lib/content/            čitanje songs.json, products.json, trends.json i films.json, raspored pitanja po danima, sopstvene slike
 src/lib/match.ts            tolerantno poređenje teksta i pretraga kataloga pesama
 src/lib/audio.ts            svež link ka klipu od 30 s (Deezer, pa iTunes)
 src/app/api/track/          zvuk za pitanje (preusmerenje na zvanični klip)

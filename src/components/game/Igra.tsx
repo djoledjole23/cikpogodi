@@ -5,9 +5,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Ocena, SegmentStanje, Stanje, Trenutno } from "@/lib/game/types";
 import { haptika, sfx } from "@/lib/sound";
 import { api, katalogPesama, NijeNaRedu } from "./api";
-import { komentarCena, komentarGugla, komentarPesma } from "@/lib/game/komentari";
+import { komentarCena, komentarFilm, komentarGugla, komentarPesma } from "@/lib/game/komentari";
 import { CenaOcena, CenaPitanje } from "./Cena";
 import { KrajSegmenta, Kraj, OkvirOcene, Poruka, Tajmer, UvodSegmenta, Zaglavlje } from "./delovi";
+import { FilmOcena, FilmPitanje } from "./Film";
 import { GuglaDuel } from "./Gugla";
 import { PesmaIgra } from "./Pesma";
 import { Odbrojavanje, smanjenoKretanje } from "./efekti";
@@ -309,6 +310,26 @@ export function Igra() {
     );
   }
 
+  if (ekran.vrsta === "ocena" && ekran.ocena.prikaz.vrsta === "film") {
+    const { ocena } = ekran;
+    const prikaz = ocena.prikaz as Extract<typeof ocena.prikaz, { vrsta: "film" }>;
+    return (
+      <>
+        {zaglavlje}
+        <OkvirOcene
+          key={ekran.pitanje.itemId}
+          komentar={komentarFilm(ocena, prikaz, ekran.pitanje.itemId)}
+          najava={prikaz.odgovor === null && !prikaz.neZnam ? "Vreme je isteklo. To je bio…" : "A to je…"}
+          otkriveno={ekran.otkriveno}
+          naDalje={dalje}
+          ceka={ceka}
+        >
+          <FilmOcena ocena={ocena} prikaz={prikaz} otkriveno={ekran.otkriveno} naOtkrij={otkrij} />
+        </OkvirOcene>
+      </>
+    );
+  }
+
   if (ekran.vrsta === "ocena") {
     const { ocena } = ekran;
     if (ocena.prikaz.vrsta !== "cena") return null;
@@ -381,7 +402,7 @@ export function Igra() {
           </>
         );
       }
-      if (t.pitanje.vrsta !== "cena") return null; // pesma i duel su nacrtani gore
+      if (t.pitanje.vrsta !== "cena" && t.pitanje.vrsta !== "film") return null; // pesma i duel su nacrtani gore
       return (
         <>
           {zaglavlje}
@@ -392,7 +413,11 @@ export function Igra() {
             zaustavljen={ceka}
             naIstek={() => void odgovori(stanje, null, true)}
           />
-          <CenaPitanje key={`p${t.itemId}`} pitanje={t.pitanje} zakljucano={ceka} naPotvrdi={(unos) => void odgovori(stanje, { unos })} />
+          {t.pitanje.vrsta === "film" ? (
+            <FilmPitanje key={`f${t.itemId}`} pitanje={t.pitanje} zakljucano={ceka} naOdgovor={(odgovor) => void odgovori(stanje, odgovor)} />
+          ) : (
+            <CenaPitanje key={`p${t.itemId}`} pitanje={t.pitanje} zakljucano={ceka} naPotvrdi={(unos) => void odgovori(stanje, { unos })} />
+          )}
         </>
       );
     }

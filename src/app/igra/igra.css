@@ -2028,3 +2028,139 @@
     font-size: 22px;
   }
 }
+
+/* ───── pogodi domaći film/seriju ───── */
+
+.g-film {
+  gap: 12px;
+}
+
+/* Kadar stoji kao fotografija zalepljena na platno: krem okvir, blago nakrivljena. */
+.g-kadar {
+  position: relative;
+  align-self: center;
+  width: 100%;
+  height: clamp(170px, 34dvh, 290px);
+  padding: 6px;
+  border-radius: var(--r-lg);
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-1deg);
+}
+
+.g-kadar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: #120c0a;
+  object-fit: contain;
+}
+
+.g-kadar-zamena {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-soft);
+  font-weight: 800;
+}
+
+.g-film-unos {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.g-film .g-pesma-polje {
+  height: 62px;
+}
+
+.g-film .g-pesma-polje input {
+  height: 56px;
+  font-size: 20px;
+}
+
+.g-film-ishod {
+  position: relative;
+}
+
+.g-film-ishod .g-kadar {
+  height: clamp(150px, 28dvh, 240px);
+}
+
+.g-film-naslov {
+  font-family: var(--font-display);
+  font-size: 30px;
+  line-height: 1.05;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.g-film-dno {
+  min-height: 78px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .g-film .g-kadar {
+    animation: g-kadar 380ms cubic-bezier(0.2, 1.2, 0.4, 1) backwards;
+  }
+
+  .g-film-naslov:not(.g-nevidljivo) {
+    animation: g-lupi-tekst 300ms cubic-bezier(0.3, 1.5, 0.5, 1);
+  }
+}
+
+@keyframes g-kadar {
+  from {
+    opacity: 0;
+    transform: rotate(4deg) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-1deg) scale(1);
+  }
+}
+
+@media (max-height: 600px) {
+  .g-film-naslov {
+    font-size: 24px;
+  }
+
+  .g-film-dno {
+    min-height: 64px;
+  }
+}
+
+/* Uvod u segment na niskom ekranu: manja ikonica i naslov, da „Kreni” ostane na ekranu. */
+@media (max-height: 600px) {
+  .g-uvod {
+    gap: 8px;
+    padding-top: 6px;
+  }
+
+  .g-uvod-ikona {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 2px;
+    border-radius: 20px;
+  }
+
+  .g-uvod-ikona svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .g-uvod .h1 {
+    font-size: 30px;
+  }
+
+  .g-uvod .btn-lg {
+    min-height: 56px;
+    font-size: 22px;
+  }
+}

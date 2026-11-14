@@ -11,8 +11,9 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { ucitajProizvode } from "../src/lib/content/products";
-import { planCena, planGugla, planPesama, seedSql } from "../src/lib/content/seed";
-import { sopstveneSlike } from "../src/lib/content/slike";
+import { ucitajFilmove } from "../src/lib/content/films";
+import { planCena, planFilmova, planGugla, planPesama, seedSql } from "../src/lib/content/seed";
+import { postojeciKadrovi, sopstveneSlike } from "../src/lib/content/slike";
 import { ucitajPesme } from "../src/lib/content/songs";
 import { ucitajTrendove } from "../src/lib/content/trends";
 import { beogradskiDatum, dodajDane } from "../src/lib/time";
@@ -30,7 +31,8 @@ const slike = sopstveneSlike(koren);
 const ucitani = ucitajProizvode(JSON.parse(readFileSync(join(koren, "data", "products.json"), "utf8")), slike);
 const trendovi = ucitajTrendove(JSON.parse(readFileSync(join(koren, "data", "trends.json"), "utf8")));
 const pesme = ucitajPesme(JSON.parse(readFileSync(join(koren, "data", "songs.json"), "utf8")));
-const sql = seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, pesme: pesme.pesme, trendovi, pocetak, dana });
+const filmovi = ucitajFilmove(JSON.parse(readFileSync(join(koren, "data", "films.json"), "utf8")), postojeciKadrovi(koren));
+const sql = seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, pesme: pesme.pesme, filmovi: filmovi.filmovi, trendovi, pocetak, dana });
 
 const dir = join(koren, "supabase", "seed");
 mkdirSync(dir, { recursive: true });
@@ -61,4 +63,8 @@ console.log(
 );
 if (pesme.izbaceni.length) console.log(`Izbačeno: ${pesme.izbaceni.map((x) => `${x.naziv} (${x.razlog})`).join(", ")}`);
 console.log(`Primer (${planP[0].datum}): ${planP[0].pesme.map((p) => `${p.izvodjac} – ${p.naslov} [${p.zanr}]`).join(", ")}`);
+const planF = planFilmova(filmovi.filmovi, pocetak, dana);
+console.log(`\nKadrova za „Pogodi domaći film/seriju”: ${filmovi.filmovi.length} (dovoljno za ${Math.floor(filmovi.filmovi.length / 3)} dana bez ponavljanja)`);
+if (filmovi.izbaceni.length) console.log(`Izbačeno: ${filmovi.izbaceni.map((x) => `${x.naziv} (${x.razlog})`).join(", ")}`);
+console.log(`Primer (${planF[0].datum}): ${planF[0].filmovi.map((f) => f.naslov).join(", ")}`);
 console.log(`\nSQL je u: ${fajl}\nNalepi ga u Supabase → SQL Editor → Run.`);
