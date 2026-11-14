@@ -1,6 +1,8 @@
 import { SEGMENTI } from "@/config/quiz.config";
 import { dodajDane } from "@/lib/time";
+import { normalizuj } from "@/lib/match";
 import type { Proizvod } from "./products";
+import { ZANROVI, type Pesma, type Zanr } from "./songs";
 import { ferDuel, napraviPar, type Par, type Pojam, type UcitaniTrendovi } from "./trends";
 
 /**
@@ -11,6 +13,7 @@ import { ferDuel, napraviPar, type Par, type Pojam, type UcitaniTrendovi } from 
 
 const PO_DANU = SEGMENTI.find((s) => s.key === "cena")!.pitanja;
 const PAROVA_PO_DANU = SEGMENTI.find((s) => s.key === "gugla")!.pitanja;
+const PESAMA_PO_DANU = SEGMENTI.find((s) => s.key === "pesma")!.pitanja;
 const NAJVISE_PO_KATEGORIJI = 4;
 
 /** Mali generator slučajnih brojeva sa semenom (mulberry32): isti datum → isti izbor. */
@@ -149,6 +152,57 @@ export function planGugla(
   return plan;
 }
 
+export type DnevniPlanPesama = { datum: string; pesme: Pesma[] };
+
+/**
+ * Za svaki dan bira 5 pesama, po malo od svega: po jedna folk, rok, pop i trep,
+ * a peta je svaki dan iz drugog žanra (folk, rok, pop, pa ukrug).
+ * U jednom danu se nijedan izvođač ne javlja dvaput (ni kao gost na tuđoj pesmi).
+ * Pesme sa spiska vlasnika sajta (prioritet) idu pre ostalih, a pesma se ne ponavlja
+ * dok ima neiskorišćenih u tom žanru.
+ */
+export function planPesama(pesme: Pesma[], pocetak: string, dana: number): DnevniPlanPesama[] {
+  const koriscena = new Map<number, number>(pesme.map((p) => [p.deezerId, 0]));
+  const peti: Zanr[] = ["folk", "rok", "pop"];
+  const plan: DnevniPlanPesama[] = [];
+
+  for (let d = 0; d < dana; d++) {
+    const datum = dodajDane(pocetak, d);
+    const rnd = slucajni(semeIzTeksta(`pesma:${datum}`));
+    const kljuc = new Map(pesme.map((p) => [p.deezerId, rnd()]));
+    // Najmanje puta korišćene prve; među njima prvo one sa prioritetom, pa nasumično.
+    const poRedu = [...pesme].sort(
+      (a, b) =>
+        koriscena.get(a.deezerId)! - koriscena.get(b.deezerId)! ||
+        Number(b.prioritet) - Number(a.prioritet) ||
+        kljuc.get(a.deezerId)! - kljuc.get(b.deezerId)!,
+    );
+
+    const izabrane: Pesma[] = [];
+    const zauzeti = new Set<string>();
+    const uzmi = (zanr: Zanr | null) => {
+      const p = poRedu.find(
+        (x) => !izabrane.includes(x) && (zanr === null || x.zanr === zanr) && x.izvodjaci.every((i) => !zauzeti.has(normalizuj(i))),
+      );
+      if (!p) return false;
+      izabrane.push(p);
+      for (const i of p.izvodjaci) zauzeti.add(normalizuj(i));
+      return true;
+    };
+
+    for (const zanr of [...ZANROVI, peti[d % peti.length]]) {
+      if (izabrane.length < PESAMA_PO_DANU && !uzmi(zanr)) uzmi(null); // žanr je ispražnjen: uzmi bilo koju
+    }
+    while (izabrane.length < PESAMA_PO_DANU && uzmi(null));
+    if (izabrane.length < PESAMA_PO_DANU) throw new Error(`Nema dovoljno pesama različitih izvođača za ${datum}.`);
+
+    const redosled = izabrane.map((p) => ({ p, k: rnd() })).sort((a, b) => a.k - b.k).map((x) => x.p);
+    for (const p of redosled) koriscena.set(p.deezerId, koriscena.get(p.deezerId)! + 1);
+    plan.push({ datum, pesme: redosled });
+  }
+  return plan;
+}
+
 /** SQL tekst u jednostrukim navodnicima. */
 const q = (s: string) => `'${s.replace(/'/g, "''")}'`;
 
@@ -171,16 +225,58 @@ export function snapshotGugla(p: Par) {
   return { a: p.a, b: p.b, indeksA: p.indeksA, indeksB: p.indeksB, period: p.period, preuzeto: p.preuzeto };
 }
 
+/** Ono što se zamrzava uz pitanje „Pogodi pesmu” (broj pesme u bazi dodaje sam SQL). */
+export function snapshotPesma(p: Pesma) {
+  return { izvodjac: p.izvodjac, naslov: p.naslov, alias: p.alias, deezerId: p.deezerId, itunesId: p.itunesId, omot: p.omot };
+}
+
 export function seedSql(opcije: {
   proizvodi: Proizvod[];
   datumCenovnika: string;
+  /** Katalog pesama za „Pogodi pesmu”. Bez njega se segment 1 ne pravi. */
+  pesme?: Pesma[];
   /** Pojmovi za „Šta se više gugla”. Bez njih se pravi samo segment 2. */
   trendovi?: Pick<UcitaniTrendovi, "pojmovi" | "period" | "preuzeto">;
   pocetak: string;
   dana: number;
 }): string {
-  const { proizvodi, datumCenovnika, trendovi, pocetak, dana } = opcije;
+  const { proizvodi, datumCenovnika, pesme, trendovi, pocetak, dana } = opcije;
   const redovi: string[] = [];
+
+  if (pesme?.length) {
+    redovi.push(
+      "-- Isto što i migracija 0003: ponovljeno ovde da seed radi i ako ona nije puštena.",
+      "alter table public.songs add column if not exists genre text;",
+      "alter table public.play_answers add column if not exists playing_since timestamptz;",
+      "",
+      "-- Katalog pesama (songs.json). Postojeće se osvežavaju po Deezer ID-u.",
+    );
+    for (const p of pesme) {
+      const alias = p.alias.length ? `array[${p.alias.map(q).join(", ")}]::text[]` : "'{}'::text[]";
+      redovi.push(
+        `insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
+  values (${q(p.izvodjac)}, ${q(p.naslov)}, ${alias}, ${p.deezerId}, ${p.itunesId ?? "null"}, ${q(p.omot)}, ${q(p.zanr)})
+  on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
+    itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;`,
+      );
+    }
+    redovi.push("", "-- Dnevni kviz: segment 1 (Pogodi pesmu). Dan koji već ima stavke se ne dira.");
+    for (const dan of planPesama(pesme, pocetak, dana)) {
+      redovi.push(
+        `insert into public.daily_quiz (quiz_date, status, published_at) values (${q(dan.datum)}, 'published', now())
+  on conflict (quiz_date) do nothing;`,
+      );
+      dan.pesme.forEach((p, i) => {
+        redovi.push(
+          `insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
+  select ${q(dan.datum)}, 1, ${i + 1}, id, ${q(JSON.stringify(snapshotPesma(p)))}::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = ${p.deezerId}
+  on conflict (quiz_date, segment, position) do nothing;`,
+        );
+      });
+    }
+    redovi.push("");
+  }
 
   redovi.push("-- Artikli (products.json). Postojeći se osvežavaju po barkodu.");
   for (const p of proizvodi) {

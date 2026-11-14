@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { MAX_UKUPNO } from "@/config/quiz.config";
 import { getDb } from "@/lib/db";
-import { GreskaIgre, odgovori, posaljiPitanje, stanjeIgre, zapocniIgru } from "@/lib/game/engine";
+import { GreskaIgre, odgovori, posaljiPitanje, slusanje, stanjeIgre, zapocniIgru } from "@/lib/game/engine";
 import { obezbediIdentitet } from "@/lib/game/identity";
 import type { Stanje } from "@/lib/game/types";
 import { beogradskiDatum, dodajDane } from "@/lib/time";
@@ -12,6 +12,7 @@ import { beogradskiDatum, dodajDane } from "@/lib/time";
  *   start    – počni današnju igru
  *   pitanje  – daj mi tekuće pitanje i pokreni vreme
  *   odgovor  – evo odgovora (ili `istek: true` kad je vreme prošlo)
+ *   slusanje – pesma je puštena ili pauzirana (server sabira preslušano vreme)
  */
 export async function POST(request: NextRequest) {
   let telo: Record<string, unknown>;
@@ -51,8 +52,19 @@ export async function POST(request: NextRequest) {
           return NextResponse.json({ greska: "los_zahtev" }, { status: 400 });
         }
         return NextResponse.json(
-          await odgovori(db, ident, datum, { itemId: telo.itemId, odgovor: telo.odgovor, istek: telo.istek === true }),
+          await odgovori(db, ident, datum, {
+            itemId: telo.itemId,
+            odgovor: telo.odgovor,
+            istek: telo.istek === true,
+            slusanoMs: typeof telo.slusanoMs === "number" ? telo.slusanoMs : undefined,
+          }),
         );
+      }
+      case "slusanje": {
+        if (typeof telo.itemId !== "number" || !Number.isInteger(telo.itemId) || typeof telo.pusteno !== "boolean") {
+          return NextResponse.json({ greska: "los_zahtev" }, { status: 400 });
+        }
+        return NextResponse.json(await slusanje(db, ident, datum, { itemId: telo.itemId, pusteno: telo.pusteno }));
       }
       default:
         return NextResponse.json({ greska: "los_zahtev" }, { status: 400 });

@@ -30,10 +30,23 @@ type RedStavke = {
   points: number | null;
   answer: unknown;
   answer_ms: number | null;
+  /** Pesma: do sada preslušano (bez dela koji upravo svira). */
+  listened_ms: number;
+  /** Pesma: koliko dugo svira od poslednjeg „pusti”, ili null ako je pauzirana. */
+  playing_ms: number | null;
 };
 
 const konfig = (n: number) => SEGMENTI.find((s) => s.n === n)!;
 const limitMs = (n: number) => konfig(n).limitS * 1000;
+
+/**
+ * Koliko je vremena „potrošeno” na pitanje. Za većinu segmenata to je vreme od slanja pitanja,
+ * a za pesmu ukupno preslušano vreme (pauza se ne računa).
+ */
+function utroseno(s: RedStavke): number {
+  if (RUKOVAOCI[s.segment].meriSlusanje) return s.listened_ms + Math.max(0, s.playing_ms ?? 0);
+  return s.elapsed_ms ?? 0;
+}
 
 // ───────────────────────── čitanje ─────────────────────────
 
@@ -43,7 +56,9 @@ async function ucitajStavke(db: Db, datum: string, playId: string | null): Promi
             (a.id is not null) as served,
             (a.answered_at is not null) as answered,
             (extract(epoch from (now() - a.served_at)) * 1000)::float8 as elapsed_ms,
-            a.points::int as points, a.answer, a.answer_ms::int as answer_ms
+            a.points::int as points, a.answer, a.answer_ms::int as answer_ms,
+            coalesce(a.listened_ms, 0)::int as listened_ms,
+            (extract(epoch from (now() - a.playing_since)) * 1000)::float8 as playing_ms
      from public.daily_quiz_items i
      join public.daily_quiz q on q.quiz_date = i.quiz_date and q.status = 'published'
      left join public.play_answers a on a.item_id = i.id and a.play_id = $2::uuid
@@ -123,20 +138,25 @@ function pregledSegmenata(stavke: RedStavke[]): SegmentStanje[] {
   });
 }
 
-/** Pitanje kome je vreme isteklo dok igrač nije bio tu (zatvoren tab, nema mreže) računa se kao netačno. */
+/**
+ * Pitanje kome je vreme isteklo dok igrač nije bio tu (zatvoren tab, nema mreže) računa se kao netačno.
+ * Kod pesme „vreme” je preslušano vreme: ako je ostala da svira do kraja klipa, pitanje je gotovo.
+ */
 async function zatvoriIstekla(db: Db, playId: string, stavke: RedStavke[]): Promise<boolean> {
   const tekuca = stavke.find((s) => !s.answered);
   if (!tekuca || !tekuca.served || tekuca.elapsed_ms === null) return false;
   const limit = limitMs(tekuca.segment);
-  if (tekuca.elapsed_ms <= limit + TOLERANCIJA_MREZE_MS) return false;
+  if (utroseno(tekuca) <= limit + TOLERANCIJA_MREZE_MS) return false;
 
+  const slusanje = Boolean(RUKOVAOCI[tekuca.segment].meriSlusanje);
   const { sacuvaj } = RUKOVAOCI[tekuca.segment].oceni(tekuca.snapshot, null, { protekloMs: limit, istek: true });
   await db.query(
     `update public.play_answers
-       set answered_at = served_at + ($3::int * interval '1 millisecond'), answer = $4::jsonb,
-           is_correct = false, points = 0, answer_ms = $3::int
+       set answered_at = case when $5::boolean then now() else served_at + ($3::int * interval '1 millisecond') end,
+           answer = $4::jsonb, is_correct = false, points = 0, answer_ms = $3::int,
+           listened_ms = case when $5::boolean then $3::int else listened_ms end, playing_since = null
      where play_id = $1::uuid and item_id = $2::int and answered_at is null`,
-    [playId, tekuca.id, limit, JSON.stringify(sacuvaj)],
+    [playId, tekuca.id, limit, JSON.stringify(sacuvaj), slusanje],
   );
   return true;
 }
@@ -198,7 +218,8 @@ function sastaviStanje(datum: string, igra: RedIgre | null, stavke: RedStavke[])
     const limit = limitMs(tekuca.segment);
     trenutno.pitanje = RUKOVAOCI[tekuca.segment].javno(tekuca.snapshot);
     trenutno.limitMs = limit;
-    trenutno.preostaloMs = Math.max(0, Math.round(limit - (tekuca.elapsed_ms ?? 0)));
+    trenutno.preostaloMs = Math.max(0, Math.round(limit - utroseno(tekuca)));
+    if (RUKOVAOCI[tekuca.segment].meriSlusanje) trenutno.svira = tekuca.playing_ms !== null;
   }
   return { ...osnova, status: "u_toku", trenutno };
 }
@@ -274,6 +295,53 @@ export function posaljiPitanje(db: Db, ident: Identitet, datum: string): Promise
   });
 }
 
+/**
+ * Pesma: igrač je pustio ili pauzirao klip. Server po svom satu sabira preslušano vreme,
+ * pa ono preživljava osvežavanje strane i ne zavisi od toga šta browser tvrdi.
+ */
+export function slusanje(db: Db, ident: Identitet, datum: string, ulaz: { itemId: number; pusteno: boolean }): Promise<Stanje> {
+  return db.transaction(async (tx) => {
+    const { igra, blokiran, stavke } = await sveze(tx, ident, datum);
+    if (blokiran) return blokirano(datum);
+    if (!igra || igra.status !== "in_progress") return sastaviStanje(datum, igra, stavke);
+
+    const tekuca = stavke.find((s) => !s.answered);
+    if (!tekuca || tekuca.id !== ulaz.itemId || !tekuca.served || !RUKOVAOCI[tekuca.segment].meriSlusanje) {
+      return sastaviStanje(datum, igra, stavke);
+    }
+    if (ulaz.pusteno && tekuca.playing_ms === null) {
+      await tx.query(`update public.play_answers set playing_since = now() where play_id = $1::uuid and item_id = $2::int`, [
+        igra.id,
+        tekuca.id,
+      ]);
+    } else if (!ulaz.pusteno && tekuca.playing_ms !== null) {
+      await tx.query(
+        `update public.play_answers
+           set listened_ms = coalesce(listened_ms, 0) + greatest(0, (extract(epoch from (now() - playing_since)) * 1000)::int),
+               playing_since = null
+         where play_id = $1::uuid and item_id = $2::int`,
+        [igra.id, tekuca.id],
+      );
+    }
+    return sastaviStanje(datum, igra, await ucitajStavke(tx, datum, igra.id));
+  });
+}
+
+/**
+ * Odakle se pušta zvuk za pitanje. Vraća se samo za pitanje koje je ovom igraču već poslato,
+ * pa niko ne može da „preslušava” pesme unapred.
+ */
+export function audioZaPitanje(db: Db, ident: Identitet, datum: string, itemId: number) {
+  return db.transaction(async (tx) => {
+    const { igra, blokiran } = await nadjiIgru(tx, ident, datum);
+    if (blokiran || !igra) return null;
+    const stavke = await ucitajStavke(tx, datum, igra.id);
+    const stavka = stavke.find((s) => s.id === itemId && s.served);
+    if (!stavka) return null;
+    return RUKOVAOCI[stavka.segment].audio?.(stavka.snapshot) ?? null;
+  });
+}
+
 export class GreskaIgre extends Error {
   constructor(
     public kod: "nema_igre" | "nije_na_redu" | "nije_poslato",
@@ -291,7 +359,7 @@ export function odgovori(
   db: Db,
   ident: Identitet,
   datum: string,
-  ulaz: { itemId: number; odgovor: unknown; istek?: boolean },
+  ulaz: { itemId: number; odgovor: unknown; istek?: boolean; slusanoMs?: number },
 ): Promise<OdgovorServera> {
   return db.transaction(async (tx) => {
     const { igra, blokiran, stavke } = await sveze(tx, ident, datum);
@@ -307,19 +375,26 @@ export function odgovori(
     }
 
     const limit = limitMs(tekuca.segment);
-    const proteklo = Math.max(0, Math.round(tekuca.elapsed_ms));
+    const rukovalac = RUKOVAOCI[tekuca.segment];
+    const slusanje = Boolean(rukovalac.meriSlusanje);
     // `sveze` je već zatvorilo pitanja koja su prešla limit + toleranciju, pa je ovo u roku.
     const istek = Boolean(ulaz.istek);
+    let proteklo = Math.max(0, Math.round(utroseno(tekuca)));
+    if (slusanje && typeof ulaz.slusanoMs === "number" && Number.isFinite(ulaz.slusanoMs) && ulaz.slusanoMs >= 0) {
+      // Server meri slušanje po svom satu, pa mu se zbog mreže potkrade koja desetinka više.
+      // Veruje se plejeru u browseru, ali samo dok je unutar tolerancije: manje od (server − tolerancija) ne prolazi.
+      proteklo = Math.max(Math.round(ulaz.slusanoMs), proteklo - TOLERANCIJA_MREZE_MS);
+    }
     const protekloMs = Math.min(proteklo, limit);
 
-    const rukovalac = RUKOVAOCI[tekuca.segment];
     const { ocena, sacuvaj } = rukovalac.oceni(tekuca.snapshot, istek ? null : ulaz.odgovor, { protekloMs, istek });
 
     await tx.query(
       `update public.play_answers
-         set answered_at = now(), answer = $3::jsonb, is_correct = $4::boolean, points = $5::int, answer_ms = $6::int
+         set answered_at = now(), answer = $3::jsonb, is_correct = $4::boolean, points = $5::int, answer_ms = $6::int,
+             listened_ms = case when $7::boolean then $6::int else listened_ms end, playing_since = null
        where play_id = $1::uuid and item_id = $2::int and answered_at is null`,
-      [igra.id, tekuca.id, JSON.stringify(sacuvaj), ocena.tacno, ocena.poeni, protekloMs],
+      [igra.id, tekuca.id, JSON.stringify(sacuvaj), ocena.tacno, ocena.poeni, protekloMs, slusanje],
     );
 
     const posle = await ucitajStavke(tx, datum, igra.id);

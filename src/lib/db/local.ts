@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { ucitajProizvode } from "@/lib/content/products";
 import { seedSql } from "@/lib/content/seed";
 import { sopstveneSlike } from "@/lib/content/slike";
+import { ucitajPesme } from "@/lib/content/songs";
 import { ucitajTrendove } from "@/lib/content/trends";
 import { beogradskiDatum } from "@/lib/time";
 import { omotajPglite, SUPABASE_ZAMENA } from "./pglite";
@@ -25,10 +26,12 @@ export async function napraviLokalnuBazu(): Promise<Db> {
   const podaci = (ime: string) => JSON.parse(readFileSync(join(process.cwd(), "data", ime), "utf8"));
   const proizvodi = ucitajProizvode(podaci("products.json"), sopstveneSlike());
   const trendovi = ucitajTrendove(podaci("trends.json"));
+  const { pesme } = ucitajPesme(podaci("songs.json"));
   await pg.exec(
     seedSql({
       proizvodi: proizvodi.proizvodi,
       datumCenovnika: proizvodi.datumCenovnika,
+      pesme,
       trendovi,
       pocetak: beogradskiDatum(),
       dana: 14,
@@ -36,7 +39,7 @@ export async function napraviLokalnuBazu(): Promise<Db> {
   );
 
   console.log(
-    `[lokalna baza] spremna: ${proizvodi.proizvodi.length} artikala, ${trendovi.pojmovi.length} pojmova za guglanje, kviz za 14 dana od ${beogradskiDatum()}`,
+    `[lokalna baza] spremna: ${proizvodi.proizvodi.length} artikala, ${pesme.length} pesama, ${trendovi.pojmovi.length} pojmova za guglanje, kviz za 14 dana od ${beogradskiDatum()}`,
   );
   return omotajPglite(pg);
 }

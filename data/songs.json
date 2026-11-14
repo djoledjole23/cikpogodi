@@ -1,0 +1,1381 @@
+{
+  "datum_provere": "2026-11-14",
+  "napomena": "Katalog za „Pogodi pesmu”. Svaka pesma je pronađena na Deezeru (api.deezer.com/search) sa zvaničnim klipom od 30 s; deezer_id je ID te numere, omot je omot njenog albuma. itunes_id je rezerva (iTunes Search API) ako Deezer ostane bez klipa. prioritet: pesme sa spiska vlasnika sajta i 10 dodatih rok pesama, koje idu u kviz pre ostalih. Ostale pesme pune katalog za biranje odgovora i dolaze na red kasnije.",
+  "nije_nadjeno": ["Kerber – Mezimac", "Disciplina Kičme – Buka u modi", "Vampiri – Rama lama ding dong", "Miroslav Ilić – Luckasta si ti (samo uživo)", "Jelena Karleuša – Insomnia", "Viki Miljković – Coca Cola, Marlboro, Suzuki", "Tap 011 – Gaće", "Slađana Milošević – Princeza", "Milan Stanković – Ovo je Balkan", "Bebi Dol – Brazil", "Elitni Odredi – Beograd", "Cvija – Gde si ti", "THCF – Malo jače"],
+  "pesme": [
+    {
+      "izvodjac": "Ceca",
+      "naslov": "Kukavica",
+      "zanr": "folk",
+      "deezer_id": 4100565851,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/f2759717a185d0d126ec4ddcca8fbe89/250x250-000000-80-0-0.jpg",
+      "itunes_id": 6781846676,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Tanja Savić",
+      "naslov": "Tako mlada",
+      "zanr": "folk",
+      "deezer_id": 3577739411,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7f737d4d72ee6e7eca098fc04879a06a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578130745,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Ceca",
+      "naslov": "Beograd",
+      "zanr": "folk",
+      "deezer_id": 3918486731,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7a4bbba6ddbc251eb2e4fec99da317db/250x250-000000-80-0-0.jpg",
+      "itunes_id": 897490637,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Aca Lukas",
+      "naslov": "Kuda idu ljudi kao ja",
+      "zanr": "folk",
+      "deezer_id": 898922622,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/1586b6461b881d4fdbb6f159414f2926/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1794183990,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Indira Radić",
+      "naslov": "Zmaj",
+      "zanr": "folk",
+      "deezer_id": 1530384162,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/56ac6941cc780e278c465c7eb0c3afef/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578094304,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Ana Nikolić",
+      "naslov": "Romale, romali",
+      "zanr": "folk",
+      "deezer_id": 529454551,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/fbf4b170d50755cf14a9962c907c550b/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1863649027,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Milica Pavlović",
+      "naslov": "Tango",
+      "zanr": "folk",
+      "deezer_id": 3577739961,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7f737d4d72ee6e7eca098fc04879a06a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578109034,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Tea Tairović",
+      "naslov": "Hajde",
+      "zanr": "folk",
+      "deezer_id": 3769786922,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/996740b19e3858696a09c2476d5b273e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1868457590,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Van Gogh",
+      "naslov": "Neko te ima",
+      "zanr": "rok",
+      "deezer_id": 416407382,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d3d29c706cb790d1d8d012a70cc7e88d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1295901266,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Van Gogh",
+      "naslov": "Za godine tvoje",
+      "zanr": "rok",
+      "deezer_id": 416410952,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/66b0517f8a4e19b9ce7d99b49243700a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1296178804,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Riblja Čorba",
+      "naslov": "Ostani đubre do kraja",
+      "zanr": "rok",
+      "deezer_id": 3112807371,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/4f01059cab768911ce47ec33dc0f9e82/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1708114196,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Bajaga i Instruktori",
+      "naslov": "Godine prolaze",
+      "zanr": "rok",
+      "deezer_id": 2619831532,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/876f6e3b5a47da8258356260596a69ab/250x250-000000-80-0-0.jpg",
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Neverne Bebe",
+      "naslov": "Dvoje",
+      "zanr": "rok",
+      "deezer_id": 1246526562,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7efd9db31e140595b23ee660d7f90dbf/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1553971637,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Negative",
+      "naslov": "Ja bih te sanjala",
+      "zanr": "rok",
+      "deezer_id": 1097617292,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/6a24c1d12b8ad6b3b2a1d0f61d9f99f5/250x250-000000-80-0-0.jpg",
+      "itunes_id": 342452460,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Osvajači",
+      "naslov": "Možda nebo zna",
+      "zanr": "rok",
+      "deezer_id": 91190723,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/3405b159010872ae2842ace1ca1a03b4/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1361362425,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Đorđe Balašević",
+      "naslov": "Ringišpil",
+      "zanr": "rok",
+      "deezer_id": 775360092,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/ff2ba6e22337997fd05523f46015b15e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1483596245,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Željko Joksimović",
+      "naslov": "Lane moje",
+      "zanr": "pop",
+      "deezer_id": 543692512,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/256eae96a498483a488a87f6aceb2339/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1534307934,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Marija Šerifović",
+      "naslov": "Molitva",
+      "zanr": "pop",
+      "deezer_id": 1841884507,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/e095600104ae7adc6560384c44e74e7a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578027079,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Toše Proeski",
+      "naslov": "Igra bez granica",
+      "zanr": "pop",
+      "deezer_id": 529457751,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/14e51589c6a8b335d1eb35a8ce48855d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578045026,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Vlado Georgiev",
+      "naslov": "Anđele",
+      "zanr": "pop",
+      "deezer_id": 3735395272,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/86e118efbbf40f163867d2899a62f09e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1863655384,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Flamingosi",
+      "naslov": "Ludi letnji ples",
+      "zanr": "pop",
+      "deezer_id": 529456911,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/0c19f0a49425d3c1b48a3a9a2144b966/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578005436,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Severina",
+      "naslov": "Gas, gas",
+      "zanr": "pop",
+      "deezer_id": 66239087,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/b05932fbca6d5492ec27197ed2b84c38/250x250-000000-80-0-0.jpg",
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Colonia",
+      "naslov": "Za tvoje snene oči",
+      "zanr": "pop",
+      "deezer_id": 3524461661,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/03e11f678a397ae09f824831141f31ec/250x250-000000-80-0-0.jpg",
+      "alias": ["Za tvoje snene oci"],
+      "itunes_id": 380344238,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Knez",
+      "naslov": "Dal' si ikada mene voljela",
+      "zanr": "pop",
+      "deezer_id": 569467032,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d2e8819830c005d290436ff45cd3e100/250x250-000000-80-0-0.jpg",
+      "alias": ["Da li si ikada mene voljela", "Dal si ikada mene volela"],
+      "itunes_id": 1779524665,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Nataša Bekvalac",
+      "naslov": "Nikotin",
+      "zanr": "pop",
+      "deezer_id": 572082382,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/133979e36499dff7b58ad7a2cb7c4fec/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578038327,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Jelena Rozga",
+      "naslov": "Bižuterija",
+      "zanr": "pop",
+      "deezer_id": 719863962,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/4c05862d7a15651ad52d513ddf6689c7/250x250-000000-80-0-0.jpg",
+      "itunes_id": 488074409,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Senidah",
+      "naslov": "Slađana",
+      "zanr": "trep",
+      "deezer_id": 1448120402,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/5ef77d9cff1c57cd4e78b7f05889d9e3/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1358425136,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Elitni Odredi",
+      "naslov": "Ne koči",
+      "zanr": "trep",
+      "deezer_id": 367409741,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/803813f492547a845a0e773fe5a18f87/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578161233,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Jala Brat & Buba Corelli",
+      "naslov": "Ona'e",
+      "zanr": "trep",
+      "deezer_id": 2826274332,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/30b661dc562993894dbfbb5ce318fd4c/250x250-000000-80-0-0.jpg",
+      "izvodjaci": ["Jala Brat", "Buba Corelli"],
+      "alias": ["Ona e"],
+      "itunes_id": 1869454361,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Jala Brat, Buba Corelli & Devito",
+      "naslov": "Roze",
+      "zanr": "trep",
+      "deezer_id": 2826469112,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/72997513f3c5926f05168759909990f4/250x250-000000-80-0-0.jpg",
+      "izvodjaci": ["Jala Brat", "Buba Corelli", "Devito"],
+      "itunes_id": 1869458408,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Jala Brat, Buba Corelli & Rasta",
+      "naslov": "Benga po snijegu",
+      "zanr": "trep",
+      "deezer_id": 2826274312,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/30b661dc562993894dbfbb5ce318fd4c/250x250-000000-80-0-0.jpg",
+      "izvodjaci": ["Jala Brat", "Buba Corelli", "Rasta"],
+      "alias": ["Benga po snegu"],
+      "itunes_id": 1869456476,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Rasta",
+      "naslov": "Hotel",
+      "zanr": "trep",
+      "deezer_id": 2874735722,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/9909b68e9509fb11a3e9ab7fc7e61ebe/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1755400371,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Voyage",
+      "naslov": "Euforija",
+      "zanr": "trep",
+      "deezer_id": 1524834902,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/3e2caab42106c745671878d679678914/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1590822353,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Jala Brat",
+      "naslov": "Mlada i luda",
+      "zanr": "trep",
+      "deezer_id": 2826870432,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7f75828e945cf7d96394cc16b5d8c33e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1869456199,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Partibrejkers",
+      "naslov": "Hoću da znam",
+      "zanr": "rok",
+      "deezer_id": 584345352,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/0e25a548d7ed6531a0b1b943c1b9102a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1057660792,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Električni Orgazam",
+      "naslov": "Igra rok'en'rol cela Jugoslavija",
+      "zanr": "rok",
+      "deezer_id": 2997909791,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/a1daef37893c7371a79c1d084a8aed13/250x250-000000-80-0-0.jpg",
+      "alias": ["Igra rokenrol cela Jugoslavija", "Igra rock and roll cela Jugoslavija", "Igra rock'n'roll cela Jugoslavija", "Igra rok end rol cela Jugoslavija"],
+      "itunes_id": 381727354,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Ekatarina Velika",
+      "naslov": "Par godina za nas",
+      "zanr": "rok",
+      "deezer_id": 2178288577,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/c9f573b1c326b7612b65ba29b18b9830/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1676062744,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "YU Grupa",
+      "naslov": "Crni leptir",
+      "zanr": "rok",
+      "deezer_id": 93131256,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/da08dde9b45fcf2e04473f0329dd68a9/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1768883648,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Galija",
+      "naslov": "Dodirni me",
+      "zanr": "rok",
+      "deezer_id": 1029768162,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/90332e72f902bd26deb0a195ea735fd6/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1524533589,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Piloti",
+      "naslov": "Kao ptica na mom dlanu",
+      "zanr": "rok",
+      "deezer_id": 2136800977,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/07892c80eee21cb133e03743ea56da54/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1670154957,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Smak",
+      "naslov": "Crna dama",
+      "zanr": "rok",
+      "deezer_id": 1189113242,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d551c7f7f3e9738741cafa9dd69e695f/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1673511045,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Generacija 5",
+      "naslov": "Dolazim za pet minuta",
+      "zanr": "rok",
+      "deezer_id": 3194092551,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/54c6ff4a139c08aa9f1f44df9ef0911e/250x250-000000-80-0-0.jpg",
+      "alias": ["Dolazim za 5 minuta"],
+      "itunes_id": 1665669373,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Idoli",
+      "naslov": "Maljčiki",
+      "zanr": "rok",
+      "deezer_id": 23797711,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/2081e7a65262a095d8c3296e572b4bb6/250x250-000000-80-0-0.jpg",
+      "itunes_id": 385266437,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Riblja Čorba",
+      "naslov": "Lutka sa naslovne strane",
+      "zanr": "rok",
+      "deezer_id": 2464031485,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/a75eb24f5925b3374a9e44f3236ba53f/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1708115106
+    },
+    {
+      "izvodjac": "Bajaga i Instruktori",
+      "naslov": "Moji drugovi",
+      "zanr": "rok",
+      "deezer_id": 2619832862,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/97755b9dade374e5265ec215db465e81/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Ekatarina Velika",
+      "naslov": "Krug",
+      "zanr": "rok",
+      "deezer_id": 2178288537,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/c9f573b1c326b7612b65ba29b18b9830/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1676062737
+    },
+    {
+      "izvodjac": "Električni Orgazam",
+      "naslov": "Bejbe, ti nisi tu",
+      "zanr": "rok",
+      "deezer_id": 2997909771,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/a1daef37893c7371a79c1d084a8aed13/250x250-000000-80-0-0.jpg",
+      "itunes_id": 505135793
+    },
+    {
+      "izvodjac": "Partibrejkers",
+      "naslov": "Kreni prema meni",
+      "zanr": "rok",
+      "deezer_id": 3059311951,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/f435aa3327ce69c3eef695aff519dd7f/250x250-000000-80-0-0.jpg",
+      "itunes_id": 593942049
+    },
+    {
+      "izvodjac": "Kerber",
+      "naslov": "Seobe",
+      "zanr": "rok",
+      "deezer_id": 1523410982,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/8f5c589408e426f6b63cd14ca4a8f292/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1590828710,
+      "prioritet": true
+    },
+    {
+      "izvodjac": "Galija",
+      "naslov": "Još uvek sanjam",
+      "zanr": "rok",
+      "deezer_id": 1029767952,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/90332e72f902bd26deb0a195ea735fd6/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1524533481
+    },
+    {
+      "izvodjac": "Piloti",
+      "naslov": "Ne veruj u idole",
+      "zanr": "rok",
+      "deezer_id": 3020679851,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/580fc7b2b1ba75ed6afd50b21390245b/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Riblja Čorba",
+      "naslov": "Dva dinara, druže",
+      "zanr": "rok",
+      "deezer_id": 3030816441,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/fa409f8b415268365a412f2758797489/250x250-000000-80-0-0.jpg",
+      "alias": ["2 dinara druže"],
+      "itunes_id": 1772667606
+    },
+    {
+      "izvodjac": "Bajaga i Instruktori",
+      "naslov": "Tišina",
+      "zanr": "rok",
+      "deezer_id": 3265454081,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/773908c4ad7bd859a9fd036880c16a28/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Đorđe Balašević",
+      "naslov": "Ne lomite mi bagrenje",
+      "zanr": "rok",
+      "deezer_id": 3933464011,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/9fed900e0042c875191498d5383ec431/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1885963818
+    },
+    {
+      "izvodjac": "Đorđe Balašević",
+      "naslov": "Priča o Vasi Ladačkom",
+      "zanr": "rok",
+      "deezer_id": 3933438781,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/e79b6ef15974e508aab915a4716cbb5a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1885825448
+    },
+    {
+      "izvodjac": "S.A.R.S.",
+      "naslov": "Buđav lebac",
+      "zanr": "rok",
+      "deezer_id": 448254092,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/0522fedf82e39c9c56644c5c1c35c403/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1479062927
+    },
+    {
+      "izvodjac": "S.A.R.S.",
+      "naslov": "Perspektiva",
+      "zanr": "rok",
+      "deezer_id": 448247912,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/b5c7bf612232dd7a5d0165fc4c2abc58/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1479062918
+    },
+    {
+      "izvodjac": "Laki Pingvini",
+      "naslov": "Šizika",
+      "zanr": "rok",
+      "deezer_id": 2534294791,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/56504dc3f81ed06b9b272eaab5fdfbb1/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1730957841
+    },
+    {
+      "izvodjac": "U Škripcu",
+      "naslov": "Siđi do reke",
+      "zanr": "rok",
+      "deezer_id": 93538110,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/da3456422c95889d66d3ad006091172e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 555295020
+    },
+    {
+      "izvodjac": "Poslednja Igra Leptira",
+      "naslov": "Nataša",
+      "zanr": "rok",
+      "deezer_id": 70302746,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/2f30ddb6cdf8a3839ed062a834608244/250x250-000000-80-0-0.jpg",
+      "itunes_id": 694066456
+    },
+    {
+      "izvodjac": "Zana",
+      "naslov": "Dodirni mi kolena",
+      "zanr": "rok",
+      "deezer_id": 67370135,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/0ea70a53d6cc08c156d3fea88e09299d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 537208928
+    },
+    {
+      "izvodjac": "Babe",
+      "naslov": "Noć bez sna",
+      "zanr": "rok",
+      "deezer_id": 1097594332,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/95ab8f39e8cf7c9d010c9e247df02893/250x250-000000-80-0-0.jpg",
+      "itunes_id": 676766334
+    },
+    {
+      "izvodjac": "Dejan Cukić",
+      "naslov": "Ruža ispod pepela",
+      "zanr": "rok",
+      "deezer_id": 3314918891,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/fd85e9d6799380a9d7f69973d1e46dcd/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1812622351
+    },
+    {
+      "izvodjac": "Goblini",
+      "naslov": "Daleki put",
+      "zanr": "rok",
+      "deezer_id": 591698172,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/fb53e64a3602ced0726e63517463852a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1276248247
+    },
+    {
+      "izvodjac": "Rambo Amadeus",
+      "naslov": "Balkan boj",
+      "zanr": "rok",
+      "deezer_id": 3200983881,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/692a2d9d46134a262bfd5f049480499d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1792096613
+    },
+    {
+      "izvodjac": "YU Grupa",
+      "naslov": "Čudna šuma",
+      "zanr": "rok",
+      "deezer_id": 93131246,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/da08dde9b45fcf2e04473f0329dd68a9/250x250-000000-80-0-0.jpg",
+      "itunes_id": 507745455
+    },
+    {
+      "izvodjac": "Smak",
+      "naslov": "Daire",
+      "zanr": "rok",
+      "deezer_id": 1189113232,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d551c7f7f3e9738741cafa9dd69e695f/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1673511043
+    },
+    {
+      "izvodjac": "Van Gogh",
+      "naslov": "Klatno",
+      "zanr": "rok",
+      "deezer_id": 416410242,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/61d3ba6e2992d5d906b999483ef4d241/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1295930977
+    },
+    {
+      "izvodjac": "Neverne Bebe",
+      "naslov": "Tužna pesma",
+      "zanr": "rok",
+      "deezer_id": 1246517092,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/a6d5e2d1f411726c802b77481f5570ef/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1553970758
+    },
+    {
+      "izvodjac": "Bajaga i Instruktori",
+      "naslov": "Verujem, ne verujem",
+      "zanr": "rok",
+      "deezer_id": 2619831592,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/876f6e3b5a47da8258356260596a69ab/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Riblja Čorba",
+      "naslov": "Kad hodaš",
+      "zanr": "rok",
+      "deezer_id": 93808806,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/a57f6bccd03536f95bcf75fc1bd4bd84/250x250-000000-80-0-0.jpg",
+      "itunes_id": 555300330
+    },
+    {
+      "izvodjac": "Zana",
+      "naslov": "Vejte snegovi",
+      "zanr": "rok",
+      "deezer_id": 3084062441,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/3d8ddab6e5bdf73d549723a9e43ee125/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1778693977
+    },
+    {
+      "izvodjac": "Lepa Brena",
+      "naslov": "Jugoslovenka",
+      "zanr": "folk",
+      "deezer_id": 995385502,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/556f4f80e7caffdda0164e3f06ccff3e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1573972496
+    },
+    {
+      "izvodjac": "Lepa Brena",
+      "naslov": "Luda za tobom",
+      "zanr": "folk",
+      "deezer_id": 1056591462,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/760738cd4fe6b8693c7ad03772a8db96/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578099903
+    },
+    {
+      "izvodjac": "Dragana Mirković",
+      "naslov": "Pitaju me u mom kraju",
+      "zanr": "folk",
+      "deezer_id": 77542252,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/78c492ee9ab9e928e71f9c908df05d4e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1589525198
+    },
+    {
+      "izvodjac": "Dragana Mirković",
+      "naslov": "Umirem majko",
+      "zanr": "folk",
+      "deezer_id": 68549735,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/f8dee63048c6a4c1f3f2af406bb5ae18/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1589525197
+    },
+    {
+      "izvodjac": "Dragana Mirković",
+      "naslov": "Plači zemljo",
+      "zanr": "folk",
+      "deezer_id": 4262262541,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/3b3a2d12b24a8be40862b8799614e1d1/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1530131660
+    },
+    {
+      "izvodjac": "Šaban Šaulić",
+      "naslov": "Dajte mi utjehu",
+      "zanr": "folk",
+      "deezer_id": 2160334507,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/fa61c937eca4bb4360b237e4f071b7d9/250x250-000000-80-0-0.jpg",
+      "alias": ["Dajte mi utehu"],
+      "itunes_id": 291506273
+    },
+    {
+      "izvodjac": "Šaban Šaulić",
+      "naslov": "Sneg je opet, Snežana",
+      "zanr": "folk",
+      "deezer_id": 3293842061,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/5cf4e70b4164ea2a5890e28234dec13a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1833465638
+    },
+    {
+      "izvodjac": "Miroslav Ilić",
+      "naslov": "Pozdravi je, pozdravi",
+      "zanr": "folk",
+      "deezer_id": 91192189,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/34c97f6f22dcb8417d9ed1b13856887d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 288032561
+    },
+    {
+      "izvodjac": "Toma Zdravković",
+      "naslov": "Dotak'o sam dno života",
+      "zanr": "folk",
+      "deezer_id": 4365851661,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7b454ec0c776dab98843ea8bd2cb84ab/250x250-000000-80-0-0.jpg",
+      "alias": ["Dotakao sam dno života"],
+      "itunes_id": 6825577391
+    },
+    {
+      "izvodjac": "Toma Zdravković",
+      "naslov": "Prokleta nedelja",
+      "zanr": "folk",
+      "deezer_id": 3018160881,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/ca521a03603fba6017d7d1f21ff5bb6b/250x250-000000-80-0-0.jpg",
+      "itunes_id": 394761867
+    },
+    {
+      "izvodjac": "Džej Ramadanovski",
+      "naslov": "Nedelja",
+      "zanr": "folk",
+      "deezer_id": 75897511,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/66c50084acefb4789eb7e05595bfb910/250x250-000000-80-0-0.jpg",
+      "itunes_id": 814036745
+    },
+    {
+      "izvodjac": "Džej Ramadanovski",
+      "naslov": "Upalite za mnom sveće",
+      "zanr": "folk",
+      "deezer_id": 3538539621,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/6eaadab518195ebd3b64a865049cbbbe/250x250-000000-80-0-0.jpg",
+      "alias": ["Upalite za mnom svijeće"],
+      "itunes_id": 1787133566
+    },
+    {
+      "izvodjac": "Sinan Sakić",
+      "naslov": "Ej, od kad sam se rodio",
+      "zanr": "folk",
+      "deezer_id": 1302228482,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/21ae99ba2b4baeb63160ca7203c78457/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1738171628
+    },
+    {
+      "izvodjac": "Sinan Sakić",
+      "naslov": "Lepa do bola",
+      "zanr": "folk",
+      "deezer_id": 1148816532,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d18891c57626dc413055ba40cde08701/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1541356044
+    },
+    {
+      "izvodjac": "Mile Kitić",
+      "naslov": "Kilo dole, kilo gore",
+      "zanr": "folk",
+      "deezer_id": 1820167077,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/adee76b22456817d1863183121472e70/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1633892109
+    },
+    {
+      "izvodjac": "Mile Kitić",
+      "naslov": "Šampanjac",
+      "zanr": "folk",
+      "deezer_id": 458533222,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/082ecbf653a76b56346640f914ab5d20/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578107934
+    },
+    {
+      "izvodjac": "Vesna Zmijanac",
+      "naslov": "Idem preko zemlje Srbije",
+      "zanr": "folk",
+      "deezer_id": 1070199542,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/e3e1493645800a176ebb64ce25626611/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1530116401
+    },
+    {
+      "izvodjac": "Seka Aleksić",
+      "naslov": "Aspirin",
+      "zanr": "folk",
+      "deezer_id": 458482352,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/e689a5661c96ae9c94a004955ef1e142/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578124263
+    },
+    {
+      "izvodjac": "Seka Aleksić",
+      "naslov": "Crno i zlatno",
+      "zanr": "folk",
+      "deezer_id": 457443222,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/6ba4ec894e23d258d4ffceba74aa6135/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578124264
+    },
+    {
+      "izvodjac": "Stoja",
+      "naslov": "Evropa",
+      "zanr": "folk",
+      "deezer_id": 3515146491,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/4d6ab6c1df27a2b5f700554549ecb360/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1834143575
+    },
+    {
+      "izvodjac": "Dara Bubamara",
+      "naslov": "Kraj i tačka",
+      "zanr": "folk",
+      "deezer_id": 76953700,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/39969f9ae6ee3e7e45b3504aaa96e5dc/250x250-000000-80-0-0.jpg",
+      "itunes_id": 853807117
+    },
+    {
+      "izvodjac": "Aco Pejović",
+      "naslov": "Jelena",
+      "zanr": "folk",
+      "deezer_id": 1070202102,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/baa426af2590acf757d71dbaf70e931d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578077479
+    },
+    {
+      "izvodjac": "Darko Lazić",
+      "naslov": "Godinu dana 300 kafana",
+      "zanr": "folk",
+      "deezer_id": 3364966471,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/c60e8d6d629589dd4127f975dec3ea9b/250x250-000000-80-0-0.jpg",
+      "alias": ["Godinu dana trista kafana"],
+      "itunes_id": 1578085998
+    },
+    {
+      "izvodjac": "Aca Lukas",
+      "naslov": "Lična karta",
+      "zanr": "folk",
+      "deezer_id": 898922532,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/1586b6461b881d4fdbb6f159414f2926/250x250-000000-80-0-0.jpg",
+      "itunes_id": 893132307
+    },
+    {
+      "izvodjac": "Saša Matić",
+      "naslov": "Kralj izgubljenih stvari",
+      "zanr": "folk",
+      "deezer_id": 458531552,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/05f89d971445de93c26a2ab7981c0864/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578121642
+    },
+    {
+      "izvodjac": "Boban Rajović",
+      "naslov": "Usne boje vina",
+      "zanr": "folk",
+      "deezer_id": 1097490802,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/3d2467e404000ce8672df185747ce77e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1577984193
+    },
+    {
+      "izvodjac": "Aleksandra Prijović",
+      "naslov": "Dam dam dam",
+      "zanr": "folk",
+      "deezer_id": 2342297565,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/9c3baeb9c3252c493bea73402bc8ba9b/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1694278577
+    },
+    {
+      "izvodjac": "Aleksandra Prijović",
+      "naslov": "Za nas kasno je",
+      "zanr": "folk",
+      "deezer_id": 2727125451,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/3da89f7f3ae4fd006211f84edfa9ff1e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1741510715
+    },
+    {
+      "izvodjac": "Milica Todorović",
+      "naslov": "Tri čaše",
+      "zanr": "folk",
+      "deezer_id": 464556372,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/70f9546a52fbbe77edd2a85c8727f13a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578147923
+    },
+    {
+      "izvodjac": "Lexington",
+      "naslov": "Dobro da nije veće zlo",
+      "zanr": "folk",
+      "deezer_id": 583784202,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/1e9ef340a9b56b96d2d3b4b7d21e84f7/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578010629
+    },
+    {
+      "izvodjac": "Predrag Živković Tozovac",
+      "naslov": "Ti si me čekala",
+      "zanr": "folk",
+      "deezer_id": 464301082,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d9d487933ca0a65e897d22661c291fd6/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578117640
+    },
+    {
+      "izvodjac": "Mitar Mirić",
+      "naslov": "Ne može nam niko ništa",
+      "zanr": "folk",
+      "deezer_id": 15620002,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d72ac926caf3ca020cd716b445803900/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1877161517
+    },
+    {
+      "izvodjac": "Ana Bekuta",
+      "naslov": "Kralj ponoći",
+      "zanr": "folk",
+      "deezer_id": 473686002,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/1197780efc4c44c6729adace6872d7eb/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1618909883
+    },
+    {
+      "izvodjac": "Zorica Brunclik",
+      "naslov": "A tebe nema",
+      "zanr": "folk",
+      "deezer_id": 1267209572,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/dd714c76af7b5a1a51369b0b5ec826ba/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1785561136
+    },
+    {
+      "izvodjac": "Rada Manojlović",
+      "naslov": "Deset ispod nule",
+      "zanr": "folk",
+      "deezer_id": 3577739451,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7f737d4d72ee6e7eca098fc04879a06a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578117495
+    },
+    {
+      "izvodjac": "Lepa Lukić",
+      "naslov": "Srce je moje violina",
+      "zanr": "folk",
+      "deezer_id": 1578104222,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d57da09e8c6bc94c2ee0e825a77b4b4d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1598866554
+    },
+    {
+      "izvodjac": "Ceca",
+      "naslov": "Pile",
+      "zanr": "folk",
+      "deezer_id": 1556613902,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/1213cb13846dfb0e563b1c60ee4c9e72/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1596088430
+    },
+    {
+      "izvodjac": "Jana",
+      "naslov": "Barabar",
+      "zanr": "folk",
+      "deezer_id": 464318182,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/04c0112ae74703f7b22a47a7947ed328/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578095472
+    },
+    {
+      "izvodjac": "Marinko Rokvić",
+      "naslov": "Skitnica",
+      "zanr": "folk",
+      "deezer_id": 457472742,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/c15764ffa29dac54fd413a6aa45cbf6d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578103918
+    },
+    {
+      "izvodjac": "Tanja Savić",
+      "naslov": "Zlatnik",
+      "zanr": "folk",
+      "deezer_id": 458499192,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/f0833cd7fc029ab13b6553b9069dceaf/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578131360
+    },
+    {
+      "izvodjac": "Indira Radić",
+      "naslov": "Lopov",
+      "zanr": "folk",
+      "deezer_id": 1530383982,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/50604a8c23db2078d29ecc7cb8a99b6c/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1591493897
+    },
+    {
+      "izvodjac": "Ana Nikolić",
+      "naslov": "Januar",
+      "zanr": "folk",
+      "deezer_id": 1343464422,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/f9e7a4a974257a417b5827536cdc3238/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1577973781
+    },
+    {
+      "izvodjac": "Zdravko Čolić",
+      "naslov": "Ti si mi u krvi",
+      "zanr": "pop",
+      "deezer_id": 2617677792,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/bf26d15f675db78c90d435621f94d88b/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1768453720
+    },
+    {
+      "izvodjac": "Zdravko Čolić",
+      "naslov": "Pusti, pusti modu",
+      "zanr": "pop",
+      "deezer_id": 3873062881,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d583b7a39e792bee9e271a46ee4be9aa/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1768453459
+    },
+    {
+      "izvodjac": "Zdravko Čolić",
+      "naslov": "Jedina",
+      "zanr": "pop",
+      "deezer_id": 2995450631,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/6ea8f083fd4774d807baf0eb2eb30db2/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1768453462
+    },
+    {
+      "izvodjac": "Željko Joksimović",
+      "naslov": "Ljubavi",
+      "zanr": "pop",
+      "deezer_id": 543692302,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/256eae96a498483a488a87f6aceb2339/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578062227
+    },
+    {
+      "izvodjac": "Aleksandra Radović",
+      "naslov": "Čuvam te",
+      "zanr": "pop",
+      "deezer_id": 724771892,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/c5fc18b55056ab0e7eaf24497bff3520/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1577968457
+    },
+    {
+      "izvodjac": "Jelena Tomašević",
+      "naslov": "Oro",
+      "zanr": "pop",
+      "deezer_id": 548422182,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/cef8b42cbd09b82220ea7aa687ff3d10/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578004843
+    },
+    {
+      "izvodjac": "Oliver Mandić",
+      "naslov": "Poludeću",
+      "zanr": "pop",
+      "deezer_id": 669667832,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/98507abe8cc3f9c8128a23af891a1790/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578033120
+    },
+    {
+      "izvodjac": "Goca Tržan",
+      "naslov": "Gluve usne",
+      "zanr": "pop",
+      "deezer_id": 900803272,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/2c37b562f9464b831107a70c611cb69e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1502376359
+    },
+    {
+      "izvodjac": "Tijana Dapčević",
+      "naslov": "Sve je isto, samo njega nema",
+      "zanr": "pop",
+      "deezer_id": 669816782,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/0f63522949f5600757c9685fae420efd/250x250-000000-80-0-0.jpg",
+      "alias": ["Sve je isto samo njega nema"],
+      "itunes_id": 1578048136
+    },
+    {
+      "izvodjac": "Saša Kovačević",
+      "naslov": "Slučajno",
+      "zanr": "pop",
+      "deezer_id": 3265960921,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/4c260d27762770c4c6b020f7baea355a/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1800492251
+    },
+    {
+      "izvodjac": "Sara Jo",
+      "naslov": "Mili, mili",
+      "zanr": "pop",
+      "deezer_id": 1458276022,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/5c32fe082b74da88e2f70874158a7434/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1485997194
+    },
+    {
+      "izvodjac": "Konstrakta",
+      "naslov": "In corpore sano",
+      "zanr": "pop",
+      "deezer_id": 1655110372,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/fee2ed6185e41649eaa2382f0c076bf7/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1610103739
+    },
+    {
+      "izvodjac": "Teya Dora",
+      "naslov": "Džanum",
+      "zanr": "pop",
+      "deezer_id": 2393291385,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/87aa5284a23bc8622f2fd44364454975/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1700644621
+    },
+    {
+      "izvodjac": "Đogani",
+      "naslov": "Idemo na Mars",
+      "zanr": "pop",
+      "deezer_id": 1524827632,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/319281deac498cf8a51f7b5aae08f326/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578052439
+    },
+    {
+      "izvodjac": "Funky G",
+      "naslov": "Robinja",
+      "zanr": "pop",
+      "deezer_id": 3251372211,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/350b80d5b91c0d49b05d7c52ce3ef666/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1798518554
+    },
+    {
+      "izvodjac": "Moby Dick",
+      "naslov": "Kralj kokaina",
+      "zanr": "pop",
+      "deezer_id": 548427902,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/645cd417def96b94009c112cc520cc26/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578023151
+    },
+    {
+      "izvodjac": "Nataša Bekvalac",
+      "naslov": "Dobro moje",
+      "zanr": "pop",
+      "deezer_id": 543688932,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/953fbf662c9e1503c278933273640980/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578025575
+    },
+    {
+      "izvodjac": "Ministarke",
+      "naslov": "Moje jedino",
+      "zanr": "pop",
+      "deezer_id": 136282042,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/5aeea2ec7785de8477ddd10c2a4bd86c/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1177057642
+    },
+    {
+      "izvodjac": "Emina Jahović",
+      "naslov": "Da l' ona zna",
+      "zanr": "pop",
+      "deezer_id": 529455441,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/9b8f2e85f1699b9c3f2bb6400be9322f/250x250-000000-80-0-0.jpg",
+      "alias": ["Da li ona zna"],
+      "itunes_id": 1578000002
+    },
+    {
+      "izvodjac": "Željko Samardžić",
+      "naslov": "Grlica",
+      "zanr": "pop",
+      "deezer_id": 730630702,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/5710206419be4921023ac329d20c707b/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1690799736
+    },
+    {
+      "izvodjac": "Željko Samardžić",
+      "naslov": "9000 metara",
+      "zanr": "pop",
+      "deezer_id": 458468242,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/bd90f01cb0edb6a944408d7ab9361916/250x250-000000-80-0-0.jpg",
+      "alias": ["Devet hiljada metara"],
+      "itunes_id": 1578134286
+    },
+    {
+      "izvodjac": "Hurricane",
+      "naslov": "Hasta la vista",
+      "zanr": "pop",
+      "deezer_id": 1403811522,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/e91792489b4e003791b884abf6c3c185/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1572121158
+    },
+    {
+      "izvodjac": "Daniel Popović",
+      "naslov": "Džuli",
+      "zanr": "pop",
+      "deezer_id": 994777892,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/daaefcbea471f512871fe4f85e3b2531/250x250-000000-80-0-0.jpg",
+      "itunes_id": 381023337
+    },
+    {
+      "izvodjac": "Jelena Rozga",
+      "naslov": "Nirvana",
+      "zanr": "pop",
+      "deezer_id": 2998009921,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/4b108ec75e2bd830d4f5552c36d17ded/250x250-000000-80-0-0.jpg",
+      "itunes_id": 632120047
+    },
+    {
+      "izvodjac": "Severina",
+      "naslov": "Italiana",
+      "zanr": "pop",
+      "deezer_id": 71437750,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/31e88f73ba6d1ac2c29c8d7842cba3a3/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Colonia",
+      "naslov": "Plamen od ljubavi",
+      "zanr": "pop",
+      "deezer_id": 3524465801,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/b4ccb8ec7fa8f2febc8ef4e1b1793065/250x250-000000-80-0-0.jpg",
+      "itunes_id": 380344263
+    },
+    {
+      "izvodjac": "Toše Proeski",
+      "naslov": "Pratim te",
+      "zanr": "pop",
+      "deezer_id": 543699482,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/84330e650a3a382fec6bd5ab1936ac5e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578045655
+    },
+    {
+      "izvodjac": "Coby",
+      "naslov": "4 strane sveta",
+      "zanr": "trep",
+      "deezer_id": 1458266602,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/5cfa9258bbc81832dce1aa8f594725d7/250x250-000000-80-0-0.jpg",
+      "alias": ["Četiri strane sveta", "4 strane svijeta"],
+      "itunes_id": 1435760145
+    },
+    {
+      "izvodjac": "Relja Popović",
+      "naslov": "Beograd još živi",
+      "zanr": "trep",
+      "deezer_id": 98406320,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/278bbf48fa085c240589163f55ba0ae8/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578173181
+    },
+    {
+      "izvodjac": "Nikolija",
+      "naslov": "Ćao zdravo",
+      "zanr": "trep",
+      "deezer_id": 3585357191,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/f157da565f7decc3d4a773857aef0061/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1843876410
+    },
+    {
+      "izvodjac": "Nikolija",
+      "naslov": "Opasna igra",
+      "zanr": "trep",
+      "deezer_id": 3585357171,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/f157da565f7decc3d4a773857aef0061/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578171020
+    },
+    {
+      "izvodjac": "Elitni Odredi",
+      "naslov": "Kao kokain",
+      "zanr": "trep",
+      "deezer_id": 1151090292,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/dd0ca35fe681011e1f9884404d488ac3/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578161009
+    },
+    {
+      "izvodjac": "Voyage & Breskvica",
+      "naslov": "Budi tu",
+      "zanr": "trep",
+      "deezer_id": 3026502121,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/e26a759066d37ce15e40bade657a5020/250x250-000000-80-0-0.jpg",
+      "izvodjaci": ["Voyage", "Breskvica"],
+      "itunes_id": 1770864844
+    },
+    {
+      "izvodjac": "Maya Berović",
+      "naslov": "Harem",
+      "zanr": "trep",
+      "deezer_id": 548432642,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/2a04ba540fe6348ce1e56b0eb81ab139/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578019371
+    },
+    {
+      "izvodjac": "Maya Berović",
+      "naslov": "Alkohol",
+      "zanr": "trep",
+      "deezer_id": 589360692,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/a979017e7973f894c16e3b2b9c612fae/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1590557416
+    },
+    {
+      "izvodjac": "Gru",
+      "naslov": "Biću tu",
+      "zanr": "trep",
+      "deezer_id": 541941912,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/1956dc7fb50cd5a835ff2f7be41ccebd/250x250-000000-80-0-0.jpg",
+      "alias": ["Bicu tu"],
+      "itunes_id": 1577997709
+    },
+    {
+      "izvodjac": "Bad Copy",
+      "naslov": "Uno due tre",
+      "zanr": "trep",
+      "deezer_id": 3259803621,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d016ccf63f7b59d5085da70e19936678/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Beogradski Sindikat",
+      "naslov": "Balada disidenta",
+      "zanr": "trep",
+      "deezer_id": 1621917272,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/60e3ad80c9381a32abecf019afb0f07b/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Marčelo",
+      "naslov": "Pegla",
+      "zanr": "trep",
+      "deezer_id": 126398043,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/aec32e8015c2b22615ba2d97a2c6ac3b/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1122634973
+    },
+    {
+      "izvodjac": "Sunshine",
+      "naslov": "Kokane",
+      "zanr": "trep",
+      "deezer_id": 74220640,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/addfca3b309c6ea81ad769b448f00cca/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1591697553
+    },
+    {
+      "izvodjac": "Rasta",
+      "naslov": "Kavasaki",
+      "zanr": "trep",
+      "deezer_id": 2874736532,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7c21ac45103f62c74a981e9860f0a2f3/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Rasta",
+      "naslov": "Indigo",
+      "zanr": "trep",
+      "deezer_id": 2892599012,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/aa81fefaa79bae1dd7d9648d9d62363d/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1757705036
+    },
+    {
+      "izvodjac": "Senidah",
+      "naslov": "Mišići",
+      "zanr": "trep",
+      "deezer_id": 3746732432,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/fdfe462880f608273af5d73eb8fdbd92/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1865193687
+    },
+    {
+      "izvodjac": "Senidah",
+      "naslov": "Behute",
+      "zanr": "trep",
+      "deezer_id": 1638064402,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/93b6ff1e82ee0b56b201d4ad2ef0927c/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1607524195
+    },
+    {
+      "izvodjac": "Zera",
+      "naslov": "Do zore",
+      "zanr": "trep",
+      "deezer_id": 3026486831,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/05dfbd23035df9e4e29b751e2444618e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1770861279
+    },
+    {
+      "izvodjac": "Teodora",
+      "naslov": "Voli me, voli me",
+      "zanr": "trep",
+      "deezer_id": 1337899422,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/53e871ea0321a0b3806556170a0b3209/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1578179364
+    },
+    {
+      "izvodjac": "Mimi Mercedez",
+      "naslov": "Kleopatra",
+      "zanr": "trep",
+      "deezer_id": 3304073171,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/7baea02c4635231c7e7abdf66bd1be9f/250x250-000000-80-0-0.jpg"
+    },
+    {
+      "izvodjac": "Buba Corelli",
+      "naslov": "Balenciaga",
+      "zanr": "trep",
+      "deezer_id": 2826423592,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/755122dbe831587019a0ff9596c38b31/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1869456343
+    },
+    {
+      "izvodjac": "Jala Brat & Buba Corelli",
+      "naslov": "Mafia",
+      "zanr": "trep",
+      "deezer_id": 2826823872,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/8f8ead150449d7d5584b476495cecfd9/250x250-000000-80-0-0.jpg",
+      "izvodjaci": ["Jala Brat", "Buba Corelli"],
+      "itunes_id": 1869456254
+    },
+    {
+      "izvodjac": "Jala Brat & Buba Corelli",
+      "naslov": "Bebi",
+      "zanr": "trep",
+      "deezer_id": 2826174002,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/d14e310fd4bb091763d1b31f2cddc4c7/250x250-000000-80-0-0.jpg",
+      "izvodjaci": ["Jala Brat", "Buba Corelli"],
+      "itunes_id": 1869456289
+    },
+    {
+      "izvodjac": "Elena",
+      "naslov": "Geto princeza",
+      "zanr": "trep",
+      "deezer_id": 2874736332,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/68eef0cddd4de7acc5fdfee9a3c2f959/250x250-000000-80-0-0.jpg"
+    }
+  ]
+}

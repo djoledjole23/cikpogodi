@@ -2,8 +2,8 @@
 
 Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript + Supabase, hosting na Vercelu.
 
-> Ovo je radna verzija README-a. Gotovi su **osnova, auth, segment 2 (Pogodi cenu) i segment 3 (Šta se više gugla)**.
-> Ostali segmenti, rezultat, rang lista, admin i deploy stižu redom.
+> Ovo je radna verzija README-a. Gotovi su **osnova, auth, segment 1 (Pogodi pesmu), segment 2 (Pogodi cenu)
+> i segment 3 (Šta se više gugla)**. Film, rebus, rezultat, rang lista, admin i deploy stižu redom.
 
 ## Šta je gotovo
 
@@ -15,6 +15,8 @@ Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript
 - Bodovanje i podešavanja: `src/config/quiz.config.ts`, `src/lib/scoring.ts`
 - Zvukovi (Web Audio, bez fajlova), dugme za zvuk, baner za kolačiće, PWA manifest i ikonice
 - **Igra** (`/igra`): jedna igra dnevno, nastavak posle osvežavanja, tajmer, bodovanje na serveru
+- **Segment 1, Pogodi pesmu**: 5 pesama dnevno iz `data/songs.json` (165 pesama sa potvrđenim klipom na Deezeru),
+  meri se preslušano vreme, odgovor se bira iz kataloga ili kuca (tolerantno poređenje)
 - **Segment 2, Pogodi cenu**: 10 artikala dnevno iz `data/products.json`, seed za 14 dana, skripta `update-cene`
 - **Segment 3, Šta se više gugla**: 8 duela dnevno iz `data/trends.json` (Google Trends, Srbija, 12 meseci).
   Pojmovi mogu biti iz različitih tema, a pobednik duela ostaje i dočekuje novog izazivača
@@ -96,13 +98,37 @@ Skripta napravi fajl u `supabase/seed/`. Otvori ga, nalepi u Supabase → SQL Ed
 Može da se pusti više puta: dan koji već ima pitanja se ne dira. Gotov fajl za prvih 14 dana
 (14–27. novembar 2026) je `supabase/seed/seed-2026-11-14-14d.sql`.
 
-Za sada skripta puni segmente 2 i 3:
+Za sada skripta puni segmente 1, 2 i 3:
 
+- **Pesma:** 5 pesama dnevno: po jedna folk, rok, pop i trep, a peta je svaki dan iz drugog žanra. U jednom danu
+  se nijedan izvođač ne javlja dvaput (ni kao gost na tuđoj pesmi). Pesme sa oznakom `prioritet` idu pre ostalih,
+  a pesma se ne ponavlja dok u njenom žanru ima neiskorišćenih (165 pesama pokriva 14 dana bez ponavljanja).
 - **Cena:** 10 artikala dnevno, bez istog naziva dvaput u danu, najviše 4 iz iste kategorije, bez ponavljanja od juče.
 - **Gugla:** lanac od 8 duela dnevno u kome pobednik ostaje. Pojam koji se više gugla ostaje na svom mestu
   (gore ili dole), a na mesto gubitnika dolazi novi izazivač. Svih 9 pojmova u danu je iz različitih tema,
   izazivač pobedi 3 do 5 puta dnevno (da „uvek tapni šampiona” ne bude taktika) i nijedan duel se ne ponavlja
   u celom periodu.
+
+## Pesme
+
+`data/songs.json` je katalog za „Pogodi pesmu”: služi i za dnevni kviz i kao spisak iz kog igrač bira odgovor
+(zato ga ima mnogo više nego što se pusti za dve nedelje).
+
+- Svaka pesma ima `deezer_id` numere koja je **pronađena na Deezeru sa klipom od 30 s** (`api.deezer.com/search`).
+  ID se ne izmišlja: pesma bez njega ne ulazi ni u kviz ni u katalog. `nije_nadjeno` nabraja pesme koje su
+  tražene, a nisu nađene (ili postoje samo uživo).
+- `zanr` je `folk`, `rok`, `pop` ili `trep` i služi za dnevni miks. `izvodjaci` se navodi kad ih je više
+  (duet, gost), da se isti izvođač ne javi dvaput u danu.
+- `alias` su drugi oblici naslova koji se priznaju kad igrač kuca („Da li si ikada mene voljela”).
+- `itunes_id` je rezerva: ako Deezer ostane bez klipa, klip se uzima sa iTunes-a.
+- Audio se **ne čuva nigde**. Browser traži `/api/track/<broj pitanja>`, a server ga preusmeri na svež zvanični
+  klip (Deezer linkovi ističu, pa se uzimaju tek kad pesma treba da se pusti). U adresi je broj pitanja, ne ID
+  pesme, i radi samo za pitanje koje je tom igraču već poslato.
+- Preslušano vreme meri i server (poruke „pušteno / pauzirano”), pa osvežavanje strane ne vraća sat na nulu.
+  Plejeru u browseru se veruje samo unutar tolerancije od 1,5 s. Ko namerno izmeni kod igre u svom browseru
+  može da sluša duže nego što prijavi; to ne može potpuno da se spreči dok se klip pušta direktno sa Deezera.
+- Nova pesma: nađi je na Deezeru (u adresi numere je ID), dodaj red u fajl i pusti `npm run seed`. Unos kroz
+  admin panel (pretraga po Deezeru) stiže sa adminom.
 
 ## Cene
 
@@ -159,7 +185,11 @@ src/config/quiz.config.ts   limiti, pragovi, poeni: sve što se podešava
 src/lib/scoring.ts          bodovanje (čiste funkcije, pokrivene testovima)
 src/lib/game/engine.ts      srce igre: ko sme da igra, koje je pitanje, vreme, poeni (sve na serveru)
 src/lib/game/segments/      po jedan fajl za svaki segment (šta ide u browser, kako se ocenjuje)
-src/lib/content/            čitanje products.json i trends.json, raspored pitanja po danima, sopstvene slike
+src/lib/content/            čitanje songs.json, products.json i trends.json, raspored pitanja po danima, sopstvene slike
+src/lib/match.ts            tolerantno poređenje teksta i pretraga kataloga pesama
+src/lib/audio.ts            svež link ka klipu od 30 s (Deezer, pa iTunes)
+src/app/api/track/          zvuk za pitanje (preusmerenje na zvanični klip)
+src/app/api/pesme/          katalog pesama za biranje odgovora
 src/lib/db/                 veza sa bazom: Postgres (produkcija) ili baza u memoriji (razvoj i testovi)
 src/app/api/igra/route.ts   jedina ulazna tačka igre za browser
 src/components/game/        ekrani igre

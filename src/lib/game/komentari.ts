@@ -1,4 +1,4 @@
-import type { Ocena, PrikazCena, PrikazGugla, SegmentStanje } from "./types";
+import type { Ocena, PrikazCena, PrikazGugla, PrikazPesma, SegmentStanje } from "./types";
 
 /**
  * Rečenica koja ide uz rezultat pitanja. Bira se po tome koliko je igrač bio blizu,
@@ -28,6 +28,15 @@ export function komentarGugla(ocena: Ocena, p: PrikazGugla, seme: number): strin
   if (tesno) return izaberi(["Bilo je tesno, ali ne.", "Za dlaku. Narod je presudio."], seme);
   if (p.puta >= 3) return izaberi(["Uh. Nije bilo ni blizu.", "Narod se ne slaže. Nimalo."], seme);
   return izaberi(["A ne. Narod misli drugačije.", "Ni blizu, ali svaka čast na hrabrosti.", "Ovaj put ne."], seme);
+}
+
+export function komentarPesma(ocena: Ocena, p: PrikazPesma, seme: number): string {
+  if (ocena.istek) return izaberi(["Klip je gotov, a pesma ostade nepogođena.", "Odsvirala je cela. Sledeća ide brže."], seme);
+  if (p.neZnam) return izaberi(["Nema veze. Sad znaš.", "Pošteno. Sledeća je tvoja."], seme);
+  if (!p.tacno) return izaberi(["A ne. Nije ta.", "Ni blizu, ali svaka čast na hrabrosti.", "Promašaj. Uši na pranje."], seme);
+  if (ocena.poeni === ocena.maxPoena) return izaberi(["Po prvom taktu! Ti ovo imaš u krvi.", "Dve sekunde i gotovo. Ajde bre!"], seme);
+  if (p.slusanoMs <= 6000) return izaberi(["Brzo si to skapirao.", "Tako je. Uvo ti radi."], seme);
+  return izaberi(["Tako je. Malo si se premišljao, al' dobro.", "Pogodak, i to posle lepog slušanja."], seme);
 }
 
 export function komentarSegmenta(s: SegmentStanje): string {

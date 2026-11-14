@@ -30,13 +30,18 @@ export type PitanjeGugla = {
   b: string;
 };
 
-export type Pitanje = PitanjeCena | PitanjeGugla;
+/** Pesma: u browser ne ide ništa o njoj. Zvuk se pušta sa /api/track/<itemId>. */
+export type PitanjePesma = { vrsta: "pesma" };
+
+export type Pitanje = PitanjePesma | PitanjeCena | PitanjeGugla;
 
 // ───── odgovori koje šalje browser ─────
 
 export type OdgovorCena = { unos: number };
 export type OdgovorGugla = { izbor: "a" | "b" };
-export type Odgovor = OdgovorCena | OdgovorGugla;
+/** Izabrana pesma iz kataloga (`songId`, uz tekst radi prikaza), slobodno ukucan tekst ili „Ne znam”. */
+export type OdgovorPesma = { songId?: number; tekst?: string; neZnam?: boolean };
+export type Odgovor = OdgovorPesma | OdgovorCena | OdgovorGugla;
 
 // ───── šta se prikazuje posle odgovora ─────
 
@@ -69,10 +74,25 @@ export type PrikazGugla = {
   period: string;
 };
 
-export type Prikaz = PrikazCena | PrikazGugla;
+export type PrikazPesma = {
+  vrsta: "pesma";
+  izvodjac: string;
+  naslov: string;
+  /** Omot albuma (Deezer). */
+  omot: string;
+  /** Šta je igrač odgovorio („Izvođač – Naslov” ili ukucan tekst); null za „Ne znam” i istek klipa. */
+  odgovor: string | null;
+  neZnam: boolean;
+  tacno: boolean;
+  /** Ukupno preslušano vreme. */
+  slusanoMs: number;
+};
+
+export type Prikaz = PrikazPesma | PrikazCena | PrikazGugla;
 
 /** Da li je pitanje ostalo bez odgovora (isteklo vreme). */
 export function bezOdgovora(p: Prikaz): boolean {
+  if (p.vrsta === "pesma") return p.odgovor === null && !p.neZnam;
   return p.vrsta === "cena" ? p.unos === null : p.izbor === null;
 }
 
@@ -116,6 +136,8 @@ export type Trenutno = {
   pitanje?: Pitanje;
   limitMs?: number;
   preostaloMs?: number;
+  /** Pesma: server misli da klip upravo svira (posle osvežavanja strane browser javlja da je stao). */
+  svira?: boolean;
 };
 
 export type StavkaRezultata = {

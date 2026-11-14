@@ -11,8 +11,9 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { ucitajProizvode } from "../src/lib/content/products";
-import { planCena, planGugla, seedSql } from "../src/lib/content/seed";
+import { planCena, planGugla, planPesama, seedSql } from "../src/lib/content/seed";
 import { sopstveneSlike } from "../src/lib/content/slike";
+import { ucitajPesme } from "../src/lib/content/songs";
 import { ucitajTrendove } from "../src/lib/content/trends";
 import { beogradskiDatum, dodajDane } from "../src/lib/time";
 
@@ -28,7 +29,8 @@ const koren = join(__dirname, "..");
 const slike = sopstveneSlike(koren);
 const ucitani = ucitajProizvode(JSON.parse(readFileSync(join(koren, "data", "products.json"), "utf8")), slike);
 const trendovi = ucitajTrendove(JSON.parse(readFileSync(join(koren, "data", "trends.json"), "utf8")));
-const sql = seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, trendovi, pocetak, dana });
+const pesme = ucitajPesme(JSON.parse(readFileSync(join(koren, "data", "songs.json"), "utf8")));
+const sql = seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, pesme: pesme.pesme, trendovi, pocetak, dana });
 
 const dir = join(koren, "supabase", "seed");
 mkdirSync(dir, { recursive: true });
@@ -51,4 +53,12 @@ console.log(
 );
 if (trendovi.izbaceni.length) console.log(`Izbačeno: ${trendovi.izbaceni.map((x) => x.naziv).join(", ")}`);
 console.log(`Primer (${guglaPlan[0].datum}): ${guglaPlan[0].dueli.map((p) => `${p.a} ${p.indeksA}:${p.indeksB} ${p.b}`).join(" → ")}`);
+const planP = planPesama(pesme.pesme, pocetak, dana);
+const poZanru = (z: string) => pesme.pesme.filter((p) => p.zanr === z).length;
+console.log(
+  `\nPesama u katalogu: ${pesme.pesme.length} (folk ${poZanru("folk")}, rok ${poZanru("rok")}, pop ${poZanru("pop")}, trep ${poZanru("trep")}; ` +
+    `klipovi provereni na Deezeru ${pesme.provereno})`,
+);
+if (pesme.izbaceni.length) console.log(`Izbačeno: ${pesme.izbaceni.map((x) => `${x.naziv} (${x.razlog})`).join(", ")}`);
+console.log(`Primer (${planP[0].datum}): ${planP[0].pesme.map((p) => `${p.izvodjac} – ${p.naslov} [${p.zanr}]`).join(", ")}`);
 console.log(`\nSQL je u: ${fajl}\nNalepi ga u Supabase → SQL Editor → Run.`);

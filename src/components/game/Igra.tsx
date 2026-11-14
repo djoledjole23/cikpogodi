@@ -4,11 +4,12 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Ocena, SegmentStanje, Stanje, Trenutno } from "@/lib/game/types";
 import { haptika, sfx } from "@/lib/sound";
-import { api, NijeNaRedu } from "./api";
-import { komentarCena, komentarGugla } from "@/lib/game/komentari";
+import { api, katalogPesama, NijeNaRedu } from "./api";
+import { komentarCena, komentarGugla, komentarPesma } from "@/lib/game/komentari";
 import { CenaOcena, CenaPitanje } from "./Cena";
 import { KrajSegmenta, Kraj, OkvirOcene, Poruka, Tajmer, UvodSegmenta, Zaglavlje } from "./delovi";
 import { GuglaDuel } from "./Gugla";
+import { PesmaIgra } from "./Pesma";
 import { Odbrojavanje, smanjenoKretanje } from "./efekti";
 
 /**
@@ -114,14 +115,16 @@ export function Igra() {
     });
 
   const kreni = (stanje: Stanje) => {
+    // Spisak pesama za biranje odgovora neka stigne dok traje odbrojavanje.
+    if (stanje.trenutno?.segment === 1) void katalogPesama().catch(() => undefined);
     if (smanjenoKretanje()) void posaljiPrvo(stanje);
     else setEkran({ vrsta: "odbrojavanje", stanje });
   };
 
-  const odgovori = (stanje: Stanje, odgovor: unknown, istek = false) =>
+  const odgovori = (stanje: Stanje, odgovor: unknown, istek = false, slusanoMs?: number) =>
     uradi(async () => {
       const pitanje = stanje.trenutno!;
-      const r = await api.odgovor(stanje.datum, pitanje.itemId, odgovor, istek);
+      const r = await api.odgovor(stanje.datum, pitanje.itemId, odgovor, istek, slusanoMs);
       // Presuda se još ne vidi: prvo ide napetost (igla klizi, trake se pune), pa `otkrij`.
       setEkran({
         vrsta: "ocena",
@@ -270,6 +273,42 @@ export function Igra() {
     );
   }
 
+  // „Pogodi pesmu”: pitanje i rezultat su ista komponenta, da muzika ne stane kad se pesma otkrije.
+  const pesma =
+    ekran.vrsta === "ocena"
+      ? ekran.ocena.prikaz.vrsta === "pesma"
+        ? { t: ekran.pitanje, ocena: ekran.ocena, otkriveno: ekran.otkriveno }
+        : null
+      : pitanje?.faza === "pitanje" && pitanje.pitanje?.vrsta === "pesma"
+        ? { t: pitanje, ocena: undefined, otkriveno: false }
+        : null;
+
+  if (pesma) {
+    // Dok se odgovara, „stanje” je ono pre odgovora (iz njega je pitanje poslato).
+    const stanje = ekran.vrsta === "ocena" ? ekran.pre : ekran.stanje;
+    const { t, ocena } = pesma;
+    return (
+      <>
+        {zaglavlje}
+        <PesmaIgra
+          key={`pesma${t.itemId}`}
+          datum={stanje.datum}
+          itemId={t.itemId}
+          pocetnoMs={Math.max(0, t.limitMs! - t.preostaloMs!)}
+          limitMs={t.limitMs!}
+          serverMisliDaSvira={Boolean(t.svira)}
+          ocena={ocena}
+          otkriveno={pesma.otkriveno}
+          zakljucano={ceka}
+          komentar={ocena?.prikaz.vrsta === "pesma" ? komentarPesma(ocena, ocena.prikaz, t.itemId) : ""}
+          naOdgovor={(odgovor, slusanoMs, istek) => void odgovori(stanje, odgovor, istek, slusanoMs)}
+          naOtkrij={otkrij}
+          naDalje={dalje}
+        />
+      </>
+    );
+  }
+
   if (ekran.vrsta === "ocena") {
     const { ocena } = ekran;
     if (ocena.prikaz.vrsta !== "cena") return null;
@@ -342,7 +381,7 @@ export function Igra() {
           </>
         );
       }
-      if (t.pitanje.vrsta !== "cena") return null; // duel je nacrtan gore
+      if (t.pitanje.vrsta !== "cena") return null; // pesma i duel su nacrtani gore
       return (
         <>
           {zaglavlje}

@@ -131,6 +131,18 @@ export const IconZvezda = (p: IconProps) => (
   </Svg>
 );
 
+export const IconPusti = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M7.4 4.6c-.7-.4-1.5.1-1.5.9v13c0 .8.8 1.3 1.5.9l11-6.5c.7-.4.7-1.4 0-1.8l-11-6.5Z" />
+  </Svg>
+);
+
+export const IconPauza = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M8 5v14M16 5v14" />
+  </Svg>
+);
+
 export function SegmentIcon({ segment, size = 26 }: { segment: SegmentKey; size?: number }) {
   switch (segment) {
     case "pesma":

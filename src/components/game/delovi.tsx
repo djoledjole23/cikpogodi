@@ -174,10 +174,18 @@ export function UvodSegmenta({ segment, naKreni, ceka }: { segment: SegmentStanj
       <p className="lead">{segment.pravilo}</p>
       <ul className="g-uvod-cinjenice">
         <li>
-          <strong>{segment.pitanja}</strong> {segment.pitanja === 1 ? "pitanje" : "pitanja"}
+          <strong>{segment.pitanja}</strong> {segment.key === "pesma" ? "pesama" : segment.pitanja === 1 ? "pitanje" : "pitanja"}
         </li>
         <li>
-          <strong>{k.limitS} s</strong> po pitanju
+          {segment.key === "pesma" ? (
+            <>
+              klip od <strong>{k.limitS} s</strong>
+            </>
+          ) : (
+            <>
+              <strong>{k.limitS} s</strong> po pitanju
+            </>
+          )}
         </li>
         <li>
           do <strong>{segment.max}</strong> poena
@@ -291,6 +299,19 @@ Za sada se igraju „Pogodi cenu” i „Šta se više gugla”. Ostali segmenti
 }
 
 function RedRezultata({ prikaz: p }: { prikaz: Prikaz }) {
+  if (p.vrsta === "pesma") {
+    const sek = (p.slusanoMs / 1000).toLocaleString("sr-Latn-RS", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    return (
+      <>
+        <strong>
+          {p.izvodjac} – {p.naslov}
+        </strong>
+        <span>
+          {p.tacno ? `Pogođeno posle ${sek} s slušanja` : p.neZnam ? "Ne znam" : p.odgovor ? `Ti: ${p.odgovor}` : "bez odgovora"}
+        </span>
+      </>
+    );
+  }
   if (p.vrsta === "cena") {
     return (
       <>

@@ -118,8 +118,8 @@ export function Nalepnica({ poeni }: { poeni: number }) {
 
 // ───────────────────────── pečat ─────────────────────────
 
-export type VrstaPecata = "pogodak" | "blizu" | "promasaj" | "vreme";
-const TEKST_PECATA: Record<VrstaPecata, string> = { pogodak: "Pogodak!", blizu: "Blizu!", promasaj: "Promašaj", vreme: "Vreme!" };
+export type VrstaPecata = "pogodak" | "blizu" | "promasaj" | "vreme" | "neznam";
+const TEKST_PECATA: Record<VrstaPecata, string> = { pogodak: "Pogodak!", blizu: "Blizu!", promasaj: "Promašaj", vreme: "Vreme!", neznam: "Ne znam" };
 
 /** Pečat koji „lupi” preko rezultata. Čita se i bez boje: tekst kaže šta je bilo. */
 export function Pecat({ vrsta }: { vrsta: VrstaPecata }) {
