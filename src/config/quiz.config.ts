@@ -5,7 +5,7 @@
 
 export const TIME_ZONE = "Europe/Belgrade";
 
-export type SegmentKey = "pesma" | "cena" | "gugla" | "film" | "rebus";
+export type SegmentKey = "pesma" | "cena" | "gugla" | "film" | "joker";
 
 export type SegmentConfig = {
   /** Redni broj u igri (1–5). */
@@ -66,13 +66,13 @@ export const SEGMENTI: SegmentConfig[] = [
   },
   {
     n: 5,
-    key: "rebus",
-    naziv: "Joker: rebus",
-    pravilo: "Reši rebus i pokupi bonus.",
-    bodovanje: "1 rebus · tačno: bonus preko svega",
+    key: "joker",
+    naziv: "Joker pitanje",
+    pravilo: "Jedno pitanje za bonus. Upiši odgovor i pokupi 50 preko svega.",
+    bodovanje: "1 pitanje · tačno: +50 preko svega",
     pitanja: 1,
     max: 50,
-    limitS: 90,
+    limitS: 30,
     bonus: true,
   },
 ];
@@ -101,7 +101,7 @@ export const CENA_PRAGOVI: { doProcenata: number; poeni: number }[] = [
 
 export const GUGLA_POENI = 5;
 export const FILM_POENI = 20;
-export const REBUS_POENI = 50;
+export const JOKER_POENI = 50;
 
 /** Koliko server toleriše kašnjenje mreže kad proverava vremena (ms). */
 export const TOLERANCIJA_MREZE_MS = 1500;

@@ -1,6 +1,37 @@
 -- Čik Pogodi! seed: 14 dana od 2026-11-14. Cenovnik od 2026-11-13.
 -- Napravljeno komandom: npm run seed -- 2026-11-14 14
 
+-- Isto što i migracije 0004 i 0005: ponovljeno ovde da seed radi i ako one nisu puštene.
+create table if not exists public.film_stills (
+  id bigint generated always as identity primary key,
+  film_id bigint not null references public.films (id) on delete cascade,
+  image_url text not null unique,
+  note text,
+  created_at timestamptz not null default now()
+);
+alter table public.film_stills enable row level security;
+create unique index if not exists films_title_idx on public.films (title);
+drop policy if exists "katalog filmova je javan" on public.films;
+create table if not exists public.joker_questions (
+  id bigint generated always as identity primary key,
+  question text not null unique,
+  answer text not null,
+  aliases text[] not null default '{}',
+  image_url text,
+  reveal_number text,
+  reveal_label text,
+  created_at timestamptz not null default now()
+);
+alter table public.joker_questions enable row level security;
+alter table public.daily_quiz_items add column if not exists film_still_id bigint references public.film_stills (id);
+alter table public.daily_quiz_items add column if not exists joker_id bigint references public.joker_questions (id);
+alter table public.daily_quiz_items drop constraint if exists stavka_odgovara_segmentu;
+alter table public.daily_quiz_items add constraint stavka_odgovara_segmentu check (
+  num_nonnulls(song_id, product_id, trend_pair_id, film_clip_id, film_still_id, rebus_id, joker_id) = 1
+  and ((segment = 1 and song_id is not null) or (segment = 2 and product_id is not null) or (segment = 3 and trend_pair_id is not null)
+    or (segment = 4 and (film_clip_id is not null or film_still_id is not null)) or (segment = 5 and (rebus_id is not null or joker_id is not null)))
+);
+
 -- Isto što i migracija 0003: ponovljeno ovde da seed radi i ako ona nije puštena.
 alter table public.songs add column if not exists genre text;
 alter table public.play_answers add column if not exists playing_since timestamptz;
@@ -2858,25 +2889,6 @@ insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id
   from public.trend_pairs where term_a = 'Sokobanja' and term_b = 'Zaječar' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 
--- Isto što i migracija 0004: ponovljeno ovde da seed radi i ako ona nije puštena.
-create table if not exists public.film_stills (
-  id bigint generated always as identity primary key,
-  film_id bigint not null references public.films (id) on delete cascade,
-  image_url text not null unique,
-  note text,
-  created_at timestamptz not null default now()
-);
-alter table public.film_stills enable row level security;
-create unique index if not exists films_title_idx on public.films (title);
-drop policy if exists "katalog filmova je javan" on public.films;
-alter table public.daily_quiz_items add column if not exists film_still_id bigint references public.film_stills (id);
-alter table public.daily_quiz_items drop constraint if exists stavka_odgovara_segmentu;
-alter table public.daily_quiz_items add constraint stavka_odgovara_segmentu check (
-  num_nonnulls(song_id, product_id, trend_pair_id, film_clip_id, film_still_id, rebus_id) = 1
-  and ((segment = 1 and song_id is not null) or (segment = 2 and product_id is not null) or (segment = 3 and trend_pair_id is not null)
-    or (segment = 4 and (film_clip_id is not null or film_still_id is not null)) or (segment = 5 and rebus_id is not null))
-);
-
 -- Filmovi i serije (films.json) i njihovi kadrovi.
 insert into public.films (title, aliases) values ('Apsolutnih sto', array['Apsolutnih 100']::text[])
   on conflict (title) do update set aliases = excluded.aliases, active = true;
@@ -3187,4 +3199,16 @@ insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
   select '2026-11-27', 4, 3, id, '{"naslov":"Lajanje na zvezde","alias":[],"slika":"/kadrovi/910755bdb2d3ed.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/910755bdb2d3ed.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+
+-- Dnevni kviz: segment 5 (Joker pitanje). Dan koji već ima Jokera se ne dira.
+insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
+  values ('Ko je od učesnika Love Island Adria imao najveći body count?', 'Entoni', array['Anthony']::text[], '/joker/74db6a8831faf1.webp', '92', 'body count')
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-14', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-11-14', 5, 1, id, '{"pitanje":"Ko je od učesnika Love Island Adria imao najveći body count?","odgovor":"Entoni","alias":["Anthony"],"slika":"/joker/74db6a8831faf1.webp","broj":"92","natpis":"body count"}'::jsonb
+  from public.joker_questions where question = 'Ko je od učesnika Love Island Adria imao najveći body count?'
   on conflict (quiz_date, segment, position) do nothing;

@@ -1,4 +1,4 @@
-import type { Ocena, PrikazCena, PrikazFilm, PrikazGugla, PrikazPesma, SegmentStanje } from "./types";
+import type { Ocena, PrikazCena, PrikazFilm, PrikazGugla, PrikazJoker, PrikazPesma, SegmentStanje } from "./types";
 
 /**
  * Rečenica koja ide uz rezultat pitanja. Bira se po tome koliko je igrač bio blizu,
@@ -13,8 +13,8 @@ export function komentarCena(ocena: Ocena, p: PrikazCena, seme: number): string 
     return izaberi(["Ajde bre, pa ti znaš cene!", "Pogodak. Tebe na pijaci ne mogu da prevare.", "To se zove redovan kupac."], seme);
   }
   if (ocena.poeni > 0) return izaberi(["Blizu, blizu. Pola poena za trud.", "Za dlaku. Nije loše.", "Toplo, ali nije vruće."], seme);
-  if (p.unos < p.prava * 0.5) return izaberi(["Te cene su bile pre deset godina.", "E, da je bar toliko."], seme);
-  if (p.unos > p.prava * 2) return izaberi(["Polako, nije ovo aerodrom.", "Ti kupuješ na benzinskoj pumpi?"], seme);
+  // Veliki promašaj (manje od pola ili više od duplo): uvek ista rečenica, po želji vlasnika sajta.
+  if (p.unos < p.prava * 0.5 || p.unos > p.prava * 2) return "Poznaješ cene isto koliko i Bogoljub.";
   return izaberi(["Ni blizu, ali svaka čast na hrabrosti.", "Kad si ti poslednji put bio u prodavnici?", "Ovo nije prošlo. Idemo dalje."], seme);
 }
 
@@ -46,7 +46,15 @@ export function komentarFilm(ocena: Ocena, p: PrikazFilm, seme: number): string 
   return izaberi(["Tako je! Ti si ovo gledao sto puta.", "Ajde bre, pa to se zna!", "Pogodak. Pravi filmofil."], seme);
 }
 
+export function komentarJoker(ocena: Ocena, p: PrikazJoker, seme: number): string {
+  if (ocena.istek) return izaberi(["Vreme! Joker je ostao u špilu.", "Isteklo. Bonus ode niz vodu."], seme);
+  if (p.neZnam) return izaberi(["Ništa od bonusa. Sutra je novi Joker.", "Pošteno. Joker čeka sutra."], seme);
+  if (!p.tacno) return izaberi(["Nije. Joker ti je pobegao.", "Promašaj. Bonus ostaje u kasi."], seme);
+  return izaberi(["Joker pada! Pedeset preko svega.", "To! Bonus je tvoj.", "Ajde bre, pa ti pratiš sve!"], seme);
+}
+
 export function komentarSegmenta(s: SegmentStanje): string {
+  if (s.bonus) return s.poeni > 0 ? "Joker pokupljen. Bonus je tvoj." : "Joker je ostao u špilu. Sutra je novi.";
   const deo = s.max > 0 ? s.poeni / s.max : 0;
   if (deo === 1) return "Sve tačno. Pa ti si opasan.";
   if (deo >= 0.7) return "Odlično. Ovo se zove znanje.";

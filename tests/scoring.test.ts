@@ -96,6 +96,6 @@ describe("config", () => {
     expect(osnovno).toBe(300);
     expect(bonus).toBe(50);
     expect(MAX_UKUPNO).toBe(350);
-    expect(SEGMENTI.reduce((z, s) => z + s.pitanja, 0)).toBe(27); // 26 pitanja + 1 rebus
+    expect(SEGMENTI.reduce((z, s) => z + s.pitanja, 0)).toBe(27); // 26 pitanja + 1 Joker
   });
 });

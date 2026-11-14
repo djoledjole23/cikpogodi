@@ -16,7 +16,7 @@ export default function Pocetna() {
         </h1>
         <p className="lead">
           Pet mini igara, jedan pokušaj dnevno. Svi dobijaju ista pitanja, pa da vidimo ko stvarno zna, a ko samo
-          priča.
+          priča. Ista pitanja za sve, trofej samo za jednog.
         </p>
         {/* Zavisi od toga da li je igrač danas već igrao, pa stiže naknadno. */}
         <Suspense fallback={<div className="skeleton" style={{ height: 74 }} aria-hidden="true" />}>

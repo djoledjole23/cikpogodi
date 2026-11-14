@@ -2,6 +2,7 @@ import { SEGMENTI } from "@/config/quiz.config";
 import { dodajDane } from "@/lib/time";
 import { normalizuj } from "@/lib/match";
 import type { Film } from "./films";
+import type { Joker } from "./joker";
 import type { Proizvod } from "./products";
 import { ZANROVI, type Pesma, type Zanr } from "./songs";
 import { ferDuel, napraviPar, type Par, type Pojam, type UcitaniTrendovi } from "./trends";
@@ -268,13 +269,47 @@ export function seedSql(opcije: {
   pesme?: Pesma[];
   /** Kadrovi za „Pogodi domaći film/seriju”. Bez njih se segment 4 ne pravi. */
   filmovi?: Film[];
+  /** Joker pitanja (po datumu). Dan bez pitanja nema segment 5. */
+  jokeri?: Joker[];
   /** Pojmovi za „Šta se više gugla”. Bez njih se pravi samo segment 2. */
   trendovi?: Pick<UcitaniTrendovi, "pojmovi" | "period" | "preuzeto">;
   pocetak: string;
   dana: number;
 }): string {
-  const { proizvodi, datumCenovnika, pesme, filmovi, trendovi, pocetak, dana } = opcije;
-  const redovi: string[] = [];
+  const { proizvodi, datumCenovnika, pesme, filmovi, jokeri, trendovi, pocetak, dana } = opcije;
+  const redovi: string[] = [
+    "-- Isto što i migracije 0004 i 0005: ponovljeno ovde da seed radi i ako one nisu puštene.",
+    `create table if not exists public.film_stills (
+  id bigint generated always as identity primary key,
+  film_id bigint not null references public.films (id) on delete cascade,
+  image_url text not null unique,
+  note text,
+  created_at timestamptz not null default now()
+);`,
+    "alter table public.film_stills enable row level security;",
+    "create unique index if not exists films_title_idx on public.films (title);",
+    `drop policy if exists "katalog filmova je javan" on public.films;`,
+    `create table if not exists public.joker_questions (
+  id bigint generated always as identity primary key,
+  question text not null unique,
+  answer text not null,
+  aliases text[] not null default '{}',
+  image_url text,
+  reveal_number text,
+  reveal_label text,
+  created_at timestamptz not null default now()
+);`,
+    "alter table public.joker_questions enable row level security;",
+    "alter table public.daily_quiz_items add column if not exists film_still_id bigint references public.film_stills (id);",
+    "alter table public.daily_quiz_items add column if not exists joker_id bigint references public.joker_questions (id);",
+    "alter table public.daily_quiz_items drop constraint if exists stavka_odgovara_segmentu;",
+    `alter table public.daily_quiz_items add constraint stavka_odgovara_segmentu check (
+  num_nonnulls(song_id, product_id, trend_pair_id, film_clip_id, film_still_id, rebus_id, joker_id) = 1
+  and ((segment = 1 and song_id is not null) or (segment = 2 and product_id is not null) or (segment = 3 and trend_pair_id is not null)
+    or (segment = 4 and (film_clip_id is not null or film_still_id is not null)) or (segment = 5 and (rebus_id is not null or joker_id is not null)))
+);`,
+    "",
+  ];
 
   if (pesme?.length) {
     redovi.push(
@@ -373,25 +408,6 @@ export function seedSql(opcije: {
   if (filmovi?.length) {
     redovi.push(
       "",
-      "-- Isto što i migracija 0004: ponovljeno ovde da seed radi i ako ona nije puštena.",
-      `create table if not exists public.film_stills (
-  id bigint generated always as identity primary key,
-  film_id bigint not null references public.films (id) on delete cascade,
-  image_url text not null unique,
-  note text,
-  created_at timestamptz not null default now()
-);`,
-      "alter table public.film_stills enable row level security;",
-      "create unique index if not exists films_title_idx on public.films (title);",
-      `drop policy if exists "katalog filmova je javan" on public.films;`,
-      "alter table public.daily_quiz_items add column if not exists film_still_id bigint references public.film_stills (id);",
-      "alter table public.daily_quiz_items drop constraint if exists stavka_odgovara_segmentu;",
-      `alter table public.daily_quiz_items add constraint stavka_odgovara_segmentu check (
-  num_nonnulls(song_id, product_id, trend_pair_id, film_clip_id, film_still_id, rebus_id) = 1
-  and ((segment = 1 and song_id is not null) or (segment = 2 and product_id is not null) or (segment = 3 and trend_pair_id is not null)
-    or (segment = 4 and (film_clip_id is not null or film_still_id is not null)) or (segment = 5 and rebus_id is not null))
-);`,
-      "",
       "-- Filmovi i serije (films.json) i njihovi kadrovi.",
     );
     for (const f of filmovi) {
@@ -418,6 +434,33 @@ export function seedSql(opcije: {
   on conflict (quiz_date, segment, position) do nothing;`,
         );
       });
+    }
+  }
+
+  // Joker pitanja za dane iz ovog perioda (poređenje datuma kao teksta radi jer su oblika YYYY-MM-DD).
+  const poslednji = dodajDane(pocetak, dana - 1);
+  const uPeriodu = (jokeri ?? []).filter((j) => j.datum >= pocetak && j.datum <= poslednji);
+  if (uPeriodu.length) {
+    redovi.push(
+      "",
+      "-- Dnevni kviz: segment 5 (Joker pitanje). Dan koji već ima Jokera se ne dira.",
+    );
+    for (const j of uPeriodu) {
+      const alias = j.alias.length ? `array[${j.alias.map(q).join(", ")}]::text[]` : "'{}'::text[]";
+      const ili = (x: string | null) => (x === null ? "null" : q(x));
+      const snapshot = { pitanje: j.pitanje, odgovor: j.odgovor, alias: j.alias, slika: j.slika, broj: j.broj, natpis: j.natpis };
+      redovi.push(
+        `insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
+  values (${q(j.pitanje)}, ${q(j.odgovor)}, ${alias}, ${ili(j.slika)}, ${ili(j.broj)}, ${ili(j.natpis)})
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;`,
+        `insert into public.daily_quiz (quiz_date, status, published_at) values (${q(j.datum)}, 'published', now())
+  on conflict (quiz_date) do nothing;`,
+        `insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select ${q(j.datum)}, 5, 1, id, ${q(JSON.stringify(snapshot))}::jsonb
+  from public.joker_questions where question = ${q(j.pitanje)}
+  on conflict (quiz_date, segment, position) do nothing;`,
+      );
     }
   }
 

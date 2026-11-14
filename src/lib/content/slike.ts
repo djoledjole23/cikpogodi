@@ -27,3 +27,10 @@ export function postojeciKadrovi(koren: string = process.cwd()): Set<string> {
   if (!existsSync(dir)) return new Set();
   return new Set(readdirSync(dir).filter((f) => NASTAVCI.test(f)).map((f) => `/kadrovi/${f}`));
 }
+
+/** Adrese fotografija za Joker pitanja koje postoje u public/joker (npr. „/joker/9f2c….webp”). */
+export function postojeceSlikeJokera(koren: string = process.cwd()): Set<string> {
+  const dir = join(koren, "public", "joker");
+  if (!existsSync(dir)) return new Set();
+  return new Set(readdirSync(dir).filter((f) => NASTAVCI.test(f)).map((f) => `/joker/${f}`));
+}

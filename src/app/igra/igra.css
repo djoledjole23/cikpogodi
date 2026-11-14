@@ -2145,6 +2145,164 @@
   }
 }
 
+/* ───── joker pitanje ───── */
+
+.g-joker {
+  gap: 12px;
+}
+
+/* Pitanje stoji na krem kartici, kao karta izvučena iz špila. */
+.g-joker-karta {
+  position: relative;
+  padding: 18px 18px 20px;
+  border-radius: var(--r-lg);
+  background: var(--cream);
+  color: var(--ink);
+  transform: rotate(-1deg);
+}
+
+.g-joker-oznaka {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 3px 10px 3px 6px;
+  border-radius: 999px;
+  background: var(--red);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.g-joker-pitanje {
+  font-family: var(--font-display);
+  font-size: 27px;
+  line-height: 1.08;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.g-joker .g-pesma-polje {
+  height: 62px;
+}
+
+.g-joker .g-pesma-polje input {
+  height: 56px;
+  font-size: 20px;
+}
+
+/* Otkrivanje: fotografija levo, veliki broj desno. Bez fotografije ili bez broja ono drugo stoji samo. */
+.g-joker-ishod {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  height: clamp(170px, 32dvh, 270px);
+}
+
+.g-joker-foto {
+  flex: 0 1 auto;
+  height: 100%;
+  max-width: 62%;
+  padding: 5px;
+  border-radius: var(--r-lg);
+  background: var(--cream);
+  transform: rotate(-2deg);
+}
+
+.g-joker-foto img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.g-joker-broj {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  transform: rotate(3deg);
+}
+
+.g-joker-broj strong {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 23vw, 96px);
+  line-height: 0.9;
+  font-weight: 800;
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+}
+
+.g-joker-broj span {
+  margin-top: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .g-joker .g-joker-karta {
+    animation: g-kadar 380ms cubic-bezier(0.2, 1.2, 0.4, 1) backwards;
+  }
+
+  .g-joker-ishod .g-joker-foto {
+    animation: g-joker-foto 420ms cubic-bezier(0.2, 1.2, 0.4, 1) backwards;
+  }
+
+  .g-joker-ishod .g-joker-broj {
+    animation: g-joker-broj 520ms cubic-bezier(0.3, 1.6, 0.5, 1) 260ms backwards;
+  }
+}
+
+@keyframes g-joker-foto {
+  from {
+    opacity: 0;
+    transform: rotate(6deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-2deg) scale(1);
+  }
+}
+
+@keyframes g-joker-broj {
+  from {
+    opacity: 0;
+    transform: rotate(-12deg) scale(2.2);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(3deg) scale(1);
+  }
+}
+
+@media (max-height: 600px) {
+  .g-joker-karta {
+    padding: 12px 16px 14px;
+  }
+
+  .g-joker-pitanje {
+    font-size: 23px;
+  }
+
+  .g-joker-ishod {
+    height: clamp(130px, 27dvh, 170px);
+  }
+}
+
 /* Uvod u segment na niskom ekranu: manja ikonica i naslov, da „Kreni” ostane na ekranu. */
 @media (max-height: 600px) {
   .g-uvod {

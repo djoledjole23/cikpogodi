@@ -46,7 +46,7 @@ const rnd = (i: number, so: number) => {
 
 /**
  * Kratke konfete iz sredine roditelja. Samo transform i opacity (ide preko GPU-a, ne koči ni slabiji telefon).
- * `jacina`: 1 = malo (pola poena), 2 = normalno, 3 = veliko (20 poena, rebus).
+ * `jacina`: 1 = malo (pola poena), 2 = normalno, 3 = veliko (20 poena, Joker).
  */
 export function Konfete({ jacina = 2, kasnjenjeMs = 0 }: { jacina?: 1 | 2 | 3; kasnjenjeMs?: number }) {
   const [vidljive, setVidljive] = useState(() => !smanjenoKretanje());

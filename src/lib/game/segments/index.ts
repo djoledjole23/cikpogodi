@@ -2,6 +2,7 @@ import type { Ocena, Pitanje, Prikaz } from "../types";
 import { cena } from "./cena";
 import { film } from "./film";
 import { gugla } from "./gugla";
+import { joker } from "./joker";
 import { pesma } from "./pesma";
 
 /**
@@ -33,4 +34,5 @@ export const RUKOVAOCI: Record<number, Rukovalac> = {
   2: cena,
   3: gugla,
   4: film,
+  5: joker,
 };

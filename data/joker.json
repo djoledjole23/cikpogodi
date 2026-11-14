@@ -1,0 +1,14 @@
+{
+  "napomena": "Joker pitanja (segment 5, bonus +50). Jedno pitanje po danu, vezano za datum; dan bez pitanja nema Jokera. Pitanje, odgovor i podatak za otkrivanje daje vlasnik sajta. alias su drugi oblici odgovora koji se priznaju. slika i otkrice (veliki broj + natpis) se prikazuju tek posle odgovora; ime fajla slike ne sme da odaje odgovor.",
+  "pitanja": [
+    {
+      "datum": "2026-11-14",
+      "pitanje": "Ko je od učesnika Love Island Adria imao najveći body count?",
+      "odgovor": "Entoni",
+      "alias": ["Anthony"],
+      "slika": "/joker/74db6a8831faf1.webp",
+      "otkrice": { "broj": "92", "natpis": "body count" },
+      "izvor": "Izazov u emisiji (septembar 2026), brojku je naveo sam učesnik; preneli loveisland.rs i Telegraf."
+    }
+  ]
+}

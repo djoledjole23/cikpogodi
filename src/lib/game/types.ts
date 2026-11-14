@@ -36,7 +36,10 @@ export type PitanjePesma = { vrsta: "pesma" };
 /** Film ili serija: samo kadar. Adresa slike ne odaje naslov. */
 export type PitanjeFilm = { vrsta: "film"; slika: string };
 
-export type Pitanje = PitanjePesma | PitanjeCena | PitanjeGugla | PitanjeFilm;
+/** Joker: samo tekst pitanja. Odgovor, fotografija i broj za otkrivanje ostaju na serveru. */
+export type PitanjeJoker = { vrsta: "joker"; pitanje: string };
+
+export type Pitanje = PitanjePesma | PitanjeCena | PitanjeGugla | PitanjeFilm | PitanjeJoker;
 
 // ───── odgovori koje šalje browser ─────
 
@@ -46,7 +49,9 @@ export type OdgovorGugla = { izbor: "a" | "b" };
 export type OdgovorPesma = { izbor?: { izvodjac: string; naslov: string }; tekst?: string; neZnam?: boolean };
 /** Ukucan naslov ili „Ne znam”. */
 export type OdgovorFilm = { tekst?: string; neZnam?: boolean };
-export type Odgovor = OdgovorPesma | OdgovorCena | OdgovorGugla | OdgovorFilm;
+/** Ukucan odgovor ili „Ne znam”. */
+export type OdgovorJoker = { tekst?: string; neZnam?: boolean };
+export type Odgovor = OdgovorPesma | OdgovorCena | OdgovorGugla | OdgovorFilm | OdgovorJoker;
 
 // ───── šta se prikazuje posle odgovora ─────
 
@@ -103,11 +108,26 @@ export type PrikazFilm = {
   tacno: boolean;
 };
 
-export type Prikaz = PrikazPesma | PrikazCena | PrikazGugla | PrikazFilm;
+export type PrikazJoker = {
+  vrsta: "joker";
+  pitanje: string;
+  /** Tačan odgovor, onako kako se piše. */
+  resenje: string;
+  /** Fotografija, veliki broj i natpis ispod broja: stižu tek sa ocenom. */
+  slika: string | null;
+  broj: string | null;
+  natpis: string | null;
+  /** Šta je igrač ukucao; null za „Ne znam” i istek vremena. */
+  odgovor: string | null;
+  neZnam: boolean;
+  tacno: boolean;
+};
+
+export type Prikaz = PrikazPesma | PrikazCena | PrikazGugla | PrikazFilm | PrikazJoker;
 
 /** Da li je pitanje ostalo bez odgovora (isteklo vreme). */
 export function bezOdgovora(p: Prikaz): boolean {
-  if (p.vrsta === "pesma" || p.vrsta === "film") return p.odgovor === null && !p.neZnam;
+  if (p.vrsta === "pesma" || p.vrsta === "film" || p.vrsta === "joker") return p.odgovor === null && !p.neZnam;
   return p.vrsta === "cena" ? p.unos === null : p.izbor === null;
 }
 

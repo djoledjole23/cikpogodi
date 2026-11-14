@@ -153,7 +153,7 @@ export function SegmentIcon({ segment, size = 26 }: { segment: SegmentKey; size?
       return <IconLupa size={size} />;
     case "film":
       return <IconKlapa size={size} />;
-    case "rebus":
+    case "joker":
       return <IconJoker size={size} />;
   }
 }

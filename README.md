@@ -3,8 +3,8 @@
 Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript + Supabase, hosting na Vercelu.
 
 > Ovo je radna verzija README-a. Gotovi su **osnova, auth, segment 1 (Pogodi pesmu), segment 2 (Pogodi cenu),
-> segment 3 (Šta se više gugla) i segment 4 (Pogodi domaći film/seriju)**. Rebus, rezultat, rang lista, admin
-> i deploy stižu redom.
+> segment 3 (Šta se više gugla), segment 4 (Pogodi domaći film/seriju) i segment 5 (Joker pitanje)**.
+> Čuvanje rezultata, rang lista, admin i deploy stižu redom.
 
 ## Šta je gotovo
 
@@ -101,7 +101,7 @@ Skripta napravi fajl u `supabase/seed/`. Otvori ga, nalepi u Supabase → SQL Ed
 Može da se pusti više puta: dan koji već ima pitanja se ne dira. Gotov fajl za prvih 14 dana
 (14–27. novembar 2026) je `supabase/seed/seed-2026-11-14-14d.sql`.
 
-Za sada skripta puni segmente 1, 2, 3 i 4:
+Skripta puni svih pet segmenata (Joker samo za dane koji imaju pitanje u `data/joker.json`):
 
 - **Pesma:** 5 pesama dnevno: po jedna folk, rok, pop i trep, a peta je svaki dan iz drugog žanra. U jednom danu
   se nijedan izvođač ne javlja dvaput (ni kao gost na tuđoj pesmi). Pesme sa oznakom `prioritet` idu pre ostalih,
@@ -111,6 +111,20 @@ Za sada skripta puni segmente 1, 2, 3 i 4:
   (gore ili dole), a na mesto gubitnika dolazi novi izazivač. Svih 9 pojmova u danu je iz različitih tema,
   izazivač pobedi 3 do 5 puta dnevno (da „uvek tapni šampiona” ne bude taktika) i nijedan duel se ne ponavlja
   u celom periodu.
+
+## Joker pitanje
+
+Peti segment je jedno pitanje dnevno za bonus (+50 preko osnovnih 300). Igrač kuca odgovor, ima 30 sekundi, a poredi
+se tolerantno kao kod filmova (kvačice, ćirilica, jedna omaška, priznati oblici iz `alias`). Posle odgovora, tačnog
+ili ne, iskoče fotografija i veliki broj sa natpisom (npr. „92 · body count”).
+
+- `data/joker.json`: jedno pitanje po **datumu**. Dan bez pitanja nema Jokera (igra tada ima četiri segmenta).
+  Polja: `datum`, `pitanje`, `odgovor`, `alias`, `slika`, `otkrice.broj`, `otkrice.natpis`, `izvor`.
+- Pitanje, odgovor i podatak daje vlasnik sajta. `izvor` kaže odakle je podatak; ne upisuj ono što ne može da se proveri.
+- Fotografija ide u `public/joker/` pod imenom koje **ne odaje odgovor** (otisak sadržaja, kao kod kadrova). U browser
+  stiže tek sa ocenom, zajedno sa rešenjem i brojem. Učitavanje odbija ime fajla koje sadrži odgovor.
+- Posle izmene fajla: `npm run seed`. Dan koji već ima Jokera u bazi se ne dira.
+- Tabela `rebuses` iz prve migracije je ostala u bazi, ali se više ne koristi (migracija `0005_joker.sql`).
 
 ## Filmovi i serije
 

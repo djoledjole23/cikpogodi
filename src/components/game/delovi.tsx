@@ -264,7 +264,7 @@ export function Kraj({ stanje }: { stanje: Stanje }) {
           <small> / {max}</small>
         </p>
         <p className="muted small">
-Rebus, čuvanje rezultata i rang lista stižu u sledećim koracima.
+Čuvanje rezultata i rang lista stižu u sledećim koracima.
         </p>
       </div>
 
@@ -316,6 +316,17 @@ function RedRezultata({ prikaz: p }: { prikaz: Prikaz }) {
     return (
       <>
         <strong>{p.naslov}</strong>
+        <span>{p.tacno ? "Pogođeno" : p.neZnam ? "Ne znam" : p.odgovor ? `Ti: ${p.odgovor}` : "bez odgovora"}</span>
+      </>
+    );
+  }
+  if (p.vrsta === "joker") {
+    return (
+      <>
+        <strong>
+          {p.resenje}
+          {p.broj ? ` · ${p.broj}${p.natpis ? ` ${p.natpis}` : ""}` : ""}
+        </strong>
         <span>{p.tacno ? "Pogođeno" : p.neZnam ? "Ne znam" : p.odgovor ? `Ti: ${p.odgovor}` : "bez odgovora"}</span>
       </>
     );

@@ -3,7 +3,7 @@ import {
   FILM_POENI,
   GUGLA_POENI,
   PESMA_PRAGOVI,
-  REBUS_POENI,
+  JOKER_POENI,
 } from "@/config/quiz.config";
 
 /** Pesma: poeni po ukupnom preslušanom vremenu. Netačno ili prekoračen klip = 0. */
@@ -64,4 +64,4 @@ export function procenatZaPrikaz(unos: number, tacna: number): string {
 
 export const poeniGugla = (tacno: boolean) => (tacno ? GUGLA_POENI : 0);
 export const poeniFilm = (tacno: boolean) => (tacno ? FILM_POENI : 0);
-export const poeniRebus = (tacno: boolean) => (tacno ? REBUS_POENI : 0);
+export const poeniJoker = (tacno: boolean) => (tacno ? JOKER_POENI : 0);
