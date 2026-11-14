@@ -1,0 +1,10 @@
+# Podešavanja za Netlify. Next.js dodatak se instalira sam, ovde se samo bira verzija Node-a.
+# Ključeve (NEXT_PUBLIC_SUPABASE_URL, DATABASE_URL i ostale) upiši na Netlify-ju:
+# Site configuration → Environment variables. Oni nikad ne idu u ovaj fajl.
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"

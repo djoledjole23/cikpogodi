@@ -1,9 +1,9 @@
 # Čik Pogodi!
 
-Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript + Supabase, hosting na Vercelu.
+Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript + Supabase, hosting na Netlify-ju.
 
 > Ovo je radna verzija README-a. Gotovi su **osnova, nalozi, svih pet segmenata, čuvanje rezultata i rang lista**.
-> Ostaju admin panel, završno poliranje i deploy (Supabase + Vercel + domen).
+> Ostaju admin panel, završno poliranje i deploy (Supabase + Netlify + domen).
 
 ## Šta je gotovo
 
@@ -72,7 +72,7 @@ npm run build
    `supabase/seed/` → Run (to su pitanja; taj fajl u sebi nosi i migracije `0002`–`0005`, pa one ne moraju posebno).
 3. **Project Settings → API Keys**: prepiši Project URL, „Publishable” i „Secret” ključ u `.env.local`
    (dupli klik na `podesi.bat`), a u **Connect → Transaction pooler** uzmi `DATABASE_URL`.
-   Iste vrednosti kasnije idu i na Vercel.
+   Iste vrednosti kasnije idu i na Netlify.
 4. **Authentication → URL Configuration**
    - Site URL: `https://www.cikpogodi.rs`
    - Redirect URLs: `https://www.cikpogodi.rs/**`, `https://cikpogodi.rs/**`, `http://localhost:3000/**`
@@ -91,6 +91,21 @@ npm run build
     insert into public.admins (user_id)
     select id from auth.users where email = 'TVOJ@MEJL';
     ```
+
+## Netlify (objavljivanje)
+
+Netlify prepoznaje Next.js sam; `netlify.toml` u korenu samo bira Node 22.
+
+1. **netlify.com → Add new site → Import an existing project → GitHub** → izaberi `djoledjole23/cikpogodi`.
+   Build command `npm run build`, publish directory `.next` (Netlify ih sam popuni).
+2. **Site configuration → Environment variables** → dodaj svih pet vrednosti iz `.env.local`, s tim što
+   `NEXT_PUBLIC_SITE_URL` mora da bude prava adresa sajta (npr. `https://www.cikpogodi.rs`), ne `localhost`.
+   Vrednosti koje počinju sa `NEXT_PUBLIC_` se ugrađuju u vreme builda: kad ih promeniš, treba **Trigger deploy**.
+3. **Domain management** → dodaj `cikpogodi.rs` i `www.cikpogodi.rs`, pa kod registratora domena postavi
+   zapise koje Netlify prikaže. HTTPS sertifikat Netlify napravi sam.
+4. Vrati se u **Supabase → Authentication → URL Configuration** i upiši pravu adresu (Site URL + Redirect URLs),
+   inače linkovi iz mejlova vode na pogrešno mesto.
+5. Svaki `git push` na `main` pravi novi deploy.
 
 ## Dnevni sadržaj
 
