@@ -34,7 +34,17 @@ export function SacuvajRezultat({ stanje, naPreskoci }: { stanje: Stanje; naPres
           </p>
         </>
       ) : (
-        <p className="g-obavestenje">Nalozi još nisu povezani, pa rezultat za sada ne može da se sačuva. Možeš da ga pogledaš.</p>
+        <p className="g-obavestenje">
+          Nalozi još nisu povezani na ovom računaru. Popuni <code>.env.local</code> (vidi README, deo „Supabase”) pa
+          ponovo pokreni sajt.
+        </p>
+      )}
+
+      {stanje.nalozi && stanje.probnaBaza && (
+        <p className="g-obavestenje">
+          Baza je privremena (fali <code>DATABASE_URL</code>), pa rezultat ne može da se upiše. Nalog možeš da
+          napraviš, ali igra te i dalje vodi kao gosta.
+        </p>
       )}
 
       <button

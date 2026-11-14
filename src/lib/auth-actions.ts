@@ -5,7 +5,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { SIFRA_MIN } from "@/config/quiz.config";
 import { bezbedanNext } from "@/lib/auth";
-import { getDb } from "@/lib/db";
+import { getDb, privremenaBaza } from "@/lib/db";
 import { prikljuciZavrseneIgre } from "@/lib/game/engine";
 import { jeUuid, KOLACIC_UREDJAJA } from "@/lib/game/identity";
 import { PORUKA_NIJE_PODESENO, supabasePodesen } from "@/lib/supabase/env";
@@ -68,6 +68,7 @@ function porukaGreske(error: AuthError): string {
 
 /** Završene gostujuće igre sa ovog uređaja (današnja i jučerašnja) prelaze na nalog. Greška ovde ne sme da pokvari registraciju. */
 async function sacuvajGostujucuIgru(userId: string) {
+  if (privremenaBaza()) return;
   try {
     const uredjaj = (await cookies()).get(KOLACIC_UREDJAJA)?.value;
     const db = await getDb();

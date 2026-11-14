@@ -2,6 +2,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { cookies } from "next/headers";
 import { getIgrac } from "@/lib/auth";
+import { privremenaBaza } from "@/lib/db";
 import type { Identitet } from "./types";
 
 export const KOLACIC_UREDJAJA = "cp_dev";
@@ -11,7 +12,7 @@ export const jeUuid = (x: unknown): x is string => typeof x === "string" && UUID
 
 /** Samo čita: ko je igrač, ako već ima oznaku uređaja. Za strane koje ne smeju da upisuju kolačiće. */
 export async function procitajIdentitet(): Promise<Identitet | null> {
-  const igrac = await getIgrac();
+  const igrac = privremenaBaza() ? null : await getIgrac();
   const izKolacica = (await cookies()).get(KOLACIC_UREDJAJA)?.value;
   if (!jeUuid(izKolacica)) return igrac ? { userId: igrac.id, deviceId: randomUUID() } : null;
   return { userId: igrac?.id ?? null, deviceId: izKolacica.toLowerCase() };
@@ -23,7 +24,7 @@ export async function procitajIdentitet(): Promise<Identitet | null> {
  * (Dva mesta, da brisanje samo kolačića ili samo localStorage ne donese drugu igru istog dana.)
  */
 export async function obezbediIdentitet(izBrowsera: unknown): Promise<Identitet> {
-  const igrac = await getIgrac();
+  const igrac = privremenaBaza() ? null : await getIgrac();
   const kolacici = await cookies();
   const izKolacica = kolacici.get(KOLACIC_UREDJAJA)?.value;
 

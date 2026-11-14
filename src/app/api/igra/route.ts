@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { MAX_UKUPNO } from "@/config/quiz.config";
-import { getDb } from "@/lib/db";
+import { getDb, privremenaBaza } from "@/lib/db";
 import { GreskaIgre, odgovori, posaljiPitanje, slusanje, stanjeIgre, zapocniIgru } from "@/lib/game/engine";
 import { obezbediIdentitet } from "@/lib/game/identity";
 import { dopuniStanje } from "@/lib/game/lista";
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
   }
 
   // Uz stanje idu i podaci o nalogu i mesto na rang listi (ekran „Sačuvaj rezultat” i ekran rezultata).
-  const dopuni = (stanje: Stanje) => dopuniStanje(db, ident, stanje, supabasePodesen());
+  const dopuni = (stanje: Stanje) => dopuniStanje(db, ident, stanje, supabasePodesen(), privremenaBaza());
 
   try {
     switch (telo.akcija) {

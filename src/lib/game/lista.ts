@@ -67,8 +67,8 @@ export async function mestoNaListi(db: Db, userId: string, datum: string): Promi
 }
 
 /** Dodaje stanju ono što igra sama ne zna: da li je igrač prijavljen, da li nalozi rade i koje je mesto na listi. */
-export async function dopuniStanje(db: Db, ident: Identitet, stanje: Stanje, nalozi: boolean): Promise<Stanje> {
-  const dopunjeno: Stanje = { ...stanje, prijavljen: Boolean(ident.userId), nalozi };
+export async function dopuniStanje(db: Db, ident: Identitet, stanje: Stanje, nalozi: boolean, probnaBaza = false): Promise<Stanje> {
+  const dopunjeno: Stanje = { ...stanje, prijavljen: Boolean(ident.userId), nalozi, probnaBaza };
   if (stanje.status === "zavrseno" && stanje.lista === "counted" && ident.userId) {
     dopunjeno.mesto = await mestoNaListi(db, ident.userId, stanje.datum);
   }

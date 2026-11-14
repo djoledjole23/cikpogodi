@@ -209,6 +209,8 @@ export type Stanje = {
   /** Da li je igrač prijavljen i da li nalozi uopšte rade (Supabase povezan). Dodaje ih API ruta. */
   prijavljen?: boolean;
   nalozi?: boolean;
+  /** Baza je privremena (u memoriji): rezultat ne može da se sačuva. Samo na razvojnom računaru. */
+  probnaBaza?: boolean;
 };
 
 export type OdgovorServera = {

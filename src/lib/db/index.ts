@@ -18,6 +18,14 @@ export type { Db } from "./types";
 type Kes = { db?: Promise<Db | null> };
 const kes = globalThis as unknown as { __cpDb?: Kes };
 
+/**
+ * Da li igra radi na privremenoj bazi u memoriji (nema DATABASE_URL).
+ * Tada nalozi i igra ne mogu da se spoje: u toj bazi nema naloga, pa se igra uvek vodi kao gost.
+ */
+export function privremenaBaza(): boolean {
+  return !process.env.DATABASE_URL;
+}
+
 export function bazaPodesena(): boolean {
   return Boolean(process.env.DATABASE_URL) || lokalnaDozvoljena();
 }

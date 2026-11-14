@@ -64,9 +64,15 @@ npm run build
 
 ## Supabase (jednom)
 
+> Dok `.env.local` ne postoji ili je prazan, nalozi ne rade: na kraju igre ne piše forma za nalog nego poruka
+> da nalozi nisu povezani. Fajl se pravi duplim klikom na `podesi.bat` (otvara ga u Notepad-u).
+
 1. Na supabase.com napravi projekat (region što bliže Srbiji, npr. Frankfurt).
-2. **SQL Editor** → nalepi ceo `supabase/migrations/0001_init.sql` → Run.
-3. **Project Settings → API**: prepiši URL i oba ključa u `.env.local` (kasnije i na Vercel).
+2. **SQL Editor** → nalepi ceo `supabase/migrations/0001_init.sql` → Run. Pa isto tako sve migracije po redu
+   (`0002…`, `0003…`, `0004…`, `0005…`) i na kraju poslednji fajl iz `supabase/seed/` (to su pitanja).
+3. **Project Settings → API Keys**: prepiši Project URL, „Publishable” i „Secret” ključ u `.env.local`
+   (dupli klik na `podesi.bat`), a u **Connect → Transaction pooler** uzmi `DATABASE_URL`.
+   Iste vrednosti kasnije idu i na Vercel.
 4. **Authentication → URL Configuration**
    - Site URL: `https://www.cikpogodi.rs`
    - Redirect URLs: `https://www.cikpogodi.rs/**`, `https://cikpogodi.rs/**`, `http://localhost:3000/**`
