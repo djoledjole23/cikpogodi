@@ -114,6 +114,9 @@ function pregledSegmenata(stavke: RedStavke[]): SegmentStanje[] {
       pitanja: svoje.length,
       odgovoreno: svoje.filter((s) => s.answered).length,
       poeni: svoje.reduce((z, s) => z + (s.points ?? 0), 0),
+      tok: svoje
+        .filter((s) => s.answered)
+        .map((s): 0 | 1 | 2 => ((s.points ?? 0) >= RUKOVAOCI[n].maxPoena ? 2 : (s.points ?? 0) > 0 ? 1 : 0)),
       max: svoje.length * RUKOVAOCI[n].maxPoena,
       bonus: Boolean(k.bonus),
     };

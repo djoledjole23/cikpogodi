@@ -1,22 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { IconCena, IconStikla } from "@/components/icons";
 import { din } from "@/lib/format";
 import type { Ocena, PitanjeCena, PrikazCena } from "@/lib/game/types";
-import { Konfete, Nalepnica } from "./efekti";
+import { sfx } from "@/lib/sound";
+import { Konfete, Nalepnica, Pecat, smanjenoKretanje, useBrojac } from "./efekti";
 
 const NAJVISE_CIFARA = 6;
 
 /** Slika i naziv artikla. Slike su sa Open Food Facts i učitavaju se direktno odatle. */
-function Artikal({ naziv, kolicina, slika, mali = false }: { naziv: string; kolicina: string; slika: string; mali?: boolean }) {
+function Artikal({ naziv, kolicina, slika }: { naziv: string; kolicina: string; slika: string }) {
   // Ako slika ne stigne (Open Food Facts ne radi, link je zastareo), pitanje i dalje može da se igra po nazivu.
   const [bezSlike, setBezSlike] = useState(!slika);
   return (
-    <div className={mali ? "g-artikal mali" : "g-artikal"}>
+    <div className="g-artikal">
       <div className={bezSlike ? "g-artikal-slika prazna" : "g-artikal-slika"}>
         {bezSlike ? (
-          <IconCena size={mali ? 30 : 64} />
+          <IconCena size={64} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element -- spoljna slika, bez Vercel optimizacije (troši kvotu)
           <img
@@ -25,7 +26,7 @@ function Artikal({ naziv, kolicina, slika, mali = false }: { naziv: string; koli
             width={400}
             height={400}
             decoding="async"
-            fetchPriority={mali ? "low" : "high"}
+            fetchPriority="high"
             onError={() => setBezSlike(true)}
           />
         )}
@@ -65,7 +66,9 @@ export function CenaPitanje({
         className="g-unos"
         onSubmit={(e) => {
           e.preventDefault();
-          if (mozeDaPosalje) naPotvrdi(unos);
+          if (!mozeDaPosalje) return;
+          sfx.klik();
+          naPotvrdi(unos);
         }}
       >
         <label htmlFor="g-cena" className="g-unos-natpis">
@@ -100,13 +103,72 @@ export function CenaPitanje({
 
 // ───────────────────────── rezultat pitanja ─────────────────────────
 
+/** Koliko traje napetost: igla klizi po meti, prava cena se „vrti”. */
+const MERENJE_MS = 950;
+/** Meta pokriva od −30% do +30% od prave cene. Dalje od toga igla stoji na ivici. */
+const RASPON = 30;
+
+/**
+ * Meta: sredina je prava cena, crveno polje je ±10% (svi poeni), svetlije polje do ±15% (pola poena).
+ * Igla pokazuje gde je pao igračev unos.
+ */
+function Meta({ unos, prava }: { unos: number; prava: number }) {
+  const odstupanje = ((unos - prava) / prava) * 100;
+  const x = Math.min(100, Math.max(0, ((odstupanje + RASPON) / (2 * RASPON)) * 100));
+  return (
+    <div className="g-meta" aria-hidden="true">
+      <div className="g-meta-put">
+        <span className="g-meta-pola" />
+        <span className="g-meta-pun">10</span>
+        <span className="g-meta-pet levo">5</span>
+        <span className="g-meta-pet desno">5</span>
+        <span className="g-meta-klizac" style={{ "--x": x, animationDuration: `${MERENJE_MS}ms` } as CSSProperties}>
+          <i className="g-meta-igla" />
+        </span>
+      </div>
+      <p className="g-meta-natpisi">
+        <span>manje</span>
+        <span>prava cena</span>
+        <span>više</span>
+      </p>
+    </div>
+  );
+}
+
 /** Jedan pogled: šta si uneo, koliko stvarno košta, koliko si promašio i koliko si poena dobio. */
-export function CenaOcena({ ocena, prikaz: p, slika }: { ocena: Ocena; prikaz: PrikazCena; slika: string }) {
+export function CenaOcena({
+  ocena,
+  prikaz: p,
+  otkriveno,
+  naOtkrij,
+}: {
+  ocena: Ocena;
+  prikaz: PrikazCena;
+  /** Dok nije otkriveno, traje „merenje”: ne vidi se ni presuda ni poeni. */
+  otkriveno: boolean;
+  naOtkrij: () => void;
+}) {
   const nivo = ocena.poeni === ocena.maxPoena ? "pun" : ocena.poeni > 0 ? "pola" : "nula";
+  const prava = useBrojac(p.prava, MERENJE_MS, 0);
+
+  const otkrijRef = useRef(naOtkrij);
+  useEffect(() => {
+    otkrijRef.current = naOtkrij;
+  }, [naOtkrij]);
+  useEffect(() => {
+    const ms = smanjenoKretanje() ? 0 : MERENJE_MS;
+    if (ms) sfx.vrti(ms);
+    const sat = setTimeout(() => otkrijRef.current(), ms);
+    return () => clearTimeout(sat);
+  }, []);
+
   return (
     <>
-      <div className={`g-rez ${nivo}`}>
-        {ocena.poeni > 0 && <Konfete jacina={nivo === "pun" ? 2 : 1} />}
+      <div className={otkriveno ? `g-rez ${nivo}` : "g-rez ceka"}>
+        {otkriveno && ocena.poeni > 0 && <Konfete jacina={nivo === "pun" ? (p.unos === p.prava ? 3 : 2) : 1} />}
+        <p className="g-rez-artikal">
+          {p.naziv} <span>{p.kolicina}</span>
+        </p>
         <div className="g-rez-cene">
           <p>
             <span className="g-rez-natpis">Ti</span>
@@ -114,16 +176,22 @@ export function CenaOcena({ ocena, prikaz: p, slika }: { ocena: Ocena; prikaz: P
           </p>
           <p>
             <span className="g-rez-natpis">Prava cena</span>
-            <strong>{din(p.prava)}</strong>
+            <strong>{din(otkriveno ? p.prava : prava)}</strong>
           </p>
         </div>
-        <div className="g-rez-dno">
+        {p.unos !== null && <Meta unos={p.unos} prava={p.prava} />}
+        <div className={otkriveno ? "g-rez-dno" : "g-rez-dno skriveno"}>
           <span className="g-rez-procenat">{p.unos === null ? "bez odgovora" : p.procenat}</span>
-          <Nalepnica poeni={ocena.poeni} />
+          {otkriveno && (
+            <span className="g-rez-presuda">
+              <Pecat vrsta={p.unos === null ? "vreme" : nivo === "pun" ? "pogodak" : nivo === "pola" ? "blizu" : "promasaj"} />
+              <Nalepnica poeni={ocena.poeni} />
+            </span>
+          )}
         </div>
       </div>
 
-      <p className="g-opseg">
+      <p className={otkriveno ? "g-opseg" : "g-opseg g-nevidljivo"}>
         U radnjama od <strong>{din(p.min)}</strong> do <strong>{din(p.max)}</strong>
         {p.najjeftinije && (
           <>
@@ -133,7 +201,6 @@ export function CenaOcena({ ocena, prikaz: p, slika }: { ocena: Ocena; prikaz: P
         )}
       </p>
 
-      <Artikal naziv={p.naziv} kolicina={p.kolicina} slika={slika} mali />
     </>
   );
 }

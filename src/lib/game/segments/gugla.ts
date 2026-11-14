@@ -28,6 +28,7 @@ function prikaz(s: SnapshotGugla, izbor: "a" | "b" | null): PrikazGugla {
     b: s.b,
     indeksA: s.indeksA,
     indeksB: s.indeksB,
+    puta: Math.round((Math.max(s.indeksA, s.indeksB) / Math.max(1, Math.min(s.indeksA, s.indeksB))) * 10) / 10,
     izbor,
     tacan: s.indeksA > s.indeksB ? "a" : "b",
     period: s.period,

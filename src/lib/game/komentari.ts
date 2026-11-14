@@ -20,8 +20,13 @@ export function komentarCena(ocena: Ocena, p: PrikazCena, seme: number): string 
 
 export function komentarGugla(ocena: Ocena, p: PrikazGugla, seme: number): string {
   if (p.izbor === null) return izaberi(["Vreme! Sledeći put tapni odmah.", "Predugo si se dvoumio."], seme);
-  if (ocena.tacno) return izaberi(["Tako je. Znaš ti šta narod kuca.", "Ajde bre, pa to se zna!", "Pogodak!"], seme);
-  if (Math.min(p.indeksA, p.indeksB) >= 80) return izaberi(["Bilo je tesno, ali ne.", "Za dlaku. Narod je presudio."], seme);
+  const tesno = Math.min(p.indeksA, p.indeksB) >= 70;
+  if (ocena.tacno) {
+    if (tesno) return izaberi(["Bilo je tesno, a ti pogodi!", "Za dlaku, ali tvoja je."], seme);
+    return izaberi(["Tako je. Znaš ti šta narod kuca.", "Ajde bre, pa to se zna!", "Pogodak! Kao da čitaš tuđe pretrage."], seme);
+  }
+  if (tesno) return izaberi(["Bilo je tesno, ali ne.", "Za dlaku. Narod je presudio."], seme);
+  if (p.puta >= 3) return izaberi(["Uh. Nije bilo ni blizu.", "Narod se ne slaže. Nimalo."], seme);
   return izaberi(["A ne. Narod misli drugačije.", "Ni blizu, ali svaka čast na hrabrosti.", "Ovaj put ne."], seme);
 }
 

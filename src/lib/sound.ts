@@ -109,6 +109,57 @@ export const sfx = {
       { frekvencija: 95, trajanje: 0.12, oblik: "square", jacina: 0.05 },
     ]);
   },
+  /** Nešto uleće na ekran (novi pojam, novo pitanje). */
+  vuus() {
+    sviraj([{ frekvencija: 240, klizi: 880, trajanje: 0.16, oblik: "sine", jacina: 0.07 }]);
+  },
+  /** Jedno slovo dok se pojam „kuca”. */
+  kucaj() {
+    sviraj([{ frekvencija: 1500, trajanje: 0.022, oblik: "square", jacina: 0.025 }]);
+  },
+  /** Napetost pred rezultat: sitni tikovi koji ubrzavaju i rastu, ukupno `ms` milisekundi. */
+  vrti(ms = 800) {
+    const tonovi: Ton[] = [];
+    const koraka = Math.max(6, Math.round(ms / 70));
+    for (let i = 0; i < koraka; i++) {
+      // Razmak između tikova se smanjuje ka kraju.
+      const udeo = i / koraka;
+      tonovi.push({
+        frekvencija: 520 + 620 * udeo,
+        od: (ms / 1000) * (1 - Math.pow(1 - udeo, 1.6)),
+        trajanje: 0.035,
+        oblik: "triangle",
+        jacina: 0.05 + 0.04 * udeo,
+      });
+    }
+    sviraj(tonovi);
+  },
+  /** Pečat lupi o rezultat. */
+  pecat() {
+    sviraj([
+      { frekvencija: 110, klizi: 55, trajanje: 0.14, oblik: "sine", jacina: 0.25 },
+      { frekvencija: 320, trajanje: 0.04, oblik: "square", jacina: 0.04 },
+    ]);
+  },
+  /** Odbrojavanje pred segment: 3, 2, 1 pa „kreni”. */
+  odbroj(kreni = false) {
+    if (kreni) {
+      sviraj([
+        { frekvencija: 783.99, trajanje: 0.3, oblik: "triangle", jacina: 0.16 },
+        { frekvencija: 1174.66, od: 0.02, trajanje: 0.34, oblik: "sine", jacina: 0.12 },
+      ]);
+    } else {
+      sviraj([{ frekvencija: 392, trajanje: 0.13, oblik: "triangle", jacina: 0.15 }]);
+    }
+  },
+  /** Zvezdica na kraju segmenta: prva, druga, treća (svaka viša). */
+  zvezda(redni = 1) {
+    const f = [659.25, 830.61, 1046.5][Math.min(Math.max(redni, 1), 3) - 1];
+    sviraj([
+      { frekvencija: f, trajanje: 0.2, oblik: "triangle", jacina: 0.15 },
+      { frekvencija: f * 2, od: 0.03, trajanje: 0.26, oblik: "sine", jacina: 0.07 },
+    ]);
+  },
   /** Kraj segmenta. */
   fanfare() {
     const note = [523.25, 659.25, 783.99, 1046.5];
@@ -127,6 +178,10 @@ export const haptika = {
   },
   netacno() {
     if (mozeVibracija()) navigator.vibrate?.([40, 60, 40]);
+  },
+  /** Kratak dodir (tap na karticu, odbrojavanje). */
+  tap() {
+    if (mozeVibracija()) navigator.vibrate?.(12);
   },
 };
 

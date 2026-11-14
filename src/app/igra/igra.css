@@ -3,6 +3,9 @@
 .g-shell {
   gap: 0;
   padding-bottom: 20px;
+  /* Konfete i kartice koje uleću sa strane ne smeju da rašire stranu (ni na tren). */
+  overflow: hidden;
+  overflow: clip;
 }
 
 .g-main {
@@ -23,19 +26,75 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  line-height: 1.15;
+  justify-content: center;
+  gap: 7px;
 }
 
 .g-gde-seg {
   font-size: 13px;
+  line-height: 1.1;
   font-weight: 800;
   color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.g-gde-pit {
+/* Tačkice: jedno pitanje, jedna tačkica. Puna crvena = svi poeni, pola = deo poena, prazna = ništa. */
+.g-tacke {
+  display: flex;
+  gap: 4px;
+}
+
+.g-tacka {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--line);
+}
+
+.g-tacka.sada {
+  background: var(--cream);
+}
+
+.g-tacka.pun {
+  background: var(--red);
+}
+
+.g-tacka.pola {
+  background: linear-gradient(90deg, var(--red) 50%, var(--line) 50%);
+}
+
+.g-tacka.nula {
+  background: transparent;
+  box-shadow: inset 0 0 0 2.5px var(--line);
+}
+
+.g-zbir-omot {
+  position: relative;
+  flex: none;
+}
+
+/* Niz pogodaka: značka zakačena za zbir. */
+.g-niz {
+  position: absolute;
+  z-index: 1;
+  left: -12px;
+  top: -9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  padding: 3px 7px 2px 4px;
+  border: 2.5px solid var(--bg);
+  border-radius: 12px;
+  background: var(--red);
+  color: var(--ink);
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 15px;
+  line-height: 1;
   font-weight: 800;
+  transform: rotate(-8deg);
 }
 
 .g-zbir {
@@ -262,24 +321,6 @@
   white-space: nowrap;
 }
 
-.g-artikal.mali {
-  flex-direction: row;
-  align-items: center;
-  gap: 12px;
-}
-
-.g-artikal.mali .g-artikal-slika {
-  flex: none;
-  width: 64px;
-  height: 64px;
-  padding: 5px;
-  border-radius: 14px;
-}
-
-.g-artikal.mali .g-artikal-naziv {
-  font-size: 18px;
-}
-
 .g-unos {
   display: flex;
   flex-direction: column;
@@ -457,21 +498,6 @@
   background: var(--line);
   color: var(--muted);
   transform: none;
-}
-
-.g-niz {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border: 2.5px solid var(--red);
-  border-radius: 14px;
-  color: var(--red);
-  font-family: var(--font-display);
-  font-size: 18px;
-  line-height: 1;
-  font-weight: 800;
 }
 
 .g-opseg {
@@ -678,67 +704,609 @@
   }
 }
 
-/* ───── pitanje: šta se više gugla ───── */
+/* ───── tajmer: poslednje sekunde ───── */
 
-.g-gugla {
+@media (prefers-reduced-motion: no-preference) {
+  .g-tajmer.kriticno .g-tajmer-broj {
+    animation: g-otkucaj 1s ease-in-out infinite;
+  }
+}
+
+@keyframes g-otkucaj {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(1.45);
+  }
+  30% {
+    transform: scale(1);
+  }
+}
+
+/* ───── odbrojavanje pred segment ───── */
+
+.g-odbroj {
   flex: 1;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.g-gugla-izbor {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+.g-odbroj-broj {
+  font-family: var(--font-display);
+  font-size: 200px;
+  line-height: 1;
+  font-weight: 800;
+  color: var(--cream);
+  text-shadow: 8px 8px 0 var(--red);
+  font-variant-numeric: tabular-nums;
+  animation: g-odbroj 480ms cubic-bezier(0.2, 1.5, 0.4, 1) both;
 }
 
-.g-pojam {
-  min-height: clamp(180px, 34dvh, 260px);
-  margin-bottom: 6px;
-  padding: 16px 10px;
-  border: 3px solid var(--cream);
-  border-radius: var(--r-lg);
+.g-odbroj-broj.cik {
+  padding: 4px 28px 0;
+  border-radius: 28px;
+  background: var(--red);
+  color: var(--ink);
+  font-size: 96px;
+  text-shadow: none;
+  transform: rotate(-5deg);
+  animation-name: g-odbroj-cik;
+}
+
+@keyframes g-odbroj {
+  from {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes g-odbroj-cik {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg) scale(0.3);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-5deg) scale(1);
+  }
+}
+
+/* ───── pečat ───── */
+
+.g-pecat {
+  display: inline-block;
+  padding: 5px 10px 2px;
+  border: 3px solid currentColor;
+  border-radius: 10px;
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: rotate(-7deg);
+}
+
+.g-pecat.pogodak,
+.g-pecat.blizu {
+  color: var(--red);
+  background: var(--cream);
+}
+
+.g-pecat.promasaj,
+.g-pecat.vreme {
+  color: var(--cream);
+  background: var(--bg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .g-pecat {
+    animation: g-pecat 320ms cubic-bezier(0.3, 1.5, 0.5, 1) both;
+  }
+}
+
+@keyframes g-pecat {
+  from {
+    opacity: 0;
+    transform: rotate(-7deg) scale(2.6);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-7deg) scale(1);
+  }
+}
+
+/* ───── rezultat cene: meta sa iglom ───── */
+
+.g-rez.ceka {
   background: var(--surface);
   color: var(--cream);
-  box-shadow: 0 6px 0 var(--cream);
-  font-family: var(--font-display);
-  font-size: 23px;
-  line-height: 1.12;
+  border: 3px solid var(--line);
+}
+
+.g-rez.pun,
+.g-rez.pola {
+  border: 3px solid var(--cream);
+}
+
+.g-rez-dno.skriveno {
+  visibility: hidden;
+}
+
+.g-rez-presuda {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.g-rez-dno {
+  min-height: 56px;
+  flex-wrap: wrap;
+}
+
+.g-rez-presuda .g-nalepnica {
+  font-size: 28px;
+}
+
+/* U ovom redu su i procenat i pečat, pa nalepnica nosi samo broj. */
+.g-rez-presuda .g-nalepnica small {
+  display: none;
+}
+
+.g-rez-artikal {
+  font-size: 15px;
+  line-height: 1.2;
   font-weight: 800;
-  text-align: center;
-  text-wrap: balance;
-  hyphens: manual;
-  overflow-wrap: anywhere;
-  cursor: pointer;
-  transition:
-    transform 80ms ease-out,
-    box-shadow 80ms ease-out;
+  opacity: 0.8;
 }
 
-.g-pojam:active,
-.g-pojam.tapnut {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 var(--cream);
+.g-rez-artikal span {
+  white-space: nowrap;
 }
 
-.g-pojam.tapnut {
+.g-rez-presuda .g-pecat {
+  font-size: 19px;
+}
+
+/* Komentar uz cenu uvek drži mesto za dva reda, da se rezultat ne pomera kad stigne duža rečenica. */
+.g-ocena > .g-komentar {
+  min-height: 2.24em;
+  display: flex;
+  align-items: flex-end;
+}
+
+.g-rez.pun .g-pecat,
+.g-rez.pola .g-pecat {
+  background: transparent;
+}
+
+.g-rez.nula .g-pecat {
+  background: transparent;
+  color: var(--muted);
+}
+
+.g-nevidljivo {
+  visibility: hidden;
+}
+
+.g-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  /* Klizač igle je širok koliko i meta, pa dok klizi ne sme da raširi stranu. */
+  margin: 0 -6px;
+  padding: 0 6px;
+  overflow: hidden;
+}
+
+.g-meta-put {
+  position: relative;
+  height: 30px;
+  margin: 8px 0;
+  border-radius: 10px;
+  background: color-mix(in srgb, currentColor 13%, transparent);
+}
+
+.g-meta-pola,
+.g-meta-pun,
+.g-meta-pet {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+/* ±15% od prave cene: pola poena */
+.g-meta-pola {
+  left: 25%;
+  right: 25%;
+  background: color-mix(in srgb, var(--red) 38%, transparent);
+}
+
+/* ±10%: svi poeni */
+.g-meta-pun {
+  left: 33.333%;
+  right: 33.333%;
   background: var(--red);
   color: var(--ink);
 }
 
-.g-pojam[disabled] {
-  opacity: 0.55;
+.g-meta-pun,
+.g-meta-pet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.g-meta-pet {
+  width: 8.333%;
+  font-size: 13px;
+}
+
+.g-meta-pet.levo {
+  left: 25%;
+}
+
+.g-meta-pet.desno {
+  right: 25%;
+}
+
+.g-meta-klizac {
+  position: absolute;
+  inset: 0;
+  transform: translateX(calc(var(--x) * 1%));
+  pointer-events: none;
+}
+
+.g-meta-igla {
+  position: absolute;
+  left: -4px;
+  top: -8px;
+  bottom: -8px;
+  width: 8px;
+  border-radius: 4px;
+  background: currentColor;
+  box-shadow: 0 0 0 2.5px var(--surface);
+}
+
+.g-rez.pun .g-meta-igla,
+.g-rez.pola .g-meta-igla {
+  box-shadow: 0 0 0 2.5px var(--cream);
+}
+
+.g-meta-natpisi {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  line-height: 1.1;
+  font-weight: 800;
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .g-meta-klizac {
+    animation: g-igla cubic-bezier(0.3, 0, 0.2, 1) both;
+  }
+
+  .g-komentar.stigao {
+    animation: g-lupi-tekst 300ms cubic-bezier(0.3, 1.5, 0.5, 1);
+  }
+}
+
+/* Igla krene sleva, malo prebaci pa se smiri: tih par trenutaka se ne zna gde će stati. */
+@keyframes g-igla {
+  0% {
+    transform: translateX(0%);
+  }
+  62% {
+    transform: translateX(calc(var(--x) * 1% + 9%));
+  }
+  82% {
+    transform: translateX(calc(var(--x) * 1% - 4%));
+  }
+  100% {
+    transform: translateX(calc(var(--x) * 1%));
+  }
+}
+
+@keyframes g-lupi-tekst {
+  from {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ───── kraj segmenta: zvezdice ───── */
+
+.g-kraj-seg-zvezde {
+  position: relative;
+  align-self: flex-start;
+}
+
+.g-zvezde {
+  display: flex;
+  gap: 6px;
+}
+
+.g-zvezda {
+  display: flex;
+  color: var(--line);
+}
+
+.g-zvezda:nth-child(2) {
+  transform: translateY(-8px);
+}
+
+.g-zvezda.upaljena {
+  color: var(--red);
+}
+
+.g-zvezda.upaljena svg {
+  fill: var(--red);
+  stroke: var(--cream);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .g-zvezda.upaljena svg {
+    animation: g-zvezda 420ms cubic-bezier(0.3, 1.8, 0.5, 1);
+  }
+}
+
+@keyframes g-zvezda {
+  from {
+    transform: scale(0.2) rotate(-40deg);
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ───── šta se više gugla: duel u kome pobednik ostaje ───── */
+
+.g-duel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.g-duel-vrh {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.g-duel-naslov {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+.g-duel-arena {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: clamp(244px, 43dvh, 320px);
+  margin-bottom: 6px;
+}
+
+/* Kartica izgleda kao polje za pretragu: lupa, pojam koji se „kuca” i traka koja meri pretrage. */
+.g-kartica {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 12px 16px 12px;
+  border: 0;
+  border-radius: var(--r-lg);
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 0 6px 0 var(--red);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 90ms ease-out,
+    box-shadow 90ms ease-out,
+    background-color 200ms ease-out,
+    color 200ms ease-out;
+}
+
+.g-kartica.a {
+  transform: rotate(-0.8deg);
+}
+
+.g-kartica.b {
+  transform: rotate(0.7deg);
+}
+
+.g-kartica:active,
+.g-kartica.izabran {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--red);
+}
+
+.g-kartica.izabran {
+  outline: 4px solid var(--red);
+  outline-offset: -4px;
+}
+
+.g-kartica[aria-disabled="true"] {
   cursor: default;
 }
 
-.g-ili {
+.g-kartica-vrh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+  color: var(--ink-soft);
+}
+
+.g-kartica-oznake {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.g-oznaka {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px 3px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  line-height: 1.1;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.g-oznaka.brani {
+  box-shadow: inset 0 0 0 2px var(--ink-soft);
+  color: var(--ink-soft);
+}
+
+.g-oznaka.izbor {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.g-oznaka.kruna {
+  background: var(--red);
+  color: var(--ink);
+}
+
+.g-kartica-naziv {
+  font-family: var(--font-display);
+  font-size: clamp(23px, 4.3dvh, 31px);
+  line-height: 1.05;
+  font-weight: 800;
+  hyphens: manual;
+  overflow-wrap: anywhere;
+}
+
+.g-kursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  margin-left: 3px;
+  border-radius: 2px;
+  background: var(--red);
+  vertical-align: -0.08em;
+}
+
+.g-kartica-mera {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.g-kartica-put {
+  flex: 1;
+  height: 18px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  overflow: hidden;
+}
+
+.g-kartica-put i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 9px;
+  background: var(--ink-soft);
+  transform-origin: left center;
+  transform: scaleX(var(--do, 0));
+}
+
+.g-kartica-broj {
+  flex: none;
+  min-width: 40px;
+  text-align: right;
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pobednik: crvena traka i kruna. Gubitnik: kartica potamni. */
+.g-kartica.pobednik .g-kartica-put i {
+  background: var(--red);
+}
+
+.g-kartica.gubitnik {
+  background: var(--surface);
+  color: var(--muted);
+  box-shadow: 0 6px 0 var(--line);
+}
+
+.g-kartica.gubitnik .g-kartica-vrh {
+  color: var(--muted);
+}
+
+.g-kartica.gubitnik .g-kartica-put {
+  background: var(--line);
+}
+
+.g-kartica.gubitnik .g-kartica-put i {
+  background: var(--muted);
+}
+
+.g-kartica.gubitnik .g-oznaka.izbor {
+  background: var(--muted);
+  color: var(--ink);
+}
+
+.g-kartica.gubitnik.izabran {
+  outline-color: var(--line);
+}
+
+.g-duel-sredina {
   position: absolute;
-  left: 50%;
-  top: calc(50% - 3px);
-  width: 44px;
-  height: 44px;
-  margin: -22px 0 0 -22px;
-  border: 3px solid var(--ink);
-  border-radius: 22px;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.g-ili {
+  width: 46px;
+  height: 46px;
+  border: 3px solid var(--bg);
+  border-radius: 23px;
   background: var(--red);
   color: var(--ink);
   font-family: var(--font-display);
@@ -749,95 +1317,25 @@
   align-items: center;
   justify-content: center;
   transform: rotate(-6deg);
-  pointer-events: none;
 }
 
-/* ───── rezultat: dve trake ───── */
-
-.g-trake {
-  position: relative;
-  padding: 16px 16px 14px;
-  border-radius: var(--r-lg);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.g-ili.sklonjen {
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity 150ms ease-out,
+    transform 150ms ease-out;
 }
 
-.g-trake.pogodak {
-  background: var(--cream);
-  color: var(--ink);
-}
-
-.g-trake.promasaj {
-  background: var(--surface);
-  color: var(--cream);
-  border: 3px solid var(--line);
-}
-
-.g-traka {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.g-traka-naziv {
+.g-duel-presuda {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 4px 8px;
-  line-height: 1.15;
+  gap: 12px;
 }
 
-.g-traka-naziv strong {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 800;
-}
-
-.g-traka-izbor {
-  padding: 3px 8px 2px;
-  border: 2px solid currentColor;
-  border-radius: 9px;
-  font-size: 12.5px;
-  line-height: 1.1;
-  font-weight: 800;
-}
-
-.g-traka-red {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.g-traka-put {
-  flex: 1;
-  height: 28px;
-  border-radius: 10px;
-  background: color-mix(in srgb, currentColor 14%, transparent);
-  overflow: hidden;
-}
-
-.g-traka-put span {
-  display: block;
-  width: var(--do);
-  height: 100%;
-  border-radius: 10px;
-  background: color-mix(in srgb, currentColor 45%, transparent);
-}
-
-.g-traka.pobednik .g-traka-put span {
-  background: var(--red);
-}
-
-.g-traka-broj {
-  flex: none;
-  width: 44px;
-  text-align: right;
-  font-family: var(--font-display);
-  font-size: 26px;
-  line-height: 1;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
+.g-duel-presuda .g-pecat.promasaj,
+.g-duel-presuda .g-pecat.vreme {
+  color: var(--muted);
 }
 
 .g-nalepnica.nula {
@@ -846,27 +1344,200 @@
   transform: none;
 }
 
-.g-trake.pogodak .g-nalepnica.nula {
-  background: color-mix(in srgb, var(--ink) 14%, transparent);
-  color: var(--ink-soft);
+.g-duel-ishod {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.g-duel-komentar {
+  font-family: var(--font-display);
+  font-size: 23px;
+  line-height: 1.12;
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+/* „Dalje” koje se samo puni: kad se napuni, igra ide dalje i bez tapa. */
+.g-samo-dalje {
+  overflow: hidden;
+}
+
+.g-samo-dalje > span,
+.g-samo-dalje > svg {
+  position: relative;
+}
+
+.g-samo-dalje-traka {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--ink) 16%, transparent);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: g-puni-dugme linear forwards;
+}
+
+@keyframes g-puni-dugme {
+  to {
+    transform: scaleX(1);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .g-traka-put span {
-    animation: g-puni 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  /* Novi izazivač uleće sa strane. */
+  .g-kartica {
+    animation: g-uleti 380ms cubic-bezier(0.2, 1.25, 0.4, 1) backwards;
   }
 
-  .g-trake.promasaj {
+  .g-kartica.b {
+    animation-name: g-uleti-b;
+  }
+
+  .g-kartica.meri .g-kartica-put i {
+    transition: transform 850ms cubic-bezier(0.25, 0.6, 0.2, 1);
+  }
+
+  .g-kursor {
+    animation: g-trepni 900ms steps(1) infinite;
+  }
+
+  .g-oznaka.kruna {
+    animation: g-lupi-tekst 320ms cubic-bezier(0.3, 1.8, 0.5, 1);
+  }
+
+  .g-oznaka.kruna svg {
+    animation: g-kruna 700ms cubic-bezier(0.3, 1.8, 0.5, 1);
+  }
+
+  .g-kartica.gubitnik.izabran {
     animation: g-tresi 420ms ease-in-out;
   }
 
-  .g-trake.pogodak .g-nalepnica {
-    animation: g-lupi 380ms cubic-bezier(0.3, 1.7, 0.5, 1) 60ms backwards;
+  .g-kartica.ispada {
+    animation: g-ispadni 320ms cubic-bezier(0.5, 0, 0.9, 0.5) forwards;
+  }
+
+  .g-duel-ishod {
+    animation: g-udji 200ms ease-out;
   }
 }
 
-@keyframes g-puni {
+@keyframes g-uleti {
   from {
-    width: 0;
+    opacity: 0;
+    transform: translateX(-70%) rotate(-7deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(-0.8deg);
+  }
+}
+
+@keyframes g-uleti-b {
+  from {
+    opacity: 0;
+    transform: translateX(70%) rotate(7deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(0.7deg);
+  }
+}
+
+@keyframes g-ispadni {
+  to {
+    opacity: 0;
+    transform: translateY(70px) rotate(9deg) scale(0.9);
+  }
+}
+
+@keyframes g-trepni {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes g-kruna {
+  0% {
+    transform: translateY(-14px) rotate(-25deg) scale(0.4);
+  }
+  60% {
+    transform: translateY(0) rotate(8deg) scale(1.25);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+/* Nizak ekran (mali telefon sa otvorenom trakom browsera): sve malo zbijenije. */
+@media (max-height: 600px) {
+  .g-duel-naslov {
+    font-size: 19px;
+  }
+
+  .g-kartica {
+    padding: 8px 14px 9px;
+  }
+
+  .g-kartica-put {
+    height: 14px;
+  }
+
+  .g-kartica-broj {
+    font-size: 22px;
+  }
+
+  .g-duel-komentar {
+    font-size: 20px;
+  }
+
+  .g-duel-izvor {
+    display: none;
+  }
+
+  .g-duel-arena {
+    height: 236px;
+  }
+
+  .g-ocena {
+    gap: 10px;
+  }
+
+  .g-ocena > .g-komentar {
+    font-size: 22px;
+  }
+
+  .g-rez {
+    padding: 12px 14px 10px;
+    gap: 8px;
+  }
+
+  .g-rez-cene strong {
+    font-size: 30px;
+  }
+
+  .g-rez-dno {
+    min-height: 48px;
+    padding-top: 8px;
+  }
+
+  .g-ocena .btn-lg {
+    min-height: 56px;
+    font-size: 22px;
+  }
+
+  .g-opseg {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .g-duel .btn-lg {
+    min-height: 56px;
+    font-size: 22px;
+  }
+
+  .g-main {
+    gap: 10px;
   }
 }

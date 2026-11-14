@@ -4,7 +4,7 @@ import { PGlite } from "@electric-sql/pglite";
 import { beforeAll, describe, expect, it } from "vitest";
 import { ucitajProizvode } from "@/lib/content/products";
 import { planCena, planGugla, seedSql } from "@/lib/content/seed";
-import { ucitajTrendove } from "@/lib/content/trends";
+import { ferDuel, napraviPar, odnos, ucitajTrendove } from "@/lib/content/trends";
 import { omotajPglite, SUPABASE_ZAMENA } from "@/lib/db/pglite";
 import type { Db } from "@/lib/db/types";
 import { GreskaIgre, odgovori, posaljiPitanje, stanjeIgre, zapocniIgru } from "@/lib/game/engine";
@@ -21,7 +21,7 @@ const ucitani = ucitajProizvode(JSON.parse(readFileSync(join(koren, "data/produc
 const trendovi = ucitajTrendove(JSON.parse(readFileSync(join(koren, "data/trends.json"), "utf8")));
 const POCETAK = "2026-11-14";
 const SEED = () =>
-  seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, parovi: trendovi.parovi, pocetak: POCETAK, dana: 14 });
+  seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, trendovi, pocetak: POCETAK, dana: 14 });
 /** Dan sa samo jednim segmentom (gugla), sa poznatim indeksima. */
 const GUGLA_DAN = "2030-02-02";
 /** Poseban dan sa cenama zgodnim za granice: 200, 200, 100, 250 dinara. */
@@ -81,6 +81,20 @@ describe("products.json i seed", () => {
   it("odbija fajl u pogrešnom obliku", () => {
     expect(() => ucitajProizvode({})).toThrow();
     expect(() => ucitajProizvode({ proizvodi: [], datum_cenovnika: "juče" })).toThrow();
+  });
+
+  it("sopstvena fotografija (public/artikli/<barkod>) ima prednost i vraća u igru artikal bez slike", () => {
+    const json = JSON.parse(readFileSync(join(koren, "data/products.json"), "utf8"));
+    const bezSlike = (json.proizvodi as { barkod: string; slika_url?: string }[]).find((x) => !x.slika_url)!;
+    const saSlikom = ucitani.proizvodi[0];
+    const slike = new Map([
+      [bezSlike.barkod, `/artikli/${bezSlike.barkod}.jpg`],
+      [saSlikom.barkod, `/artikli/${saSlikom.barkod}.webp`],
+    ]);
+    const novi = ucitajProizvode(json, slike);
+    expect(novi.proizvodi.length).toBe(ucitani.proizvodi.length + 1);
+    expect(novi.proizvodi.find((x) => x.barkod === bezSlike.barkod)!.slika).toBe(`/artikli/${bezSlike.barkod}.jpg`);
+    expect(novi.proizvodi.find((x) => x.barkod === saSlikom.barkod)!.slika).toBe(`/artikli/${saSlikom.barkod}.webp`);
   });
 
   it("14 dana po 10 različitih artikala, bez istog naziva dvaput u danu", () => {
@@ -356,50 +370,112 @@ describe("jedna igra dnevno", () => {
   });
 });
 
-describe("trends.json i parovi", () => {
-  it("par se pravi samo kad je razlika jasna, a brojevi dovoljno veliki", () => {
-    expect(trendovi.parovi.length).toBe(169);
-    for (const p of trendovi.parovi) {
-      expect(Math.max(p.indeksA, p.indeksB)).toBe(100);
-      expect(Math.min(p.indeksA, p.indeksB)).toBeGreaterThanOrEqual(10);
-      expect(Math.min(p.indeksA, p.indeksB)).toBeLessThanOrEqual(90);
-      expect(p.a).not.toBe(p.b);
+describe("trends.json: jedna skala za sve teme", () => {
+  const pojam = (naziv: string) => trendovi.pojmovi.find((p) => p.naziv === naziv)!;
+
+  it("mostovi svode sve grupe na istu skalu, a merenja se slažu", () => {
+    expect(trendovi.pojmovi.length).toBe(105);
+    expect(new Set(trendovi.pojmovi.map((p) => p.tema)).size).toBe(22);
+    // dva merenja istog odnosa (preko različitih mostova) ne razlikuju se više od 3%
+    expect(trendovi.najveceOdstupanje).toBeLessThan(0.03);
+    // unutar grupe odnos ostaje onakav kakav je izmeren: burek 53,27 naspram ćevapa 31,17
+    expect(pojam("Ćevapi").jacina / pojam("Burek").jacina).toBeCloseTo(31.17 / 53.27, 6);
+    // preko mosta: u istom poređenju novi sad je imao 87,6, a burek 1,06 (premalo da se koristi),
+    // pa odnos ide preko drugih mostova i mora da ispadne istog reda veličine
+    const ns = pojam("Novi Sad").jacina / pojam("Burek").jacina;
+    expect(ns).toBeGreaterThan(55);
+    expect(ns).toBeLessThan(95);
+    // most „novi sad 62,21 : vremenska prognoza 61,46” → praktično isto
+    expect(odnos(pojam("Novi Sad"), pojam("Vremenska prognoza"))).toBeGreaterThan(0.95);
+  });
+
+  it("premalo pretraga → pojam ne ulazi u igru", () => {
+    for (const naziv of ["Aleksandar Mitrović", "Dušan Tadić", "Vidovdan", "Slagalica", "Ljubičica"]) {
+      expect(pojam(naziv)).toBeUndefined();
+      expect(trendovi.izbaceni.some((x) => x.naziv === naziv)).toBe(true);
     }
-    // tačan odgovor nije uvek na istoj strani
-    const levo = trendovi.parovi.filter((p) => p.indeksA > p.indeksB).length;
-    expect(levo).toBeGreaterThan(60);
-    expect(levo).toBeLessThan(110);
-    // poznat primer iz fajla: burek 53,27 naspram ćevapa 31,17 → 100 : 59
-    const burek = trendovi.parovi.find((p) => [p.a, p.b].includes("Burek") && [p.a, p.b].includes("Ćevapi"))!;
-    expect([burek.indeksA, burek.indeksB].sort((x, y) => x - y)).toEqual([59, 100]);
-    // premalo pretraga → nema para
-    expect(trendovi.parovi.some((p) => [p.a, p.b].includes("Aleksandar Mitrović"))).toBe(false);
-    // praktično nerešeno (paradajz 38,83 / paprika 39,17) → nema para
-    expect(trendovi.parovi.some((p) => [p.a, p.b].includes("Paradajz") && [p.a, p.b].includes("Paprika"))).toBe(false);
+  });
+
+  it("duel je fer samo kad je pobednik jasan, ali ne preočigledan", () => {
+    expect(ferDuel(pojam("Novi Sad"), pojam("Vremenska prognoza"))).toBe(false); // praktično nerešeno
+    expect(ferDuel(pojam("Paradajz"), pojam("Paprika"))).toBe(false); // 38,83 naspram 39,17
+    expect(ferDuel(pojam("Novi Sad"), pojam("Tulumbe"))).toBe(false); // preočigledno
+    expect(ferDuel(pojam("Burek"), pojam("Burek"))).toBe(false);
+    expect(ferDuel(pojam("Burek"), pojam("Ćevapi"))).toBe(true); // ista tema
+    expect(ferDuel(pojam("Čaj"), pojam("Zlatibor"))).toBe(true); // različite teme
+    // mali brojevi nose veliku grešku zaokruživanja, pa im treba veća razlika
+    const mali = { ...pojam("Burek"), prosekUGrupi: 2.5, nesigurnost: 0.2, upit: "x" };
+    const maloVeci = { ...mali, jacina: mali.jacina * 1.4, upit: "y" };
+    expect(odnos(mali, maloVeci)).toBeLessThan(0.8);
+    expect(ferDuel(mali, maloVeci)).toBe(false);
+  });
+
+  it("u duelu jači pojam ima 100, a slabiji srazmerno manje", () => {
+    const par = napraviPar(pojam("Ćevapi"), pojam("Burek"), "p", "2026-11-14");
+    expect(par).toMatchObject({ a: "Ćevapi", b: "Burek", indeksA: 59, indeksB: 100 });
   });
 
   it("odbija fajl u pogrešnom obliku", () => {
     expect(() => ucitajTrendove({})).toThrow();
     expect(() => ucitajTrendove({ period: "x", datum_preuzimanja: "2026-11-13", grupe: [{ tema: "T", pojmovi: [{ naziv: "A" }] }] })).toThrow();
+    // tema koju nijedan most ne povezuje sa ostalima ne može da se poredi, pa ispada
+    const bezMosta = ucitajTrendove({
+      period: "x",
+      datum_preuzimanja: "2026-11-13",
+      mostovi: [],
+      grupe: [
+        { tema: "A", pojmovi: [{ naziv: "a1", upit: "a1", prosek: 50 }] },
+        { tema: "B", pojmovi: [{ naziv: "b1", upit: "b1", prosek: 50 }] },
+      ],
+    });
+    expect(bezMosta.pojmovi.map((p) => p.naziv)).toEqual(["a1"]);
   });
 
-  it("14 dana po 8 parova: svaki iz druge teme, nijedan par se ne ponavlja", () => {
-    const plan = planGugla(trendovi.parovi, POCETAK, 14);
+  it("14 dana po 8 duela: pobednik ostaje na svom mestu, izazivač dolazi na mesto gubitnika", () => {
+    const plan = planGugla(trendovi, POCETAK, 14);
     expect(plan.length).toBe(14);
     const svi = new Set<string>();
+    const tema = (naziv: string) => pojam(naziv).tema;
+    let pobedeIzazivaca = 0;
+
     for (const dan of plan) {
-      expect(dan.parovi.length).toBe(8);
-      expect(new Set(dan.parovi.map((p) => p.tema)).size).toBe(8);
-      const pojmovi = dan.parovi.flatMap((p) => [p.a, p.b]);
-      expect(new Set(pojmovi).size).toBe(16);
-      for (const p of dan.parovi) {
+      expect(dan.dueli.length).toBe(8);
+      // 9 pojmova u danu, svaki iz druge teme
+      const nazivi = new Set(dan.dueli.flatMap((p) => [p.a, p.b]));
+      expect(nazivi.size).toBe(9);
+      expect(new Set([...nazivi].map(tema)).size).toBe(9);
+
+      let pobede = 0;
+      dan.dueli.forEach((p, i) => {
+        expect(Math.max(p.indeksA, p.indeksB)).toBe(100);
+        expect(Math.min(p.indeksA, p.indeksB)).toBeGreaterThanOrEqual(20);
+        expect(Math.min(p.indeksA, p.indeksB)).toBeLessThanOrEqual(80);
         const k = [p.upitA, p.upitB].sort().join("|");
         expect(svi.has(k)).toBe(false);
         svi.add(k);
-      }
+        if (i === 0) return;
+        // pobednik prethodnog duela stoji na istom mestu (gore ili dole), drugi pojam je nov
+        const pre = dan.dueli[i - 1];
+        const gorePobedio = pre.indeksA > pre.indeksB;
+        if (gorePobedio) {
+          expect(p.a).toBe(pre.a);
+          expect(p.b).not.toBe(pre.b);
+          if (p.indeksB > p.indeksA) pobede++;
+        } else {
+          expect(p.b).toBe(pre.b);
+          expect(p.a).not.toBe(pre.a);
+          if (p.indeksA > p.indeksB) pobede++;
+        }
+      });
+      // izazivač ne gubi uvek: „uvek tapni šampiona” ne sme da bude taktika
+      expect(pobede).toBeGreaterThanOrEqual(2);
+      expect(pobede).toBeLessThanOrEqual(5);
+      pobedeIzazivaca += pobede;
     }
     expect(svi.size).toBe(112);
-    expect(planGugla(trendovi.parovi, POCETAK, 14)).toEqual(plan); // isti raspored pri svakom pokretanju
+    expect(pobedeIzazivaca / (14 * 7)).toBeGreaterThan(0.35);
+    expect(pobedeIzazivaca / (14 * 7)).toBeLessThan(0.65);
+    expect(planGugla(trendovi, POCETAK, 14)).toEqual(plan); // isti raspored pri svakom pokretanju
   });
 });
 
@@ -419,7 +495,7 @@ describe("segment 3: šta se više gugla", () => {
     let s = await posaljiPitanje(db, ja, GUGLA_DAN);
     const a = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" } });
     expect(a.ocena).toMatchObject({ tacno: true, poeni: 5, maxPoena: 5 });
-    expect(a.ocena.prikaz).toEqual({ vrsta: "gugla", a: "Levo", b: "Desno", indeksA: 100, indeksB: 60, izbor: "a", tacan: "a", period: "test" });
+    expect(a.ocena.prikaz).toEqual({ vrsta: "gugla", a: "Levo", b: "Desno", indeksA: 100, indeksB: 60, puta: 1.7, izbor: "a", tacan: "a", period: "test" });
 
     s = await posaljiPitanje(db, ja, GUGLA_DAN);
     const b = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" } });
@@ -430,7 +506,7 @@ describe("segment 3: šta se više gugla", () => {
     const c = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" }, istek: true });
     expect(c.ocena).toMatchObject({ tacno: false, poeni: 0, istek: true });
     expect(c.ocena.prikaz).toMatchObject({ izbor: null, tacan: "a" });
-    expect(c.krajSegmenta).toMatchObject({ n: 3, poeni: 5, max: 15 });
+    expect(c.krajSegmenta).toMatchObject({ n: 3, poeni: 5, max: 15, tok: [2, 0, 0] });
     expect(c.stanje.status).toBe("zavrseno");
     expect(c.stanje.rezultat!.map((r) => [r.poeni, r.istek])).toEqual([[5, false], [0, false], [0, true]]);
   });
@@ -465,5 +541,22 @@ describe("segment 3: šta se više gugla", () => {
     expect(poslednji!.krajSegmenta).toMatchObject({ n: 2 });
     expect(poslednji!.stanje.status).toBe("u_toku");
     expect(poslednji!.stanje.trenutno).toMatchObject({ segment: 3, pozicija: 1, ukupno: 8, faza: "uvod" });
+  });
+
+  it("ceo dan iz seed-a: pojam koji pobedi ostaje u sledećem pitanju, na istom mestu", async () => {
+    const ja = gost();
+    await zapocniIgru(db, ja, POCETAK);
+    for (let i = 0; i < 10; i++) await odigraj(ja, POCETAK, 100);
+    let pre: { a: string; b: string; tacan: "a" | "b" } | null = null;
+    for (let i = 0; i < 8; i++) {
+      const s = await posaljiPitanje(db, ja, POCETAK);
+      const pitanje = s.trenutno!.pitanje as { vrsta: "gugla"; a: string; b: string };
+      if (pre) expect(pitanje[pre.tacan]).toBe(pre[pre.tacan]);
+      const r = await odgovori(db, ja, POCETAK, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" } });
+      const p = r.ocena.prikaz as { a: string; b: string; tacan: "a" | "b" };
+      pre = { a: p.a, b: p.b, tacan: p.tacan };
+      // tok segmenta se puni redom i ne odaje ništa unapred
+      expect(r.stanje.segmenti.find((x) => x.n === 3)!.tok.length).toBe(i + 1);
+    }
   });
 });

@@ -1,0 +1,18 @@
+Sopstvene fotografije artikala za „Pogodi cenu”.
+
+Fajl nazovi po barkodu artikla i ubaci ovde, na primer:
+
+    8600043000023.jpg      (Plazma keks 300 g)
+
+Dozvoljeni formati: .jpg, .jpeg, .png, .webp, .avif
+Najbolje: kvadratna slika, bela pozadina, bar 600 x 600 piksela, do 200 KB.
+
+Kad fajl postoji, igra koristi njega umesto slike sa Open Food Facts.
+Artikal koji do sada nije imao sliku (pa je bio izbačen iz igre) ovako ulazi u igru.
+
+Posle dodavanja slika pusti ponovo:  npm run seed
+(dan koji je već upisan u bazu zadržava stare slike; novi dani dobijaju nove).
+
+Barkodove vidiš u data/products.json (polje "barkod").
+
+Koristi samo fotografije koje smeš: svoje, ili one za koje imaš dozvolu proizvođača ili trgovca.

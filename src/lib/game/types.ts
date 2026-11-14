@@ -24,9 +24,9 @@ export type PitanjeCena = {
 
 export type PitanjeGugla = {
   vrsta: "gugla";
-  /** Levi pojam. */
+  /** Gornji pojam. */
   a: string;
-  /** Desni pojam. */
+  /** Donji pojam. Pobednik duela ostaje na svom mestu i u sledećem pitanju. */
   b: string;
 };
 
@@ -61,6 +61,8 @@ export type PrikazGugla = {
   /** Indeks 0–100 unutar para (češće traženi pojam je 100). */
   indeksA: number;
   indeksB: number;
+  /** Koliko puta se pobednik više gugla od drugog pojma (npr. 2,4). */
+  puta: number;
   /** Šta je igrač tapnuo, ili null ako je isteklo vreme. */
   izbor: "a" | "b" | null;
   tacan: "a" | "b";
@@ -94,6 +96,8 @@ export type SegmentStanje = {
   pitanja: number;
   odgovoreno: number;
   poeni: number;
+  /** Kako su prošla dosadašnja pitanja, redom: 2 = svi poeni, 1 = deo poena, 0 = ništa. */
+  tok: (0 | 1 | 2)[];
   max: number;
   bonus: boolean;
 };

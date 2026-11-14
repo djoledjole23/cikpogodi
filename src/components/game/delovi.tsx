@@ -9,20 +9,27 @@ import { broj, din } from "@/lib/format";
 import { komentarSegmenta } from "@/lib/game/komentari";
 import type { Prikaz, SegmentStanje, Stanje } from "@/lib/game/types";
 import { sfx } from "@/lib/sound";
-import { Konfete, useBrojac } from "./efekti";
+import { brojZvezdica, Konfete, smanjenoKretanje, useBrojac, Zvezde } from "./efekti";
 
 // ───────────────────────── zaglavlje igre ─────────────────────────
 
-/** Stalno vidljivo: gde sam (segment X/5, pitanje Y/N) i koliko imam poena. */
+/**
+ * Stalno vidljivo: u kom sam segmentu, kako su prošla pitanja do sada (tačkice), niz pogodaka i zbir.
+ * `tok` su ishodi već odgovorenih pitanja u segmentu, `pozicija` je pitanje koje je sad na redu.
+ */
 export function Zaglavlje({
   segment,
   pozicija,
   ukupno,
+  tok,
+  niz = 0,
   zbir,
 }: {
   segment?: number;
   pozicija?: number;
   ukupno?: number;
+  tok?: (0 | 1 | 2)[];
+  niz?: number;
   zbir: number;
 }) {
   const prikaz = useBrojac(zbir);
@@ -40,24 +47,45 @@ export function Zaglavlje({
     };
   }, [zbir]);
 
+  const naziv = segment !== undefined ? SEGMENTI.find((s) => s.n === segment)?.naziv : undefined;
+
   return (
     <header className="g-top">
-      <p className="g-gde">
+      <div className="g-gde">
         {segment !== undefined && (
           <span className="g-gde-seg">
-            Segment {segment}/{SEGMENTI.length}
+            {segment}/{SEGMENTI.length} · {naziv}
           </span>
         )}
-        {pozicija !== undefined && ukupno !== undefined && (
-          <span className="g-gde-pit">
-            Pitanje {pozicija}/{ukupno}
+        {ukupno !== undefined && (
+          <>
+            <span className="g-tacke" aria-hidden="true">
+              {Array.from({ length: ukupno }, (_, i) => {
+                const ishod = tok?.[i];
+                const klasa =
+                  ishod === undefined ? (i === (pozicija ?? 0) - 1 ? "sada" : "") : ishod === 2 ? "pun" : ishod === 1 ? "pola" : "nula";
+                return <i key={i} className={`g-tacka ${klasa}`} />;
+              })}
+            </span>
+            {pozicija !== undefined && (
+              <span className="sr-only">
+                Pitanje {pozicija} od {ukupno}
+              </span>
+            )}
+          </>
+        )}
+      </div>
+      <div className="g-zbir-omot">
+        {niz >= 2 && (
+          <span key={niz} className="g-niz" aria-label={`${niz} pogodaka zaredom`}>
+            <IconVatra size={16} strokeWidth={2.8} />x{niz}
           </span>
         )}
-      </p>
-      <p id="g-zbir" className={skok ? "g-zbir skok" : "g-zbir"} aria-live="polite">
-        <span className="sr-only">Zbir: </span>
-        <strong>{broj(prikaz)}</strong> <span>poena</span>
-      </p>
+        <p id="g-zbir" className={skok ? "g-zbir skok" : "g-zbir"} aria-live="polite">
+          <span className="sr-only">Zbir: </span>
+          <strong>{broj(prikaz)}</strong> <span>poena</span>
+        </p>
+      </div>
       <SoundToggle />
     </header>
   );
@@ -155,7 +183,16 @@ export function UvodSegmenta({ segment, naKreni, ceka }: { segment: SegmentStanj
           do <strong>{segment.max}</strong> poena
         </li>
       </ul>
-      <button type="button" className="btn btn-lg g-dole" onClick={naKreni} aria-disabled={ceka} autoFocus>
+      <button
+        type="button"
+        className="btn btn-lg g-dole"
+        onClick={() => {
+          sfx.klik();
+          naKreni();
+        }}
+        aria-disabled={ceka}
+        autoFocus
+      >
         <span>{ceka ? "Stiže…" : "Kreni"}</span>
         {!ceka && <IconStrelica size={26} />}
       </button>
@@ -166,24 +203,38 @@ export function UvodSegmenta({ segment, naKreni, ceka }: { segment: SegmentStanj
 // ───────────────────────── kraj segmenta ─────────────────────────
 
 export function KrajSegmenta({ segment, naDalje }: { segment: SegmentStanje; naDalje: () => void }) {
+  const zvezdice = brojZvezdica(segment.poeni, segment.max);
   useEffect(() => {
-    sfx.fanfare();
-  }, []);
-  const prikaz = useBrojac(segment.poeni, 900);
+    // Zbir se „vrti” uz tikove, pa se pale zvezdice. Fanfara ide samo za sve tri.
+    if (smanjenoKretanje()) return;
+    sfx.vrti(850);
+    if (zvezdice < 3) return;
+    const sat = setTimeout(() => sfx.fanfare(), 950 + 3 * 330);
+    return () => clearTimeout(sat);
+  }, [zvezdice]);
+  const prikaz = useBrojac(segment.poeni, 900, 0);
   return (
-    <section className="g-uvod">
-      <span className="g-uvod-ikona">
-        <SegmentIcon segment={segment.key} size={56} />
-        {segment.poeni > 0 && <Konfete jacina={segment.poeni === segment.max ? 3 : 2} />}
-      </span>
+    <section className="g-uvod g-kraj-seg">
       <p className="g-uvod-broj">Gotov segment</p>
       <h1 className="h1">{segment.naziv}</h1>
+      <div className="g-kraj-seg-zvezde">
+        <Zvezde broj={zvezdice} kasnjenjeMs={950} />
+        {zvezdice > 0 && <Konfete jacina={zvezdice === 3 ? 3 : 2} kasnjenjeMs={smanjenoKretanje() ? 0 : 950 + (zvezdice - 1) * 330} />}
+      </div>
       <p className="g-veliki-zbir">
         {broj(prikaz)}
         <small> / {segment.max}</small>
       </p>
       <p className="lead">{komentarSegmenta(segment)}</p>
-      <button type="button" className="btn btn-lg g-dole" onClick={naDalje} autoFocus>
+      <button
+        type="button"
+        className="btn btn-lg g-dole"
+        onClick={() => {
+          sfx.klik();
+          naDalje();
+        }}
+        autoFocus
+      >
         <span>Dalje</span>
         <IconStrelica size={26} />
       </button>
@@ -267,30 +318,42 @@ function RedRezultata({ prikaz: p }: { prikaz: Prikaz }) {
 
 // ───────────────────────── okvir rezultata pitanja ─────────────────────────
 
-/** Zajedničko za sve segmente: komentar gore, niz tačnih, sadržaj segmenta u sredini, „Dalje” dole. */
+/**
+ * Zajedničko za rezultat pitanja: komentar gore, sadržaj segmenta u sredini, „Dalje” dole.
+ * Dok rezultat nije otkriven (igla još klizi), umesto komentara stoji `najava`, a „Dalje” čeka.
+ */
 export function OkvirOcene({
   komentar,
-  niz,
+  najava,
+  otkriveno,
   children,
   naDalje,
   ceka,
 }: {
   komentar: string;
-  niz: number;
+  najava: string;
+  otkriveno: boolean;
   children: ReactNode;
   naDalje: () => void;
   ceka: boolean;
 }) {
   return (
     <section className="g-ocena">
-      <h1 className="g-komentar">{komentar}</h1>
+      <h1 key={otkriveno ? "komentar" : "najava"} className={otkriveno ? "g-komentar stigao" : "g-komentar"} role="status">
+        {otkriveno ? komentar : najava}
+      </h1>
       {children}
-      {niz >= 2 && (
-        <p className="g-niz">
-          <IconVatra size={22} /> x{niz} zaredom
-        </p>
-      )}
-      <button type="button" className="btn btn-lg g-dole" onClick={naDalje} aria-disabled={ceka} autoFocus>
+      <button
+        type="button"
+        className="btn btn-lg g-dole"
+        onClick={() => {
+          if (!otkriveno) return;
+          sfx.klik();
+          naDalje();
+        }}
+        aria-disabled={ceka || !otkriveno}
+        autoFocus
+      >
         <span>{ceka ? "Stiže…" : "Dalje"}</span>
         {!ceka && <IconStrelica size={26} />}
       </button>

@@ -118,6 +118,19 @@ export const IconSat = (p: IconProps) => (
   </Svg>
 );
 
+export const IconKruna = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M3.6 8.3 6 17.4c.1.5.6.9 1.2.9h9.7c.6 0 1.1-.4 1.2-.9l2.3-9.2-4.9 3.4L12 5.2 8.5 11.7 3.6 8.3Z" />
+    <path d="M7.3 21h9.5" />
+  </Svg>
+);
+
+export const IconZvezda = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="m12.1 3.3 2.5 5.4 5.9.7c.4.1.6.6.3.9l-4.4 4 1.2 5.8c.1.4-.4.8-.8.6L12 17.8l-5 2.9c-.4.2-.9-.1-.8-.6l1.2-5.8-4.3-4c-.3-.3-.2-.8.3-.9l5.9-.7 2.4-5.4c.1-.4.3-.4.4 0Z" />
+  </Svg>
+);
+
 export function SegmentIcon({ segment, size = 26 }: { segment: SegmentKey; size?: number }) {
   switch (segment) {
     case "pesma":

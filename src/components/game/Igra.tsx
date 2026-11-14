@@ -8,34 +8,65 @@ import { api, NijeNaRedu } from "./api";
 import { komentarCena, komentarGugla } from "@/lib/game/komentari";
 import { CenaOcena, CenaPitanje } from "./Cena";
 import { KrajSegmenta, Kraj, OkvirOcene, Poruka, Tajmer, UvodSegmenta, Zaglavlje } from "./delovi";
-import { GuglaOcena, GuglaPitanje } from "./Gugla";
-import { smanjenoKretanje } from "./efekti";
+import { GuglaDuel } from "./Gugla";
+import { Odbrojavanje, smanjenoKretanje } from "./efekti";
 
 /**
  * Ceo tok igre u browseru. Server odlučuje sve (koje je pitanje, koliko je vremena, koliko poena);
  * ova komponenta samo prikazuje ekran koji odgovara stanju i šalje ono što igrač uradi.
  */
+type EkranOcene = {
+  vrsta: "ocena";
+  /** Stanje pre odgovora: zaglavlje ga pokazuje dok se rezultat ne otkrije (da tačkice ne odaju ishod). */
+  pre: Stanje;
+  stanje: Stanje;
+  ocena: Ocena;
+  pitanje: Trenutno;
+  krajSegmenta?: SegmentStanje;
+  /** Napetost je gotova: vidi se presuda, čuje se zvuk, poeni lete u zbir. */
+  otkriveno: boolean;
+  /** „Šta se više gugla”: gubitnik ispada dok stiže sledeći duel. */
+  odlazi: boolean;
+};
+
 type Ekran =
   | { vrsta: "ucitavanje" }
   | { vrsta: "greska" }
   | { vrsta: "stanje"; stanje: Stanje } // uvod, pitanje, kraj ili poruka: zavisi od stanja
-  | { vrsta: "ocena"; stanje: Stanje; ocena: Ocena; pitanje: Trenutno; krajSegmenta?: SegmentStanje }
+  | { vrsta: "odbrojavanje"; stanje: Stanje } // „3, 2, 1” pred prvo pitanje segmenta
+  | EkranOcene
   | { vrsta: "kraj_segmenta"; stanje: Stanje; segment: SegmentStanje };
+
+const cekaj = (ms: number) => new Promise<void>((gotovo) => setTimeout(gotovo, ms));
+const tokSegmenta = (stanje: Stanje, n: number) => stanje.segmenti.find((s) => s.n === n)?.tok ?? [];
+/** Koliko je poslednjih pitanja zaredom donelo poene. */
+const nizPogodaka = (tok: number[]) => {
+  let n = 0;
+  for (let i = tok.length - 1; i >= 0 && tok[i] > 0; i--) n++;
+  return n;
+};
+
+/** Ako igra još nije počela ili je sledeće pitanje samo spremno (nije prvo u segmentu), odmah ga zatraži. */
+async function razresi(stanje: Stanje): Promise<Stanje> {
+  let s = stanje;
+  if (s.status === "nije_poceo") s = await api.start();
+  if (s.status === "u_toku" && s.trenutno?.faza === "sledece") s = await api.pitanje(s.datum);
+  return s;
+}
 
 export function Igra() {
   const [ekran, setEkran] = useState<Ekran>({ vrsta: "ucitavanje" });
   const [ceka, setCeka] = useState(false);
   /** Zbir koji se vidi u zaglavlju: kasni za pravim dok poeni „lete”. */
   const [zbir, setZbir] = useState(0);
-  /** Koliko je pitanja zaredom donelo poene. */
-  const [niz, setNiz] = useState(0);
   const saljem = useRef(false);
+  const ekranRef = useRef(ekran);
+  useEffect(() => {
+    ekranRef.current = ekran;
+  }, [ekran]);
 
-  /** Prikaži ono što stanje kaže. Ako je sledeće pitanje samo spremno (nije prvo u segmentu), odmah ga zatraži. */
   const prikazi = useCallback(async (stanje: Stanje) => {
-    let s = stanje;
-    if (s.status === "nije_poceo") s = await api.start();
-    if (s.status === "u_toku" && s.trenutno?.faza === "sledece") s = await api.pitanje(s.datum);
+    const s = await razresi(stanje);
     setZbir(s.score);
     setEkran({ vrsta: "stanje", stanje: s });
   }, []);
@@ -74,39 +105,72 @@ export function Igra() {
     [prikazi],
   );
 
-  const kreni = (stanje: Stanje) =>
+  /** Traži prvo pitanje segmenta (tad na serveru počinje da teče vreme). */
+  const posaljiPrvo = (stanje: Stanje) =>
     uradi(async () => {
       const s = await api.pitanje(stanje.datum);
       setZbir(s.score);
       setEkran({ vrsta: "stanje", stanje: s });
     });
 
+  const kreni = (stanje: Stanje) => {
+    if (smanjenoKretanje()) void posaljiPrvo(stanje);
+    else setEkran({ vrsta: "odbrojavanje", stanje });
+  };
+
   const odgovori = (stanje: Stanje, odgovor: unknown, istek = false) =>
     uradi(async () => {
       const pitanje = stanje.trenutno!;
       const r = await api.odgovor(stanje.datum, pitanje.itemId, odgovor, istek);
-      const noviNiz = r.ocena.tacno ? niz + 1 : 0;
-      setNiz(noviNiz);
-      if (r.ocena.tacno) {
-        sfx.ding(noviNiz);
-        haptika.tacno();
-      } else {
-        sfx.bonk();
-        haptika.netacno();
-      }
-      setEkran({ vrsta: "ocena", stanje: r.stanje, ocena: r.ocena, pitanje, krajSegmenta: r.krajSegmenta });
-      // Zbir u zaglavlju se menja kad poeni „dolete” do njega.
-      setTimeout(() => setZbir(r.stanje.score), r.ocena.poeni > 0 && !smanjenoKretanje() ? 870 : 0);
+      // Presuda se još ne vidi: prvo ide napetost (igla klizi, trake se pune), pa `otkrij`.
+      setEkran({
+        vrsta: "ocena",
+        pre: stanje,
+        stanje: r.stanje,
+        ocena: r.ocena,
+        pitanje,
+        krajSegmenta: r.krajSegmenta,
+        otkriveno: false,
+        odlazi: false,
+      });
     });
 
-  const dalje = (e: Extract<Ekran, { vrsta: "ocena" }>) => {
+  /** Trenutak istine: zvuk, vibracija, tačkica u zaglavlju i poeni koji lete u zbir. */
+  const otkrij = useCallback(() => {
+    const e = ekranRef.current;
+    if (e.vrsta !== "ocena" || e.otkriveno) return;
+    const otkriven: EkranOcene = { ...e, otkriveno: true };
+    ekranRef.current = otkriven;
+    setEkran(otkriven);
+    if (e.ocena.tacno) {
+      sfx.ding(nizPogodaka(tokSegmenta(e.stanje, e.pitanje.segment)));
+      haptika.tacno();
+    } else {
+      sfx.bonk();
+      haptika.netacno();
+    }
+    // Zbir u zaglavlju se menja kad poeni „dolete” do njega.
+    setTimeout(() => setZbir((z) => Math.max(z, e.stanje.score)), e.ocena.poeni > 0 && !smanjenoKretanje() ? 870 : 0);
+  }, []);
+
+  const dalje = useCallback(() => {
+    const e = ekranRef.current;
+    if (e.vrsta !== "ocena" || !e.otkriveno || e.odlazi) return;
     if (e.krajSegmenta) {
-      setNiz(0);
+      setZbir(e.stanje.score);
       setEkran({ vrsta: "kraj_segmenta", stanje: e.stanje, segment: e.krajSegmenta });
       return;
     }
-    void uradi(() => prikazi(e.stanje));
-  };
+    void uradi(async () => {
+      // U duelu gubitnik prvo ispadne, pa uleti novi izazivač.
+      const duel = e.ocena.prikaz.vrsta === "gugla" && !smanjenoKretanje();
+      if (duel) setEkran({ ...e, odlazi: true });
+      const [s] = await Promise.all([razresi(e.stanje), cekaj(duel ? 320 : 0)]);
+      setZbir(s.score);
+      setEkran({ vrsta: "stanje", stanje: s });
+      if (duel) sfx.vuus();
+    });
+  }, [uradi]);
 
   // ───── crtanje ─────
 
@@ -137,32 +201,12 @@ export function Igra() {
     );
   }
 
-  if (ekran.vrsta === "ocena") {
-    const { pitanje, ocena } = ekran;
+  if (ekran.vrsta === "odbrojavanje") {
+    const t = ekran.stanje.trenutno!;
     return (
       <>
-        <Zaglavlje segment={pitanje.segment} pozicija={pitanje.pozicija} ukupno={pitanje.ukupno} zbir={zbir} />
-        <OkvirOcene
-          key={pitanje.itemId}
-          komentar={
-            ocena.prikaz.vrsta === "cena"
-              ? komentarCena(ocena, ocena.prikaz, pitanje.itemId)
-              : komentarGugla(ocena, ocena.prikaz, pitanje.itemId)
-          }
-          niz={niz}
-          naDalje={() => dalje(ekran)}
-          ceka={ceka}
-        >
-          {ocena.prikaz.vrsta === "cena" ? (
-            <CenaOcena
-              ocena={ocena}
-              prikaz={ocena.prikaz}
-              slika={pitanje.pitanje?.vrsta === "cena" ? pitanje.pitanje.slika : ""}
-            />
-          ) : (
-            <GuglaOcena ocena={ocena} prikaz={ocena.prikaz} />
-          )}
-        </OkvirOcene>
+        <Zaglavlje segment={t.segment} ukupno={t.ukupno} tok={[]} zbir={zbir} />
+        <Odbrojavanje naKraj={() => void posaljiPrvo(ekran.stanje)} />
       </>
     );
   }
@@ -170,8 +214,78 @@ export function Igra() {
   if (ekran.vrsta === "kraj_segmenta") {
     return (
       <>
-        <Zaglavlje segment={ekran.segment.n} zbir={zbir} />
+        <Zaglavlje segment={ekran.segment.n} ukupno={ekran.segment.pitanja} tok={ekran.segment.tok} zbir={zbir} />
         <KrajSegmenta segment={ekran.segment} naDalje={() => void uradi(() => prikazi(ekran.stanje))} />
+      </>
+    );
+  }
+
+  // Pitanje i njegov rezultat dele isto zaglavlje: tačkice i niz se menjaju tek kad se rezultat otkrije.
+  const pitanje = ekran.vrsta === "ocena" ? ekran.pitanje : ekran.stanje.status === "u_toku" ? ekran.stanje.trenutno : undefined;
+  const zaZaglavlje = ekran.vrsta === "ocena" && !ekran.otkriveno ? ekran.pre : ekran.stanje;
+  const tok = pitanje ? tokSegmenta(zaZaglavlje, pitanje.segment) : [];
+  const zaglavlje = pitanje ? (
+    <Zaglavlje segment={pitanje.segment} pozicija={pitanje.pozicija} ukupno={pitanje.ukupno} tok={tok} niz={nizPogodaka(tok)} zbir={zbir} />
+  ) : (
+    <Zaglavlje zbir={ekran.stanje.status === "zavrseno" ? zbir : 0} />
+  );
+
+  // „Šta se više gugla”: pitanje i rezultat su isti ekran (iste kartice), pa se crtaju na istom mestu u stablu.
+  const duel =
+    ekran.vrsta === "ocena"
+      ? ekran.ocena.prikaz.vrsta === "gugla" && ekran.pitanje.pitanje?.vrsta === "gugla"
+        ? { t: ekran.pitanje, pitanje: ekran.pitanje.pitanje, ocena: ekran.ocena, otkriveno: ekran.otkriveno, odlazi: ekran.odlazi }
+        : null
+      : pitanje?.faza === "pitanje" && pitanje.pitanje?.vrsta === "gugla"
+        ? { t: pitanje, pitanje: pitanje.pitanje, ocena: undefined, otkriveno: false, odlazi: false }
+        : null;
+
+  if (duel) {
+    const stanje = ekran.stanje;
+    const { t, ocena } = duel;
+    return (
+      <>
+        {zaglavlje}
+        <Tajmer
+          key={t.itemId}
+          limitMs={t.limitMs!}
+          preostaloMs={t.preostaloMs!}
+          zaustavljen={ceka || Boolean(ocena)}
+          naIstek={() => void odgovori(stanje, null, true)}
+        />
+        <GuglaDuel
+          key="duel"
+          itemId={t.itemId}
+          pitanje={duel.pitanje}
+          ocena={ocena}
+          otkriveno={duel.otkriveno}
+          odlazi={duel.odlazi}
+          zakljucano={ceka}
+          komentar={ocena?.prikaz.vrsta === "gugla" ? komentarGugla(ocena, ocena.prikaz, t.itemId) : ""}
+          naIzbor={(izbor) => void odgovori(stanje, { izbor })}
+          naOtkrij={otkrij}
+          naDalje={dalje}
+        />
+      </>
+    );
+  }
+
+  if (ekran.vrsta === "ocena") {
+    const { ocena } = ekran;
+    if (ocena.prikaz.vrsta !== "cena") return null;
+    return (
+      <>
+        {zaglavlje}
+        <OkvirOcene
+          key={ekran.pitanje.itemId}
+          komentar={komentarCena(ocena, ocena.prikaz, ekran.pitanje.itemId)}
+          najava={ocena.prikaz.unos === null ? "Vreme je isteklo. Prava cena je…" : "A prava cena je…"}
+          otkriveno={ekran.otkriveno}
+          naDalje={dalje}
+          ceka={ceka}
+        >
+          <CenaOcena ocena={ocena} prikaz={ocena.prikaz} otkriveno={ekran.otkriveno} naOtkrij={otkrij} />
+        </OkvirOcene>
       </>
     );
   }
@@ -182,7 +296,7 @@ export function Igra() {
     case "nije_povezano":
       return (
         <>
-          <Zaglavlje zbir={0} />
+          {zaglavlje}
           <Poruka naslov="Igra još nije povezana">Baza nije podešena, pa nema ni pitanja. Javi onome ko održava sajt.</Poruka>
         </>
       );
@@ -190,14 +304,14 @@ export function Igra() {
     case "nije_poceo":
       return (
         <>
-          <Zaglavlje zbir={0} />
+          {zaglavlje}
           <Poruka naslov="Današnji kviz još nije spreman">Pitanja za danas još nisu postavljena. Svrati malo kasnije.</Poruka>
         </>
       );
     case "uredjaj_igrao":
       return (
         <>
-          <Zaglavlje zbir={0} />
+          {zaglavlje}
           <Poruka
             naslov="Ovde je danas već igrano"
             dugme={
@@ -213,7 +327,7 @@ export function Igra() {
     case "zavrseno":
       return (
         <>
-          <Zaglavlje zbir={zbir} />
+          {zaglavlje}
           <Kraj stanje={stanje} />
         </>
       );
@@ -223,14 +337,15 @@ export function Igra() {
       if (t.faza !== "pitanje" || !t.pitanje) {
         return (
           <>
-            <Zaglavlje segment={t.segment} zbir={zbir} />
-            <UvodSegmenta segment={segment} naKreni={() => void kreni(stanje)} ceka={ceka} />
+            <Zaglavlje segment={t.segment} ukupno={t.ukupno} tok={segment.tok} zbir={zbir} />
+            <UvodSegmenta segment={segment} naKreni={() => kreni(stanje)} ceka={ceka} />
           </>
         );
       }
+      if (t.pitanje.vrsta !== "cena") return null; // duel je nacrtan gore
       return (
         <>
-          <Zaglavlje segment={t.segment} pozicija={t.pozicija} ukupno={t.ukupno} zbir={zbir} />
+          {zaglavlje}
           <Tajmer
             key={t.itemId}
             limitMs={t.limitMs!}
@@ -238,21 +353,7 @@ export function Igra() {
             zaustavljen={ceka}
             naIstek={() => void odgovori(stanje, null, true)}
           />
-          {t.pitanje.vrsta === "cena" ? (
-            <CenaPitanje
-              key={`p${t.itemId}`}
-              pitanje={t.pitanje}
-              zakljucano={ceka}
-              naPotvrdi={(unos) => void odgovori(stanje, { unos })}
-            />
-          ) : (
-            <GuglaPitanje
-              key={`p${t.itemId}`}
-              pitanje={t.pitanje}
-              zakljucano={ceka}
-              naIzbor={(izbor) => void odgovori(stanje, { izbor })}
-            />
-          )}
+          <CenaPitanje key={`p${t.itemId}`} pitanje={t.pitanje} zakljucano={ceka} naPotvrdi={(unos) => void odgovori(stanje, { unos })} />
         </>
       );
     }

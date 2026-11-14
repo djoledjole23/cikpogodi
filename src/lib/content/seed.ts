@@ -1,7 +1,7 @@
 import { SEGMENTI } from "@/config/quiz.config";
 import { dodajDane } from "@/lib/time";
 import type { Proizvod } from "./products";
-import type { Par } from "./trends";
+import { ferDuel, napraviPar, type Par, type Pojam, type UcitaniTrendovi } from "./trends";
 
 /**
  * Raspored artikala po danima i SQL koji ga upisuje.
@@ -83,38 +83,68 @@ export function planCena(proizvodi: Proizvod[], pocetak: string, dana: number): 
   return plan;
 }
 
-export type DnevniPlanGugla = { datum: string; parovi: Par[] };
+export type DnevniPlanGugla = { datum: string; dueli: Par[] };
+
+/** Koliko puta u danu izazivač treba da pobedi (da „uvek tapni šampiona” ne bude taktika). */
+const POBEDE_IZAZIVACA = { cilj: 4, najmanje: 3, najvise: 5 };
 
 /**
- * Za svaki dan bira 8 parova: svaki iz druge teme (pa se nijedan pojam ne javlja dvaput u danu),
- * i nijedan par se ne ponavlja u celom periodu.
+ * Za svaki dan pravi lanac od 8 duela u kome pobednik ostaje:
+ * pojam koji se više gugla ostaje na svom mestu (gore ili dole), a na mesto gubitnika dolazi novi izazivač.
+ * Svih 9 pojmova u danu je iz različitih tema, svaki duel ima jasnog pobednika (vidi `ferDuel`)
+ * i nijedan duel se ne ponavlja u celom periodu.
  */
-export function planGugla(parovi: Par[], pocetak: string, dana: number): DnevniPlanGugla[] {
-  const poTemi = new Map<string, Par[]>();
-  for (const p of parovi) poTemi.set(p.tema, [...(poTemi.get(p.tema) ?? []), p]);
-  const kljuc = (p: Par) => `${p.upitA}|${p.upitB}`;
-  const iskoriscen = new Set<string>();
+export function planGugla(
+  trendovi: Pick<UcitaniTrendovi, "pojmovi" | "period" | "preuzeto">,
+  pocetak: string,
+  dana: number,
+): DnevniPlanGugla[] {
+  const { pojmovi, period, preuzeto } = trendovi;
+  const kljuc = (x: Pojam, y: Pojam) => [x.upit, y.upit].sort().join("|");
+  const iskoriscenDuel = new Set<string>();
+  const koriscen = new Map<string, number>(pojmovi.map((p) => [p.upit, 0]));
   const plan: DnevniPlanGugla[] = [];
 
   for (let d = 0; d < dana; d++) {
     const datum = dodajDane(pocetak, d);
-    const rnd = slucajni(semeIzTeksta(`gugla:${datum}`));
-    // Teme sa najviše neiskorišćenih parova idu prve (uz malo slučajnosti), da nijedna ne presuši pre kraja.
-    const teme = [...poTemi.entries()]
-      .map(([tema, lista]) => ({ tema, slobodni: lista.filter((p) => !iskoriscen.has(kljuc(p))), tezina: rnd() * 3 }))
-      .filter((t) => t.slobodni.length > 0)
-      .sort((x, y) => y.slobodni.length + y.tezina - (x.slobodni.length + x.tezina))
-      .slice(0, PAROVA_PO_DANU);
-    if (teme.length < PAROVA_PO_DANU) {
-      throw new Error(`Nema dovoljno parova za ${datum}: treba ${PAROVA_PO_DANU} različitih tema, a ostalo ih je ${teme.length}.`);
+    let dueli: { gore: Pojam; dole: Pojam }[] | null = null;
+
+    for (let pokusaj = 0; pokusaj < 400 && !dueli; pokusaj++) {
+      const rnd = slucajni(semeIzTeksta(`gugla:${datum}:${pokusaj}`));
+      // Najređe korišćeni pojmovi idu prvi, uz malo slučajnosti.
+      const poRedu = (lista: Pojam[]) =>
+        lista.map((p) => ({ p, k: koriscen.get(p.upit)! + rnd() * 0.9 })).sort((x, y) => x.k - y.k).map((x) => x.p);
+
+      // Prvi pojam: iz slabije polovine, da lanac ima kuda da raste.
+      const poJacini = [...pojmovi].sort((x, y) => x.jacina - y.jacina);
+      let sampion = poRedu(poJacini.slice(0, Math.ceil(poJacini.length * 0.55)))[0];
+      let sampionGore = rnd() < 0.5;
+      const teme = new Set([sampion.tema]);
+      const lanac: { gore: Pojam; dole: Pojam }[] = [];
+      let pobede = 0;
+
+      for (let k = 0; k < PAROVA_PO_DANU; k++) {
+        const kandidati = pojmovi.filter((p) => !teme.has(p.tema) && ferDuel(sampion, p) && !iskoriscenDuel.has(kljuc(sampion, p)));
+        const jaci = poRedu(kandidati.filter((p) => p.jacina > sampion.jacina));
+        const slabiji = poRedu(kandidati.filter((p) => p.jacina < sampion.jacina));
+        const zeliPobedu = rnd() < (POBEDE_IZAZIVACA.cilj - pobede) / (PAROVA_PO_DANU - k);
+        const izbor = zeliPobedu ? (jaci[0] ?? slabiji[0]) : (slabiji[0] ?? jaci[0]);
+        if (!izbor) break;
+        lanac.push(sampionGore ? { gore: sampion, dole: izbor } : { gore: izbor, dole: sampion });
+        teme.add(izbor.tema);
+        if (izbor.jacina > sampion.jacina) {
+          sampion = izbor;
+          sampionGore = !sampionGore;
+          pobede++;
+        }
+      }
+      if (lanac.length === PAROVA_PO_DANU && pobede >= POBEDE_IZAZIVACA.najmanje && pobede <= POBEDE_IZAZIVACA.najvise) dueli = lanac;
     }
-    const izabrani = teme
-      .map((t) => t.slobodni[Math.floor(rnd() * t.slobodni.length)])
-      .map((p) => ({ p, k: rnd() }))
-      .sort((x, y) => x.k - y.k)
-      .map((x) => x.p);
-    for (const p of izabrani) iskoriscen.add(kljuc(p));
-    plan.push({ datum, parovi: izabrani });
+    if (!dueli) throw new Error(`Ne mogu da složim lanac duela za ${datum}: treba još pojmova u trends.json.`);
+
+    for (const x of dueli) iskoriscenDuel.add(kljuc(x.gore, x.dole));
+    for (const p of new Set(dueli.flatMap((x) => [x.gore, x.dole]))) koriscen.set(p.upit, koriscen.get(p.upit)! + 1);
+    plan.push({ datum, dueli: dueli.map((x) => napraviPar(x.gore, x.dole, period, preuzeto)) });
   }
   return plan;
 }
@@ -144,12 +174,12 @@ export function snapshotGugla(p: Par) {
 export function seedSql(opcije: {
   proizvodi: Proizvod[];
   datumCenovnika: string;
-  /** Parovi za „Šta se više gugla”. Bez njih se pravi samo segment 2. */
-  parovi?: Par[];
+  /** Pojmovi za „Šta se više gugla”. Bez njih se pravi samo segment 2. */
+  trendovi?: Pick<UcitaniTrendovi, "pojmovi" | "period" | "preuzeto">;
   pocetak: string;
   dana: number;
 }): string {
-  const { proizvodi, datumCenovnika, parovi = [], pocetak, dana } = opcije;
+  const { proizvodi, datumCenovnika, trendovi, pocetak, dana } = opcije;
   const redovi: string[] = [];
 
   redovi.push("-- Artikli (products.json). Postojeći se osvežavaju po barkodu.");
@@ -179,28 +209,29 @@ export function seedSql(opcije: {
     });
   }
 
-  if (parovi.length) {
+  if (trendovi) {
+    const plan = planGugla(trendovi, pocetak, dana);
     redovi.push(
       "",
       "-- Isto što i migracija 0002: ponovljeno ovde da seed radi i ako ona nije puštena.",
       "create unique index if not exists trend_pairs_par_idx on public.trend_pairs (term_a, term_b, period);",
       "",
-      "-- Parovi pojmova (trends.json). Postojeći se osvežavaju.",
+      "-- Dueli pojmova (trends.json). Postojeći se osvežavaju.",
     );
-    for (const p of parovi) {
+    for (const p of plan.flatMap((dan) => dan.dueli)) {
       redovi.push(
         `insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
   values (${q(p.a)}, ${q(p.b)}, ${p.indeksA}, ${p.indeksB}, ${q(p.period)}, ${q(p.preuzeto)})
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;`,
       );
     }
-    redovi.push("", "-- Dnevni kviz: segment 3 (Šta se više gugla).");
-    for (const dan of planGugla(parovi, pocetak, dana)) {
+    redovi.push("", "-- Dnevni kviz: segment 3 (Šta se više gugla). Pobednik duela ostaje i u sledećem.");
+    for (const dan of plan) {
       redovi.push(
         `insert into public.daily_quiz (quiz_date, status, published_at) values (${q(dan.datum)}, 'published', now())
   on conflict (quiz_date) do nothing;`,
       );
-      dan.parovi.forEach((p, i) => {
+      dan.dueli.forEach((p, i) => {
         redovi.push(
           `insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
   select ${q(dan.datum)}, 3, ${i + 1}, id, ${q(JSON.stringify(snapshotGugla(p)))}::jsonb
