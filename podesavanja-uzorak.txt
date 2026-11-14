@@ -19,6 +19,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=
 
 # "Publishable key" (stariji naziv: anon key). Ovaj kljuc SME da bude javan.
+# Ako si red kopirao iz Supabase-a pa se zove NEXT_PUBLIC_SUPABASE_ANON_KEY - i to radi.
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 
 # "Secret key" (stariji naziv: service_role key). TAJNA - nikome ne salji.

@@ -5,7 +5,7 @@ import { GreskaIgre, odgovori, posaljiPitanje, slusanje, stanjeIgre, zapocniIgru
 import { obezbediIdentitet } from "@/lib/game/identity";
 import { dopuniStanje } from "@/lib/game/lista";
 import type { Stanje } from "@/lib/game/types";
-import { supabasePodesen } from "@/lib/supabase/env";
+import { staFaliSupabase, supabasePodesen } from "@/lib/supabase/env";
 import { beogradskiDatum, dodajDane } from "@/lib/time";
 
 /**
@@ -16,6 +16,18 @@ import { beogradskiDatum, dodajDane } from "@/lib/time";
  *   odgovor  – evo odgovora (ili `istek: true` kad je vreme prošlo)
  *   slusanje – pesma je puštena ili pauzirana (server sabira preslušano vreme)
  */
+let upozoreno = false;
+function upozori() {
+  if (upozoreno) return;
+  const fali = staFaliSupabase();
+  if (!fali) return;
+  upozoreno = true;
+  console.error(
+    `\n[nalozi] Nalozi ne rade jer u .env.local fali: ${fali}.\n` +
+      "   Popuni ih (dupli klik na podesi.bat), pa ugasi ovaj prozor i pokreni pokreni.bat ponovo.\n",
+  );
+}
+
 export async function POST(request: NextRequest) {
   let telo: Record<string, unknown>;
   try {
@@ -30,6 +42,9 @@ export async function POST(request: NextRequest) {
     const prazno: Stanje = { status: "nije_povezano", datum: danas, score: 0, maxUkupno: MAX_UKUPNO, segmenti: [] };
     return NextResponse.json(prazno);
   }
+
+  // Jednom po pokretanju: ako nalozi ne rade, reci u konzoli šta tačno fali u .env.local.
+  upozori();
 
   const ident = await obezbediIdentitet(telo.deviceId);
 
