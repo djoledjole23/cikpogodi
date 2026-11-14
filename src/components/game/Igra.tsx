@@ -10,6 +10,7 @@ import { CenaOcena, CenaPitanje } from "./Cena";
 import { KrajSegmenta, Kraj, OkvirOcene, Poruka, Tajmer, UvodSegmenta, Zaglavlje } from "./delovi";
 import { FilmOcena, FilmPitanje } from "./Film";
 import { JokerOcena, JokerPitanje } from "./Joker";
+import { SacuvajRezultat } from "./Sacuvaj";
 import { GuglaDuel } from "./Gugla";
 import { PesmaIgra } from "./Pesma";
 import { Odbrojavanje, smanjenoKretanje } from "./efekti";
@@ -57,11 +58,33 @@ async function razresi(stanje: Stanje): Promise<Stanje> {
   return s;
 }
 
+const KLJUC_PRESKAKANJA = "cp_preskocio";
+
 export function Igra() {
   const [ekran, setEkran] = useState<Ekran>({ vrsta: "ucitavanje" });
   const [ceka, setCeka] = useState(false);
   /** Zbir koji se vidi u zaglavlju: kasni za pravim dok poeni „lete”. */
   const [zbir, setZbir] = useState(0);
+  /** Dan za koji je igrač rekao „Preskoči, samo mi pokaži rezultat” (pamti se na uređaju, da ga ne pitamo opet). */
+  const [preskocio, setPreskocio] = useState<string | null>(null);
+  useEffect(() => {
+    try {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- localStorage postoji tek u browseru
+      setPreskocio(localStorage.getItem(KLJUC_PRESKAKANJA));
+    } catch {
+      // privatni režim bez localStorage: pitaćemo ponovo, ništa strašno
+    }
+  }, []);
+  const zapamtiPreskakanje = useCallback((datum: string | null) => {
+    setPreskocio(datum);
+    window.scrollTo({ top: 0 });
+    try {
+      if (datum) localStorage.setItem(KLJUC_PRESKAKANJA, datum);
+      else localStorage.removeItem(KLJUC_PRESKAKANJA);
+    } catch {
+      // vidi gore
+    }
+  }, []);
   const saljem = useRef(false);
   const ekranRef = useRef(ekran);
   useEffect(() => {
@@ -406,10 +429,19 @@ export function Igra() {
         </>
       );
     case "zavrseno":
+      // Gost koji još nije birao: prvo „Sačuvaj rezultat i uđi na rang listu”, pa tek onda rezultat.
+      if (stanje.lista === "none" && !stanje.prijavljen && preskocio !== stanje.datum) {
+        return (
+          <>
+            {zaglavlje}
+            <SacuvajRezultat stanje={stanje} naPreskoci={() => zapamtiPreskakanje(stanje.datum)} />
+          </>
+        );
+      }
       return (
         <>
           {zaglavlje}
-          <Kraj stanje={stanje} />
+          <Kraj stanje={stanje} naSacuvaj={() => zapamtiPreskakanje(null)} />
         </>
       );
     case "u_toku": {

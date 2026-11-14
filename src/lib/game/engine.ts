@@ -2,7 +2,7 @@ import { MAX_UKUPNO, SEGMENTI, TOLERANCIJA_MREZE_MS } from "@/config/quiz.config
 import type { Db } from "@/lib/db/types";
 import { RUKOVAOCI } from "./segments";
 import { bezOdgovora } from "./types";
-import type { Identitet, OdgovorServera, SegmentStanje, Stanje, StavkaRezultata, Trenutno } from "./types";
+import type { Identitet, OdgovorServera, SegmentStanje, Stanje, StanjeListe, StavkaRezultata, Trenutno } from "./types";
 
 /**
  * Srce igre. Sve odluke se donose ovde, na serveru:
@@ -17,7 +17,28 @@ type RedIgre = {
   id: string;
   user_id: string | null;
   status: "in_progress" | "finished";
+  /** none: nije na rang listi (gost) · pending: čeka potvrdu mejla · counted: na listi */
+  lista: StanjeListe;
 };
+
+const KOLONE_IGRE = `id::text as id, user_id::text as user_id, status, leaderboard_status as lista`;
+
+/**
+ * Završena igra koja ima nalog ide na rang listu: odmah ako je mejl potvrđen, inače „na čekanju”
+ * (kad se mejl potvrdi, okidač u bazi je prebacuje na listu). Igra gosta ostaje van liste.
+ */
+async function upisiNaListu(db: Db, playId: string): Promise<StanjeListe> {
+  const [red] = await db.query<{ lista: StanjeListe }>(
+    `update public.plays p set leaderboard_status = case
+         when p.user_id is null or p.status <> 'finished' then p.leaderboard_status
+         when exists (select 1 from auth.users u where u.id = p.user_id and u.email_confirmed_at is not null) then 'counted'
+         else 'pending' end
+     where p.id = $1::uuid
+     returning leaderboard_status as lista`,
+    [playId],
+  );
+  return red?.lista ?? "none";
+}
 
 type RedStavke = {
   id: number;
@@ -83,35 +104,64 @@ async function nadjiIgru(
 ): Promise<{ igra: RedIgre | null; blokiran: boolean }> {
   if (ident.userId) {
     const [svoja] = await db.query<RedIgre>(
-      `select id::text as id, user_id::text as user_id, status from public.plays
+      `select ${KOLONE_IGRE} from public.plays
        where quiz_date = $1::date and user_id = $2::uuid for update`,
       [datum, ident.userId],
     );
-    if (svoja) return { igra: svoja, blokiran: false };
+    if (svoja) {
+      // Mejl je možda potvrđen u međuvremenu: igra „na čekanju” tada ulazi na listu.
+      if (svoja.status === "finished" && svoja.lista !== "counted") svoja.lista = await upisiNaListu(db, svoja.id);
+      return { igra: svoja, blokiran: false };
+    }
   }
 
   const [gostujuca] = await db.query<RedIgre>(
-    `select id::text as id, user_id::text as user_id, status from public.plays
+    `select ${KOLONE_IGRE} from public.plays
      where quiz_date = $1::date and device_id = $2::uuid and user_id is null for update`,
     [datum, ident.deviceId],
   );
   if (gostujuca) {
     if (ident.userId) {
-      // Igrač se prijavio usred igre (ili posle nje): igra postaje njegova.
+      // Igrač se prijavio usred igre (ili posle nje): igra postaje njegova, a završena ide na rang listu.
       await db.query(`update public.plays set user_id = $2::uuid where id = $1::uuid`, [gostujuca.id, ident.userId]);
       gostujuca.user_id = ident.userId;
+      gostujuca.lista = await upisiNaListu(db, gostujuca.id);
     }
     return { igra: gostujuca, blokiran: false };
   }
 
   if (!ident.userId) {
-    const [tudja] = await db.query(
-      `select 1 as ima from public.plays where quiz_date = $1::date and device_id = $2::uuid and user_id is not null limit 1`,
+    const [tudja] = await db.query<RedIgre>(
+      `select ${KOLONE_IGRE} from public.plays
+       where quiz_date = $1::date and device_id = $2::uuid and user_id is not null
+       order by started_at desc limit 1`,
       [datum, ident.deviceId],
     );
+    // Igrač je posle igre napravio nalog, ali mejl još nije potvrdio (pa ne može ni da se prijavi):
+    // na uređaju na kom je igrao i dalje vidi svoj rezultat.
+    if (tudja && tudja.status === "finished" && tudja.lista === "pending") return { igra: tudja, blokiran: false };
     if (tudja) return { igra: null, blokiran: true };
   }
   return { igra: null, blokiran: false };
+}
+
+/**
+ * Posle registracije: završena gostujuća igra sa ovog uređaja postaje igra novog naloga i čeka potvrdu mejla.
+ * (Novi nalog još nema sesiju, pa ovo ne može da sačeka prvu prijavu.) Igra u toku se ne dira:
+ * nju preuzima prva prijava. Vraća broj preuzetih igara.
+ */
+export async function prikljuciZavrseneIgre(db: Db, userId: string, deviceId: string, datumi: string[]): Promise<number> {
+  return db.transaction(async (tx) => {
+    const redovi = await tx.query<{ id: string }>(
+      `update public.plays p set user_id = $1::uuid
+       where p.device_id = $2::uuid and p.user_id is null and p.status = 'finished' and p.quiz_date = any(string_to_array($3::text, ',')::date[])
+         and not exists (select 1 from public.plays x where x.user_id = $1::uuid and x.quiz_date = p.quiz_date)
+       returning p.id::text as id`,
+      [userId, deviceId, datumi.join(",")],
+    );
+    for (const r of redovi) await upisiNaListu(tx, r.id);
+    return redovi.length;
+  });
 }
 
 // ───────────────────────── pomoćne ─────────────────────────
@@ -161,8 +211,8 @@ async function zatvoriIstekla(db: Db, playId: string, stavke: RedStavke[]): Prom
   return true;
 }
 
-/** Posle svakog odgovora: prepiši zbir, a ako nema više pitanja, zatvori igru. */
-async function osveziIgru(db: Db, playId: string, stavke: RedStavke[]) {
+/** Posle svakog odgovora: prepiši zbir, a ako nema više pitanja, zatvori igru (i upiši je na rang listu ako ima nalog). */
+async function osveziIgru(db: Db, playId: string, stavke: RedStavke[]): Promise<StanjeListe> {
   const sveOdgovoreno = stavke.length > 0 && stavke.every((s) => s.answered);
   const sledeca = stavke.find((s) => !s.answered);
   await db.query(
@@ -175,6 +225,7 @@ async function osveziIgru(db: Db, playId: string, stavke: RedStavke[]) {
      where p.id = $1::uuid`,
     [playId, sledeca?.segment ?? stavke.at(-1)?.segment ?? 1, sledeca?.position ?? stavke.at(-1)?.position ?? 1, sveOdgovoreno],
   );
+  return sveOdgovoreno ? upisiNaListu(db, playId) : "none";
 }
 
 function sastaviStanje(datum: string, igra: RedIgre | null, stavke: RedStavke[]): Stanje {
@@ -203,7 +254,7 @@ function sastaviStanje(datum: string, igra: RedIgre | null, stavke: RedStavke[])
         prikaz,
       };
     });
-    return { ...osnova, status: "zavrseno", rezultat };
+    return { ...osnova, status: "zavrseno", rezultat, lista: igra.lista };
   }
 
   const uSegmentu = stavke.filter((s) => s.segment === tekuca.segment);
@@ -231,7 +282,8 @@ async function sveze(db: Db, ident: Identitet, datum: string) {
   if (igra && igra.status === "in_progress") {
     if (await zatvoriIstekla(db, igra.id, stavke)) {
       stavke = await ucitajStavke(db, datum, igra.id);
-      await osveziIgru(db, igra.id, stavke);
+      const lista = await osveziIgru(db, igra.id, stavke);
+      if (stavke.every((s) => s.answered)) igra.lista = lista;
     }
   }
   return { igra, blokiran, stavke };
@@ -264,7 +316,7 @@ export function zapocniIgru(db: Db, ident: Identitet, datum: string): Promise<St
       `insert into public.plays (quiz_date, user_id, device_id, current_segment, current_position)
        values ($1::date, $2::uuid, $3::uuid, $4::int, 1)
        on conflict do nothing
-       returning id::text as id, user_id::text as user_id, status`,
+       returning ${KOLONE_IGRE}`,
       [datum, ident.userId, ident.deviceId, stavke[0].segment],
     );
     if (!nova) {
@@ -398,10 +450,11 @@ export function odgovori(
     );
 
     const posle = await ucitajStavke(tx, datum, igra.id);
-    await osveziIgru(tx, igra.id, posle);
+    const lista = await osveziIgru(tx, igra.id, posle);
 
     const segmentGotov = posle.filter((s) => s.segment === tekuca.segment).every((s) => s.answered);
-    const stanje = sastaviStanje(datum, { ...igra, status: posle.every((s) => s.answered) ? "finished" : "in_progress" }, posle);
+    const gotova = posle.every((s) => s.answered);
+    const stanje = sastaviStanje(datum, { ...igra, status: gotova ? "finished" : "in_progress", lista: gotova ? lista : igra.lista }, posle);
     return {
       ocena,
       krajSegmenta: segmentGotov ? stanje.segmenti.find((s) => s.n === tekuca.segment) : undefined,

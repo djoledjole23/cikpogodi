@@ -3,7 +3,9 @@ import { MAX_UKUPNO } from "@/config/quiz.config";
 import { getDb } from "@/lib/db";
 import { GreskaIgre, odgovori, posaljiPitanje, slusanje, stanjeIgre, zapocniIgru } from "@/lib/game/engine";
 import { obezbediIdentitet } from "@/lib/game/identity";
+import { dopuniStanje } from "@/lib/game/lista";
 import type { Stanje } from "@/lib/game/types";
+import { supabasePodesen } from "@/lib/supabase/env";
 import { beogradskiDatum, dodajDane } from "@/lib/time";
 
 /**
@@ -39,32 +41,34 @@ export async function POST(request: NextRequest) {
     if (jucerasnje.status === "u_toku" || jucerasnje.status === "zavrseno") datum = juce;
   }
 
+  // Uz stanje idu i podaci o nalogu i mesto na rang listi (ekran „Sačuvaj rezultat” i ekran rezultata).
+  const dopuni = (stanje: Stanje) => dopuniStanje(db, ident, stanje, supabasePodesen());
+
   try {
     switch (telo.akcija) {
       case "stanje":
-        return NextResponse.json(await stanjeIgre(db, ident, datum));
+        return NextResponse.json(await dopuni(await stanjeIgre(db, ident, datum)));
       case "start":
-        return NextResponse.json(await zapocniIgru(db, ident, datum));
+        return NextResponse.json(await dopuni(await zapocniIgru(db, ident, datum)));
       case "pitanje":
-        return NextResponse.json(await posaljiPitanje(db, ident, datum));
+        return NextResponse.json(await dopuni(await posaljiPitanje(db, ident, datum)));
       case "odgovor": {
         if (typeof telo.itemId !== "number" || !Number.isInteger(telo.itemId)) {
           return NextResponse.json({ greska: "los_zahtev" }, { status: 400 });
         }
-        return NextResponse.json(
-          await odgovori(db, ident, datum, {
-            itemId: telo.itemId,
-            odgovor: telo.odgovor,
-            istek: telo.istek === true,
-            slusanoMs: typeof telo.slusanoMs === "number" ? telo.slusanoMs : undefined,
-          }),
-        );
+        const ishod = await odgovori(db, ident, datum, {
+          itemId: telo.itemId,
+          odgovor: telo.odgovor,
+          istek: telo.istek === true,
+          slusanoMs: typeof telo.slusanoMs === "number" ? telo.slusanoMs : undefined,
+        });
+        return NextResponse.json({ ...ishod, stanje: await dopuni(ishod.stanje) });
       }
       case "slusanje": {
         if (typeof telo.itemId !== "number" || !Number.isInteger(telo.itemId) || typeof telo.pusteno !== "boolean") {
           return NextResponse.json({ greska: "los_zahtev" }, { status: 400 });
         }
-        return NextResponse.json(await slusanje(db, ident, datum, { itemId: telo.itemId, pusteno: telo.pusteno }));
+        return NextResponse.json(await dopuni(await slusanje(db, ident, datum, { itemId: telo.itemId, pusteno: telo.pusteno })));
       }
       default:
         return NextResponse.json({ greska: "los_zahtev" }, { status: 400 });
@@ -72,7 +76,7 @@ export async function POST(request: NextRequest) {
   } catch (e) {
     if (e instanceof GreskaIgre) {
       // Browser i server su se razišli (dupli klik, drugi tab, isteklo vreme): pošalji sveže stanje.
-      return NextResponse.json({ greska: e.kod, stanje: await stanjeIgre(db, ident, datum) }, { status: 409 });
+      return NextResponse.json({ greska: e.kod, stanje: await dopuni(await stanjeIgre(db, ident, datum)) }, { status: 409 });
     }
     console.error("[igra]", e);
     return NextResponse.json({ greska: "server" }, { status: 500 });

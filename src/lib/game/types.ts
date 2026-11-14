@@ -184,6 +184,9 @@ export type StavkaRezultata = {
   prikaz: Prikaz;
 };
 
+/** none: rezultat nije na rang listi (gost) · pending: čeka potvrdu mejla · counted: na listi */
+export type StanjeListe = "none" | "pending" | "counted";
+
 export type Stanje = {
   status:
     | "nije_povezano" // nema baze
@@ -199,6 +202,13 @@ export type Stanje = {
   trenutno?: Trenutno;
   /** Samo kad je igra završena. */
   rezultat?: StavkaRezultata[];
+  /** Samo kad je igra završena: da li je rezultat na rang listi. */
+  lista?: StanjeListe;
+  /** Mesto na današnjoj listi (samo kad je rezultat na listi). */
+  mesto?: number | null;
+  /** Da li je igrač prijavljen i da li nalozi uopšte rade (Supabase povezan). Dodaje ih API ruta. */
+  prijavljen?: boolean;
+  nalozi?: boolean;
 };
 
 export type OdgovorServera = {

@@ -2331,3 +2331,46 @@
     font-size: 22px;
   }
 }
+
+/* ───── sačuvaj rezultat / status na rang listi ───── */
+
+.g-obavestenje {
+  padding: 14px 16px;
+  border: 2px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.g-obavestenje.dobro {
+  border-color: var(--cream);
+  box-shadow: 0 4px 0 var(--red);
+}
+
+.g-obavestenje .g-tekst-dugme {
+  align-self: flex-start;
+  padding: 0;
+  color: var(--cream);
+}
+
+.g-sacuvaj .h1 {
+  text-wrap: balance;
+}
+
+.g-podeli-tekst {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--cream);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.35;
+  resize: none;
+}

@@ -7,6 +7,7 @@ import { SoundToggle } from "@/components/SoundToggle";
 import { SEGMENTI } from "@/config/quiz.config";
 import { broj, din } from "@/lib/format";
 import { komentarSegmenta } from "@/lib/game/komentari";
+import { tekstZaDeljenje } from "@/lib/game/podeli";
 import type { Prikaz, SegmentStanje, Stanje } from "@/lib/game/types";
 import { sfx } from "@/lib/sound";
 import { brojZvezdica, Konfete, smanjenoKretanje, useBrojac, Zvezde } from "./efekti";
@@ -251,22 +252,96 @@ export function KrajSegmenta({ segment, naDalje }: { segment: SegmentStanje; naD
   );
 }
 
-// ───────────────────────── kraj (privremeni ekran dok ne stignu rezultat i rang lista) ─────────────────────────
+// ───────────────────────── rezultat ─────────────────────────
 
-export function Kraj({ stanje }: { stanje: Stanje }) {
+/** Da li je rezultat na rang listi, čeka potvrdu mejla ili nije sačuvan. */
+function StatusListe({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => void }) {
+  if (stanje.lista === "counted") {
+    return (
+      <div className="g-obavestenje dobro">
+        <p>
+          <strong>{stanje.mesto ? `Ti si ${stanje.mesto}. na današnjoj listi.` : "Rezultat je na rang listi."}</strong>
+        </p>
+        <Link href="/rang-lista" className="text-link tap">
+          Vidi rang listu
+        </Link>
+      </div>
+    );
+  }
+  if (stanje.lista === "pending") {
+    return (
+      <div className="g-obavestenje">
+        <p>
+          <strong>Rezultat čeka potvrdu mejla.</strong> Klikni na link koji smo ti poslali i ulaziš na rang listu.
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div className="g-obavestenje">
+      <p>
+        <strong>Ovaj rezultat nije na rang listi.</strong>
+        {stanje.nalozi ? " Napravi nalog ili se prijavi da uđe." : " Nalozi još nisu povezani."}
+      </p>
+      {stanje.nalozi && (
+        <button type="button" className="g-tekst-dugme" onClick={naSacuvaj}>
+          Sačuvaj rezultat
+        </button>
+      )}
+    </div>
+  );
+}
+
+/** „Podeli”: tekst sa kvadratićima kao kod Wordle-a. Telefon otvara deljenje, računar kopira tekst. */
+function Podeli({ stanje }: { stanje: Stanje }) {
+  const [poruka, setPoruka] = useState<string | null>(null);
+  /** Kad browser ne da kopiranje, tekst se prikaže da ga igrač sam označi i kopira. */
+  const [rucno, setRucno] = useState<string | null>(null);
+  const podeli = async () => {
+    sfx.klik();
+    const tekst = tekstZaDeljenje(stanje, typeof location !== "undefined" ? location.host.replace(/^www\./, "") : undefined);
+    try {
+      if (typeof navigator.share === "function" && /Android|iPhone|iPad/i.test(navigator.userAgent)) {
+        await navigator.share({ text: tekst });
+        return;
+      }
+      await navigator.clipboard.writeText(tekst);
+      setRucno(null);
+      setPoruka("Kopirano! Nalepi gde hoćeš.");
+    } catch (e) {
+      // Igrač je zatvorio prozor za deljenje: nije greška.
+      if ((e as Error)?.name === "AbortError") return;
+      setRucno(tekst);
+      setPoruka("Označi tekst i kopiraj ga.");
+    }
+  };
+  return (
+    <div className="stack">
+      <button type="button" className="btn btn-ghost" onClick={() => void podeli()}>
+        Podeli rezultat
+      </button>
+      {rucno && <textarea className="g-podeli-tekst" readOnly rows={rucno.split("\n").length} value={rucno} onFocus={(e) => e.currentTarget.select()} aria-label="Tekst za deljenje" />}
+      <p className="small muted center" role="status" aria-live="polite">
+        {poruka ?? "Bez spojlera: vide se samo kvadratići i poeni."}
+      </p>
+    </div>
+  );
+}
+
+export function Kraj({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => void }) {
   const max = stanje.segmenti.reduce((z, s) => z + s.max, 0);
   return (
     <section className="stack-lg">
       <div className="stack">
-        <p className="g-uvod-broj">Kraj za danas</p>
+        <p className="g-uvod-broj">Tvoj rezultat</p>
         <p className="g-veliki-zbir">
           {broj(stanje.score)}
           <small> / {max}</small>
         </p>
-        <p className="muted small">
-Čuvanje rezultata i rang lista stižu u sledećim koracima.
-        </p>
       </div>
+
+      <StatusListe stanje={stanje} naSacuvaj={naSacuvaj} />
+      <Podeli stanje={stanje} />
 
       {stanje.segmenti.map((seg) => (
         <div key={seg.n} className="stack">

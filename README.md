@@ -2,9 +2,8 @@
 
 Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript + Supabase, hosting na Vercelu.
 
-> Ovo je radna verzija README-a. Gotovi su **osnova, auth, segment 1 (Pogodi pesmu), segment 2 (Pogodi cenu),
-> segment 3 (Šta se više gugla), segment 4 (Pogodi domaći film/seriju) i segment 5 (Joker pitanje)**.
-> Čuvanje rezultata, rang lista, admin i deploy stižu redom.
+> Ovo je radna verzija README-a. Gotovi su **osnova, nalozi, svih pet segmenata, čuvanje rezultata i rang lista**.
+> Ostaju admin panel, završno poliranje i deploy (Supabase + Vercel + domen).
 
 ## Šta je gotovo
 
@@ -111,6 +110,36 @@ Skripta puni svih pet segmenata (Joker samo za dane koji imaju pitanje u `data/j
   (gore ili dole), a na mesto gubitnika dolazi novi izazivač. Svih 9 pojmova u danu je iz različitih tema,
   izazivač pobedi 3 do 5 puta dnevno (da „uvek tapni šampiona” ne bude taktika) i nijedan duel se ne ponavlja
   u celom periodu.
+
+## Rezultat i rang lista
+
+- **Posle poslednjeg pitanja** gost vidi ekran „Sačuvaj rezultat i uđi na rang listu”: Google / Apple, registracija
+  mejlom, „Već imam nalog” i „Preskoči, samo mi pokaži rezultat”. Ko je već prijavljen taj ekran ne vidi.
+- **Gde je rezultat** piše u `plays.leaderboard_status`: `none` (gost, nije na listi), `pending` (nalog postoji, mejl
+  nije potvrđen) ili `counted` (na listi). Upisuje ga server čim se igra završi ili čim pređe na nalog.
+- **Gost koji se posle igre prijavi**: igra sa tog uređaja postaje njegova. **Gost koji se registruje**: igra odmah
+  prelazi na novi nalog i čeka potvrdu mejla; kad klikne na link iz mejla, okidač u bazi je stavlja na listu.
+  Dok čeka, na uređaju na kom je igrao i dalje vidi svoj rezultat.
+- **Rang lista** (`/rang-lista`): Danas / Ova nedelja (ponedeljak–nedelja) / Ukupno, prvih 50 i red igrača koji
+  gleda, čak i kad nije među njima. Kod istog broja poena bolji je onaj ko je ukupno brže odgovarao; sve računa
+  funkcija `public.leaderboard` u bazi. Na listi su samo nalozi sa potvrđenim mejlom i korisničkim imenom.
+- **Avatar** je crtani lik koji se pravi iz oznake naloga (`src/components/Avatar.tsx`): isti nalog uvek dobija
+  isti lik, ništa se ne bira i ne šalje.
+- **Podeli** pravi tekst sa kvadratićima po segmentima, poenima i adresom, bez ijednog odgovora.
+- Poznata rupa: gost koji obriše kolačiće i podatke sajta dobija novu oznaku uređaja, pa može da odigra ponovo
+  pre nego što napravi nalog. Nalog može da ima samo jednu igru dnevno.
+- Pregled izgleda liste na svom računaru: pokreni sa `CP_PROBNA_LISTA=1` (14 izmišljenih naloga za danas).
+  Na pravom sajtu to ne postoji.
+
+## Ista pitanja za sve
+
+Pitanja za dan su redovi u tabeli `daily_quiz_items`, pa ih svaki igrač čita iste i istim redom. Pravi ih
+`npm run seed` iz fajlova u `data/`, bez slučajnosti i bez zavisnosti od sata, a dan koji je već u bazi se ne
+dira ni kad se seed pusti ponovo sa drugačijim podacima. Lokalna proba čita isti fajl iz `supabase/seed/` koji
+ide u pravu bazu. Sve ovo proverava `tests/ista-pitanja.test.ts`, uključujući i to da fajl u `supabase/seed/`
+odgovara podacima (posle svake izmene u `data/` pusti `npm run seed` ponovo, inače taj test pada).
+
+Pitanja za dan koji je već počeo ne menjaj: ko je već igrao, igrao je stara.
 
 ## Joker pitanje
 

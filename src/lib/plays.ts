@@ -2,8 +2,10 @@ import "server-only";
 import { connection } from "next/server";
 import { getDb } from "./db";
 import { stanjeIgre } from "./game/engine";
+import { dopuniStanje } from "./game/lista";
 import { procitajIdentitet } from "./game/identity";
 import type { Stanje } from "./game/types";
+import { supabasePodesen } from "./supabase/env";
 import { beogradskiDatum } from "./time";
 
 /**
@@ -21,7 +23,7 @@ export async function getDanasnjaIgra(): Promise<Stanje | null> {
   try {
     const db = await getDb();
     if (!db) return null;
-    return await stanjeIgre(db, ident, beogradskiDatum());
+    return await dopuniStanje(db, ident, await stanjeIgre(db, ident, beogradskiDatum()), supabasePodesen());
   } catch (e) {
     console.error("[pocetna]", e);
     return null;

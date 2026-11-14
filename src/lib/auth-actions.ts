@@ -1,12 +1,16 @@
 "use server";
 
 import type { AuthError } from "@supabase/supabase-js";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { SIFRA_MIN } from "@/config/quiz.config";
 import { bezbedanNext } from "@/lib/auth";
+import { getDb } from "@/lib/db";
+import { prikljuciZavrseneIgre } from "@/lib/game/engine";
+import { jeUuid, KOLACIC_UREDJAJA } from "@/lib/game/identity";
 import { PORUKA_NIJE_PODESENO, supabasePodesen } from "@/lib/supabase/env";
 import { adminPodesen, createAdminClient, createClient } from "@/lib/supabase/server";
+import { beogradskiDatum, dodajDane } from "@/lib/time";
 import { proveriKorisnickoIme } from "@/lib/username";
 
 export type StanjeForme = {
@@ -62,6 +66,19 @@ function porukaGreske(error: AuthError): string {
   }
 }
 
+/** Završene gostujuće igre sa ovog uređaja (današnja i jučerašnja) prelaze na nalog. Greška ovde ne sme da pokvari registraciju. */
+async function sacuvajGostujucuIgru(userId: string) {
+  try {
+    const uredjaj = (await cookies()).get(KOLACIC_UREDJAJA)?.value;
+    const db = await getDb();
+    if (!db || !jeUuid(uredjaj)) return;
+    const danas = beogradskiDatum();
+    await prikljuciZavrseneIgre(db, userId, uredjaj.toLowerCase(), [danas, dodajDane(danas, -1)]);
+  } catch (e) {
+    console.error("[registracija] igra nije prebačena na nalog", e);
+  }
+}
+
 // ───────────────────────── Registracija ─────────────────────────
 
 export async function registracija(_pre: StanjeForme, formData: FormData): Promise<StanjeForme> {
@@ -105,6 +122,10 @@ export async function registracija(_pre: StanjeForme, formData: FormData): Promi
     // Ime upisuje server, posle filtera. Ako ga je neko u međuvremenu zauzeo, igrač ga bira posle prijave.
     await createAdminClient().from("profiles").upsert({ id: data.user.id, username });
   }
+
+  // Igra koju je upravo završio kao gost postaje igra novog naloga i čeka potvrdu mejla
+  // (novi nalog još nema sesiju, pa ovo ne može da sačeka prvu prijavu).
+  if (noviNalog && data.user) await sacuvajGostujucuIgru(data.user.id);
 
   if (data.session) redirect(next);
   redirect(`/proveri-mejl?email=${encodeURIComponent(email)}`);

@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ucitajProizvode } from "@/lib/content/products";
 import { seedSql } from "@/lib/content/seed";
@@ -25,6 +25,20 @@ export async function napraviLokalnuBazu(): Promise<Db> {
     await pg.exec(readFileSync(join(dir, fajl), "utf8"));
   }
 
+  // Isti fajlovi koji idu u pravu bazu (supabase/seed/*.sql): ono što se testira ovde je baš ono što igrači dobijaju.
+  const seedDir = join(process.cwd(), "supabase", "seed");
+  const seedFajlovi = existsSync(seedDir) ? readdirSync(seedDir).filter((f) => f.endsWith(".sql")).sort() : [];
+  for (const fajl of seedFajlovi) await pg.exec(readFileSync(join(seedDir, fajl), "utf8"));
+
+  const danas = beogradskiDatum();
+  const imaDanas = (await pg.query<{ ima: boolean }>(`select exists (select 1 from public.daily_quiz where quiz_date = $1::date) as ima`, [danas])).rows[0]?.ima;
+  if (imaDanas) {
+    if (process.env.CP_PROBNA_LISTA === "1") await probnaLista(pg, danas);
+    console.log(`[lokalna baza] spremna: pitanja iz ${seedFajlovi.join(", ")} (ista kao u pravoj bazi)`);
+    return omotajPglite(pg);
+  }
+
+  // Za današnji dan nema gotovog seed fajla: pitanja se prave iz data/ na licu mesta (samo za probu).
   const podaci = (ime: string) => JSON.parse(readFileSync(join(process.cwd(), "data", ime), "utf8"));
   const proizvodi = ucitajProizvode(podaci("products.json"), sopstveneSlike());
   const trendovi = ucitajTrendove(podaci("trends.json"));
@@ -39,13 +53,31 @@ export async function napraviLokalnuBazu(): Promise<Db> {
       filmovi,
       jokeri,
       trendovi,
-      pocetak: beogradskiDatum(),
+      pocetak: danas,
       dana: 14,
     }),
   );
 
   console.log(
-    `[lokalna baza] spremna: ${proizvodi.proizvodi.length} artikala, ${pesme.length} pesama, ${filmovi.length} kadrova, ${jokeri.length} Joker pitanja, ${trendovi.pojmovi.length} pojmova za guglanje, kviz za 14 dana od ${beogradskiDatum()}`,
+    `[lokalna baza] spremna (bez seed fajla za danas, pitanja napravljena iz data/): ${proizvodi.proizvodi.length} artikala, ${pesme.length} pesama, ${filmovi.length} kadrova, ${jokeri.length} Joker pitanja, ${trendovi.pojmovi.length} pojmova za guglanje, kviz za 14 dana od ${danas}`,
   );
   return omotajPglite(pg);
+}
+
+/**
+ * Samo za pregled izgleda rang liste na svom računaru (CP_PROBNA_LISTA=1): izmišljeni nalozi sa današnjim rezultatima.
+ * Nikad se ne pali na pravom sajtu: prava baza ne prolazi kroz ovaj fajl.
+ */
+async function probnaLista(pg: { exec(sql: string): Promise<unknown> }, danas: string) {
+  const imena = ["Mile_iz_trafike", "komsinica_Rada", "DzoniBravo", "baba_Zorka", "Lepi_Cane", "SlagalicaKing", "tetka_iz_Nisa", "Burek_sa_sirom", "ZvezdaSever", "Grobar1945", "mali_Perica", "Sojka", "kum_Laza", "Teta_Vida"];
+  const redovi = imena.map((ime, i) => {
+    const id = `aaaaaaaa-0000-4000-8000-${String(i + 1).padStart(12, "0")}`;
+    const poeni = [310, 285, 285, 240, 215, 190, 175, 160, 140, 120, 95, 70, 45, 20][i];
+    return `
+      insert into auth.users (id, email, email_confirmed_at) values ('${id}', 'proba${i}@example.com', now());
+      update public.profiles set username = '${ime}' where id = '${id}';
+      insert into public.plays (quiz_date, user_id, device_id, status, score, total_answer_ms, leaderboard_status, finished_at)
+        values ('${danas}', '${id}', '${id}', 'finished', ${poeni}, ${90000 + i * 7300}, 'counted', now());`;
+  });
+  await pg.exec(redovi.join("\n"));
 }

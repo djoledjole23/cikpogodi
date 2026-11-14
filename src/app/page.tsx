@@ -15,8 +15,7 @@ export default function Pocetna() {
           <span className="logo-pogodi">Pogodi!</span>
         </h1>
         <p className="lead">
-          Pet mini igara, jedan pokušaj dnevno. Svi dobijaju ista pitanja, pa da vidimo ko stvarno zna, a ko samo
-          priča. Ista pitanja za sve, trofej samo za jednog.
+          Pet mini igara, jedan pokušaj dnevno. Ista pitanja za sve, trofej samo za jednog.
         </p>
         {/* Zavisi od toga da li je igrač danas već igrao, pa stiže naknadno. */}
         <Suspense fallback={<div className="skeleton" style={{ height: 74 }} aria-hidden="true" />}>
@@ -100,6 +99,17 @@ async function StanjeIgre() {
             <p className="played-score">
               {igra.score}
               <small> / {max}</small>
+            </p>
+            <p className="small">
+              {igra.lista === "counted" ? (
+                <Link href="/rang-lista" className="text-link">
+                  {igra.mesto ? `Ti si ${igra.mesto}. na današnjoj listi` : "Rezultat je na rang listi"}
+                </Link>
+              ) : igra.lista === "pending" ? (
+                "Rezultat čeka potvrdu mejla, pa ulazi na rang listu."
+              ) : (
+                "Rezultat nije na rang listi."
+              )}
             </p>
           </>
         ) : (
