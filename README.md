@@ -68,8 +68,8 @@ npm run build
 > da nalozi nisu povezani. Fajl se pravi duplim klikom na `podesi.bat` (otvara ga u Notepad-u).
 
 1. Na supabase.com napravi projekat (region što bliže Srbiji, npr. Frankfurt).
-2. **SQL Editor** → nalepi ceo `supabase/migrations/0001_init.sql` → Run. Pa isto tako sve migracije po redu
-   (`0002…`, `0003…`, `0004…`, `0005…`) i na kraju poslednji fajl iz `supabase/seed/` (to su pitanja).
+2. **SQL Editor** → nalepi ceo `supabase/migrations/0001_init.sql` → Run. Zatim nalepi poslednji fajl iz
+   `supabase/seed/` → Run (to su pitanja; taj fajl u sebi nosi i migracije `0002`–`0005`, pa one ne moraju posebno).
 3. **Project Settings → API Keys**: prepiši Project URL, „Publishable” i „Secret” ključ u `.env.local`
    (dupli klik na `podesi.bat`), a u **Connect → Transaction pooler** uzmi `DATABASE_URL`.
    Iste vrednosti kasnije idu i na Vercel.
