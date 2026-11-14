@@ -160,20 +160,24 @@ pa se brojevi unose u fajl, a dueli se prave iz njega.
 
 - Fajl ima **grupe** do 5 pojmova. Jedna grupa = jedno poređenje u Trends-u, pa su pojmovi u njoj na
   zajedničkoj skali.
-- **Mostovi** su poređenja u kojima su zajedno pojmovi iz različitih grupa (najjači pojam svake grupe je u
-  bar jednom mostu). Preko njih se sve grupe svode na jednu skalu, pa mogu da se porede i pojmovi koji nemaju
-  veze jedan s drugim (čaj i Zlatibor). Tamo gde se dva mosta preklapaju, merenja se slažu na manje od 1%.
-- `prosek` je prosečan nedeljni indeks (0–100) za 52 cele nedelje. To je broj koji Trends prikazuje kao
-  „prosek” pored grafikona, samo sa dve decimale.
-- `upit` je tačno ono što je ukucano u Trends: bez kvačica, kako ljudi najčešće kucaju (`cevapi`, ne `ćevapi`).
-- U igri se duel prikazuje kao odnos: pojam koji se više tražio dobija 100, drugi srazmerno manje.
-- Pojam sa prosekom ispod 2 u svojoj grupi ne ulazi u igru (pregrubo zaokruženo).
+- **Tema ili tačan tekst.** `upit` koji počinje sa `/` je oznaka *teme* u Trends-u (npr. `/m/0110q02h` je
+  košarkaš Nikola Jokić): broje se sve pretrage o tom pojmu, kako god da su ukucane („jokic”, „jokić mvp”).
+  Ostali upiti su *tačan tekst* pretrage (`bmw`, `polovni automobili`). Za svaki pojam su izmerena oba načina
+  i uzet je onaj koji hvata više: tema je pravilo, a tekst se koristi kad teme nema ili kad hvata manje od
+  samog teksta (marke automobila, palačinke, pasulj). Pojam meren kao tekst traži veću razliku u duelu.
+- **Mostovi** su poređenja u kojima su zajedno najjači pojmovi iz različitih grupa. Preko njih se sve grupe
+  svode na jednu skalu, pa mogu da se porede i pojmovi koji nemaju veze jedan s drugim (čaj i Zlatibor).
+  Tamo gde se mostovi preklapaju, merenja se slažu na oko 1%.
+- `prosek` je prosečan nedeljni indeks (0–100) za cele nedelje u periodu.
+- **Stvaran broj pretraga ne postoji u Trends-u**, samo odnosi. U igri se zato prikazuje odnos: pojam koji se
+  više tražio dobija 100, drugi srazmerno manje, uz „koliko puta više”.
+- Pojam sa prosekom ispod 2 u svojoj grupi ne ulazi u igru (pregrubo zaokruženo). Grupa koja ne može pouzdano
+  da se veže za ostale takođe ispada (praznici: jedan veliki skok godišnje, pa je prosek premali).
 - Duel se **ne pravi** kad je slabiji pojam iznad 80% jačeg (preblizu, a zajednička skala nosi grešku od par
-  procenata), kad je ispod 20% (preočigledno) ili kad bi greška zaokruživanja malih brojeva mogla da
-  promeni pobednika.
+  procenata), kad je ispod 20% (preočigledno) ili kad bi greška merenja mogla da promeni pobednika.
 
-Nova grupa: otvori `trends.google.com/trends/explore?geo=RS&date=today 12-m`, uporedi do 5 pojmova, prepiši
-proseke u fajl. Zatim napravi bar jedan most: uporedi najjači pojam nove grupe sa pojmovima sličnog reda
+Nova grupa: otvori `trends.google.com/trends/explore?geo=RS&date=today 12-m`, uporedi do 5 pojmova (kad Trends
+ponudi temu, na primer „Košarkaš”, izaberi nju umesto „Pojam za pretragu”), prepiši proseke u fajl. Zatim napravi bar jedan most: uporedi najjači pojam nove grupe sa pojmovima sličnog reda
 veličine iz drugih grupa i dodaj to poređenje u `mostovi`. Promeni `period` i `datum_preuzimanja`, pa pusti
 `npm run seed` (skripta ispisuje najveće neslaganje merenja; ako pređe par procenata, neki broj je pogrešno
 prepisan). Ručni unos kroz admin panel stiže sa adminom.

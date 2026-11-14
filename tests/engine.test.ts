@@ -374,35 +374,46 @@ describe("trends.json: jedna skala za sve teme", () => {
   const pojam = (naziv: string) => trendovi.pojmovi.find((p) => p.naziv === naziv)!;
 
   it("mostovi svode sve grupe na istu skalu, a merenja se slažu", () => {
-    expect(trendovi.pojmovi.length).toBe(105);
-    expect(new Set(trendovi.pojmovi.map((p) => p.tema)).size).toBe(22);
+    expect(trendovi.pojmovi.length).toBe(104);
+    expect(new Set(trendovi.pojmovi.map((p) => p.tema)).size).toBe(21);
     // dva merenja istog odnosa (preko različitih mostova) ne razlikuju se više od 3%
     expect(trendovi.najveceOdstupanje).toBeLessThan(0.03);
-    // unutar grupe odnos ostaje onakav kakav je izmeren: burek 53,27 naspram ćevapa 31,17
-    expect(pojam("Ćevapi").jacina / pojam("Burek").jacina).toBeCloseTo(31.17 / 53.27, 6);
-    // preko mosta: u istom poređenju novi sad je imao 87,6, a burek 1,06 (premalo da se koristi),
-    // pa odnos ide preko drugih mostova i mora da ispadne istog reda veličine
-    const ns = pojam("Novi Sad").jacina / pojam("Burek").jacina;
-    expect(ns).toBeGreaterThan(55);
-    expect(ns).toBeLessThan(95);
-    // most „novi sad 62,21 : vremenska prognoza 61,46” → praktično isto
-    expect(odnos(pojam("Novi Sad"), pojam("Vremenska prognoza"))).toBeGreaterThan(0.95);
+    // unutar grupe odnos ostaje onakav kakav je izmeren: burek 49,38 naspram ćevapa 45,6
+    expect(pojam("Ćevapi").jacina / pojam("Burek").jacina).toBeCloseTo(45.6 / 49.38, 6);
+    // provera spolja: šljiva i Jokić su iz različitih grupa i nisu zajedno ni u jednom mostu,
+    // a kad se direktno uporede u Trends-u izlazi 34,13 : 27,08. Zajednička skala mora da da isto (±5%).
+    const izracunato = pojam("Šljiva").jacina / pojam("Nikola Jokić").jacina;
+    expect(Math.abs(izracunato / (34.13 / 27.08) - 1)).toBeLessThan(0.05);
+    // most „novi sad 69,6 : vremenska prognoza 62,42”
+    expect(odnos(pojam("Novi Sad"), pojam("Vremenska prognoza"))).toBeCloseTo(62.42 / 69.6, 1);
   });
 
-  it("premalo pretraga → pojam ne ulazi u igru", () => {
-    for (const naziv of ["Aleksandar Mitrović", "Dušan Tadić", "Vidovdan", "Slagalica", "Ljubičica"]) {
+  it("ljudi i mesta se mere kao tema (sve pretrage o njima), a ne kao tačno ukucan tekst", () => {
+    for (const naziv of ["Nikola Jokić", "Ceca", "Novi Sad", "Šljiva", "Burek"]) expect(pojam(naziv).mera, naziv).toBe("tema");
+    // tačan tekst ostaje tamo gde tema hvata manje od samog teksta ili je nema
+    for (const naziv of ["BMW", "Palačinke", "Polovni automobili", "Matematika"]) {
+      expect(pojam(naziv).mera, naziv).toBe("tekst");
+      expect(pojam(naziv).nesigurnost).toBeGreaterThanOrEqual(0.25); // traži veću razliku u duelu
+    }
+    expect(pojam("Nikola Jokić").nesigurnost).toBeLessThan(0.02);
+  });
+
+  it("premalo pretraga ili nepouzdano merenje → pojam ne ulazi u igru", () => {
+    // praznici imaju jedan veliki skok godišnje, pa im je prosek premali da se pouzdano veže za ostale grupe
+    for (const naziv of ["Vidovdan", "Slagalica", "Božić", "Uskrs", "Slava", "Nova godina"]) {
       expect(pojam(naziv)).toBeUndefined();
       expect(trendovi.izbaceni.some((x) => x.naziv === naziv)).toBe(true);
     }
   });
 
   it("duel je fer samo kad je pobednik jasan, ali ne preočigledan", () => {
-    expect(ferDuel(pojam("Novi Sad"), pojam("Vremenska prognoza"))).toBe(false); // praktično nerešeno
-    expect(ferDuel(pojam("Paradajz"), pojam("Paprika"))).toBe(false); // 38,83 naspram 39,17
+    expect(ferDuel(pojam("Novi Sad"), pojam("Vremenska prognoza"))).toBe(false); // preblizu
+    expect(ferDuel(pojam("Klima"), pojam("Frižider"))).toBe(false); // 26,06 naspram 25,77
+    expect(ferDuel(pojam("Burek"), pojam("Ćevapi"))).toBe(false); // 49,38 naspram 45,6
     expect(ferDuel(pojam("Novi Sad"), pojam("Tulumbe"))).toBe(false); // preočigledno
     expect(ferDuel(pojam("Burek"), pojam("Burek"))).toBe(false);
-    expect(ferDuel(pojam("Burek"), pojam("Ćevapi"))).toBe(true); // ista tema
-    expect(ferDuel(pojam("Čaj"), pojam("Zlatibor"))).toBe(true); // različite teme
+    expect(ferDuel(pojam("Burek"), pojam("Gibanica"))).toBe(true); // ista grupa
+    expect(ferDuel(pojam("Čaj"), pojam("Zlatibor"))).toBe(true); // različite grupe
     // mali brojevi nose veliku grešku zaokruživanja, pa im treba veća razlika
     const mali = { ...pojam("Burek"), prosekUGrupi: 2.5, nesigurnost: 0.2, upit: "x" };
     const maloVeci = { ...mali, jacina: mali.jacina * 1.4, upit: "y" };
@@ -412,7 +423,7 @@ describe("trends.json: jedna skala za sve teme", () => {
 
   it("u duelu jači pojam ima 100, a slabiji srazmerno manje", () => {
     const par = napraviPar(pojam("Ćevapi"), pojam("Burek"), "p", "2026-11-14");
-    expect(par).toMatchObject({ a: "Ćevapi", b: "Burek", indeksA: 59, indeksB: 100 });
+    expect(par).toMatchObject({ a: "Ćevapi", b: "Burek", indeksA: 92, indeksB: 100 });
   });
 
   it("odbija fajl u pogrešnom obliku", () => {

@@ -1,6 +1,10 @@
 /**
  * Čitanje data/trends.json (Google Trends, Srbija, poslednjih 12 meseci).
  *
+ * Pojam se meri kao TEMA (sve pretrage o njemu, kako god da su ukucane) kad god Trends ima temu koja
+ * hvata bar koliko i sam tekst; inače kao TAČAN TEKST pretrage. Tako „Nikola Jokić” broji i „jokic” i „jokić mvp”,
+ * a ne samo pretrage u kojima piše puno ime.
+ *
  * U fajlu su „grupe” (jedno poređenje do 5 pojmova, zajednička skala unutar grupe) i „mostovi”
  * (poređenja u kojima su zajedno pojmovi iz različitih grupa). Preko mostova se sve grupe svode
  * na jednu skalu, pa mogu da se porede i pojmovi iz različitih tema.
@@ -17,10 +21,13 @@ export type Pojam = {
   /** Isti prosek sveden na zajedničku skalu svih grupa. Samo odnos dve jačine ima smisla. */
   jacina: number;
   /**
-   * Koliko najviše jačina može da omaši zbog zaokruživanja (0,1 = 10%).
-   * Trends daje cele brojeve 0–100 po nedelji, pa mali prosek nosi veliku grešku.
+   * Koliko najviše jačina može da omaši (0,1 = 10%).
+   * Trends daje cele brojeve 0–100 po nedelji, pa mali prosek nosi veliku grešku zaokruživanja.
+   * Pojam meren kao tačan tekst (a ne kao tema) dobija dodatak: tekst ne hvata sve oblike i pisanja.
    */
   nesigurnost: number;
+  /** Da li je meren kao tema u Google Trends-u (sve pretrage o pojmu) ili kao tačan tekst pretrage. */
+  mera: "tema" | "tekst";
 };
 
 /** Jedan duel: dva pojma i njihov odnos. */
@@ -49,11 +56,15 @@ export type UcitaniTrendovi = {
 /** Ispod ovog proseka Trends zaokružuje pregrubo da bi poređenje bilo pouzdano. */
 const NAJMANJI_PROSEK = 2;
 /** Merenje u mostu se koristi samo ako je bar ovoliko (inače je zaokruživanje preveliko). */
-const NAJMANJE_U_MOSTU = 5;
+const NAJMANJE_U_MOSTU = 7;
 /** Duel je fer samo ako je slabiji pojam najviše 80% jačeg... */
 export const NAJVECI_ODNOS = 0.8;
 /** ...i ako pobednik ostaje isti i kad se obe jačine pomere za svoju najveću grešku, uz još 10% rezerve za zajedničku skalu. */
 const REZERVA_SKALE = 0.9;
+/** Dodatna nesigurnost za pojam meren kao tačan tekst. */
+const NESIGURNOST_TEKSTA = 0.25;
+/** Upit koji počinje kosom crtom je oznaka teme u Google Trends-u (npr. /m/0110q02h). */
+const jeTema = (upit: string) => upit.startsWith("/");
 /** ...i bar 20% jačeg: ispod toga je preočigledno. */
 export const NAJMANJI_ODNOS = 0.2;
 
@@ -149,7 +160,8 @@ export function ucitajTrendove(json: unknown): UcitaniTrendovi {
       upit: s.upit,
       prosekUGrupi: s.prosek,
       jacina: s.prosek * Math.exp(logFaktor.get(s.tema)!),
-      nesigurnost: 0.5 / s.prosek,
+      nesigurnost: 0.5 / s.prosek + (jeTema(s.upit) ? 0 : NESIGURNOST_TEKSTA),
+      mera: jeTema(s.upit) ? "tema" : "tekst",
     });
   }
 

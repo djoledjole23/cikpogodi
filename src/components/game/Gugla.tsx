@@ -211,7 +211,7 @@ export function GuglaDuel({
           <p className="g-duel-komentar">{komentar}</p>
           <p className="g-opseg">
             <strong>{p.tacan === "a" ? p.a : p.b}</strong>: {broj1(p.puta)} puta više pretraga.
-            <span className="g-duel-izvor"> Google Trends, Srbija, {p.period}.</span>
+            <span className="g-duel-izvor"> Brojevi su odnos, ne broj pretraga. Google Trends, Srbija, 12 meseci.</span>
           </p>
           <button type="button" className="btn btn-lg g-dole g-samo-dalje" onClick={naDalje} aria-disabled={zakljucano} autoFocus>
             <i className="g-samo-dalje-traka" style={{ animationDuration: `${SAMO_DALJE_MS}ms` }} />
