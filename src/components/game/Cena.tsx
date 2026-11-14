@@ -9,9 +9,9 @@ import { Konfete, Nalepnica, Pecat, smanjenoKretanje, useBrojac } from "./efekti
 
 const NAJVISE_CIFARA = 6;
 
-/** Slika i naziv artikla. Slike su sa Open Food Facts i učitavaju se direktno odatle. */
+/** Slika i naziv artikla. Slike su u public/artikli/ (rezerva: Open Food Facts, direktno odatle). */
 function Artikal({ naziv, kolicina, slika }: { naziv: string; kolicina: string; slika: string }) {
-  // Ako slika ne stigne (Open Food Facts ne radi, link je zastareo), pitanje i dalje može da se igra po nazivu.
+  // Ako slika ne stigne, pitanje i dalje može da se igra po nazivu.
   const [bezSlike, setBezSlike] = useState(!slika);
   return (
     <div className="g-artikal">
@@ -19,7 +19,7 @@ function Artikal({ naziv, kolicina, slika }: { naziv: string; kolicina: string; 
         {bezSlike ? (
           <IconCena size={64} />
         ) : (
-          // eslint-disable-next-line @next/next/no-img-element -- spoljna slika, bez Vercel optimizacije (troši kvotu)
+          // eslint-disable-next-line @next/next/no-img-element -- već smanjena slika, bez Vercel optimizacije (troši kvotu)
           <img
             src={slika}
             alt=""

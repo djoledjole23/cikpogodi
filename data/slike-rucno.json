@@ -1,0 +1,125 @@
+{
+ "napomena": "Artikli kojih nema u Maxi internet prodavnici: adresa fotografije nađena pretragom po barkodu na cenoteka.rs (14.11.2026). Skripta scripts/slike-artikala.mjs ih preuzima odavde.",
+ "artikli": {
+  "86027618": {
+   "izvor": "Cenoteka",
+   "nadjeno": "JELEN 0,5l",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2023/11/jelen-0-5l-65550d497df55.jpeg",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2023/11/jelen-0-5l-65550d497df55.jpeg"
+   ]
+  },
+  "8600939130841": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Keks ŠTARK Piškote 105g",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2024/12/keks-stark-piskote-105g-6761e085bdfd5.jpeg",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2024/12/keks-stark-piskote-105g-6761e085bdfd5.jpeg"
+   ]
+  },
+  "8602300233229": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Bombone PIONIR Negro + karamele mix 250g",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2024/11/bombone-pionir-negro-karamele-mix-250g-672c62f202e52.png",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2024/11/bombone-pionir-negro-karamele-mix-250g-672c62f202e52.png"
+   ]
+  },
+  "8606033742416": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Čips MARBO Chipsy domaćinski kajmak 145g",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2026/06/cips-marbo-chipsy-domacinski-kajmak-145g-6a25914c7761a.png",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2026/06/cips-marbo-chipsy-domacinski-kajmak-145g-6a25914c7761a.png"
+   ]
+  },
+  "8600037005133": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Gazirana voda KNJAZ MILOŠ 1,75l",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2024/02/gazirana-voda-knjaz-milos-1-75l-65d75c31c14c0.jpeg",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2024/02/gazirana-voda-knjaz-milos-1-75l-65d75c31c14c0.jpeg"
+   ]
+  },
+  "8600037008011": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Gazirana voda KNJAZ MILOŠ staklo 250ml",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2025/06/gazirana-voda-knjaz-milos-staklo-250ml-685e7a6cc41b1.jpeg",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2025/06/gazirana-voda-knjaz-milos-staklo-250ml-685e7a6cc41b1.jpeg"
+   ]
+  },
+  "8600169600022": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Voda PROLOM 1.5l",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2023/11/voda-prolom-1-5l-655537d1d9ac5.jpeg",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2023/11/voda-prolom-1-5l-655537d1d9ac5.jpeg"
+   ]
+  },
+  "8606030051702": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Voćni sok FRUVITA pomorandža 100% 800ml",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2025/08/vocni-sok-fruvita-pomorandza-100-800ml-68a9a8a4a70d1.png",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2025/08/vocni-sok-fruvita-pomorandza-100-800ml-68a9a8a4a70d1.png"
+   ]
+  },
+  "8600498170029": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Ulje DIJAMANT 1l",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2025/07/ulje-dijamant-1l-6883303779dc9.webp",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2025/07/ulje-dijamant-1l-6883303779dc9.webp"
+   ]
+  },
+  "8600498151479": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Ajvar DIJAMANT blagi 680g",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2025/07/ajvar-dijamant-blagi-680g-68833884db8c2.webp",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2025/07/ajvar-dijamant-blagi-680g-68833884db8c2.webp"
+   ]
+  },
+  "8606006080064": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Sladoled MACHO čokolada 75ml",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2024/03/sladoled-macho-cokolada-75ml-65e25d08f2e18.jpeg",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2024/03/sladoled-macho-cokolada-75ml-65e25d08f2e18.jpeg"
+   ]
+  },
+  "8606006080088": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Sladoled KAPRI 65ml",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2024/03/sladoled-kapri-65ml-65e2640825d4f.jpeg",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2024/03/sladoled-kapri-65ml-65e2640825d4f.jpeg"
+   ]
+  },
+  "8606006080040": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Sladoled FRIKOM Sneško 46g",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2025/04/sladoled-frikom-snesko-46g-6809e3ec3b3ee.png",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2025/04/sladoled-frikom-snesko-46g-6809e3ec3b3ee.png"
+   ]
+  },
+  "8606006080095": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Sladoled FRIKOM Čoko moko 65ml",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2026/03/sladoled-frikom-coko-moko-65ml-69bf04dedeff6.png",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2026/03/sladoled-frikom-coko-moko-65ml-69bf04dedeff6.png"
+   ]
+  },
+  "8606017433705": {
+   "izvor": "Cenoteka",
+   "nadjeno": "Smrznute pogačice FRIKOM 800g",
+   "adrese": [
+    "https://api.cenoteka.rs/uploads/2023/11/smrznute-pogacice-frikom-800g-65559db7b9a59.jpeg",
+    "https://api.cenoteka.rs/uploads/cache/product_small/uploads/2023/11/smrznute-pogacice-frikom-800g-65559db7b9a59.jpeg"
+   ]
+  }
+ }
+}

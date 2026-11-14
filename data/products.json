@@ -2,7 +2,7 @@
   "izvor": "Zvanični cenovnici trgovinskih lanaca (Portal otvorenih podataka, data.gov.rs) – Maxi/Delhaize, Lidl, Idea, Univerexport, Gomex, Aman, Super Vero",
   "datum_cenovnika": "2026-11-13",
   "napomena": "cena_rsd = prosek redovnih cena (bez akcija) između lanaca, zaokružen na dinar. Unutar lanca je prvo uzet prosek svih formata/objekata.",
-  "slike": "Open Food Facts (CC BY-SA) – u footeru sajta navesti: Slike: Open Food Facts",
+  "slike": "Fotografije pakovanja su u public/artikli/<barkod>.webp (preuzete skriptom scripts/slike-artikala.mjs iz Maxi internet prodavnice i sa Cenoteke; vlasništvo proizvođača i trgovaca). Polje slika_url (Open Food Facts) je rezerva za artikal koji tamo nema fajl.",
   "broj_proizvoda": 94,
   "proizvodi": [
     {
@@ -649,7 +649,7 @@
     {
       "id": "8602300233229",
       "barkod": "8602300233229",
-      "naziv": "Pionir Negro punjene bombone",
+      "naziv": "Pionir mix Negro i Karamela lešnik",
       "kolicina": "250 g",
       "kategorija": "Slatkiši",
       "cena_rsd": 264,
@@ -1926,7 +1926,7 @@
     {
       "id": "8606006080040",
       "barkod": "8606006080040",
-      "naziv": "Frikom Snesko",
+      "naziv": "Frikom Sneško",
       "kolicina": "46 g",
       "kategorija": "Smrznuto",
       "cena_rsd": 76,

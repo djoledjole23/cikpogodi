@@ -42,8 +42,8 @@ export type Pitanje = PitanjePesma | PitanjeCena | PitanjeGugla | PitanjeFilm;
 
 export type OdgovorCena = { unos: number };
 export type OdgovorGugla = { izbor: "a" | "b" };
-/** Izabrana pesma iz kataloga (`songId`, uz tekst radi prikaza), slobodno ukucan tekst ili „Ne znam”. */
-export type OdgovorPesma = { songId?: number; tekst?: string; neZnam?: boolean };
+/** Pesma izabrana sa spiska (`izbor`, uz tekst radi prikaza), slobodno ukucan tekst ili „Ne znam”. */
+export type OdgovorPesma = { izbor?: { izvodjac: string; naslov: string }; tekst?: string; neZnam?: boolean };
 /** Ukucan naslov ili „Ne znam”. */
 export type OdgovorFilm = { tekst?: string; neZnam?: boolean };
 export type Odgovor = OdgovorPesma | OdgovorCena | OdgovorGugla | OdgovorFilm;

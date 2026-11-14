@@ -54,14 +54,14 @@ export const api = {
 
 // ───── katalog pesama (za biranje odgovora) ─────
 
-export type PesmaIzKataloga = { id: number; izvodjac: string; naslov: string };
+export type PesmaIzKataloga = { izvodjac: string; naslov: string };
 let katalog: Promise<PesmaIzKataloga[]> | null = null;
 
-/** Ceo spisak pesama. Učitava se jednom po poseti; ako ne uspe, sledeći poziv pokušava ponovo. */
+/** Ceo spisak pesama (više hiljada). Učitava se jednom po poseti; ako ne uspe, sledeći poziv pokušava ponovo. */
 export function katalogPesama(): Promise<PesmaIzKataloga[]> {
   katalog ??= fetch("/api/pesme")
     .then((o) => (o.ok ? o.json() : Promise.reject(new Error(`pesme ${o.status}`))))
-    .then((p: { pesme: [number, string, string][] }) => p.pesme.map(([id, izvodjac, naslov]) => ({ id, izvodjac, naslov })))
+    .then((p: { izvodjaci: [string, string[]][] }) => p.izvodjaci.flatMap(([izvodjac, naslovi]) => naslovi.map((naslov) => ({ izvodjac, naslov }))))
     .catch((e) => {
       katalog = null;
       throw e;

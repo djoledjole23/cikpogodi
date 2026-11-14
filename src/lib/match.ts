@@ -63,7 +63,7 @@ export function slicno(upisano: string, tacniOblici: string[]): boolean {
   });
 }
 
-export type StavkaKataloga = { id: number; izvodjac: string; naslov: string };
+export type StavkaKataloga = { izvodjac: string; naslov: string };
 
 /** Šta igrač sme da ukuca da bi pogodio pesmu: naslov, „izvođač naslov”, „naslov izvođač” i dodatni oblici naslova. */
 export function tacniObliciPesme(p: { izvodjac: string; naslov: string; alias?: string[] }): string[] {
@@ -71,33 +71,49 @@ export function tacniObliciPesme(p: { izvodjac: string; naslov: string; alias?: 
   return naslovi.flatMap((n) => [n, `${p.izvodjac} ${n}`, `${n} ${p.izvodjac}`]);
 }
 
+type Pripremljeno<T> = { stavka: T; naslov: string; reci: string[] };
+/** Katalog ima više hiljada pesama: priprema se jednom, a ne pri svakom ukucanom slovu. */
+const pripremljeni = new WeakMap<object, Pripremljeno<StavkaKataloga>[]>();
+
+function pripremi<T extends StavkaKataloga>(katalog: T[]): Pripremljeno<T>[] {
+  let p = pripremljeni.get(katalog) as Pripremljeno<T>[] | undefined;
+  if (!p) {
+    p = katalog.map((stavka) => {
+      const naslov = normalizuj(stavka.naslov);
+      return { stavka, naslov, reci: `${normalizuj(stavka.izvodjac)} ${naslov}`.split(" ") };
+    });
+    pripremljeni.set(katalog, p);
+  }
+  return p;
+}
+
 /**
  * Pretraga kataloga dok igrač kuca: svaka ukucana reč mora da bude početak neke reči u „izvođač naslov”
  * (pa „cec kuk” nalazi „Ceca – Kukavica”). Ako tako nema ničega, traži se uz jednu grešku u kucanju po reči.
- * Prvo idu pesme kojima naslov počinje ukucanim tekstom.
+ * Prvo idu pesme kojima naslov počinje ukucanim tekstom. Vraća prvih `najvise` i ukupan broj nađenih.
  */
-export function pretraziKatalog<T extends StavkaKataloga>(katalog: T[], upit: string, najvise = 6): T[] {
+export function nadjiUKatalogu<T extends StavkaKataloga>(katalog: T[], upit: string, najvise = 6): { stavke: T[]; ukupno: number } {
   const u = normalizuj(upit);
-  if (!u) return [];
+  if (!u) return { stavke: [], ukupno: 0 };
   const reci = u.split(" ");
+  const pripremljeno = pripremi(katalog);
 
-  type Pripremljeno = { stavka: T; naslov: string; reci: string[] };
-  const pripremljeno: Pripremljeno[] = katalog.map((stavka) => {
-    const naslov = normalizuj(stavka.naslov);
-    return { stavka, naslov, reci: `${normalizuj(stavka.izvodjac)} ${naslov}`.split(" ") };
-  });
-
-  const tacno = (p: Pripremljeno) => reci.every((r) => p.reci.some((x) => x.startsWith(r)));
-  const priblizno = (p: Pripremljeno) =>
+  const tacno = (p: Pripremljeno<T>) => reci.every((r) => p.reci.some((x) => x.startsWith(r)));
+  const priblizno = (p: Pripremljeno<T>) =>
     reci.every((r) => p.reci.some((x) => x.startsWith(r) || (r.length >= 4 && razdaljina(r, x.slice(0, r.length)) <= 1)));
 
   let nadjeno = pripremljeno.filter(tacno);
   if (!nadjeno.length) nadjeno = pripremljeno.filter(priblizno);
 
-  const rang = (p: Pripremljeno) => (p.naslov.startsWith(u) ? 0 : p.naslov.split(" ").some((x) => x.startsWith(reci[0])) ? 1 : 2);
-  return nadjeno
+  const rang = (p: Pripremljeno<T>) => (p.naslov.startsWith(u) ? 0 : p.naslov.split(" ").some((x) => x.startsWith(reci[0])) ? 1 : 2);
+  const stavke = nadjeno
     .map((p, i) => ({ p, i, r: rang(p) }))
     .sort((x, y) => x.r - y.r || x.i - y.i)
     .slice(0, najvise)
     .map((x) => x.p.stavka);
+  return { stavke, ukupno: nadjeno.length };
+}
+
+export function pretraziKatalog<T extends StavkaKataloga>(katalog: T[], upit: string, najvise = 6): T[] {
+  return nadjiUKatalogu(katalog, upit, najvise).stavke;
 }

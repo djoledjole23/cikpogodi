@@ -53,8 +53,8 @@ export default function PravilaPrivatnosti() {
           <li><span className="todo">[SERVIS ZA SLANJE MEJLOVA]</span>: potvrda naloga i nova šifra.</li>
           <li>Google i Apple: samo ako se prijaviš preko njihovog naloga.</li>
           <li>
-            Deezer, YouTube i Open Food Facts: muzika, video inserti i slike se učitavaju sa njihovih servera, pa
-            oni pritom vide tvoju IP adresu.
+            Deezer: muzički klipovi i omoti albuma se učitavaju sa njihovih servera, pa oni pritom vide tvoju IP
+            adresu.
           </li>
         </ul>
 

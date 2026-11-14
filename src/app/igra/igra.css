@@ -1785,6 +1785,15 @@
   color: var(--ink);
 }
 
+.g-predlozi-jos {
+  padding: 0 4px;
+  font-size: 13.5px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: center;
+}
+
 .g-predlozi-prazno {
   padding: 8px 4px;
   font-size: 14.5px;

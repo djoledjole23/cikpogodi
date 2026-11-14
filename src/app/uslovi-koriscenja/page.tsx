@@ -26,9 +26,9 @@ export default function UsloviKoriscenja() {
         <h2>Sadržaj</h2>
         <p>
           Cene su iz zvaničnih cenovnika trgovinskih lanaca (data.gov.rs) i važe za dan kada su preuzete. Muzički
-          klipovi su zvanični odlomci sa servisa Deezer, video inserti se puštaju sa zvaničnih YouTube kanala, a
-          slike proizvoda su sa Open Food Facts. Podaci o pretragama su iz Google Trends. Sva prava ostaju kod
-          vlasnika.
+          klipovi su zvanični odlomci sa servisa Deezer. Fotografije proizvoda pripadaju proizvođačima i trgovcima, a
+          kadrovi iz filmova i serija njihovim producentima. Podaci o pretragama su iz Google Trends. Sva prava
+          ostaju kod vlasnika.
         </p>
 
         <h2>Bez garancija</h2>

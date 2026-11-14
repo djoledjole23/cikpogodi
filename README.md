@@ -130,8 +130,24 @@ iz `alias`). Tačno nosi 20 poena, sve ostalo 0.
 
 ## Pesme
 
-`data/songs.json` je katalog za „Pogodi pesmu”: služi i za dnevni kviz i kao spisak iz kog igrač bira odgovor
-(zato ga ima mnogo više nego što se pusti za dve nedelje).
+`data/songs.json` su pesme koje se **puštaju** u „Pogodi pesmu” (165 komada, mnogo više nego što treba za dve nedelje).
+
+`data/katalog.json` je **spisak za biranje odgovora**: oko 6.700 pesama (do 30 najslušanijih od svakog izvođača
+iz kviza i do 20 od još dvestotinak domaćih izvođača). Te pesme se nikad ne puštaju. Služe da izbor bude težak:
+ko ukuca „Ceca” vidi tridesetak njenih pesama, a ne samo onu koja svira. Browser dobija jedan pomešan spisak
+(`/api/pesme`), bez oznake koja je pesma iz kviza.
+
+- Naslovi su sa Deezera, ne izmišljaju se. Osvežavanje spiska:
+  `node scripts/katalog-pesama.mjs preuzmi` (oko 5 minuta, pravi `tmp/katalog-sirovo.json`), pa
+  `node scripts/katalog-pesama.mjs napravi` (čisti verzije i duple, ujednačava pisanje i kvačice gde je sigurno).
+- Iz spiska se izbacuje sve što bi se sudarilo sa pesmom iz kviza (isti izvođač i isti ili skoro isti naslov),
+  da tačan odgovor bude samo jedan. To proverava i test `tests/katalog.test.ts`, pa ga pusti posle svake izmene
+  `songs.json`.
+- Izbor sa spiska je tačan samo ako je baš ta pesma (isti izvođač i naslov). Praštanje omaški važi samo kad igrač
+  kuca naslov i pošalje ga bez biranja.
+- Deo naslova sa Deezera je pisan bez kvačica („Hitna pomoc”). Skripta popravlja ono što je sigurno, ostalo ostaje.
+
+O pesmama koje se puštaju (`songs.json`):
 
 - Svaka pesma ima `deezer_id` numere koja je **pronađena na Deezeru sa klipom od 30 s** (`api.deezer.com/search`).
   ID se ne izmišlja: pesma bez njega ne ulazi ni u kviz ni u katalog. `nije_nadjeno` nabraja pesme koje su
@@ -152,12 +168,23 @@ iz `alias`). Tačno nosi 20 poena, sve ostalo 0.
 ## Cene
 
 `data/products.json` je jedini izvor cena. U igru ulaze samo artikli koji imaju i sliku i cenu
-(trenutno 76 od 94). Cena u igri je `cena_rsd`: prosek redovnih cena između lanaca, zaokružen na dinar.
+(trenutno svih 94). Cena u igri je `cena_rsd`: prosek redovnih cena između lanaca, zaokružen na dinar.
 
-**Fotografije.** Slike su za sada sa Open Food Facts (slikaju ih korisnici, pa su neujednačene). Sopstvena
-fotografija ima prednost: ubaci fajl nazvan po barkodu u `public/artikli/` (npr. `public/artikli/8600043000023.jpg`)
-i pusti `npm run seed`. Artikal koji u fajlu nema sliku, a ovde je ima, ulazi u igru. Uputstvo je u
-`public/artikli/PROCITAJ.txt`. Koristi samo fotografije koje smeš (svoje ili uz dozvolu proizvođača ili trgovca).
+**Fotografije.** Za svaki artikal postoji fotografija pakovanja u `public/artikli/<barkod>.webp` (bela pozadina,
+najviše 640 px). Preuzete su skriptom, isključivo po barkodu, pa slika ne može da bude od druge gramaže ili ukusa:
+
+```bash
+node scripts/slike-artikala.mjs     # → tmp/artikli/ + izveštaj šta je nađeno i gde
+```
+
+- 79 artikala je iz Maxi internet prodavnice. Za 15 kojih tamo nema, adresa fotografije je nađena pretragom po
+  barkodu na Cenoteci i upisana u `data/slike-rucno.json` (Cenoteka ne pušta skripte na pretragu).
+- Preuzete fajlove pregledaj, pa ih pretvori u webp i prebaci u `public/artikli/`. Posle toga `npm run seed`.
+- **Fotografije su vlasništvo proizvođača i trgovaca.** Odluku da se koriste doneo je vlasnik sajta i on za nju
+  odgovara. Ako neko zatraži uklanjanje, obriši fajl: artikal tada koristi `slika_url` iz `products.json`
+  (Open Food Facts) ako ga ima, a inače ispada iz igre.
+- Fajl u `public/artikli/` uvek ima prednost, pa tu možeš da ubaciš i sopstvenu fotografiju
+  (uputstvo: `public/artikli/PROCITAJ.txt`).
 
 ```bash
 npm run update-cene             # osveži cene iz cenovnika na data.gov.rs

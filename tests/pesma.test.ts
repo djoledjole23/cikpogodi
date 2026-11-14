@@ -64,10 +64,11 @@ async function slusaj(ja: Identitet, itemId: number, ms: number) {
   return slusanje(db, ja, DAN, { itemId, pusteno: false });
 }
 
-const idPesme = async (redni: number) => {
-  const [r] = await db.query<{ id: number }>(`select id::int as id from public.songs where deezer_id = $1::bigint`, [900000 + redni]);
-  return r.id;
-};
+/** Probna pesma broj `redni`, onako kako bi je igrač izabrao sa spiska. */
+const izborPesme = (redni: number) => ({
+  izvodjac: `Probni Bend ${redni}`,
+  naslov: redni === 1 ? "Ne može nam niko ništa" : redni === 2 ? "Zmaj" : `Probna pesma broj ${redni}`,
+});
 
 describe("tolerantno poređenje", () => {
   it("ne gleda velika slova, kvačice ni pismo", () => {
@@ -107,7 +108,7 @@ describe("tolerantno poređenje", () => {
   });
 
   it("pretraga kataloga: početak reči, bilo kojim redom, i uz omašku", () => {
-    const k = katalog.pesme.map((p, i) => ({ id: i + 1, izvodjac: p.izvodjac, naslov: p.naslov }));
+    const k = katalog.pesme.map((p) => ({ izvodjac: p.izvodjac, naslov: p.naslov }));
     const nadji = (u: string) => pretraziKatalog(k, u, 5).map((x) => `${x.izvodjac} – ${x.naslov}`);
     expect(nadji("kuk")).toEqual(["Ceca – Kukavica"]);
     expect(nadji("cec kuk")).toEqual(["Ceca – Kukavica"]);
@@ -276,7 +277,7 @@ describe("segment 1: pogodi pesmu", () => {
       const s = await posaljiPitanje(db, ja, DAN);
       const id = s.trenutno!.itemId;
       if (ms > 0) await slusaj(ja, id, ms);
-      const r = await odgovori(db, ja, DAN, { itemId: id, odgovor: { songId: await idPesme(i + 1) }, slusanoMs: ms });
+      const r = await odgovori(db, ja, DAN, { itemId: id, odgovor: { izbor: izborPesme(i + 1) }, slusanoMs: ms });
       expect(r.ocena, `${ms} ms`).toMatchObject({ tacno: true, poeni, maxPoena: 20, istek: false });
       expect((r.ocena.prikaz as PrikazPesma).slusanoMs).toBe(ms);
       zbir += poeni;
@@ -306,7 +307,7 @@ describe("segment 1: pogodi pesmu", () => {
     r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: { tekst: "ЗМАЈ" }, slusanoMs: 3000 });
     expect(r.ocena).toMatchObject({ tacno: true, poeni: 15 });
     // 3: izabrana pogrešna pesma iz kataloga (iako tekst liči na tačan naslov, važi izbor)
-    r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: { songId: await idPesme(9), tekst: "Probna pesma broj 3" }, slusanoMs: 1000 });
+    r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: { izbor: izborPesme(9), tekst: "Probna pesma broj 3" }, slusanoMs: 1000 });
     expect(r.ocena).toMatchObject({ tacno: false, poeni: 0, istek: false });
     expect((r.ocena.prikaz as PrikazPesma).odgovor).toBe("Probna pesma broj 3");
     // 4: samo izvođač nije dovoljno
@@ -320,7 +321,7 @@ describe("segment 1: pogodi pesmu", () => {
     expect(r.ocena).toMatchObject({ tacno: false, poeni: 0, istek: false });
     expect(r.ocena.prikaz).toMatchObject({ neZnam: true, odgovor: null });
     // 7–9: gluposti su netačan odgovor, ne greška
-    for (const los of [null, {}, { songId: "7", tekst: 5 }]) {
+    for (const los of [null, {}, { izbor: "7", tekst: 5 }]) {
       r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: los, slusanoMs: 100 });
       expect(r.ocena).toMatchObject({ tacno: false, poeni: 0 });
     }
@@ -330,25 +331,48 @@ describe("segment 1: pogodi pesmu", () => {
     expect(r.stanje.segmenti[0].tok).toEqual([2, 1, 0, 0, 1, 0, 0, 0, 0, 0]);
   });
 
+  it("izbor sa spiska: tačna je samo baš ta pesma (isti izvođač i naslov), bez praštanja omaški", async () => {
+    const ja = gost();
+    await zapocniIgru(db, ja, DAN);
+    const pitanje = async () => (await posaljiPitanje(db, ja, DAN)).trenutno!.itemId;
+
+    // 1: priznati oblik naslova, bez kvačica i velikim slovima
+    let r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: { izbor: { izvodjac: "probni bend 1", naslov: "NEMOZE NAM NIKO NISTA" } }, slusanoMs: 1000 });
+    expect(r.ocena).toMatchObject({ tacno: true, poeni: 20 });
+    expect((r.ocena.prikaz as PrikazPesma).odgovor).toBe("probni bend 1 – NEMOZE NAM NIKO NISTA");
+    // 2: isti naslov, drugi izvođač (druga pesma koja se isto zove)
+    r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: { izbor: { izvodjac: "Indira Radić", naslov: "Zmaj" } }, slusanoMs: 1000 });
+    expect(r.ocena).toMatchObject({ tacno: false, poeni: 0 });
+    // 3: pravi izvođač, njegova druga pesma
+    r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: { izbor: { izvodjac: "Probni Bend 3", naslov: "Probna pesma broj 4" } }, slusanoMs: 1000 });
+    expect(r.ocena).toMatchObject({ tacno: false, poeni: 0 });
+    // 4: izbor je stavka sa spiska, pa se omaška u naslovu ne prašta (to važi samo za kucanje)
+    r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: { izbor: { izvodjac: "Probni Bend 4", naslov: "Probna pesma borj 4" } }, slusanoMs: 1000 });
+    expect(r.ocena).toMatchObject({ tacno: false, poeni: 0 });
+    // 5: nepotpun izbor se ne računa kao izbor, pa važi ukucan tekst
+    r = await odgovori(db, ja, DAN, { itemId: await pitanje(), odgovor: { izbor: { izvodjac: 5 }, tekst: "probna pesma broj 5" }, slusanoMs: 1000 });
+    expect(r.ocena).toMatchObject({ tacno: true, poeni: 20 });
+  });
+
   it("browseru se veruje samo unutar tolerancije: ko sluša 10 s ne može da prijavi 1 s", async () => {
     const ja = gost();
     await zapocniIgru(db, ja, DAN);
     let s = await posaljiPitanje(db, ja, DAN);
     await slusaj(ja, s.trenutno!.itemId, 10000);
-    let r = await odgovori(db, ja, DAN, { itemId: s.trenutno!.itemId, odgovor: { songId: await idPesme(1) }, slusanoMs: 1000 });
+    let r = await odgovori(db, ja, DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: izborPesme(1) }, slusanoMs: 1000 });
     expect(r.ocena.poeni).toBe(5); // 10 s − 1,5 s tolerancije = 8,5 s
     expect((r.ocena.prikaz as PrikazPesma).slusanoMs).toBeGreaterThanOrEqual(8500);
 
     // mala razlika zbog mreže ide u korist igrača: server izmerio 2,3 s, plejer kaže 1,9 s → 20 poena
     s = await posaljiPitanje(db, ja, DAN);
     await slusaj(ja, s.trenutno!.itemId, 2300);
-    r = await odgovori(db, ja, DAN, { itemId: s.trenutno!.itemId, odgovor: { songId: await idPesme(2) }, slusanoMs: 1900 });
+    r = await odgovori(db, ja, DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: izborPesme(2) }, slusanoMs: 1900 });
     expect(r.ocena.poeni).toBe(20);
 
     // bez podatka iz browsera važi ono što je server izmerio; besmislen podatak se ne uzima
     s = await posaljiPitanje(db, ja, DAN);
     await slusaj(ja, s.trenutno!.itemId, 4500);
-    r = await odgovori(db, ja, DAN, { itemId: s.trenutno!.itemId, odgovor: { songId: await idPesme(3) }, slusanoMs: -5 });
+    r = await odgovori(db, ja, DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: izborPesme(3) }, slusanoMs: -5 });
     expect(r.ocena.poeni).toBe(10);
 
     // odgovor dok pesma još svira: računa se i deo koji upravo svira
@@ -356,7 +380,7 @@ describe("segment 1: pogodi pesmu", () => {
     const id = s.trenutno!.itemId;
     await slusanje(db, ja, DAN, { itemId: id, pusteno: true });
     await pg.exec(`update public.play_answers set playing_since = now() - interval '7000 milliseconds' where item_id = ${id} and answered_at is null`);
-    r = await odgovori(db, ja, DAN, { itemId: id, odgovor: { songId: await idPesme(4) } });
+    r = await odgovori(db, ja, DAN, { itemId: id, odgovor: { izbor: izborPesme(4) } });
     expect(r.ocena.poeni).toBe(5);
   });
 
@@ -365,7 +389,7 @@ describe("segment 1: pogodi pesmu", () => {
     await zapocniIgru(db, ja, DAN);
     let s = await posaljiPitanje(db, ja, DAN);
     await slusaj(ja, s.trenutno!.itemId, 29900);
-    const r = await odgovori(db, ja, DAN, { itemId: s.trenutno!.itemId, odgovor: { songId: await idPesme(1) }, istek: true, slusanoMs: 30000 });
+    const r = await odgovori(db, ja, DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: izborPesme(1) }, istek: true, slusanoMs: 30000 });
     expect(r.ocena).toMatchObject({ tacno: false, poeni: 0, istek: true });
     expect(r.ocena.prikaz).toMatchObject({ naslov: "Ne može nam niko ništa", odgovor: null, neZnam: false });
 

@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="footer">
       <p>
-        Cene: zvanični cenovnici lanaca, data.gov.rs · Slike: Open Food Facts · Muzika: Deezer · Pretrage: Google
+        Cene: zvanični cenovnici lanaca, data.gov.rs · Fotografije artikala: proizvođači i trgovci · Muzika: Deezer · Pretrage: Google
         Trends
       </p>
       <nav aria-label="Pravne strane">

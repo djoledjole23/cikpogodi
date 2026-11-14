@@ -979,382 +979,472 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
 
 -- Artikli (products.json). Postojeći se osvežavaju po barkodu.
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600043000023', 'Plazma keks', '300 g', 'https://images.openfoodfacts.org/images/products/860/004/300/0023/front_en.57.400.jpg', 288.56, 279.99, 294.99, 'Super Vero', '2026-11-13')
+  values ('8600043000023', 'Plazma keks', '300 g', '/artikli/8600043000023.webp', 288.56, 279.99, 294.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600043000016', 'Plazma keks', '150 g', 'https://images.openfoodfacts.org/images/products/860/004/300/0016/front_en.31.400.jpg', 158.19, 152.99, 159.99, 'Super Vero', '2026-11-13')
+  values ('8600043000016', 'Plazma keks', '150 g', '/artikli/8600043000016.webp', 158.19, 152.99, 159.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600043039788', 'Plazma keks', '400 g', 'https://images.openfoodfacts.org/images/products/860/004/303/9788/front_sr.13.400.jpg', 387.71, 369.99, 401.66, 'Super Vero', '2026-11-13')
+  values ('8600043039788', 'Plazma keks', '400 g', '/artikli/8600043039788.webp', 387.71, 369.99, 401.66, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600043001105', 'Plazma mlevena', '300 g', 'https://images.openfoodfacts.org/images/products/860/004/300/1105/front_en.45.400.jpg', 292.59, 279.99, 299.99, 'Super Vero', '2026-11-13')
+  values ('8600043001105', 'Plazma mlevena', '300 g', '/artikli/8600043001105.webp', 292.59, 279.99, 299.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600043028263', 'Plazma Kocka napolitanke', '135 g', 'https://images.openfoodfacts.org/images/products/860/004/302/8263/front_fr.7.400.jpg', 205.77, 183.99, 219.99, 'Lidl', '2026-11-13')
+  values ('8600043028263', 'Plazma Kocka napolitanke', '135 g', '/artikli/8600043028263.webp', 205.77, 183.99, 219.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600043029512', 'Plazma Stiksi', '125 g', 'https://images.openfoodfacts.org/images/products/860/004/302/9512/front_en.3.400.jpg', 250.19, 217.99, 270.67, 'Lidl', '2026-11-13')
+  values ('8600043029512', 'Plazma Stiksi', '125 g', '/artikli/8600043029512.webp', 250.19, 217.99, 270.67, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600043041484', 'Plazma Rolsi lešnik', '130 g', 'https://images.openfoodfacts.org/images/products/860/004/304/1484/front_fr.5.400.jpg', 185.59, 170.99, 212.49, 'Aman', '2026-11-13')
+  values ('8600043036794', 'Plazma od srca lešnik', '100 g', '/artikli/8600043036794.webp', 196.53, 184.99, 205.7, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600114000013', 'Jaffa keks', '150 g', 'https://images.openfoodfacts.org/images/products/860/011/400/0013/front_en.28.400.jpg', 143.62, 139.99, 146.66, 'Aman', '2026-11-13')
+  values ('8600043041484', 'Plazma Rolsi lešnik', '130 g', '/artikli/8600043041484.webp', 185.59, 170.99, 212.49, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600114000211', 'Jaffa keks', '300 g', 'https://images.openfoodfacts.org/images/products/860/011/400/0211/front_en.45.400.jpg', 252, 249.69, 258.32, 'Maxi', '2026-11-13')
+  values ('8600114000013', 'Jaffa keks', '150 g', '/artikli/8600114000013.webp', 143.62, 139.99, 146.66, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600114000020', 'Munchmallow', '105 g', 'https://images.openfoodfacts.org/images/products/860/011/400/0020/front_en.46.400.jpg', 107.98, 102.99, 111.66, 'Aman', '2026-11-13')
+  values ('8600114000211', 'Jaffa keks', '300 g', '/artikli/8600114000211.webp', 252, 249.69, 258.32, 'Maxi', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600114006626', 'Jaffa napolitanke šlag i čokolada', '187 g', 'https://images.openfoodfacts.org/images/products/860/011/400/6626/front_fr.10.400.jpg', 122.33, 109.99, 139.99, 'Super Vero', '2026-11-13')
+  values ('8600114000020', 'Munchmallow', '105 g', '/artikli/8600114000020.webp', 107.98, 102.99, 111.66, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939313701', 'Najlepše želje mlečna čokolada', '200 g', 'https://images.openfoodfacts.org/images/products/860/093/931/3701/front_hr.25.400.jpg', 381.76, 364.99, 389.99, 'Super Vero', '2026-11-13')
+  values ('8600114006626', 'Jaffa napolitanke šlag i čokolada', '187 g', '/artikli/8600114006626.webp', 122.33, 109.99, 139.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939313602', 'Najlepše želje mlečna čokolada', '90 g', 'https://images.openfoodfacts.org/images/products/860/093/931/3602/front_fr.22.400.jpg', 192.96, 189.99, 198.32, 'Aman', '2026-11-13')
+  values ('8600939313701', 'Najlepše želje mlečna čokolada', '200 g', '/artikli/8600939313701.webp', 381.76, 364.99, 389.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939334171', 'Najlepše želje crna sa bananicom', '184 g', 'https://images.openfoodfacts.org/images/products/860/093/933/4171/front_sr.3.400.jpg', 367.08, 349.99, 389.99, 'Aman', '2026-11-13')
+  values ('8600939313602', 'Najlepše želje mlečna čokolada', '90 g', '/artikli/8600939313602.webp', 192.96, 189.99, 198.32, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939346082', 'Najlepše želje sa keksom', '170 g', 'https://images.openfoodfacts.org/images/products/860/093/934/6082/front_fr.3.400.jpg', 352.63, 349.99, 363.32, 'Lidl', '2026-11-13')
+  values ('8600939334171', 'Najlepše želje crna sa bananicom', '184 g', '/artikli/8600939334171.webp', 367.08, 349.99, 389.99, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('86006675', 'Štark Bananica', '25 g', 'https://images.openfoodfacts.org/images/products/000/008/600/6675/front_en.38.400.jpg', 27.19, 24.99, 29.99, 'Lidl', '2026-11-13')
+  values ('8600939346082', 'Najlepše želje sa keksom', '170 g', '/artikli/8600939346082.webp', 352.63, 349.99, 363.32, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939366424', 'Štark Bananica', '250 g', 'https://images.openfoodfacts.org/images/products/860/093/936/6424/front_de.3.400.jpg', 255.99, 247.99, 269.99, 'Maxi', '2026-11-13')
+  values ('86006675', 'Štark Bananica', '25 g', '/artikli/86006675.webp', 27.19, 24.99, 29.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939365472', 'Štark Bananica 5 kom', '125 g', 'https://images.openfoodfacts.org/images/products/860/093/936/5472/front_en.22.400.jpg', 138.89, 134.99, 141.99, 'Super Vero', '2026-11-13')
+  values ('8600939366424', 'Štark Bananica', '250 g', '/artikli/8600939366424.webp', 255.99, 247.99, 269.99, 'Maxi', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939303115', 'Štark Menaž čokolada za kuvanje', '100 g', 'https://images.openfoodfacts.org/images/products/860/093/930/3115/front_sr.34.400.jpg', 201.92, 192.99, 211.66, 'Super Vero', '2026-11-13')
+  values ('8600939365472', 'Štark Bananica 5 kom', '125 g', '/artikli/8600939365472.webp', 138.89, 134.99, 141.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939841204', 'Štark Čajni keksići', '800 g', 'https://images.openfoodfacts.org/images/products/860/093/984/1204/front_en.17.400.jpg', 322.46, 309.99, 349.99, 'Maxi', '2026-11-13')
+  values ('8600939130841', 'Štark Piškote', '105 g', '/artikli/8600939130841.webp', 106.79, 96.99, 122.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939110454', 'Štark napolitanke sa čokoladom', '180 g', 'https://images.openfoodfacts.org/images/products/860/093/911/0454/front_en.17.400.jpg', 146.77, 128.99, 159.99, 'Lidl', '2026-11-13')
+  values ('8600939303115', 'Štark Menaž čokolada za kuvanje', '100 g', '/artikli/8600939303115.webp', 201.92, 192.99, 211.66, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601900502032', 'Eurocrem Euro blok', '50 g', 'https://images.openfoodfacts.org/images/products/860/190/050/2032/front_sr.10.400.jpg', 66.79, 59.99, 74.99, 'Univerexport', '2026-11-13')
+  values ('8600939841204', 'Štark Čajni keksići', '800 g', '/artikli/8600939841204.webp', 322.46, 309.99, 349.99, 'Maxi', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601900502100', 'Eurocrem Euro blok', '100 g', 'https://images.openfoodfacts.org/images/products/860/190/050/2100/front_sr.14.400.jpg', 121.33, 99.99, 137.99, 'Aman', '2026-11-13')
+  values ('8600939110454', 'Štark napolitanke sa čokoladom', '180 g', '/artikli/8600939110454.webp', 146.77, 128.99, 159.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601900503411', 'Eurocrem činija', '500 g', 'https://images.openfoodfacts.org/images/products/860/190/050/3411/front_en.3.400.jpg', 480.46, 399.99, 543.32, 'Univerexport', '2026-11-13')
+  values ('8601900502032', 'Eurocrem Euro blok', '50 g', '/artikli/8601900502032.webp', 66.79, 59.99, 74.99, 'Univerexport', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600946442111', 'Swisslion Isleri sa Eurocremom', '125 g', 'https://images.openfoodfacts.org/images/products/860/094/644/2111/front_en.9.400.jpg', 155.19, 129.99, 184.99, 'Univerexport', '2026-11-13')
+  values ('8601900502100', 'Eurocrem Euro blok', '100 g', '/artikli/8601900502100.webp', 121.33, 99.99, 137.99, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8602300236022', 'Pionir Medeno srce', '150 g', 'https://images.openfoodfacts.org/images/products/860/230/023/6022/front_en.10.400.jpg', 145.63, 139.99, 153.32, 'Lidl', '2026-11-13')
+  values ('8601900503411', 'Eurocrem činija', '500 g', '/artikli/8601900503411.webp', 480.46, 399.99, 543.32, 'Univerexport', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8602300200245', 'Pionir zeleni mentol bombone', '100 g', 'https://images.openfoodfacts.org/images/products/860/230/020/0245/front_hr.10.400.jpg', 67.39, 59.99, 74.72, 'Aman', '2026-11-13')
+  values ('8600946442111', 'Swisslion Isleri sa Eurocremom', '125 g', '/artikli/8600946442111.webp', 155.19, 129.99, 184.99, 'Univerexport', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8602300207305', 'Pionir karamele lešnik', '100 g', 'https://images.openfoodfacts.org/images/products/860/230/020/7305/front_en.3.400.jpg', 143.88, 132.99, 154.99, 'Super Vero', '2026-11-13')
+  values ('8602300236022', 'Pionir Medeno srce', '150 g', '/artikli/8602300236022.webp', 145.63, 139.99, 153.32, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8602300233229', 'Pionir Negro punjene bombone', '250 g', 'https://images.openfoodfacts.org/images/products/860/230/023/3229/front_de.3.400.jpg', 264.47, 252.99, 286.16, 'Super Vero', '2026-11-13')
+  values ('8602300200245', 'Pionir zeleni mentol bombone', '100 g', '/artikli/8602300200245.webp', 67.39, 59.99, 74.72, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600104004458', 'Medela štrudla', '240 g', 'https://images.openfoodfacts.org/images/products/860/010/400/4458/front_fr.37.400.jpg', 150.42, 139.99, 157.99, 'Lidl', '2026-11-13')
+  values ('8602300207305', 'Pionir karamele lešnik', '100 g', '/artikli/8602300207305.webp', 143.88, 132.99, 154.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939506912', 'Smoki', '50 g', 'https://images.openfoodfacts.org/images/products/860/093/950/6912/front_en.45.400.jpg', 47.66, 45.99, 49.99, 'Maxi', '2026-11-13')
+  values ('8602300233229', 'Pionir mix Negro i Karamela lešnik', '250 g', '/artikli/8602300233229.webp', 264.47, 252.99, 286.16, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939508190', 'Smoki', '80 g', 'https://images.openfoodfacts.org/images/products/860/093/950/8190/front_en.3.400.jpg', 73.8, 69.99, 76.99, 'Aman', '2026-11-13')
+  values ('8600104004458', 'Medela štrudla', '240 g', '/artikli/8600104004458.webp', 150.42, 139.99, 157.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939506936', 'Smoki', '150 g', 'https://images.openfoodfacts.org/images/products/860/093/950/6936/front_en.32.400.jpg', 129.26, 127.99, 129.99, 'Super Vero', '2026-11-13')
+  values ('8600939506912', 'Smoki', '50 g', '/artikli/8600939506912.webp', 47.66, 45.99, 49.99, 'Maxi', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939507025', 'Smoki', '250 g', 'https://images.openfoodfacts.org/images/products/860/093/950/7025/front_en.23.400.jpg', 184.73, 171.99, 199.99, 'Lidl', '2026-11-13')
+  values ('8600939508190', 'Smoki', '80 g', '/artikli/8600939508190.webp', 73.8, 69.99, 76.99, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600939375563', 'Čoko Smoki', '80 g', 'https://images.openfoodfacts.org/images/products/860/093/937/5563/front_en.34.400.jpg', 170.95, 149.99, 179.99, 'Lidl', '2026-11-13')
+  values ('8600939506936', 'Smoki', '150 g', '/artikli/8600939506936.webp', 129.26, 127.99, 129.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606017378495', 'Chipsy Classic', '140 g', 'https://images.openfoodfacts.org/images/products/860/601/737/8495/front_nl.3.400.jpg', 192.37, 171.49, 214.99, 'Lidl', '2026-11-13')
+  values ('8600939507025', 'Smoki', '250 g', '/artikli/8600939507025.webp', 184.73, 171.99, 199.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606033742416', 'Chipsy Domaćinski kajmak', '145 g', 'https://images.openfoodfacts.org/images/products/860/603/374/2416/front_en.4.400.jpg', 194.88, 184.99, 199.99, 'Lidl', '2026-11-13')
+  values ('8600939375563', 'Čoko Smoki', '80 g', '/artikli/8600939375563.webp', 170.95, 149.99, 179.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606033741495', 'Clipsy Mix flips', '150 g', 'https://images.openfoodfacts.org/images/products/860/603/374/1495/front_hr.4.400.jpg', 149.35, 144.99, 156.66, 'Lidl', '2026-11-13')
+  values ('8606017378495', 'Chipsy Classic', '140 g', '/artikli/8606017378495.webp', 192.37, 171.49, 214.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606017378822', 'Pardon štapići sa kikirikijem', '210 g', 'https://images.openfoodfacts.org/images/products/860/601/737/8822/front_en.3.400.jpg', 159.22, 137.99, 169.99, 'Lidl', '2026-11-13')
+  values ('8606033742416', 'Chipsy Domaćinski kajmak', '145 g', '/artikli/8606033742416.webp', 194.88, 184.99, 199.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606017370048', 'Pardon perece', '95 g', 'https://images.openfoodfacts.org/images/products/860/601/737/0048/front_en.4.400.jpg', 81.39, 74.99, 88.99, 'Super Vero', '2026-11-13')
+  values ('8606033741495', 'Clipsy Mix flips', '150 g', '/artikli/8606033741495.webp', 149.35, 144.99, 156.66, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600037000312', 'Knjaz Miloš gazirana voda', '0,5 l', 'https://images.openfoodfacts.org/images/products/860/003/700/0312/front_fr.15.400.jpg', 54.78, 49.99, 57.99, 'Lidl', '2026-11-13')
+  values ('8606017378822', 'Pardon štapići sa kikirikijem', '210 g', '/artikli/8606017378822.webp', 159.22, 137.99, 169.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600037005133', 'Knjaz Miloš gazirana voda', '1,75 l', 'https://images.openfoodfacts.org/images/products/860/003/700/5133/front_sr.18.400.jpg', 64.65, 62.99, 65.59, 'Lidl', '2026-11-13')
+  values ('8606017370048', 'Pardon perece', '95 g', '/artikli/8606017370048.webp', 81.39, 74.99, 88.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600037008011', 'Knjaz Miloš staklo', '0,25 l', 'https://images.openfoodfacts.org/images/products/860/003/700/8011/front_fr.3.400.jpg', 82.99, 77.99, 89.99, 'Super Vero', '2026-11-13')
+  values ('8600037000312', 'Knjaz Miloš gazirana voda', '0,5 l', '/artikli/8600037000312.webp', 54.78, 49.99, 57.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600169600022', 'Prolom voda', '1,5 l', 'https://images.openfoodfacts.org/images/products/860/016/960/0022/front_en.27.400.jpg', 86.23, 82.66, 99.99, 'Idea', '2026-11-13')
+  values ('8600037005133', 'Knjaz Miloš gazirana voda', '1,75 l', '/artikli/8600037005133.webp', 64.65, 62.99, 65.59, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606030051702', 'Fruvita narandža 100%', '0,8 l', 'https://images.openfoodfacts.org/images/products/860/603/005/1702/front_en.4.400.jpg', 317.47, 297.99, 349.99, 'Super Vero', '2026-11-13')
+  values ('8600037008011', 'Knjaz Miloš staklo', '0,25 l', '/artikli/8600037008011.webp', 82.99, 77.99, 89.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600105001463', 'Jelen pivo limenka', '0,5 l', 'https://images.openfoodfacts.org/images/products/860/010/500/1463/front_en.8.400.jpg', 98.28, 90.99, 109.99, 'Lidl', '2026-11-13')
+  values ('8600169600022', 'Prolom voda', '1,5 l', '/artikli/8600169600022.webp', 86.23, 82.66, 99.99, 'Idea', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('86027618', 'Jelen pivo flaša', '0,5 l', 'https://images.openfoodfacts.org/images/products/000/008/602/7618/front_en.7.400.jpg', 91.19, 89.99, 94.99, 'Gomex', '2026-11-13')
+  values ('8606002170066', 'Aqua Heba gazirana', '1,5 l', '/artikli/8606002170066.webp', 65.35, 61.99, 69.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600649000427', 'Zaječarsko pivo limenka', '0,5 l', 'https://images.openfoodfacts.org/images/products/860/064/900/0427/front_de.3.400.jpg', 96.28, 89.99, 104.99, 'Lidl', '2026-11-13')
+  values ('8606030051702', 'Fruvita narandža 100%', '0,8 l', '/artikli/8606030051702.webp', 317.47, 297.99, 349.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600101521439', 'Doncafe Moment kafa', '200 g', 'https://images.openfoodfacts.org/images/products/860/010/152/1439/front_en.5.400.jpg', 471.34, 449.99, 483.32, 'Lidl', '2026-11-13')
+  values ('8600105001463', 'Jelen pivo limenka', '0,5 l', '/artikli/8600105001463.webp', 98.28, 90.99, 109.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600103056250', 'Grand Gold kafa', '500 g', 'https://images.openfoodfacts.org/images/products/860/010/305/6250/front_sr.8.400.jpg', 1103.99, 999.99, 1159.99, 'Univerexport', '2026-11-13')
+  values ('86027618', 'Jelen pivo flaša', '0,5 l', '/artikli/86027618.webp', 91.19, 89.99, 94.99, 'Gomex', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606018312276', 'Grand 3u1 Najlepše želje', '18 g', 'https://images.openfoodfacts.org/images/products/860/601/831/2276/front_sr.3.400.jpg', 32.92, 28.99, 39.99, 'Super Vero', '2026-11-13')
+  values ('8600102672383', 'Lav pivo limenka', '0,5 l', '/artikli/8600102672383.webp', 88.2, 82.99, 92.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500116011', 'Moja Kravica mleko dugotrajno 2,8%', '1 l', 'https://images.openfoodfacts.org/images/products/860/150/011/6011/front_sr.23.400.jpg', 112.99, 99.99, 139.99, 'Super Vero', '2026-11-13')
+  values ('8600649000427', 'Zaječarsko pivo limenka', '0,5 l', '/artikli/8600649000427.webp', 96.28, 89.99, 104.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500138655', 'Moja Kravica sveže mleko 2,8%', '1,75 l', 'https://images.openfoodfacts.org/images/products/860/150/013/8655/front_en.11.400.jpg', 226.79, 219.99, 230.62, 'Aman', '2026-11-13')
+  values ('8606105157360', 'Zaječarsko pivo PET', '2 l', '/artikli/8606105157360.webp', 305.37, 279.99, 316.66, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500138495', 'Moja Kravica jogurt 2,8%', '1,75 kg', 'https://images.openfoodfacts.org/images/products/860/150/013/8495/front_en.3.400.jpg', 232.61, 224.99, 240.09, 'Lidl', '2026-11-13')
+  values ('8600101521439', 'Doncafe Moment kafa', '200 g', '/artikli/8600101521439.webp', 471.34, 449.99, 483.32, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500115892', 'Moja Kravica jogurt čaša', '180 g', 'https://images.openfoodfacts.org/images/products/860/150/011/5892/front_fr.4.400.jpg', 38.46, 35.99, 39.99, 'Super Vero', '2026-11-13')
+  values ('8600103056250', 'Grand Gold kafa', '500 g', '/artikli/8600103056250.webp', 1103.99, 999.99, 1159.99, 'Univerexport', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500110330', 'Moja Kravica čokoladno mleko', '0,25 l', 'https://images.openfoodfacts.org/images/products/860/150/011/0330/front_en.22.400.jpg', 67.56, 64.99, 69.99, 'Lidl', '2026-11-13')
+  values ('8606106464078', 'Bonito tamno pržena kafa', '200 g', '/artikli/8606106464078.webp', 457.04, 429.99, 507.68, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500112419', 'Moja Kravica kisela pavlaka 20%', '400 g', 'https://images.openfoodfacts.org/images/products/860/150/011/2419/front_en.15.400.jpg', 187.09, 179.99, 189.99, 'Lidl', '2026-11-13')
+  values ('8606018312276', 'Grand 3u1 Najlepše želje', '18 g', '/artikli/8606018312276.webp', 32.92, 28.99, 39.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500111122', 'Moja Kravica maslac', '125 g', 'https://images.openfoodfacts.org/images/products/860/150/011/1122/front_nl.3.400.jpg', 321.53, 315.99, 329.99, 'Super Vero', '2026-11-13')
+  values ('8601500116011', 'Moja Kravica mleko dugotrajno 2,8%', '1 l', '/artikli/8601500116011.webp', 112.99, 99.99, 139.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500126492', 'Ella sveži sir', '400 g', 'https://images.openfoodfacts.org/images/products/860/150/012/6492/front_en.3.400.jpg', 281.62, 262.99, 299.99, 'Super Vero', '2026-11-13')
+  values ('8601500138655', 'Moja Kravica sveže mleko 2,8%', '1,75 l', '/artikli/8601500138655.webp', 226.79, 219.99, 230.62, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8601500133490', 'Imlek protein čoko šejk', '300 ml', 'https://images.openfoodfacts.org/images/products/860/150/013/3490/front_en.29.400.jpg', 180.06, 169.99, 189.99, 'Lidl', '2026-11-13')
+  values ('8601500138495', 'Moja Kravica jogurt 2,8%', '1,75 kg', '/artikli/8601500138495.webp', 232.61, 224.99, 240.09, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('86002783', 'Carnex jetrena pašteta', '75 g', 'https://images.openfoodfacts.org/images/products/000/008/600/2783/front_de.7.400.jpg', 88.94, 79.99, 99.99, 'Lidl', '2026-11-13')
+  values ('8601500115892', 'Moja Kravica jogurt čaša', '180 g', '/artikli/8601500115892.webp', 38.46, 35.99, 39.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600012700336', 'Carnex sarma', '400 g', 'https://images.openfoodfacts.org/images/products/860/001/270/0336/front_en.14.400.jpg', 495.72, 469.99, 521.66, 'Aman', '2026-11-13')
+  values ('8601500110330', 'Moja Kravica čokoladno mleko', '0,25 l', '/artikli/8601500110330.webp', 67.56, 64.99, 69.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600012700282', 'Carnex pasulj sa slaninom', '400 g', 'https://images.openfoodfacts.org/images/products/860/001/270/0282/front_hr.3.400.jpg', 359.45, 317.49, 403.32, 'Lidl', '2026-11-13')
+  values ('8601500112419', 'Moja Kravica kisela pavlaka 20%', '400 g', '/artikli/8601500112419.webp', 187.09, 179.99, 189.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600012502510', 'Carnex delikates viršla', '205 g', 'https://images.openfoodfacts.org/images/products/860/001/250/2510/front_fr.3.400.jpg', 211.07, 196.99, 229.99, 'Super Vero', '2026-11-13')
+  values ('8601500111122', 'Moja Kravica maslac', '125 g', '/artikli/8601500111122.webp', 321.53, 315.99, 329.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600084005841', 'Yuhor Alpska kobasica', '350 g', 'https://images.openfoodfacts.org/images/products/860/008/400/5841/front_en.3.400.jpg', 302.85, 244.99, 339.99, 'Lidl', '2026-11-13')
+  values ('8601500119609', 'Moja Kravica krem sir', '200 g', '/artikli/8601500119609.webp', 194.35, 179.99, 201.49, 'Gomex', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600084005612', 'Yuhor Levački štapići', '200 g', 'https://images.openfoodfacts.org/images/products/860/008/400/5612/front_en.3.400.jpg', 594.16, 557.99, 639.99, 'Super Vero', '2026-11-13')
+  values ('8601500126492', 'Ella sveži sir', '400 g', '/artikli/8601500126492.webp', 281.62, 262.99, 299.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600763655244', 'Neoplanta Pipi pileća viršla', '205 g', 'https://images.openfoodfacts.org/images/products/860/076/365/5244/front_en.3.400.jpg', 193.67, 182.99, 209.99, 'Super Vero', '2026-11-13')
+  values ('8601500133490', 'Imlek protein čoko šejk', '300 ml', '/artikli/8601500133490.webp', 180.06, 169.99, 189.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606100145775', 'Zlatiborac kulen slajs', '100 g', 'https://images.openfoodfacts.org/images/products/860/610/014/5775/front_sr.18.400.jpg', 270.52, 207.49, 309.99, 'Maxi', '2026-11-13')
+  values ('8600012700183', 'Carnex mesni narezak', '150 g', '/artikli/8600012700183.webp', 212.99, 174.99, 229.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606106822403', 'Zlatiborac čvarci', '150 g', 'https://images.openfoodfacts.org/images/products/860/610/682/2403/front_fr.3.400.jpg', 469.72, 436.99, 499.99, 'Maxi', '2026-11-13')
+  values ('86002783', 'Carnex jetrena pašteta', '75 g', '/artikli/86002783.webp', 88.94, 79.99, 99.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600498170029', 'Dijamant suncokretovo ulje', '1 l', 'https://images.openfoodfacts.org/images/products/860/049/817/0029/front_hu.6.400.jpg', 201.52, 195.66, 214.99, 'Univerexport', '2026-11-13')
+  values ('8600012700336', 'Carnex sarma', '400 g', '/artikli/8600012700336.webp', 495.72, 469.99, 521.66, 'Aman', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600498150083', 'Dijamant kečap blagi', '500 g', 'https://images.openfoodfacts.org/images/products/860/049/815/0083/front_en.6.400.jpg', 160.84, 147.99, 179.99, 'Lidl', '2026-11-13')
+  values ('8600012700282', 'Carnex pasulj sa slaninom', '400 g', '/artikli/8600012700282.webp', 359.45, 317.49, 403.32, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600498176359', 'Dijamant majonez', '285 ml', 'https://images.openfoodfacts.org/images/products/860/049/817/6359/front_sr.5.400.jpg', 191.65, 189.99, 199.99, 'Lidl', '2026-11-13')
+  values ('8600012502510', 'Carnex delikates viršla', '205 g', '/artikli/8600012502510.webp', 211.07, 196.99, 229.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8600498172115', 'Dijamant stoni margarin', '250 g', 'https://images.openfoodfacts.org/images/products/860/049/817/2115/front_sr.14.400.jpg', 114.79, 104.99, 124.99, 'Lidl', '2026-11-13')
+  values ('8600084005841', 'Yuhor Alpska kobasica', '350 g', '/artikli/8600084005841.webp', 302.85, 244.99, 339.99, 'Lidl', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606006080088', 'Frikom Kapri sladoled', '70 ml', 'https://images.openfoodfacts.org/images/products/860/600/608/0088/front_sr.30.400.jpg', 98.83, 89.99, 102.99, 'Lidl', '2026-11-13')
+  values ('8600084005612', 'Yuhor Levački štapići', '200 g', '/artikli/8600084005612.webp', 594.16, 557.99, 639.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606006080040', 'Frikom Snesko', '46 g', 'https://images.openfoodfacts.org/images/products/860/600/608/0040/front_sr.4.400.jpg', 76.39, 65.99, 80.99, 'Maxi', '2026-11-13')
+  values ('8600763655244', 'Neoplanta Pipi pileća viršla', '205 g', '/artikli/8600763655244.webp', 193.67, 182.99, 209.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
-  values ('8606006080095', 'Frikom Čoko Moko', '52 g', 'https://images.openfoodfacts.org/images/products/860/600/608/0095/front_sr.4.400.jpg', 80.39, 79.99, 81.99, 'Idea', '2026-11-13')
+  values ('8600763025559', 'Neoplanta namaz u crevu', '125 g', '/artikli/8600763025559.webp', 95.66, 84.99, 104.99, 'Lidl', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8600763036777', 'Neoplanta pizza šunka', '330 g', '/artikli/8600763036777.webp', 349.32, 284.99, 379.99, 'Lidl', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606100145775', 'Zlatiborac kulen slajs', '100 g', '/artikli/8606100145775.webp', 270.52, 207.49, 309.99, 'Maxi', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606100145737', 'Zlatiborac goveđa pršuta slajs', '100 g', '/artikli/8606100145737.webp', 687.7, 617.99, 714.99, 'Maxi', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606106822403', 'Zlatiborac čvarci', '150 g', '/artikli/8606106822403.webp', 469.72, 436.99, 499.99, 'Maxi', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8600498170029', 'Dijamant suncokretovo ulje', '1 l', '/artikli/8600498170029.webp', 201.52, 195.66, 214.99, 'Univerexport', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8600498150083', 'Dijamant kečap blagi', '500 g', '/artikli/8600498150083.webp', 160.84, 147.99, 179.99, 'Lidl', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8600498176359', 'Dijamant majonez', '285 ml', '/artikli/8600498176359.webp', 191.65, 189.99, 199.99, 'Lidl', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8600498172115', 'Dijamant stoni margarin', '250 g', '/artikli/8600498172115.webp', 114.79, 104.99, 124.99, 'Lidl', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8600498151479', 'Dijamant ajvar blagi', '680 g', '/artikli/8600498151479.webp', 470.1, 449.55, 514.99, 'Idea', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8601900201119', 'Takovo koncentrat kokošije supe', '88 g', '/artikli/8601900201119.webp', 194.01, 130.32, 245.99, 'Univerexport', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606006080064', 'Frikom Macho sladoled', '75 ml', '/artikli/8606006080064.webp', 150.49, 148.99, 153.99, 'Maxi', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606006080088', 'Frikom Kapri sladoled', '70 ml', '/artikli/8606006080088.webp', 98.83, 89.99, 102.99, 'Lidl', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606006080040', 'Frikom Sneško', '46 g', '/artikli/8606006080040.webp', 76.39, 65.99, 80.99, 'Maxi', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606006080095', 'Frikom Čoko Moko', '52 g', '/artikli/8606006080095.webp', 80.39, 79.99, 81.99, 'Idea', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606029612204', 'Frikom Quattro Plazma', '1,5 l', '/artikli/8606029612204.webp', 651.18, 599.99, 699.99, 'Lidl', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606029610019', 'Frikom grašak', '400 g', '/artikli/8606029610019.webp', 165.75, 149.99, 179.99, 'Lidl', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606006081252', 'Frikom pomfrit', '1 kg', '/artikli/8606006081252.webp', 388.66, 382.99, 399.99, 'Super Vero', '2026-11-13')
+  on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
+    price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
+    cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
+insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
+  values ('8606017433705', 'Frikom pogačice', '800 g', '/artikli/8606017433705.webp', 315.9, 289.99, 374.99, 'Super Vero', '2026-11-13')
   on conflict (barcode) do update set name = excluded.name, size = excluded.size, image_url = excluded.image_url,
     price_avg = excluded.price_avg, price_min = excluded.price_min, price_max = excluded.price_max,
     cheapest_chain = excluded.cheapest_chain, price_date = excluded.price_date, active = true, updated_at = now();
@@ -1363,590 +1453,590 @@ insert into public.products (barcode, name, size, image_url, price_avg, price_mi
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-14', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 1, id, '{"naziv":"Frikom Snesko","kolicina":"46 g","slika":"https://images.openfoodfacts.org/images/products/860/600/608/0040/front_sr.4.400.jpg","cena":76,"min":65.99,"max":80.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606006080040'
+  select '2026-11-14', 2, 1, id, '{"naziv":"Zaječarsko pivo PET","kolicina":"2 l","slika":"/artikli/8606105157360.webp","cena":305,"min":279.99,"max":316.66,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606105157360'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 2, id, '{"naziv":"Moja Kravica sveže mleko 2,8%","kolicina":"1,75 l","slika":"https://images.openfoodfacts.org/images/products/860/150/013/8655/front_en.11.400.jpg","cena":227,"min":219.99,"max":230.62,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500138655'
+  select '2026-11-14', 2, 2, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"90 g","slika":"/artikli/8600939313602.webp","cena":193,"min":189.99,"max":198.32,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939313602'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 3, id, '{"naziv":"Eurocrem činija","kolicina":"500 g","slika":"https://images.openfoodfacts.org/images/products/860/190/050/3411/front_en.3.400.jpg","cena":480,"min":399.99,"max":543.32,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601900503411'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 4, id, '{"naziv":"Grand 3u1 Najlepše želje","kolicina":"18 g","slika":"https://images.openfoodfacts.org/images/products/860/601/831/2276/front_sr.3.400.jpg","cena":33,"min":28.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606018312276'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 5, id, '{"naziv":"Carnex jetrena pašteta","kolicina":"75 g","slika":"https://images.openfoodfacts.org/images/products/000/008/600/2783/front_de.7.400.jpg","cena":89,"min":79.99,"max":99.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '86002783'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 6, id, '{"naziv":"Neoplanta Pipi pileća viršla","kolicina":"205 g","slika":"https://images.openfoodfacts.org/images/products/860/076/365/5244/front_en.3.400.jpg","cena":194,"min":182.99,"max":209.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-14', 2, 3, id, '{"naziv":"Neoplanta Pipi pileća viršla","kolicina":"205 g","slika":"/artikli/8600763655244.webp","cena":194,"min":182.99,"max":209.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600763655244'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 7, id, '{"naziv":"Jaffa keks","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/011/400/0013/front_en.28.400.jpg","cena":144,"min":139.99,"max":146.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114000013'
+  select '2026-11-14', 2, 4, id, '{"naziv":"Eurocrem Euro blok","kolicina":"50 g","slika":"/artikli/8601900502032.webp","cena":67,"min":59.99,"max":74.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601900502032'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 8, id, '{"naziv":"Jelen pivo limenka","kolicina":"0,5 l","slika":"https://images.openfoodfacts.org/images/products/860/010/500/1463/front_en.8.400.jpg","cena":98,"min":90.99,"max":109.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600105001463'
+  select '2026-11-14', 2, 5, id, '{"naziv":"Dijamant kečap blagi","kolicina":"500 g","slika":"/artikli/8600498150083.webp","cena":161,"min":147.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600498150083'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 9, id, '{"naziv":"Najlepše želje crna sa bananicom","kolicina":"184 g","slika":"https://images.openfoodfacts.org/images/products/860/093/933/4171/front_sr.3.400.jpg","cena":367,"min":349.99,"max":389.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939334171'
+  select '2026-11-14', 2, 6, id, '{"naziv":"Lav pivo limenka","kolicina":"0,5 l","slika":"/artikli/8600102672383.webp","cena":88,"min":82.99,"max":92.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600102672383'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-14', 2, 10, id, '{"naziv":"Ella sveži sir","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/150/012/6492/front_en.3.400.jpg","cena":282,"min":262.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500126492'
+  select '2026-11-14', 2, 7, id, '{"naziv":"Plazma Rolsi lešnik","kolicina":"130 g","slika":"/artikli/8600043041484.webp","cena":186,"min":170.99,"max":212.49,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043041484'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-14', 2, 8, id, '{"naziv":"Imlek protein čoko šejk","kolicina":"300 ml","slika":"/artikli/8601500133490.webp","cena":180,"min":169.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500133490'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-14', 2, 9, id, '{"naziv":"Moja Kravica jogurt čaša","kolicina":"180 g","slika":"/artikli/8601500115892.webp","cena":38,"min":35.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500115892'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-14', 2, 10, id, '{"naziv":"Moja Kravica sveže mleko 2,8%","kolicina":"1,75 l","slika":"/artikli/8601500138655.webp","cena":227,"min":219.99,"max":230.62,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500138655'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-15', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 1, id, '{"naziv":"Pardon perece","kolicina":"95 g","slika":"https://images.openfoodfacts.org/images/products/860/601/737/0048/front_en.4.400.jpg","cena":81,"min":74.99,"max":88.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606017370048'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 2, id, '{"naziv":"Chipsy Classic","kolicina":"140 g","slika":"https://images.openfoodfacts.org/images/products/860/601/737/8495/front_nl.3.400.jpg","cena":192,"min":171.49,"max":214.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606017378495'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 3, id, '{"naziv":"Štark Čajni keksići","kolicina":"800 g","slika":"https://images.openfoodfacts.org/images/products/860/093/984/1204/front_en.17.400.jpg","cena":322,"min":309.99,"max":349.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939841204'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 4, id, '{"naziv":"Pionir zeleni mentol bombone","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/230/020/0245/front_hr.10.400.jpg","cena":67,"min":59.99,"max":74.72,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8602300200245'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 5, id, '{"naziv":"Carnex pasulj sa slaninom","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/001/270/0282/front_hr.3.400.jpg","cena":359,"min":317.49,"max":403.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600012700282'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 6, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"1,75 l","slika":"https://images.openfoodfacts.org/images/products/860/003/700/5133/front_sr.18.400.jpg","cena":65,"min":62.99,"max":65.59,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037005133'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 7, id, '{"naziv":"Plazma keks","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/004/303/9788/front_sr.13.400.jpg","cena":388,"min":369.99,"max":401.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-15', 2, 1, id, '{"naziv":"Plazma keks","kolicina":"400 g","slika":"/artikli/8600043039788.webp","cena":388,"min":369.99,"max":401.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600043039788'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 8, id, '{"naziv":"Plazma mlevena","kolicina":"300 g","slika":"https://images.openfoodfacts.org/images/products/860/004/300/1105/front_en.45.400.jpg","cena":293,"min":279.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-15', 2, 2, id, '{"naziv":"Moja Kravica kisela pavlaka 20%","kolicina":"400 g","slika":"/artikli/8601500112419.webp","cena":187,"min":179.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500112419'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-15', 2, 3, id, '{"naziv":"Smoki","kolicina":"250 g","slika":"/artikli/8600939507025.webp","cena":185,"min":171.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939507025'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-15', 2, 4, id, '{"naziv":"Zlatiborac čvarci","kolicina":"150 g","slika":"/artikli/8606106822403.webp","cena":470,"min":436.99,"max":499.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606106822403'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-15', 2, 5, id, '{"naziv":"Chipsy Domaćinski kajmak","kolicina":"145 g","slika":"/artikli/8606033742416.webp","cena":195,"min":184.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606033742416'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-15', 2, 6, id, '{"naziv":"Swisslion Isleri sa Eurocremom","kolicina":"125 g","slika":"/artikli/8600946442111.webp","cena":155,"min":129.99,"max":184.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600946442111'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-15', 2, 7, id, '{"naziv":"Plazma mlevena","kolicina":"300 g","slika":"/artikli/8600043001105.webp","cena":293,"min":279.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600043001105'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 9, id, '{"naziv":"Pardon štapići sa kikirikijem","kolicina":"210 g","slika":"https://images.openfoodfacts.org/images/products/860/601/737/8822/front_en.3.400.jpg","cena":159,"min":137.99,"max":169.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606017378822'
+  select '2026-11-15', 2, 8, id, '{"naziv":"Clipsy Mix flips","kolicina":"150 g","slika":"/artikli/8606033741495.webp","cena":149,"min":144.99,"max":156.66,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606033741495'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 10, id, '{"naziv":"Knjaz Miloš staklo","kolicina":"0,25 l","slika":"https://images.openfoodfacts.org/images/products/860/003/700/8011/front_fr.3.400.jpg","cena":83,"min":77.99,"max":89.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037008011'
+  select '2026-11-15', 2, 9, id, '{"naziv":"Frikom Sneško","kolicina":"46 g","slika":"/artikli/8606006080040.webp","cena":76,"min":65.99,"max":80.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080040'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-15', 2, 10, id, '{"naziv":"Štark Piškote","kolicina":"105 g","slika":"/artikli/8600939130841.webp","cena":107,"min":96.99,"max":122.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939130841'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-16', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 1, id, '{"naziv":"Štark Bananica","kolicina":"25 g","slika":"https://images.openfoodfacts.org/images/products/000/008/600/6675/front_en.38.400.jpg","cena":27,"min":24.99,"max":29.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '86006675'
+  select '2026-11-16', 2, 1, id, '{"naziv":"Smoki","kolicina":"80 g","slika":"/artikli/8600939508190.webp","cena":74,"min":69.99,"max":76.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939508190'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 2, id, '{"naziv":"Eurocrem Euro blok","kolicina":"50 g","slika":"https://images.openfoodfacts.org/images/products/860/190/050/2032/front_sr.10.400.jpg","cena":67,"min":59.99,"max":74.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601900502032'
+  select '2026-11-16', 2, 2, id, '{"naziv":"Carnex mesni narezak","kolicina":"150 g","slika":"/artikli/8600012700183.webp","cena":213,"min":174.99,"max":229.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600012700183'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 3, id, '{"naziv":"Yuhor Levački štapići","kolicina":"200 g","slika":"https://images.openfoodfacts.org/images/products/860/008/400/5612/front_en.3.400.jpg","cena":594,"min":557.99,"max":639.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600084005612'
+  select '2026-11-16', 2, 3, id, '{"naziv":"Najlepše želje sa keksom","kolicina":"170 g","slika":"/artikli/8600939346082.webp","cena":353,"min":349.99,"max":363.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939346082'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 4, id, '{"naziv":"Štark Menaž čokolada za kuvanje","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/093/930/3115/front_sr.34.400.jpg","cena":202,"min":192.99,"max":211.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-16', 2, 4, id, '{"naziv":"Frikom Čoko Moko","kolicina":"52 g","slika":"/artikli/8606006080095.webp","cena":80,"min":79.99,"max":81.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080095'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-16', 2, 5, id, '{"naziv":"Štark Bananica 5 kom","kolicina":"125 g","slika":"/artikli/8600939365472.webp","cena":139,"min":134.99,"max":141.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939365472'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-16', 2, 6, id, '{"naziv":"Štark Menaž čokolada za kuvanje","kolicina":"100 g","slika":"/artikli/8600939303115.webp","cena":202,"min":192.99,"max":211.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600939303115'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 5, id, '{"naziv":"Moja Kravica mleko dugotrajno 2,8%","kolicina":"1 l","slika":"https://images.openfoodfacts.org/images/products/860/150/011/6011/front_sr.23.400.jpg","cena":113,"min":99.99,"max":139.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500116011'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 6, id, '{"naziv":"Chipsy Domaćinski kajmak","kolicina":"145 g","slika":"https://images.openfoodfacts.org/images/products/860/603/374/2416/front_en.4.400.jpg","cena":195,"min":184.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606033742416'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 7, id, '{"naziv":"Smoki","kolicina":"250 g","slika":"https://images.openfoodfacts.org/images/products/860/093/950/7025/front_en.23.400.jpg","cena":185,"min":171.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939507025'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 8, id, '{"naziv":"Prolom voda","kolicina":"1,5 l","slika":"https://images.openfoodfacts.org/images/products/860/016/960/0022/front_en.27.400.jpg","cena":86,"min":82.66,"max":99.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-16', 2, 7, id, '{"naziv":"Prolom voda","kolicina":"1,5 l","slika":"/artikli/8600169600022.webp","cena":86,"min":82.66,"max":99.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600169600022'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 9, id, '{"naziv":"Štark napolitanke sa čokoladom","kolicina":"180 g","slika":"https://images.openfoodfacts.org/images/products/860/093/911/0454/front_en.17.400.jpg","cena":147,"min":128.99,"max":159.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939110454'
+  select '2026-11-16', 2, 8, id, '{"naziv":"Dijamant majonez","kolicina":"285 ml","slika":"/artikli/8600498176359.webp","cena":192,"min":189.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600498176359'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 10, id, '{"naziv":"Zlatiborac kulen slajs","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/610/014/5775/front_sr.18.400.jpg","cena":271,"min":207.49,"max":309.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606100145775'
+  select '2026-11-16', 2, 9, id, '{"naziv":"Ella sveži sir","kolicina":"400 g","slika":"/artikli/8601500126492.webp","cena":282,"min":262.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500126492'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-16', 2, 10, id, '{"naziv":"Čoko Smoki","kolicina":"80 g","slika":"/artikli/8600939375563.webp","cena":171,"min":149.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939375563'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-17', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 1, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"90 g","slika":"https://images.openfoodfacts.org/images/products/860/093/931/3602/front_fr.22.400.jpg","cena":193,"min":189.99,"max":198.32,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939313602'
+  select '2026-11-17', 2, 1, id, '{"naziv":"Neoplanta pizza šunka","kolicina":"330 g","slika":"/artikli/8600763036777.webp","cena":349,"min":284.99,"max":379.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600763036777'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 2, id, '{"naziv":"Smoki","kolicina":"80 g","slika":"https://images.openfoodfacts.org/images/products/860/093/950/8190/front_en.3.400.jpg","cena":74,"min":69.99,"max":76.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939508190'
+  select '2026-11-17', 2, 2, id, '{"naziv":"Pardon štapići sa kikirikijem","kolicina":"210 g","slika":"/artikli/8606017378822.webp","cena":159,"min":137.99,"max":169.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606017378822'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 3, id, '{"naziv":"Grand Gold kafa","kolicina":"500 g","slika":"https://images.openfoodfacts.org/images/products/860/010/305/6250/front_sr.8.400.jpg","cena":1104,"min":999.99,"max":1159.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600103056250'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 4, id, '{"naziv":"Dijamant majonez","kolicina":"285 ml","slika":"https://images.openfoodfacts.org/images/products/860/049/817/6359/front_sr.5.400.jpg","cena":192,"min":189.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498176359'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 5, id, '{"naziv":"Fruvita narandža 100%","kolicina":"0,8 l","slika":"https://images.openfoodfacts.org/images/products/860/603/005/1702/front_en.4.400.jpg","cena":317,"min":297.99,"max":349.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606030051702'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 6, id, '{"naziv":"Zlatiborac čvarci","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/610/682/2403/front_fr.3.400.jpg","cena":470,"min":436.99,"max":499.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606106822403'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 7, id, '{"naziv":"Plazma Kocka napolitanke","kolicina":"135 g","slika":"https://images.openfoodfacts.org/images/products/860/004/302/8263/front_fr.7.400.jpg","cena":206,"min":183.99,"max":219.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-17', 2, 3, id, '{"naziv":"Plazma Kocka napolitanke","kolicina":"135 g","slika":"/artikli/8600043028263.webp","cena":206,"min":183.99,"max":219.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600043028263'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 8, id, '{"naziv":"Zaječarsko pivo limenka","kolicina":"0,5 l","slika":"https://images.openfoodfacts.org/images/products/860/064/900/0427/front_de.3.400.jpg","cena":96,"min":89.99,"max":104.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600649000427'
+  select '2026-11-17', 2, 4, id, '{"naziv":"Takovo koncentrat kokošije supe","kolicina":"88 g","slika":"/artikli/8601900201119.webp","cena":194,"min":130.32,"max":245.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601900201119'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 9, id, '{"naziv":"Doncafe Moment kafa","kolicina":"200 g","slika":"https://images.openfoodfacts.org/images/products/860/010/152/1439/front_en.5.400.jpg","cena":471,"min":449.99,"max":483.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600101521439'
+  select '2026-11-17', 2, 5, id, '{"naziv":"Jelen pivo limenka","kolicina":"0,5 l","slika":"/artikli/8600105001463.webp","cena":98,"min":90.99,"max":109.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600105001463'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 10, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"0,5 l","slika":"https://images.openfoodfacts.org/images/products/860/003/700/0312/front_fr.15.400.jpg","cena":55,"min":49.99,"max":57.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037000312'
+  select '2026-11-17', 2, 6, id, '{"naziv":"Knjaz Miloš staklo","kolicina":"0,25 l","slika":"/artikli/8600037008011.webp","cena":83,"min":77.99,"max":89.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600037008011'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-17', 2, 7, id, '{"naziv":"Carnex jetrena pašteta","kolicina":"75 g","slika":"/artikli/86002783.webp","cena":89,"min":79.99,"max":99.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '86002783'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-17', 2, 8, id, '{"naziv":"Carnex delikates viršla","kolicina":"205 g","slika":"/artikli/8600012502510.webp","cena":211,"min":196.99,"max":229.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600012502510'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-17', 2, 9, id, '{"naziv":"Medela štrudla","kolicina":"240 g","slika":"/artikli/8600104004458.webp","cena":150,"min":139.99,"max":157.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600104004458'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-17', 2, 10, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"200 g","slika":"/artikli/8600939313701.webp","cena":382,"min":364.99,"max":389.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939313701'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-18', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 1, id, '{"naziv":"Moja Kravica kisela pavlaka 20%","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/150/011/2419/front_en.15.400.jpg","cena":187,"min":179.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500112419'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 2, id, '{"naziv":"Medela štrudla","kolicina":"240 g","slika":"https://images.openfoodfacts.org/images/products/860/010/400/4458/front_fr.37.400.jpg","cena":150,"min":139.99,"max":157.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600104004458'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 3, id, '{"naziv":"Dijamant suncokretovo ulje","kolicina":"1 l","slika":"https://images.openfoodfacts.org/images/products/860/049/817/0029/front_hu.6.400.jpg","cena":202,"min":195.66,"max":214.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498170029'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 4, id, '{"naziv":"Dijamant stoni margarin","kolicina":"250 g","slika":"https://images.openfoodfacts.org/images/products/860/049/817/2115/front_sr.14.400.jpg","cena":115,"min":104.99,"max":124.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498172115'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 5, id, '{"naziv":"Moja Kravica jogurt 2,8%","kolicina":"1,75 kg","slika":"https://images.openfoodfacts.org/images/products/860/150/013/8495/front_en.3.400.jpg","cena":233,"min":224.99,"max":240.09,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-18', 2, 1, id, '{"naziv":"Moja Kravica jogurt 2,8%","kolicina":"1,75 kg","slika":"/artikli/8601500138495.webp","cena":233,"min":224.99,"max":240.09,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8601500138495'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 6, id, '{"naziv":"Imlek protein čoko šejk","kolicina":"300 ml","slika":"https://images.openfoodfacts.org/images/products/860/150/013/3490/front_en.29.400.jpg","cena":180,"min":169.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500133490'
+  select '2026-11-18', 2, 2, id, '{"naziv":"Doncafe Moment kafa","kolicina":"200 g","slika":"/artikli/8600101521439.webp","cena":471,"min":449.99,"max":483.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600101521439'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 7, id, '{"naziv":"Pionir karamele lešnik","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/230/020/7305/front_en.3.400.jpg","cena":144,"min":132.99,"max":154.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8602300207305'
+  select '2026-11-18', 2, 3, id, '{"naziv":"Zlatiborac kulen slajs","kolicina":"100 g","slika":"/artikli/8606100145775.webp","cena":271,"min":207.49,"max":309.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606100145775'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 8, id, '{"naziv":"Frikom Kapri sladoled","kolicina":"70 ml","slika":"https://images.openfoodfacts.org/images/products/860/600/608/0088/front_sr.30.400.jpg","cena":99,"min":89.99,"max":102.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606006080088'
+  select '2026-11-18', 2, 4, id, '{"naziv":"Štark napolitanke sa čokoladom","kolicina":"180 g","slika":"/artikli/8600939110454.webp","cena":147,"min":128.99,"max":159.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939110454'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 9, id, '{"naziv":"Eurocrem Euro blok","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/190/050/2100/front_sr.14.400.jpg","cena":121,"min":99.99,"max":137.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601900502100'
+  select '2026-11-18', 2, 5, id, '{"naziv":"Yuhor Levački štapići","kolicina":"200 g","slika":"/artikli/8600084005612.webp","cena":594,"min":557.99,"max":639.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600084005612'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 10, id, '{"naziv":"Jaffa keks","kolicina":"300 g","slika":"https://images.openfoodfacts.org/images/products/860/011/400/0211/front_en.45.400.jpg","cena":252,"min":249.69,"max":258.32,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114000211'
+  select '2026-11-18', 2, 6, id, '{"naziv":"Frikom Quattro Plazma","kolicina":"1,5 l","slika":"/artikli/8606029612204.webp","cena":651,"min":599.99,"max":699.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606029612204'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-18', 2, 7, id, '{"naziv":"Jaffa keks","kolicina":"150 g","slika":"/artikli/8600114000013.webp","cena":144,"min":139.99,"max":146.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114000013'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-18', 2, 8, id, '{"naziv":"Yuhor Alpska kobasica","kolicina":"350 g","slika":"/artikli/8600084005841.webp","cena":303,"min":244.99,"max":339.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600084005841'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-18', 2, 9, id, '{"naziv":"Grand 3u1 Najlepše želje","kolicina":"18 g","slika":"/artikli/8606018312276.webp","cena":33,"min":28.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606018312276'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-18', 2, 10, id, '{"naziv":"Pionir Medeno srce","kolicina":"150 g","slika":"/artikli/8602300236022.webp","cena":146,"min":139.99,"max":153.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8602300236022'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-19', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 1, id, '{"naziv":"Smoki","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/093/950/6936/front_en.32.400.jpg","cena":129,"min":127.99,"max":129.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-19', 2, 1, id, '{"naziv":"Pardon perece","kolicina":"95 g","slika":"/artikli/8606017370048.webp","cena":81,"min":74.99,"max":88.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606017370048'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-19', 2, 2, id, '{"naziv":"Pionir zeleni mentol bombone","kolicina":"100 g","slika":"/artikli/8602300200245.webp","cena":67,"min":59.99,"max":74.72,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8602300200245'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-19', 2, 3, id, '{"naziv":"Eurocrem činija","kolicina":"500 g","slika":"/artikli/8601900503411.webp","cena":480,"min":399.99,"max":543.32,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601900503411'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-19', 2, 4, id, '{"naziv":"Dijamant suncokretovo ulje","kolicina":"1 l","slika":"/artikli/8600498170029.webp","cena":202,"min":195.66,"max":214.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600498170029'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-19', 2, 5, id, '{"naziv":"Chipsy Classic","kolicina":"140 g","slika":"/artikli/8606017378495.webp","cena":192,"min":171.49,"max":214.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606017378495'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-19', 2, 6, id, '{"naziv":"Smoki","kolicina":"150 g","slika":"/artikli/8600939506936.webp","cena":129,"min":127.99,"max":129.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600939506936'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 2, id, '{"naziv":"Moja Kravica jogurt čaša","kolicina":"180 g","slika":"https://images.openfoodfacts.org/images/products/860/150/011/5892/front_fr.4.400.jpg","cena":38,"min":35.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500115892'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 3, id, '{"naziv":"Čoko Smoki","kolicina":"80 g","slika":"https://images.openfoodfacts.org/images/products/860/093/937/5563/front_en.34.400.jpg","cena":171,"min":149.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939375563'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 4, id, '{"naziv":"Pionir Negro punjene bombone","kolicina":"250 g","slika":"https://images.openfoodfacts.org/images/products/860/230/023/3229/front_de.3.400.jpg","cena":264,"min":252.99,"max":286.16,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8602300233229'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 5, id, '{"naziv":"Plazma Rolsi lešnik","kolicina":"130 g","slika":"https://images.openfoodfacts.org/images/products/860/004/304/1484/front_fr.5.400.jpg","cena":186,"min":170.99,"max":212.49,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043041484'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 6, id, '{"naziv":"Carnex delikates viršla","kolicina":"205 g","slika":"https://images.openfoodfacts.org/images/products/860/001/250/2510/front_fr.3.400.jpg","cena":211,"min":196.99,"max":229.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600012502510'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 7, id, '{"naziv":"Clipsy Mix flips","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/603/374/1495/front_hr.4.400.jpg","cena":149,"min":144.99,"max":156.66,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606033741495'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 8, id, '{"naziv":"Pionir Medeno srce","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/230/023/6022/front_en.10.400.jpg","cena":146,"min":139.99,"max":153.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8602300236022'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 9, id, '{"naziv":"Plazma keks","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/004/300/0016/front_en.31.400.jpg","cena":158,"min":152.99,"max":159.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-19', 2, 7, id, '{"naziv":"Plazma keks","kolicina":"150 g","slika":"/artikli/8600043000016.webp","cena":158,"min":152.99,"max":159.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600043000016'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 10, id, '{"naziv":"Moja Kravica maslac","kolicina":"125 g","slika":"https://images.openfoodfacts.org/images/products/860/150/011/1122/front_nl.3.400.jpg","cena":322,"min":315.99,"max":329.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500111122'
+  select '2026-11-19', 2, 8, id, '{"naziv":"Plazma od srca lešnik","kolicina":"100 g","slika":"/artikli/8600043036794.webp","cena":197,"min":184.99,"max":205.7,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043036794'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-19', 2, 9, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"0,5 l","slika":"/artikli/8600037000312.webp","cena":55,"min":49.99,"max":57.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600037000312'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-19', 2, 10, id, '{"naziv":"Dijamant stoni margarin","kolicina":"250 g","slika":"/artikli/8600498172115.webp","cena":115,"min":104.99,"max":124.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600498172115'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-20', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 1, id, '{"naziv":"Frikom Čoko Moko","kolicina":"52 g","slika":"https://images.openfoodfacts.org/images/products/860/600/608/0095/front_sr.4.400.jpg","cena":80,"min":79.99,"max":81.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606006080095'
+  select '2026-11-20', 2, 1, id, '{"naziv":"Frikom grašak","kolicina":"400 g","slika":"/artikli/8606029610019.webp","cena":166,"min":149.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606029610019'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 2, id, '{"naziv":"Munchmallow","kolicina":"105 g","slika":"https://images.openfoodfacts.org/images/products/860/011/400/0020/front_en.46.400.jpg","cena":108,"min":102.99,"max":111.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114000020'
+  select '2026-11-20', 2, 2, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"1,75 l","slika":"/artikli/8600037005133.webp","cena":65,"min":62.99,"max":65.59,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600037005133'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 3, id, '{"naziv":"Štark Bananica 5 kom","kolicina":"125 g","slika":"https://images.openfoodfacts.org/images/products/860/093/936/5472/front_en.22.400.jpg","cena":139,"min":134.99,"max":141.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939365472'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 4, id, '{"naziv":"Smoki","kolicina":"50 g","slika":"https://images.openfoodfacts.org/images/products/860/093/950/6912/front_en.45.400.jpg","cena":48,"min":45.99,"max":49.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939506912'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 5, id, '{"naziv":"Plazma Stiksi","kolicina":"125 g","slika":"https://images.openfoodfacts.org/images/products/860/004/302/9512/front_en.3.400.jpg","cena":250,"min":217.99,"max":270.67,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043029512'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 6, id, '{"naziv":"Plazma keks","kolicina":"300 g","slika":"https://images.openfoodfacts.org/images/products/860/004/300/0023/front_en.57.400.jpg","cena":289,"min":279.99,"max":294.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-20', 2, 3, id, '{"naziv":"Plazma keks","kolicina":"300 g","slika":"/artikli/8600043000023.webp","cena":289,"min":279.99,"max":294.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600043000023'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 7, id, '{"naziv":"Yuhor Alpska kobasica","kolicina":"350 g","slika":"https://images.openfoodfacts.org/images/products/860/008/400/5841/front_en.3.400.jpg","cena":303,"min":244.99,"max":339.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600084005841'
+  select '2026-11-20', 2, 4, id, '{"naziv":"Moja Kravica čokoladno mleko","kolicina":"0,25 l","slika":"/artikli/8601500110330.webp","cena":68,"min":64.99,"max":69.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500110330'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 8, id, '{"naziv":"Dijamant kečap blagi","kolicina":"500 g","slika":"https://images.openfoodfacts.org/images/products/860/049/815/0083/front_en.6.400.jpg","cena":161,"min":147.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498150083'
+  select '2026-11-20', 2, 5, id, '{"naziv":"Grand Gold kafa","kolicina":"500 g","slika":"/artikli/8600103056250.webp","cena":1104,"min":999.99,"max":1159.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600103056250'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 9, id, '{"naziv":"Carnex sarma","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/001/270/0336/front_en.14.400.jpg","cena":496,"min":469.99,"max":521.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-20', 2, 6, id, '{"naziv":"Štark Bananica","kolicina":"250 g","slika":"/artikli/8600939366424.webp","cena":256,"min":247.99,"max":269.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939366424'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-20', 2, 7, id, '{"naziv":"Jaffa keks","kolicina":"300 g","slika":"/artikli/8600114000211.webp","cena":252,"min":249.69,"max":258.32,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114000211'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-20', 2, 8, id, '{"naziv":"Carnex sarma","kolicina":"400 g","slika":"/artikli/8600012700336.webp","cena":496,"min":469.99,"max":521.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600012700336'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 10, id, '{"naziv":"Jelen pivo flaša","kolicina":"0,5 l","slika":"https://images.openfoodfacts.org/images/products/000/008/602/7618/front_en.7.400.jpg","cena":91,"min":89.99,"max":94.99,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '86027618'
+  select '2026-11-20', 2, 9, id, '{"naziv":"Pionir mix Negro i Karamela lešnik","kolicina":"250 g","slika":"/artikli/8602300233229.webp","cena":264,"min":252.99,"max":286.16,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8602300233229'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-20', 2, 10, id, '{"naziv":"Moja Kravica mleko dugotrajno 2,8%","kolicina":"1 l","slika":"/artikli/8601500116011.webp","cena":113,"min":99.99,"max":139.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500116011'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-21', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 1, id, '{"naziv":"Moja Kravica sveže mleko 2,8%","kolicina":"1,75 l","slika":"https://images.openfoodfacts.org/images/products/860/150/013/8655/front_en.11.400.jpg","cena":227,"min":219.99,"max":230.62,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500138655'
+  select '2026-11-21', 2, 1, id, '{"naziv":"Štark Bananica","kolicina":"25 g","slika":"/artikli/86006675.webp","cena":27,"min":24.99,"max":29.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '86006675'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 2, id, '{"naziv":"Jaffa napolitanke šlag i čokolada","kolicina":"187 g","slika":"https://images.openfoodfacts.org/images/products/860/011/400/6626/front_fr.10.400.jpg","cena":122,"min":109.99,"max":139.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114006626'
+  select '2026-11-21', 2, 2, id, '{"naziv":"Plazma Stiksi","kolicina":"125 g","slika":"/artikli/8600043029512.webp","cena":250,"min":217.99,"max":270.67,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043029512'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 3, id, '{"naziv":"Štark Bananica","kolicina":"250 g","slika":"https://images.openfoodfacts.org/images/products/860/093/936/6424/front_de.3.400.jpg","cena":256,"min":247.99,"max":269.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939366424'
+  select '2026-11-21', 2, 3, id, '{"naziv":"Bonito tamno pržena kafa","kolicina":"200 g","slika":"/artikli/8606106464078.webp","cena":457,"min":429.99,"max":507.68,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606106464078'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 4, id, '{"naziv":"Čoko Smoki","kolicina":"80 g","slika":"https://images.openfoodfacts.org/images/products/860/093/937/5563/front_en.34.400.jpg","cena":171,"min":149.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939375563'
+  select '2026-11-21', 2, 4, id, '{"naziv":"Frikom pogačice","kolicina":"800 g","slika":"/artikli/8606017433705.webp","cena":316,"min":289.99,"max":374.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606017433705'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 5, id, '{"naziv":"Swisslion Isleri sa Eurocremom","kolicina":"125 g","slika":"https://images.openfoodfacts.org/images/products/860/094/644/2111/front_en.9.400.jpg","cena":155,"min":129.99,"max":184.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600946442111'
+  select '2026-11-21', 2, 5, id, '{"naziv":"Carnex pasulj sa slaninom","kolicina":"400 g","slika":"/artikli/8600012700282.webp","cena":359,"min":317.49,"max":403.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600012700282'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 6, id, '{"naziv":"Pardon štapići sa kikirikijem","kolicina":"210 g","slika":"https://images.openfoodfacts.org/images/products/860/601/737/8822/front_en.3.400.jpg","cena":159,"min":137.99,"max":169.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606017378822'
+  select '2026-11-21', 2, 6, id, '{"naziv":"Fruvita narandža 100%","kolicina":"0,8 l","slika":"/artikli/8606030051702.webp","cena":317,"min":297.99,"max":349.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606030051702'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 7, id, '{"naziv":"Najlepše želje sa keksom","kolicina":"170 g","slika":"https://images.openfoodfacts.org/images/products/860/093/934/6082/front_fr.3.400.jpg","cena":353,"min":349.99,"max":363.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939346082'
+  select '2026-11-21', 2, 7, id, '{"naziv":"Frikom pomfrit","kolicina":"1 kg","slika":"/artikli/8606006081252.webp","cena":389,"min":382.99,"max":399.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006081252'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 8, id, '{"naziv":"Moja Kravica maslac","kolicina":"125 g","slika":"https://images.openfoodfacts.org/images/products/860/150/011/1122/front_nl.3.400.jpg","cena":322,"min":315.99,"max":329.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500111122'
+  select '2026-11-21', 2, 8, id, '{"naziv":"Najlepše želje crna sa bananicom","kolicina":"184 g","slika":"/artikli/8600939334171.webp","cena":367,"min":349.99,"max":389.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939334171'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 9, id, '{"naziv":"Doncafe Moment kafa","kolicina":"200 g","slika":"https://images.openfoodfacts.org/images/products/860/010/152/1439/front_en.5.400.jpg","cena":471,"min":449.99,"max":483.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600101521439'
+  select '2026-11-21', 2, 9, id, '{"naziv":"Frikom Kapri sladoled","kolicina":"70 ml","slika":"/artikli/8606006080088.webp","cena":99,"min":89.99,"max":102.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080088'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-21', 2, 10, id, '{"naziv":"Moja Kravica čokoladno mleko","kolicina":"0,25 l","slika":"https://images.openfoodfacts.org/images/products/860/150/011/0330/front_en.22.400.jpg","cena":68,"min":64.99,"max":69.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500110330'
+  select '2026-11-21', 2, 10, id, '{"naziv":"Moja Kravica krem sir","kolicina":"200 g","slika":"/artikli/8601500119609.webp","cena":194,"min":179.99,"max":201.49,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500119609'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-22', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 1, id, '{"naziv":"Jaffa keks","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/011/400/0013/front_en.28.400.jpg","cena":144,"min":139.99,"max":146.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114000013'
+  select '2026-11-22', 2, 1, id, '{"naziv":"Aqua Heba gazirana","kolicina":"1,5 l","slika":"/artikli/8606002170066.webp","cena":65,"min":61.99,"max":69.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606002170066'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 2, id, '{"naziv":"Neoplanta Pipi pileća viršla","kolicina":"205 g","slika":"https://images.openfoodfacts.org/images/products/860/076/365/5244/front_en.3.400.jpg","cena":194,"min":182.99,"max":209.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600763655244'
+  select '2026-11-22', 2, 2, id, '{"naziv":"Jelen pivo flaša","kolicina":"0,5 l","slika":"/artikli/86027618.webp","cena":91,"min":89.99,"max":94.99,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '86027618'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 3, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"200 g","slika":"https://images.openfoodfacts.org/images/products/860/093/931/3701/front_hr.25.400.jpg","cena":382,"min":364.99,"max":389.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939313701'
+  select '2026-11-22', 2, 3, id, '{"naziv":"Zaječarsko pivo limenka","kolicina":"0,5 l","slika":"/artikli/8600649000427.webp","cena":96,"min":89.99,"max":104.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600649000427'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 4, id, '{"naziv":"Dijamant suncokretovo ulje","kolicina":"1 l","slika":"https://images.openfoodfacts.org/images/products/860/049/817/0029/front_hu.6.400.jpg","cena":202,"min":195.66,"max":214.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498170029'
+  select '2026-11-22', 2, 4, id, '{"naziv":"Pionir karamele lešnik","kolicina":"100 g","slika":"/artikli/8602300207305.webp","cena":144,"min":132.99,"max":154.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8602300207305'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 5, id, '{"naziv":"Grand Gold kafa","kolicina":"500 g","slika":"https://images.openfoodfacts.org/images/products/860/010/305/6250/front_sr.8.400.jpg","cena":1104,"min":999.99,"max":1159.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600103056250'
+  select '2026-11-22', 2, 5, id, '{"naziv":"Dijamant ajvar blagi","kolicina":"680 g","slika":"/artikli/8600498151479.webp","cena":470,"min":449.55,"max":514.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600498151479'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 6, id, '{"naziv":"Dijamant majonez","kolicina":"285 ml","slika":"https://images.openfoodfacts.org/images/products/860/049/817/6359/front_sr.5.400.jpg","cena":192,"min":189.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498176359'
+  select '2026-11-22', 2, 6, id, '{"naziv":"Smoki","kolicina":"50 g","slika":"/artikli/8600939506912.webp","cena":48,"min":45.99,"max":49.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939506912'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 7, id, '{"naziv":"Yuhor Levački štapići","kolicina":"200 g","slika":"https://images.openfoodfacts.org/images/products/860/008/400/5612/front_en.3.400.jpg","cena":594,"min":557.99,"max":639.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600084005612'
+  select '2026-11-22', 2, 7, id, '{"naziv":"Frikom Macho sladoled","kolicina":"75 ml","slika":"/artikli/8606006080064.webp","cena":150,"min":148.99,"max":153.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080064'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 8, id, '{"naziv":"Imlek protein čoko šejk","kolicina":"300 ml","slika":"https://images.openfoodfacts.org/images/products/860/150/013/3490/front_en.29.400.jpg","cena":180,"min":169.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500133490'
+  select '2026-11-22', 2, 8, id, '{"naziv":"Jaffa napolitanke šlag i čokolada","kolicina":"187 g","slika":"/artikli/8600114006626.webp","cena":122,"min":109.99,"max":139.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114006626'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 9, id, '{"naziv":"Štark napolitanke sa čokoladom","kolicina":"180 g","slika":"https://images.openfoodfacts.org/images/products/860/093/911/0454/front_en.17.400.jpg","cena":147,"min":128.99,"max":159.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939110454'
+  select '2026-11-22', 2, 9, id, '{"naziv":"Moja Kravica maslac","kolicina":"125 g","slika":"/artikli/8601500111122.webp","cena":322,"min":315.99,"max":329.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500111122'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 10, id, '{"naziv":"Plazma Rolsi lešnik","kolicina":"130 g","slika":"https://images.openfoodfacts.org/images/products/860/004/304/1484/front_fr.5.400.jpg","cena":186,"min":170.99,"max":212.49,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043041484'
+  select '2026-11-22', 2, 10, id, '{"naziv":"Štark Čajni keksići","kolicina":"800 g","slika":"/artikli/8600939841204.webp","cena":322,"min":309.99,"max":349.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939841204'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-23', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 1, id, '{"naziv":"Jelen pivo flaša","kolicina":"0,5 l","slika":"https://images.openfoodfacts.org/images/products/000/008/602/7618/front_en.7.400.jpg","cena":91,"min":89.99,"max":94.99,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '86027618'
+  select '2026-11-23', 2, 1, id, '{"naziv":"Bonito tamno pržena kafa","kolicina":"200 g","slika":"/artikli/8606106464078.webp","cena":457,"min":429.99,"max":507.68,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606106464078'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 2, id, '{"naziv":"Frikom Snesko","kolicina":"46 g","slika":"https://images.openfoodfacts.org/images/products/860/600/608/0040/front_sr.4.400.jpg","cena":76,"min":65.99,"max":80.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606006080040'
+  select '2026-11-23', 2, 2, id, '{"naziv":"Eurocrem Euro blok","kolicina":"100 g","slika":"/artikli/8601900502100.webp","cena":121,"min":99.99,"max":137.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601900502100'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 3, id, '{"naziv":"Prolom voda","kolicina":"1,5 l","slika":"https://images.openfoodfacts.org/images/products/860/016/960/0022/front_en.27.400.jpg","cena":86,"min":82.66,"max":99.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600169600022'
+  select '2026-11-23', 2, 3, id, '{"naziv":"Jaffa keks","kolicina":"150 g","slika":"/artikli/8600114000013.webp","cena":144,"min":139.99,"max":146.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114000013'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 4, id, '{"naziv":"Zlatiborac čvarci","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/610/682/2403/front_fr.3.400.jpg","cena":470,"min":436.99,"max":499.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606106822403'
+  select '2026-11-23', 2, 4, id, '{"naziv":"Neoplanta namaz u crevu","kolicina":"125 g","slika":"/artikli/8600763025559.webp","cena":96,"min":84.99,"max":104.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600763025559'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 5, id, '{"naziv":"Knjaz Miloš staklo","kolicina":"0,25 l","slika":"https://images.openfoodfacts.org/images/products/860/003/700/8011/front_fr.3.400.jpg","cena":83,"min":77.99,"max":89.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037008011'
+  select '2026-11-23', 2, 5, id, '{"naziv":"Zlatiborac goveđa pršuta slajs","kolicina":"100 g","slika":"/artikli/8606100145737.webp","cena":688,"min":617.99,"max":714.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606100145737'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 6, id, '{"naziv":"Pionir Medeno srce","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/230/023/6022/front_en.10.400.jpg","cena":146,"min":139.99,"max":153.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8602300236022'
+  select '2026-11-23', 2, 6, id, '{"naziv":"Munchmallow","kolicina":"105 g","slika":"/artikli/8600114000020.webp","cena":108,"min":102.99,"max":111.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114000020'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 7, id, '{"naziv":"Moja Kravica kisela pavlaka 20%","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/150/011/2419/front_en.15.400.jpg","cena":187,"min":179.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500112419'
+  select '2026-11-23', 2, 7, id, '{"naziv":"Plazma od srca lešnik","kolicina":"100 g","slika":"/artikli/8600043036794.webp","cena":197,"min":184.99,"max":205.7,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043036794'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 8, id, '{"naziv":"Moja Kravica čokoladno mleko","kolicina":"0,25 l","slika":"https://images.openfoodfacts.org/images/products/860/150/011/0330/front_en.22.400.jpg","cena":68,"min":64.99,"max":69.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500110330'
+  select '2026-11-23', 2, 8, id, '{"naziv":"Frikom Quattro Plazma","kolicina":"1,5 l","slika":"/artikli/8606029612204.webp","cena":651,"min":599.99,"max":699.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606029612204'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 9, id, '{"naziv":"Jaffa keks","kolicina":"300 g","slika":"https://images.openfoodfacts.org/images/products/860/011/400/0211/front_en.45.400.jpg","cena":252,"min":249.69,"max":258.32,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114000211'
+  select '2026-11-23', 2, 9, id, '{"naziv":"Moja Kravica jogurt 2,8%","kolicina":"1,75 kg","slika":"/artikli/8601500138495.webp","cena":233,"min":224.99,"max":240.09,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500138495'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 10, id, '{"naziv":"Eurocrem Euro blok","kolicina":"50 g","slika":"https://images.openfoodfacts.org/images/products/860/190/050/2032/front_sr.10.400.jpg","cena":67,"min":59.99,"max":74.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601900502032'
+  select '2026-11-23', 2, 10, id, '{"naziv":"Grand 3u1 Najlepše želje","kolicina":"18 g","slika":"/artikli/8606018312276.webp","cena":33,"min":28.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606018312276'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-24', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 1, id, '{"naziv":"Carnex pasulj sa slaninom","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/001/270/0282/front_hr.3.400.jpg","cena":359,"min":317.49,"max":403.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600012700282'
+  select '2026-11-24', 2, 1, id, '{"naziv":"Clipsy Mix flips","kolicina":"150 g","slika":"/artikli/8606033741495.webp","cena":149,"min":144.99,"max":156.66,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606033741495'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 2, id, '{"naziv":"Frikom Kapri sladoled","kolicina":"70 ml","slika":"https://images.openfoodfacts.org/images/products/860/600/608/0088/front_sr.30.400.jpg","cena":99,"min":89.99,"max":102.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606006080088'
+  select '2026-11-24', 2, 2, id, '{"naziv":"Pardon štapići sa kikirikijem","kolicina":"210 g","slika":"/artikli/8606017378822.webp","cena":159,"min":137.99,"max":169.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606017378822'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 3, id, '{"naziv":"Moja Kravica mleko dugotrajno 2,8%","kolicina":"1 l","slika":"https://images.openfoodfacts.org/images/products/860/150/011/6011/front_sr.23.400.jpg","cena":113,"min":99.99,"max":139.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500116011'
+  select '2026-11-24', 2, 3, id, '{"naziv":"Moja Kravica krem sir","kolicina":"200 g","slika":"/artikli/8601500119609.webp","cena":194,"min":179.99,"max":201.49,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500119609'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 4, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"200 g","slika":"https://images.openfoodfacts.org/images/products/860/093/931/3701/front_hr.25.400.jpg","cena":382,"min":364.99,"max":389.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939313701'
+  select '2026-11-24', 2, 4, id, '{"naziv":"Moja Kravica kisela pavlaka 20%","kolicina":"400 g","slika":"/artikli/8601500112419.webp","cena":187,"min":179.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500112419'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 5, id, '{"naziv":"Zlatiborac kulen slajs","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/610/014/5775/front_sr.18.400.jpg","cena":271,"min":207.49,"max":309.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606100145775'
+  select '2026-11-24', 2, 5, id, '{"naziv":"Jaffa napolitanke šlag i čokolada","kolicina":"187 g","slika":"/artikli/8600114006626.webp","cena":122,"min":109.99,"max":139.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114006626'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 6, id, '{"naziv":"Pardon perece","kolicina":"95 g","slika":"https://images.openfoodfacts.org/images/products/860/601/737/0048/front_en.4.400.jpg","cena":81,"min":74.99,"max":88.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606017370048'
+  select '2026-11-24', 2, 6, id, '{"naziv":"Pionir zeleni mentol bombone","kolicina":"100 g","slika":"/artikli/8602300200245.webp","cena":67,"min":59.99,"max":74.72,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8602300200245'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 7, id, '{"naziv":"Yuhor Alpska kobasica","kolicina":"350 g","slika":"https://images.openfoodfacts.org/images/products/860/008/400/5841/front_en.3.400.jpg","cena":303,"min":244.99,"max":339.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600084005841'
+  select '2026-11-24', 2, 7, id, '{"naziv":"Frikom Sneško","kolicina":"46 g","slika":"/artikli/8606006080040.webp","cena":76,"min":65.99,"max":80.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080040'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 8, id, '{"naziv":"Smoki","kolicina":"250 g","slika":"https://images.openfoodfacts.org/images/products/860/093/950/7025/front_en.23.400.jpg","cena":185,"min":171.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939507025'
+  select '2026-11-24', 2, 8, id, '{"naziv":"Smoki","kolicina":"80 g","slika":"/artikli/8600939508190.webp","cena":74,"min":69.99,"max":76.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939508190'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 9, id, '{"naziv":"Pionir Negro punjene bombone","kolicina":"250 g","slika":"https://images.openfoodfacts.org/images/products/860/230/023/3229/front_de.3.400.jpg","cena":264,"min":252.99,"max":286.16,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8602300233229'
+  select '2026-11-24', 2, 9, id, '{"naziv":"Carnex mesni narezak","kolicina":"150 g","slika":"/artikli/8600012700183.webp","cena":213,"min":174.99,"max":229.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600012700183'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 10, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"0,5 l","slika":"https://images.openfoodfacts.org/images/products/860/003/700/0312/front_fr.15.400.jpg","cena":55,"min":49.99,"max":57.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037000312'
+  select '2026-11-24', 2, 10, id, '{"naziv":"Zaječarsko pivo limenka","kolicina":"0,5 l","slika":"/artikli/8600649000427.webp","cena":96,"min":89.99,"max":104.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600649000427'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-25', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 1, id, '{"naziv":"Eurocrem činija","kolicina":"500 g","slika":"https://images.openfoodfacts.org/images/products/860/190/050/3411/front_en.3.400.jpg","cena":480,"min":399.99,"max":543.32,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601900503411'
+  select '2026-11-25', 2, 1, id, '{"naziv":"Doncafe Moment kafa","kolicina":"200 g","slika":"/artikli/8600101521439.webp","cena":471,"min":449.99,"max":483.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600101521439'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 2, id, '{"naziv":"Zaječarsko pivo limenka","kolicina":"0,5 l","slika":"https://images.openfoodfacts.org/images/products/860/064/900/0427/front_de.3.400.jpg","cena":96,"min":89.99,"max":104.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600649000427'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 3, id, '{"naziv":"Grand 3u1 Najlepše želje","kolicina":"18 g","slika":"https://images.openfoodfacts.org/images/products/860/601/831/2276/front_sr.3.400.jpg","cena":33,"min":28.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606018312276'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 4, id, '{"naziv":"Najlepše želje crna sa bananicom","kolicina":"184 g","slika":"https://images.openfoodfacts.org/images/products/860/093/933/4171/front_sr.3.400.jpg","cena":367,"min":349.99,"max":389.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939334171'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 5, id, '{"naziv":"Chipsy Domaćinski kajmak","kolicina":"145 g","slika":"https://images.openfoodfacts.org/images/products/860/603/374/2416/front_en.4.400.jpg","cena":195,"min":184.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-25', 2, 2, id, '{"naziv":"Chipsy Domaćinski kajmak","kolicina":"145 g","slika":"/artikli/8606033742416.webp","cena":195,"min":184.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8606033742416'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 6, id, '{"naziv":"Ella sveži sir","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/150/012/6492/front_en.3.400.jpg","cena":282,"min":262.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500126492'
+  select '2026-11-25', 2, 3, id, '{"naziv":"Plazma Rolsi lešnik","kolicina":"130 g","slika":"/artikli/8600043041484.webp","cena":186,"min":170.99,"max":212.49,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043041484'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 7, id, '{"naziv":"Štark Bananica 5 kom","kolicina":"125 g","slika":"https://images.openfoodfacts.org/images/products/860/093/936/5472/front_en.22.400.jpg","cena":139,"min":134.99,"max":141.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939365472'
+  select '2026-11-25', 2, 4, id, '{"naziv":"Zlatiborac kulen slajs","kolicina":"100 g","slika":"/artikli/8606100145775.webp","cena":271,"min":207.49,"max":309.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606100145775'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 8, id, '{"naziv":"Najlepše želje sa keksom","kolicina":"170 g","slika":"https://images.openfoodfacts.org/images/products/860/093/934/6082/front_fr.3.400.jpg","cena":353,"min":349.99,"max":363.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939346082'
+  select '2026-11-25', 2, 5, id, '{"naziv":"Zlatiborac goveđa pršuta slajs","kolicina":"100 g","slika":"/artikli/8606100145737.webp","cena":688,"min":617.99,"max":714.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606100145737'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 9, id, '{"naziv":"Smoki","kolicina":"50 g","slika":"https://images.openfoodfacts.org/images/products/860/093/950/6912/front_en.45.400.jpg","cena":48,"min":45.99,"max":49.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939506912'
+  select '2026-11-25', 2, 6, id, '{"naziv":"Štark Bananica","kolicina":"250 g","slika":"/artikli/8600939366424.webp","cena":256,"min":247.99,"max":269.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939366424'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 10, id, '{"naziv":"Moja Kravica jogurt 2,8%","kolicina":"1,75 kg","slika":"https://images.openfoodfacts.org/images/products/860/150/013/8495/front_en.3.400.jpg","cena":233,"min":224.99,"max":240.09,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500138495'
+  select '2026-11-25', 2, 7, id, '{"naziv":"Fruvita narandža 100%","kolicina":"0,8 l","slika":"/artikli/8606030051702.webp","cena":317,"min":297.99,"max":349.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606030051702'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-25', 2, 8, id, '{"naziv":"Carnex sarma","kolicina":"400 g","slika":"/artikli/8600012700336.webp","cena":496,"min":469.99,"max":521.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600012700336'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-25', 2, 9, id, '{"naziv":"Eurocrem Euro blok","kolicina":"50 g","slika":"/artikli/8601900502032.webp","cena":67,"min":59.99,"max":74.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601900502032'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-25', 2, 10, id, '{"naziv":"Najlepše želje crna sa bananicom","kolicina":"184 g","slika":"/artikli/8600939334171.webp","cena":367,"min":349.99,"max":389.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939334171'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-26', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 1, id, '{"naziv":"Chipsy Classic","kolicina":"140 g","slika":"https://images.openfoodfacts.org/images/products/860/601/737/8495/front_nl.3.400.jpg","cena":192,"min":171.49,"max":214.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606017378495'
+  select '2026-11-26', 2, 1, id, '{"naziv":"Eurocrem Euro blok","kolicina":"100 g","slika":"/artikli/8601900502100.webp","cena":121,"min":99.99,"max":137.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601900502100'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 2, id, '{"naziv":"Smoki","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/093/950/6936/front_en.32.400.jpg","cena":129,"min":127.99,"max":129.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939506936'
+  select '2026-11-26', 2, 2, id, '{"naziv":"Dijamant ajvar blagi","kolicina":"680 g","slika":"/artikli/8600498151479.webp","cena":470,"min":449.55,"max":514.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600498151479'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 3, id, '{"naziv":"Frikom Čoko Moko","kolicina":"52 g","slika":"https://images.openfoodfacts.org/images/products/860/600/608/0095/front_sr.4.400.jpg","cena":80,"min":79.99,"max":81.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606006080095'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 4, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"1,75 l","slika":"https://images.openfoodfacts.org/images/products/860/003/700/5133/front_sr.18.400.jpg","cena":65,"min":62.99,"max":65.59,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037005133'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 5, id, '{"naziv":"Swisslion Isleri sa Eurocremom","kolicina":"125 g","slika":"https://images.openfoodfacts.org/images/products/860/094/644/2111/front_en.9.400.jpg","cena":155,"min":129.99,"max":184.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600946442111'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 6, id, '{"naziv":"Carnex sarma","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/001/270/0336/front_en.14.400.jpg","cena":496,"min":469.99,"max":521.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600012700336'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 7, id, '{"naziv":"Dijamant kečap blagi","kolicina":"500 g","slika":"https://images.openfoodfacts.org/images/products/860/049/815/0083/front_en.6.400.jpg","cena":161,"min":147.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498150083'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 8, id, '{"naziv":"Munchmallow","kolicina":"105 g","slika":"https://images.openfoodfacts.org/images/products/860/011/400/0020/front_en.46.400.jpg","cena":108,"min":102.99,"max":111.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114000020'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 9, id, '{"naziv":"Plazma keks","kolicina":"300 g","slika":"https://images.openfoodfacts.org/images/products/860/004/300/0023/front_en.57.400.jpg","cena":289,"min":279.99,"max":294.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-26', 2, 3, id, '{"naziv":"Plazma keks","kolicina":"300 g","slika":"/artikli/8600043000023.webp","cena":289,"min":279.99,"max":294.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600043000023'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 10, id, '{"naziv":"Pionir zeleni mentol bombone","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/230/020/0245/front_hr.10.400.jpg","cena":67,"min":59.99,"max":74.72,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8602300200245'
+  select '2026-11-26', 2, 4, id, '{"naziv":"Aqua Heba gazirana","kolicina":"1,5 l","slika":"/artikli/8606002170066.webp","cena":65,"min":61.99,"max":69.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606002170066'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-26', 2, 5, id, '{"naziv":"Dijamant kečap blagi","kolicina":"500 g","slika":"/artikli/8600498150083.webp","cena":161,"min":147.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600498150083'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-26', 2, 6, id, '{"naziv":"Štark Čajni keksići","kolicina":"800 g","slika":"/artikli/8600939841204.webp","cena":322,"min":309.99,"max":349.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939841204'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-26', 2, 7, id, '{"naziv":"Swisslion Isleri sa Eurocremom","kolicina":"125 g","slika":"/artikli/8600946442111.webp","cena":155,"min":129.99,"max":184.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600946442111'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-26', 2, 8, id, '{"naziv":"Lav pivo limenka","kolicina":"0,5 l","slika":"/artikli/8600102672383.webp","cena":88,"min":82.99,"max":92.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600102672383'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-26', 2, 9, id, '{"naziv":"Smoki","kolicina":"250 g","slika":"/artikli/8600939507025.webp","cena":185,"min":171.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939507025'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-26', 2, 10, id, '{"naziv":"Frikom Macho sladoled","kolicina":"75 ml","slika":"/artikli/8606006080064.webp","cena":150,"min":148.99,"max":153.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080064'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-27', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 1, id, '{"naziv":"Fruvita narandža 100%","kolicina":"0,8 l","slika":"https://images.openfoodfacts.org/images/products/860/603/005/1702/front_en.4.400.jpg","cena":317,"min":297.99,"max":349.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606030051702'
+  select '2026-11-27', 2, 1, id, '{"naziv":"Frikom Kapri sladoled","kolicina":"70 ml","slika":"/artikli/8606006080088.webp","cena":99,"min":89.99,"max":102.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080088'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 2, id, '{"naziv":"Plazma mlevena","kolicina":"300 g","slika":"https://images.openfoodfacts.org/images/products/860/004/300/1105/front_en.45.400.jpg","cena":293,"min":279.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043001105'
+  select '2026-11-27', 2, 2, id, '{"naziv":"Yuhor Levački štapići","kolicina":"200 g","slika":"/artikli/8600084005612.webp","cena":594,"min":557.99,"max":639.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600084005612'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 3, id, '{"naziv":"Plazma keks","kolicina":"400 g","slika":"https://images.openfoodfacts.org/images/products/860/004/303/9788/front_sr.13.400.jpg","cena":388,"min":369.99,"max":401.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043039788'
+  select '2026-11-27', 2, 3, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"90 g","slika":"/artikli/8600939313602.webp","cena":193,"min":189.99,"max":198.32,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939313602'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 4, id, '{"naziv":"Eurocrem Euro blok","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/190/050/2100/front_sr.14.400.jpg","cena":121,"min":99.99,"max":137.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601900502100'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 5, id, '{"naziv":"Clipsy Mix flips","kolicina":"150 g","slika":"https://images.openfoodfacts.org/images/products/860/603/374/1495/front_hr.4.400.jpg","cena":149,"min":144.99,"max":156.66,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606033741495'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 6, id, '{"naziv":"Štark Menaž čokolada za kuvanje","kolicina":"100 g","slika":"https://images.openfoodfacts.org/images/products/860/093/930/3115/front_sr.34.400.jpg","cena":202,"min":192.99,"max":211.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939303115'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 7, id, '{"naziv":"Smoki","kolicina":"80 g","slika":"https://images.openfoodfacts.org/images/products/860/093/950/8190/front_en.3.400.jpg","cena":74,"min":69.99,"max":76.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939508190'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 8, id, '{"naziv":"Dijamant stoni margarin","kolicina":"250 g","slika":"https://images.openfoodfacts.org/images/products/860/049/817/2115/front_sr.14.400.jpg","cena":115,"min":104.99,"max":124.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498172115'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 9, id, '{"naziv":"Moja Kravica jogurt čaša","kolicina":"180 g","slika":"https://images.openfoodfacts.org/images/products/860/150/011/5892/front_fr.4.400.jpg","cena":38,"min":35.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601500115892'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 10, id, '{"naziv":"Carnex jetrena pašteta","kolicina":"75 g","slika":"https://images.openfoodfacts.org/images/products/000/008/600/2783/front_de.7.400.jpg","cena":89,"min":79.99,"max":99.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-27', 2, 4, id, '{"naziv":"Carnex jetrena pašteta","kolicina":"75 g","slika":"/artikli/86002783.webp","cena":89,"min":79.99,"max":99.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '86002783'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-27', 2, 5, id, '{"naziv":"Štark Bananica 5 kom","kolicina":"125 g","slika":"/artikli/8600939365472.webp","cena":139,"min":134.99,"max":141.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939365472'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-27', 2, 6, id, '{"naziv":"Zlatiborac čvarci","kolicina":"150 g","slika":"/artikli/8606106822403.webp","cena":470,"min":436.99,"max":499.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606106822403'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-27', 2, 7, id, '{"naziv":"Jaffa keks","kolicina":"300 g","slika":"/artikli/8600114000211.webp","cena":252,"min":249.69,"max":258.32,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114000211'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-27', 2, 8, id, '{"naziv":"Jelen pivo flaša","kolicina":"0,5 l","slika":"/artikli/86027618.webp","cena":91,"min":89.99,"max":94.99,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '86027618'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-27', 2, 9, id, '{"naziv":"Medela štrudla","kolicina":"240 g","slika":"/artikli/8600104004458.webp","cena":150,"min":139.99,"max":157.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600104004458'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-27', 2, 10, id, '{"naziv":"Smoki","kolicina":"150 g","slika":"/artikli/8600939506936.webp","cena":129,"min":127.99,"max":129.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939506936'
   on conflict (quiz_date, segment, position) do nothing;
 
 -- Isto što i migracija 0002: ponovljeno ovde da seed radi i ako ona nije puštena.

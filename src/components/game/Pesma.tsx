@@ -1,10 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { PESMA_PRAGOVI } from "@/config/quiz.config";
 import { IconLupa, IconNota, IconPauza, IconPusti, IconStrelica } from "@/components/icons";
 import type { Ocena, OdgovorPesma, PrikazPesma } from "@/lib/game/types";
-import { pretraziKatalog } from "@/lib/match";
+import { nadjiUKatalogu } from "@/lib/match";
 import { sfx } from "@/lib/sound";
 import { api, katalogPesama, type PesmaIzKataloga } from "./api";
 import { Konfete, Nalepnica, Pecat, smanjenoKretanje } from "./efekti";
@@ -285,9 +285,11 @@ export function PesmaIgra({
     void red.current.then(() => naOdgovorRef.current(odgovor, preslusano, false));
   };
 
-  const predlozi = gotovo ? [] : pretraziKatalog(katalog, upit, NAJVISE_PREDLOGA);
+  const nadjeno = useMemo(() => nadjiUKatalogu(katalog, upit, NAJVISE_PREDLOGA), [katalog, upit]);
+  const predlozi = gotovo ? [] : nadjeno.stavke;
+  const josPredloga = gotovo ? 0 : nadjeno.ukupno - predlozi.length;
   const izabran = Math.min(oznacen, Math.max(0, predlozi.length - 1));
-  const posaljiPredlog = (s: PesmaIzKataloga) => posalji({ songId: s.id, tekst: `${s.izvodjac} – ${s.naslov}` });
+  const posaljiPredlog = (s: PesmaIzKataloga) => posalji({ izbor: { izvodjac: s.izvodjac, naslov: s.naslov }, tekst: `${s.izvodjac} – ${s.naslov}` });
 
   const prikazanoMs = konacnoMs ?? ms;
   const zona = zonaZa(prikazanoMs);
@@ -408,7 +410,7 @@ export function PesmaIgra({
             {upit.trim() !== "" && (
               <ul id="g-predlozi" className="g-predlozi" role="listbox">
                 {predlozi.map((s, i) => (
-                  <li key={s.id} id={`g-predlog-${i}`} role="option" aria-selected={i === izabran}>
+                  <li key={`${s.izvodjac}|${s.naslov}`} id={`g-predlog-${i}`} role="option" aria-selected={i === izabran}>
                     <button
                       type="button"
                       className={i === izabran ? "g-predlog oznacen" : "g-predlog"}
@@ -421,6 +423,7 @@ export function PesmaIgra({
                     </button>
                   </li>
                 ))}
+                {josPredloga > 0 && <li className="g-predlozi-jos">i još {josPredloga}. Kucaj dalje.</li>}
                 {predlozi.length === 0 && (
                   <li className="g-predlozi-prazno">Nema je na spisku. Enter šalje ono što si ukucao.</li>
                 )}
