@@ -9,7 +9,7 @@ export function bezbedanNext(next: unknown, podrazumevano = "/"): string {
 
 /**
  * Isto, ali prihvata i punu adresu ako pokazuje na ovaj sajt
- * (Supabase u mejlu šalje punu adresu, npr. https://www.cikpogodi.rs/igra).
+ * (Supabase u mejlu šalje punu adresu, npr. https://cikpogodi.online/igra).
  */
 export function bezbedanNextIzAdrese(next: unknown, origin: string, podrazumevano = "/"): string {
   if (typeof next !== "string" || !next) return podrazumevano;

@@ -206,7 +206,7 @@ describe("tekst za deljenje", () => {
       segmenti: [seg(1, "pesma", [2, 1, 0, 2, 1], 60, 100), seg(2, "cena", [2, 0, 1, 0, 0, 2, 0, 0, 0, 2], 35, 100), seg(3, "gugla", [2, 2, 0, 2, 0, 2, 2, 0], 25, 40), seg(4, "film", [2, 0, 0], 20, 60), seg(5, "joker", [2], 50, 50)],
     };
     expect(tekstZaDeljenje(stanje)).toBe(
-      ["Čik Pogodi! 14.11.2026.", "187/350", "🎵 🟩🟨⬛🟩🟨", "🛒 🟩⬛🟨⬛⬛🟩⬛⬛⬛🟩", "🔎 🟩🟩⬛🟩⬛🟩🟩⬛", "🎬 🟩⬛⬛", "🃏 🟩", "cikpogodi.rs"].join("\n"),
+      ["Čik Pogodi! 14.11.2026.", "187/350", "🎵 🟩🟨⬛🟩🟨", "🛒 🟩⬛🟨⬛⬛🟩⬛⬛⬛🟩", "🔎 🟩🟩⬛🟩⬛🟩🟩⬛", "🎬 🟩⬛⬛", "🃏 🟩", "cikpogodi.online"].join("\n"),
     );
   });
 });

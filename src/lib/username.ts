@@ -126,7 +126,7 @@ export function proveriKorisnickoIme(ime: string): string | null {
  * pa se on pravi od nadimka. Nikad se ne prikazuje i na njega se ništa ne šalje.
  * Dva nadimka koja se razlikuju samo po kvačicama ili veličini slova daju istu adresu — to su isti nalog.
  */
-export const DOMEN_NALOGA = "nalozi.cikpogodi.rs";
+export const DOMEN_NALOGA = "nalozi.cikpogodi.online";
 
 /** Nadimak sveden na mala latinična slova, brojeve i donju crtu. */
 export function kljucImena(ime: string): string {

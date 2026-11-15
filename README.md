@@ -1,6 +1,6 @@
 # Čik Pogodi!
 
-Dnevni kviz od 5 segmenata (www.cikpogodi.rs). Next.js (App Router) + TypeScript + Supabase, hosting na Netlify-ju.
+Dnevni kviz od 5 segmenata (cikpogodi.online). Next.js (App Router) + TypeScript + Supabase, hosting na Vercelu (region fra1, Frankfurt).
 
 > Ovo je radna verzija README-a. Gotovi su **osnova, nalozi, svih pet segmenata, čuvanje rezultata i rang lista**.
 > Ostaju admin panel, završno poliranje i deploy (Supabase + Netlify + domen).
@@ -56,7 +56,7 @@ npm run build
 
 | Ime | Šta je |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | Adresa sajta bez kose crte na kraju (`https://www.cikpogodi.rs`, lokalno `http://localhost:3000`) |
+| `NEXT_PUBLIC_SITE_URL` | Adresa sajta bez kose crte na kraju (`https://cikpogodi.online`, lokalno `http://localhost:3000`) |
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Project Settings → API → Project URL |
 | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | „Publishable” ključ (ili stari „anon”). Sme da bude javan |
 | `SUPABASE_SECRET_KEY` | „Secret” ključ (ili stari „service_role”). **Tajna**, samo na serveru |
@@ -74,14 +74,14 @@ npm run build
    (dupli klik na `podesi.bat`), a u **Connect → Transaction pooler** uzmi `DATABASE_URL`.
    Iste vrednosti kasnije idu i na Netlify.
 4. **Authentication → URL Configuration**
-   - Site URL: `https://www.cikpogodi.rs`
-   - Redirect URLs: `https://www.cikpogodi.rs/**`, `https://cikpogodi.rs/**`, `http://localhost:3000/**`
+   - Site URL: `https://cikpogodi.online`
+   - Redirect URLs: `https://cikpogodi.online/**`, `https://cikpogodi.online/**`, `http://localhost:3000/**`
 5. **Authentication → Sign In / Providers → Email**: uključi „Confirm email”.
 6. **Authentication → Emails → Templates**
    - „Confirm signup”: nalepi `supabase/email-templates/potvrda-naloga.html` (naslov je u komentaru na vrhu fajla)
    - „Reset password”: nalepi `supabase/email-templates/nova-sifra.html`
 7. **Authentication → Emails → SMTP Settings**: ugrađeno slanje je samo za probu (par mejlova na sat).
-   Za pravi sajt poveži svoj SMTP (npr. Resend) i u DNS za cikpogodi.rs dodaj zapise koje ti servis da.
+   Za pravi sajt poveži svoj SMTP (npr. Resend) i u DNS za cikpogodi.online dodaj zapise koje ti servis da.
 8. **Google prijava**: Authentication → Sign In / Providers → Google. Treba OAuth klijent iz Google Cloud konzole;
    kao „Authorized redirect URI” ide adresa koju Supabase prikaže na toj strani.
 9. **Apple prijava**: isto mesto → Apple. Traži plaćen Apple Developer nalog, može i kasnije.
@@ -99,9 +99,9 @@ Netlify prepoznaje Next.js sam; `netlify.toml` u korenu samo bira Node 22.
 1. **netlify.com → Add new site → Import an existing project → GitHub** → izaberi `djoledjole23/cikpogodi`.
    Build command `npm run build`, publish directory `.next` (Netlify ih sam popuni).
 2. **Site configuration → Environment variables** → dodaj svih pet vrednosti iz `.env.local`, s tim što
-   `NEXT_PUBLIC_SITE_URL` mora da bude prava adresa sajta (npr. `https://www.cikpogodi.rs`), ne `localhost`.
+   `NEXT_PUBLIC_SITE_URL` mora da bude prava adresa sajta (npr. `https://cikpogodi.online`), ne `localhost`.
    Vrednosti koje počinju sa `NEXT_PUBLIC_` se ugrađuju u vreme builda: kad ih promeniš, treba **Trigger deploy**.
-3. **Domain management** → dodaj `cikpogodi.rs` i `www.cikpogodi.rs`, pa kod registratora domena postavi
+3. **Domain management** → dodaj `cikpogodi.online` i `cikpogodi.online`, pa kod registratora domena postavi
    zapise koje Netlify prikaže. HTTPS sertifikat Netlify napravi sam.
 4. Vrati se u **Supabase → Authentication → URL Configuration** i upiši pravu adresu (Site URL + Redirect URLs),
    inače linkovi iz mejlova vode na pogrešno mesto.

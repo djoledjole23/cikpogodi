@@ -9,7 +9,7 @@ import type { Stanje } from "./types";
 const ZNAK: Record<SegmentKey, string> = { pesma: "🎵", cena: "🛒", gugla: "🔎", film: "🎬", joker: "🃏" };
 const KVADRAT = ["⬛", "🟨", "🟩"] as const;
 
-export function tekstZaDeljenje(stanje: Stanje, adresa = "cikpogodi.rs"): string {
+export function tekstZaDeljenje(stanje: Stanje, adresa = "cikpogodi.online"): string {
   const [g, m, d] = stanje.datum.split("-").map(Number);
   const max = stanje.segmenti.reduce((z, s) => z + s.max, 0);
   const redovi = stanje.segmenti.map((s) => `${ZNAK[s.key]} ${s.tok.map((t) => KVADRAT[t]).join("")}`);

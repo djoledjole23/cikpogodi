@@ -7,7 +7,7 @@ import "@fontsource/nunito/800.css";
 import "./globals.css";
 import { CookieBanner } from "@/components/CookieBanner";
 
-const SAJT = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.cikpogodi.rs";
+const SAJT = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cikpogodi.online";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SAJT),
