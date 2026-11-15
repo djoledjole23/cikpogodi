@@ -23,7 +23,7 @@ import type { Identitet } from "@/lib/game/types";
 
 const koren = join(__dirname, "..");
 const json = (ime: string) => JSON.parse(readFileSync(join(koren, "data", ime), "utf8"));
-const POCETAK = "2026-11-14";
+const POCETAK = "2026-11-15";
 const DANA = 14;
 
 function ulaz() {
@@ -74,14 +74,14 @@ describe("isti dan, ista pitanja", () => {
     const neZna = await odigraj(gost(), POCETAK, (seg) => (seg === 2 ? { unos: 1 } : seg === 3 ? { izbor: "a" } : { neZnam: true }));
     const drugi = await odigraj(gost(), POCETAK, (seg) => (seg === 2 ? { unos: 250 } : seg === 3 ? { izbor: "b" } : { tekst: "nešto" }));
     const treci = await odigraj(gost(), POCETAK, (seg, n) => (seg === 2 ? { unos: 99 + n } : seg === 3 ? { izbor: n % 2 ? "a" : "b" } : { tekst: "Entoni" }));
-    expect(neZna).toHaveLength(5 + 10 + 8 + 3 + 1);
+    expect(neZna).toHaveLength(5 + 5 + 5 + 3 + 1);
     expect(drugi).toEqual(neZna);
     expect(treci).toEqual(neZna);
-    expect(neZna.map((x) => x.split("/")[0]).join("")).toBe("1".repeat(5) + "2".repeat(10) + "3".repeat(8) + "4".repeat(3) + "5");
+    expect(neZna.map((x) => x.split("/")[0]).join("")).toBe("1".repeat(5) + "2".repeat(5) + "3".repeat(5) + "4".repeat(3) + "5");
   });
 
   it("i sutradan je isto za sve, a pitanja su drugačija nego danas", async () => {
-    const sutra = "2026-11-15";
+    const sutra = "2026-11-16";
     const a = await odigraj(gost(), sutra, (seg) => (seg === 2 ? { unos: 1 } : seg === 3 ? { izbor: "a" } : { neZnam: true }));
     const b = await odigraj(gost(), sutra, (seg) => (seg === 2 ? { unos: 500 } : seg === 3 ? { izbor: "b" } : { tekst: "x" }));
     expect(b).toEqual(a);
@@ -107,7 +107,7 @@ describe("pravljenje pitanja", () => {
     drugacije.pesme = [...drugacije.pesme].reverse();
     drugacije.filmovi = [...drugacije.filmovi].reverse();
     await pg.exec(seedSql(drugacije));
-    await pg.exec(seedSql({ ...ulaz(), pocetak: "2026-11-10", dana: 10 })); // drugi početak, preklapa se sa današnjim danom
+    await pg.exec(seedSql({ ...ulaz(), pocetak: "2026-11-11", dana: 10 })); // drugi početak, preklapa se sa današnjim danom
     expect((await stavke()).rows).toEqual(pre);
   });
 

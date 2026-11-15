@@ -28,11 +28,9 @@ async function Sadrzaj({ searchParams }: Pick<PageProps<"/registracija">, "searc
       <OAuthDugmad next={next} />
       <OAuthRazdvojnik />
       <RegistracijaForma next={next} />
-      <p className="center">
-        <Link href={`/prijava?next=${encodeURIComponent(next)}`} className="text-link tap">
-          Već imam nalog → Prijavi se
-        </Link>
-      </p>
+      <Link href={`/prijava?next=${encodeURIComponent(next)}`} className="btn btn-ghost">
+        Već imaš nalog? Prijavi se
+      </Link>
     </div>
   );
 }

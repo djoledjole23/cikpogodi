@@ -27,11 +27,9 @@ export function SacuvajRezultat({ stanje, naPreskoci }: { stanje: Stanje; naPres
           <OAuthDugmad next="/igra" />
           <OAuthRazdvojnik />
           <RegistracijaForma next="/igra" />
-          <p className="center">
-            <Link href="/prijava?next=/igra" className="text-link tap">
-              Već imam nalog → Prijavi se
-            </Link>
-          </p>
+          <Link href="/prijava?next=/igra" className="btn btn-ghost">
+            Već imaš nalog? Prijavi se
+          </Link>
         </>
       ) : (
         <p className="g-obavestenje">

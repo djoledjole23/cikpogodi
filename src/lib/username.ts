@@ -120,3 +120,21 @@ export function proveriKorisnickoIme(ime: string): string | null {
   if (imaPsovku(s)) return "Ajde bez psovki u imenu, gledaju i deca.";
   return null;
 }
+
+/**
+ * Interna adresa naloga. Igrač se prijavljuje nadimkom i šifrom, a Supabase iznutra traži mejl,
+ * pa se on pravi od nadimka. Nikad se ne prikazuje i na njega se ništa ne šalje.
+ * Dva nadimka koja se razlikuju samo po kvačicama ili veličini slova daju istu adresu — to su isti nalog.
+ */
+export const DOMEN_NALOGA = "nalozi.cikpogodi.rs";
+
+/** Nadimak sveden na mala latinična slova, brojeve i donju crtu. */
+export function kljucImena(ime: string): string {
+  let s = ime.trim().toLowerCase();
+  s = Array.from(s, (c) => CIRILICA[c] ?? c).join("");
+  s = s.replace(/\u0111/g, "dj");
+  s = s.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return s.replace(/[^a-z0-9_]/g, "");
+}
+
+export const mejlZaIme = (ime: string) => `${kljucImena(ime)}@${DOMEN_NALOGA}`;

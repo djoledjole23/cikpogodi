@@ -8,7 +8,6 @@ import {
   postaviNovuSifru,
   prijava,
   registracija,
-  zatraziNovuSifru,
   type StanjeForme,
 } from "@/lib/auth-actions";
 import { KORISNICKO_IME, SIFRA_MIN } from "@/config/quiz.config";
@@ -99,8 +98,8 @@ export function RegistracijaForma({ next = "/" }: { next?: string }) {
       <Greska stanje={stanje} />
       <Field
         name="username"
-        label="Korisničko ime"
-        hint={`${KORISNICKO_IME.min}–${KORISNICKO_IME.max} znakova. Ovo ime se vidi na rang listi.`}
+        label="Nadimak"
+        hint={`${KORISNICKO_IME.min}\u2013${KORISNICKO_IME.max} znakova. Ovim se prijavljuje\u0161 i ovo se vidi na rang listi.`}
         error={stanje.polja?.username}
         defaultValue={stanje.vrednosti?.username}
         autoComplete="username"
@@ -110,37 +109,22 @@ export function RegistracijaForma({ next = "/" }: { next?: string }) {
         required
       />
       <Field
-        name="email"
-        type="email"
-        label="Mejl"
-        error={stanje.polja?.email}
-        defaultValue={stanje.vrednosti?.email}
-        autoComplete="email"
-        inputMode="email"
-        required
-      />
-      <Field
         name="sifra"
         type="password"
-        label="Šifra"
+        label="\u0160ifra"
         hint={`Bar ${SIFRA_MIN} znakova.`}
         error={stanje.polja?.sifra}
         autoComplete="new-password"
         required
       />
-      <Field
-        name="sifra2"
-        type="password"
-        label="Šifra još jednom"
-        error={stanje.polja?.sifra2}
-        autoComplete="new-password"
-        required
-      />
       <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "Pravim nalog…" : "Napravi nalog"}
+        {ceka ? "Pravim nalog\u2026" : "Napravi nalog"}
       </button>
       <p className="small muted center">
-        Pravljenjem naloga prihvataš <Link href="/uslovi-koriscenja">uslove korišćenja</Link> i{" "}
+        Nema mejla i nema potvr\u0111ivanja \u2014 zapamti nadimak i \u0161ifru, jer zaboravljena \u0161ifra ne mo\u017ee da se vrati.
+      </p>
+      <p className="small muted center">
+        Pravljenjem naloga prihvata\u0161 <Link href="/uslovi-koriscenja">uslove kori\u0161\u0107enja</Link> i{" "}
         <Link href="/pravila-privatnosti">pravila privatnosti</Link>.
       </p>
     </form>
@@ -156,52 +140,24 @@ export function PrijavaForma({ next = "/" }: { next?: string }) {
       <input type="hidden" name="next" value={next} />
       <Greska stanje={stanje} />
       <Field
-        name="email"
-        type="email"
-        label="Mejl"
-        defaultValue={stanje.vrednosti?.email}
-        autoComplete="email"
-        inputMode="email"
+        name="username"
+        label="Nadimak"
+        defaultValue={stanje.vrednosti?.username}
+        autoComplete="username"
+        autoCapitalize="none"
+        spellCheck={false}
+        maxLength={KORISNICKO_IME.max}
         required
       />
-      <Field name="sifra" type="password" label="Šifra" autoComplete="current-password" required />
+      <Field name="sifra" type="password" label="\u0160ifra" autoComplete="current-password" required />
       <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "Prijavljujem…" : "Prijavi se"}
+        {ceka ? "Prijavljujem\u2026" : "Prijavi se"}
       </button>
     </form>
   );
 }
 
-// ───────────────────────── Zaboravljena / nova šifra ─────────────────────────
-
-export function ZaboravljenaSifraForma() {
-  const [stanje, akcija, ceka] = useActionState(zatraziNovuSifru, PRAZNO);
-  if (stanje.ok) {
-    return (
-      <p className="form-ok" role="status">
-        {stanje.ok}
-      </p>
-    );
-  }
-  return (
-    <form action={akcija} className="form" noValidate>
-      <Greska stanje={stanje} />
-      <Field
-        name="email"
-        type="email"
-        label="Mejl sa kojim si napravio nalog"
-        error={stanje.polja?.email}
-        defaultValue={stanje.vrednosti?.email}
-        autoComplete="email"
-        inputMode="email"
-        required
-      />
-      <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "Šaljem…" : "Pošalji mi link"}
-      </button>
-    </form>
-  );
-}
+// ───────────────────────── Promena šifre ─────────────────────────
 
 export function NovaSifraForma() {
   const [stanje, akcija, ceka] = useActionState(postaviNovuSifru, PRAZNO);
@@ -209,24 +165,24 @@ export function NovaSifraForma() {
     <form action={akcija} className="form" noValidate>
       <Greska stanje={stanje} />
       <Field
+        name="stara"
+        type="password"
+        label="Sada\u0161nja \u0161ifra"
+        error={stanje.polja?.stara}
+        autoComplete="current-password"
+        required
+      />
+      <Field
         name="sifra"
         type="password"
-        label="Nova šifra"
+        label="Nova \u0161ifra"
         hint={`Bar ${SIFRA_MIN} znakova.`}
         error={stanje.polja?.sifra}
         autoComplete="new-password"
         required
       />
-      <Field
-        name="sifra2"
-        type="password"
-        label="Nova šifra još jednom"
-        error={stanje.polja?.sifra2}
-        autoComplete="new-password"
-        required
-      />
       <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "Čuvam…" : "Sačuvaj novu šifru"}
+        {ceka ? "\u010cuvam\u2026" : "Sa\u010duvaj novu \u0161ifru"}
       </button>
     </form>
   );

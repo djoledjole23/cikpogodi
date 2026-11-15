@@ -30,28 +30,28 @@ describe("pesma", () => {
 
 describe("cena", () => {
   it.each([
-    [172, 172, 10],
-    [189.2, 172, 10], // tačno +10%
-    [154.8, 172, 10], // tačno −10%
-    [189.21, 172, 5], // malo preko 10%
-    [197.8, 172, 5], // tačno +15%
-    [146.2, 172, 5], // tačno −15%
+    [172, 172, 20],
+    [189.2, 172, 20], // tačno +10%
+    [154.8, 172, 20], // tačno −10%
+    [189.21, 172, 10], // malo preko 10%
+    [197.8, 172, 10], // tačno +15%
+    [146.2, 172, 10], // tačno −15%
     [197.81, 172, 0], // malo preko 15%
     [0, 172, 0],
-    [110, 100, 10], // tačno 10% na okruglom broju
-    [115, 100, 5], // tačno 15%
+    [110, 100, 20], // tačno 10% na okruglom broju
+    [115, 100, 10], // tačno 15%
     [116, 100, 0],
-    [80.29, 72.99, 5], // 7,30 / 72,99 = 10,0014%: za dlaku preko
-    [80.28, 72.99, 10], // 7,29 / 72,99 = 9,99%
+    [80.29, 72.99, 10], // 7,30 / 72,99 = 10,0014%: za dlaku preko
+    [80.28, 72.99, 20], // 7,29 / 72,99 = 9,99%
   ])("unos %d, prava %d → %i poena", (unos, tacna, poeni) => {
     expect(poeniCena(unos, tacna)).toBe(poeni);
   });
 
   it("decimale ne kvare granicu od tačno 10%", () => {
-    expect(poeniCena(87.98, 79.98)).toBe(5); // 8,00 / 79,98 = 10,0025%
-    expect(poeniCena(87.97, 79.98)).toBe(10); // 7,99 / 79,98 = 9,99%
-    expect(poeniCena(33, 30)).toBe(10); // 3 / 30 = tačno 10%
-    expect(poeniCena(0.3, 0.27)).toBe(5); // 0,03 / 0,27 = 11,1%
+    expect(poeniCena(87.98, 79.98)).toBe(10); // 8,00 / 79,98 = 10,0025%
+    expect(poeniCena(87.97, 79.98)).toBe(20); // 7,99 / 79,98 = 9,99%
+    expect(poeniCena(33, 30)).toBe(20); // 3 / 30 = tačno 10%
+    expect(poeniCena(0.3, 0.27)).toBe(10); // 0,03 / 0,27 = 11,1%
   });
 
   it("besmislen unos je 0", () => {
@@ -62,7 +62,7 @@ describe("cena", () => {
 
   it("odstupanje i prikaz", () => {
     expect(odstupanjeCena(189, 172)).toBeCloseTo(0.0988, 3);
-    expect(procenatZaPrikaz(189, 172)).toBe("+10%"); // 9,88%: u pragu, 10 poena
+    expect(procenatZaPrikaz(189, 172)).toBe("+10%"); // 9,88%: u pragu, 20 poena
     expect(procenatZaPrikaz(150, 172)).toBe("−13%");
     expect(procenatZaPrikaz(172, 172)).toBe("u dinar");
     expect(procenatZaPrikaz(173, 172)).toBe("+1%");
@@ -74,17 +74,17 @@ describe("cena", () => {
     // 542 / 471 = +15,07% → 0 poena, pa ne sme da piše +15%
     expect(poeniCena(542, 471)).toBe(0);
     expect(procenatZaPrikaz(542, 471)).toBe("+15,1%");
-    // 106 / 96 = +10,42% → 5 poena, pa ne sme da piše +10%
-    expect(poeniCena(106, 96)).toBe(5);
+    // 106 / 96 = +10,42% → 10 poena, pa ne sme da piše +10%
+    expect(poeniCena(106, 96)).toBe(10);
     expect(procenatZaPrikaz(106, 96)).toBe("+10,5%");
     // 2001 / 1819 = +10,005%: zaokruženo na desetinu bi opet bilo 10,0
-    expect(poeniCena(2001, 1819)).toBe(5);
+    expect(poeniCena(2001, 1819)).toBe(10);
     expect(procenatZaPrikaz(2001, 1819)).toBe("+10,1%");
     // tačno na pragu ostaje ceo broj
     expect(procenatZaPrikaz(220, 200)).toBe("+10%");
     expect(procenatZaPrikaz(85, 100)).toBe("−15%");
-    // 14,6% je u pragu od 15 → 5 poena i „+15%” se slažu
-    expect(poeniCena(1146, 1000)).toBe(5);
+    // 14,6% je u pragu od 15 → 10 poena i „+15%” se slažu
+    expect(poeniCena(1146, 1000)).toBe(10);
     expect(procenatZaPrikaz(1146, 1000)).toBe("+15%");
   });
 });
@@ -96,6 +96,6 @@ describe("config", () => {
     expect(osnovno).toBe(300);
     expect(bonus).toBe(50);
     expect(MAX_UKUPNO).toBe(350);
-    expect(SEGMENTI.reduce((z, s) => z + s.pitanja, 0)).toBe(27); // 26 pitanja + 1 Joker
+    expect(SEGMENTI.reduce((z, s) => z + s.pitanja, 0)).toBe(19); // 26 pitanja + 1 Joker
   });
 });

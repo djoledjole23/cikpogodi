@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { BrisanjeNalogaForma, KorisnickoImeForma } from "@/components/auth/forms";
@@ -22,7 +23,6 @@ export default function Nalog({ searchParams }: PageProps<"/nalog">) {
 async function Sadrzaj({ searchParams }: Pick<PageProps<"/nalog">, "searchParams">) {
   const igrac = await getIgrac();
   if (!igrac) redirect("/prijava?next=/nalog");
-  if (!igrac.username) redirect("/nalog/korisnicko-ime");
   const sp = await searchParams;
 
   return (
@@ -37,12 +37,6 @@ async function Sadrzaj({ searchParams }: Pick<PageProps<"/nalog">, "searchParams
         <p className="display" style={{ fontSize: 28, lineHeight: 1.1 }}>
           {igrac.username}
         </p>
-        <p className="muted" style={{ overflowWrap: "anywhere" }}>
-          {igrac.email}
-        </p>
-        {!igrac.mejlPotvrdjen && (
-          <p className="field-error">Mejl još nije potvrđen, pa ti rezultati ne ulaze na rang listu.</p>
-        )}
       </div>
 
       <section className="stack" aria-labelledby="promena-imena">
@@ -50,6 +44,17 @@ async function Sadrzaj({ searchParams }: Pick<PageProps<"/nalog">, "searchParams
           Promeni ime
         </h2>
         <KorisnickoImeForma trenutno={igrac.username} next="/nalog" />
+      </section>
+
+      <section className="stack" aria-labelledby="promena-sifre">
+        <h2 id="promena-sifre" className="h2">
+          Promeni šifru
+        </h2>
+        <p className="muted">
+          <Link href="/nova-sifra" className="text-link tap">
+            Postavi novu šifru
+          </Link>
+        </p>
       </section>
 
       <form action={odjava}>

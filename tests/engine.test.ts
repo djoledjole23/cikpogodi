@@ -97,15 +97,15 @@ describe("products.json i seed", () => {
     expect(novi.proizvodi.find((x) => x.barkod === saSlikom.barkod)!.slika).toBe(`/artikli/${saSlikom.barkod}.webp`);
   });
 
-  it("14 dana po 10 različitih artikala, bez istog naziva dvaput u danu", () => {
+  it("14 dana po 5 različitih artikala, bez istog naziva dvaput u danu", () => {
     const plan = planCena(ucitani.proizvodi, POCETAK, 14);
     expect(plan.length).toBe(14);
     expect(plan[0].datum).toBe("2026-11-14");
     expect(plan[13].datum).toBe("2026-11-27");
     const koriscenje = new Map<string, number>();
     plan.forEach((dan, i) => {
-      expect(dan.artikli.length).toBe(10);
-      expect(new Set(dan.artikli.map((a) => a.naziv)).size).toBe(10);
+      expect(dan.artikli.length).toBe(5);
+      expect(new Set(dan.artikli.map((a) => a.naziv)).size).toBe(5);
       const poKat = new Map<string, number>();
       for (const a of dan.artikli) {
         poKat.set(a.kategorija, (poKat.get(a.kategorija) ?? 0) + 1);
@@ -134,7 +134,7 @@ describe("products.json i seed", () => {
       "select count(*)::int as n from public.daily_quiz_items where quiz_date between '2026-11-14' and '2026-11-27'",
     );
     expect(p.n).toBe(76);
-    expect(i.n).toBe(140 + 112); // 14 × (10 cena + 8 parova)
+    expect(i.n).toBe(70 + 70); // 14 × (5 cena + 5 parova)
     const [cena] = await db.query<{ cena: number; price: number }>(
       `select (i.snapshot->>'cena')::int as cena, round(p.price_avg)::int as price
        from public.daily_quiz_items i join public.products p on p.id = i.product_id
@@ -156,11 +156,11 @@ describe("tok igre", () => {
     expect((await stanjeIgre(db, ja, POCETAK)).status).toBe("nije_poceo");
     const s = await zapocniIgru(db, ja, POCETAK);
     expect(s.status).toBe("u_toku");
-    expect(s.trenutno).toMatchObject({ segment: 2, pozicija: 1, ukupno: 10, faza: "uvod" });
+    expect(s.trenutno).toMatchObject({ segment: 2, pozicija: 1, ukupno: 5, faza: "uvod" });
     expect(s.trenutno!.pitanje).toBeUndefined();
     expect(s.segmenti).toEqual([
-      expect.objectContaining({ n: 2, key: "cena", pitanja: 10, odgovoreno: 0, poeni: 0, max: 100 }),
-      expect.objectContaining({ n: 3, key: "gugla", pitanja: 8, odgovoreno: 0, poeni: 0, max: 40 }),
+      expect.objectContaining({ n: 2, key: "cena", pitanja: 5, odgovoreno: 0, poeni: 0, max: 100 }),
+      expect.objectContaining({ n: 3, key: "gugla", pitanja: 5, odgovoreno: 0, poeni: 0, max: 40 }),
     ]);
   });
 
@@ -184,22 +184,22 @@ describe("tok igre", () => {
     const ja = gost();
     await zapocniIgru(db, ja, TEST_DAN);
     const a = await odigraj(ja, TEST_DAN, 220); // 200 → +10%
-    expect(a.ocena).toMatchObject({ poeni: 10, tacno: true, maxPoena: 10, istek: false });
+    expect(a.ocena).toMatchObject({ poeni: 20, tacno: true, maxPoena: 20, istek: false });
     expect(a.ocena.prikaz).toMatchObject({ unos: 220, prava: 200, procenat: "+10%", min: 190, max: 210, najjeftinije: "Lidl" });
     const b = await odigraj(ja, TEST_DAN, 221); // 200 → +10,5%
-    expect(b.ocena.poeni).toBe(5);
+    expect(b.ocena.poeni).toBe(10);
     const c = await odigraj(ja, TEST_DAN, 85); // 100 → −15%
-    expect(c.ocena).toMatchObject({ poeni: 5, tacno: true });
+    expect(c.ocena).toMatchObject({ poeni: 10, tacno: true });
     expect(c.krajSegmenta).toBeUndefined();
     const d = await odigraj(ja, TEST_DAN, 288); // 250 → +15,2%
     expect(d.ocena).toMatchObject({ poeni: 0, tacno: false });
-    expect(d.krajSegmenta).toMatchObject({ n: 2, poeni: 20, max: 40, odgovoreno: 4 });
+    expect(d.krajSegmenta).toMatchObject({ n: 2, poeni: 40, max: 80, odgovoreno: 4 });
     expect(d.stanje.status).toBe("zavrseno");
-    expect(d.stanje.score).toBe(20);
+    expect(d.stanje.score).toBe(40);
     expect(d.stanje.rezultat!.map((r) => [r.poeni, (r.prikaz as PrikazCena).unos, (r.prikaz as PrikazCena).prava])).toEqual([
-      [10, 220, 200],
-      [5, 221, 200],
-      [5, 85, 100],
+      [20, 220, 200],
+      [10, 221, 200],
+      [10, 85, 100],
       [0, 288, 250],
     ]);
 
@@ -208,7 +208,7 @@ describe("tok igre", () => {
        from public.plays where quiz_date = $1::date and device_id = $2::uuid`,
       [TEST_DAN, ja.deviceId],
     );
-    expect(igra).toMatchObject({ status: "finished", score: 20, gotovo: true });
+    expect(igra).toMatchObject({ status: "finished", score: 40, gotovo: true });
     expect(igra.total).toBeGreaterThanOrEqual(0);
   });
 
@@ -218,7 +218,7 @@ describe("tok igre", () => {
     const s1 = await posaljiPitanje(db, ja, TEST_DAN);
     const a = await odgovori(db, ja, TEST_DAN, { itemId: s1.trenutno!.itemId, odgovor: { unos: 199.6 } });
     expect((a.ocena.prikaz as PrikazCena).unos).toBe(200); // zaokruženo na dinar
-    expect(a.ocena.poeni).toBe(10);
+    expect(a.ocena.poeni).toBe(20);
     const s2 = await posaljiPitanje(db, ja, TEST_DAN);
     const b = await odgovori(db, ja, TEST_DAN, { itemId: s2.trenutno!.itemId, odgovor: { unos: "200" } });
     expect(b.ocena).toMatchObject({ poeni: 0, tacno: false });
@@ -283,7 +283,7 @@ describe("vreme", () => {
     const s = await posaljiPitanje(db, ja, TEST_DAN);
     await pomeriSat(ja, s.trenutno!.itemId, 21);
     const r = await odgovori(db, ja, TEST_DAN, { itemId: s.trenutno!.itemId, odgovor: { unos: 200 } });
-    expect(r.ocena.poeni).toBe(10);
+    expect(r.ocena.poeni).toBe(20);
     const [red] = await db.query<{ ms: number }>(
       `select answer_ms::int as ms from public.play_answers where item_id = $1::int and play_id = (select id from public.plays where device_id = $2::uuid and quiz_date = $3::date)`,
       [s.trenutno!.itemId, ja.deviceId, TEST_DAN],
@@ -320,7 +320,7 @@ describe("jedna igra dnevno", () => {
     await zapocniIgru(db, ja, TEST_DAN);
     await odigraj(ja, TEST_DAN, 200);
     const opet = await zapocniIgru(db, ja, TEST_DAN);
-    expect(opet.score).toBe(10);
+    expect(opet.score).toBe(20);
     expect(opet.trenutno!.pozicija).toBe(2);
     const [n] = await db.query<{ n: number }>(
       "select count(*)::int as n from public.plays where device_id = $1::uuid and quiz_date = $2::date",
@@ -346,12 +346,12 @@ describe("jedna igra dnevno", () => {
     await odigraj(kaoGost, TEST_DAN, 200);
 
     const posle = await stanjeIgre(db, kaoIgrac, TEST_DAN);
-    expect(posle.score).toBe(10);
+    expect(posle.score).toBe(20);
     expect(posle.trenutno!.pozicija).toBe(2);
 
     // isti nalog sa drugog telefona vidi istu igru
     const drugiTelefon: Identitet = { userId: kaoIgrac.userId, deviceId: uredjaj() };
-    expect((await zapocniIgru(db, drugiTelefon, TEST_DAN)).score).toBe(10);
+    expect((await zapocniIgru(db, drugiTelefon, TEST_DAN)).score).toBe(20);
 
     // odjavi se: kao gost na istom uređaju ne dobija novu igru
     expect((await stanjeIgre(db, kaoGost, TEST_DAN)).status).toBe("uredjaj_igrao");
@@ -366,7 +366,7 @@ describe("jedna igra dnevno", () => {
     const drugi: Identitet = { userId: igrac, deviceId: uredjaj() };
     const s = await zapocniIgru(db, drugi, TEST_DAN);
     expect(s.status).toBe("zavrseno");
-    expect(s.score).toBe(40);
+    expect(s.score).toBe(80);
   });
 });
 
@@ -442,7 +442,7 @@ describe("trends.json: jedna skala za sve teme", () => {
     expect(bezMosta.pojmovi.map((p) => p.naziv)).toEqual(["a1"]);
   });
 
-  it("14 dana po 8 duela: pobednik ostaje na svom mestu, izazivač dolazi na mesto gubitnika", () => {
+  it("14 dana po 5 duela: pobednik ostaje na svom mestu, izazivač dolazi na mesto gubitnika", () => {
     const plan = planGugla(trendovi, POCETAK, 14);
     expect(plan.length).toBe(14);
     const svi = new Set<string>();
@@ -450,11 +450,11 @@ describe("trends.json: jedna skala za sve teme", () => {
     let pobedeIzazivaca = 0;
 
     for (const dan of plan) {
-      expect(dan.dueli.length).toBe(8);
-      // 9 pojmova u danu, svaki iz druge teme
+      expect(dan.dueli.length).toBe(5);
+      // 6 pojmova u danu, svaki iz druge teme
       const nazivi = new Set(dan.dueli.flatMap((p) => [p.a, p.b]));
-      expect(nazivi.size).toBe(9);
-      expect(new Set([...nazivi].map(tema)).size).toBe(9);
+      expect(nazivi.size).toBe(6);
+      expect(new Set([...nazivi].map(tema)).size).toBe(6);
 
       let pobede = 0;
       dan.dueli.forEach((p, i) => {
@@ -483,7 +483,7 @@ describe("trends.json: jedna skala za sve teme", () => {
       expect(pobede).toBeLessThanOrEqual(5);
       pobedeIzazivaca += pobede;
     }
-    expect(svi.size).toBe(112);
+    expect(svi.size).toBe(70);
     expect(pobedeIzazivaca / (14 * 7)).toBeGreaterThan(0.35);
     expect(pobedeIzazivaca / (14 * 7)).toBeLessThan(0.65);
     expect(planGugla(trendovi, POCETAK, 14)).toEqual(plan); // isti raspored pri svakom pokretanju
@@ -500,12 +500,12 @@ describe("segment 3: šta se više gugla", () => {
     expect(JSON.stringify(s.trenutno)).not.toMatch(/indeks|tacan|snapshot/);
   });
 
-  it("tačno = 5, netačno = 0, istek = 0; posle odgovora stižu oba indeksa", async () => {
+  it("tačno = 8, netačno = 0, istek = 0; posle odgovora stižu oba indeksa", async () => {
     const ja = gost();
     await zapocniIgru(db, ja, GUGLA_DAN);
     let s = await posaljiPitanje(db, ja, GUGLA_DAN);
     const a = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" } });
-    expect(a.ocena).toMatchObject({ tacno: true, poeni: 5, maxPoena: 5 });
+    expect(a.ocena).toMatchObject({ tacno: true, poeni: 8, maxPoena: 8 });
     expect(a.ocena.prikaz).toEqual({ vrsta: "gugla", a: "Levo", b: "Desno", indeksA: 100, indeksB: 60, puta: 1.7, izbor: "a", tacan: "a", period: "test" });
 
     s = await posaljiPitanje(db, ja, GUGLA_DAN);
@@ -517,9 +517,9 @@ describe("segment 3: šta se više gugla", () => {
     const c = await odgovori(db, ja, GUGLA_DAN, { itemId: s.trenutno!.itemId, odgovor: { izbor: "a" }, istek: true });
     expect(c.ocena).toMatchObject({ tacno: false, poeni: 0, istek: true });
     expect(c.ocena.prikaz).toMatchObject({ izbor: null, tacan: "a" });
-    expect(c.krajSegmenta).toMatchObject({ n: 3, poeni: 5, max: 15, tok: [2, 0, 0] });
+    expect(c.krajSegmenta).toMatchObject({ n: 3, poeni: 8, max: 24, tok: [2, 0, 0] });
     expect(c.stanje.status).toBe("zavrseno");
-    expect(c.stanje.rezultat!.map((r) => [r.poeni, r.istek])).toEqual([[5, false], [0, false], [0, true]]);
+    expect(c.stanje.rezultat!.map((r) => [r.poeni, r.istek])).toEqual([[8, false], [0, false], [0, true]]);
   });
 
   it("gluposti umesto izbora su netačan odgovor, ne greška", async () => {
@@ -548,18 +548,18 @@ describe("segment 3: šta se više gugla", () => {
     const ja = gost();
     await zapocniIgru(db, ja, POCETAK);
     let poslednji;
-    for (let i = 0; i < 10; i++) poslednji = await odigraj(ja, POCETAK, 100);
+    for (let i = 0; i < 5; i++) poslednji = await odigraj(ja, POCETAK, 100);
     expect(poslednji!.krajSegmenta).toMatchObject({ n: 2 });
     expect(poslednji!.stanje.status).toBe("u_toku");
-    expect(poslednji!.stanje.trenutno).toMatchObject({ segment: 3, pozicija: 1, ukupno: 8, faza: "uvod" });
+    expect(poslednji!.stanje.trenutno).toMatchObject({ segment: 3, pozicija: 1, ukupno: 5, faza: "uvod" });
   });
 
   it("ceo dan iz seed-a: pojam koji pobedi ostaje u sledećem pitanju, na istom mestu", async () => {
     const ja = gost();
     await zapocniIgru(db, ja, POCETAK);
-    for (let i = 0; i < 10; i++) await odigraj(ja, POCETAK, 100);
+    for (let i = 0; i < 5; i++) await odigraj(ja, POCETAK, 100);
     let pre: { a: string; b: string; tacan: "a" | "b" } | null = null;
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 5; i++) {
       const s = await posaljiPitanje(db, ja, POCETAK);
       const pitanje = s.trenutno!.pitanje as { vrsta: "gugla"; a: string; b: string };
       if (pre) expect(pitanje[pre.tacan]).toBe(pre[pre.tacan]);

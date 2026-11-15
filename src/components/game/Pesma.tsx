@@ -18,6 +18,8 @@ import { Konfete, Nalepnica, Pecat, smanjenoKretanje } from "./efekti";
  */
 
 const MERENJE_MS = 700;
+/** Tišina između dve pesme. */
+const TISINA_MS = 350;
 const NAJVISE_PREDLOGA = 4;
 const sekunde = (ms: number) => (ms / 1000).toLocaleString("sr-Latn-RS", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
@@ -86,6 +88,8 @@ export function PesmaIgra({
   /** Poruke serveru idu jedna po jedna, redom kojim su nastale. */
   const red = useRef<Promise<unknown>>(Promise.resolve());
   const zavrseno = useRef(false);
+  /** Sprečava da dva brza tapa na „Dalje” preskoče pesmu. */
+  const odlazi = useRef(false);
   const naOdgovorRef = useRef(naOdgovor);
   const otkrijRef = useRef(naOtkrij);
   useEffect(() => {
@@ -220,11 +224,25 @@ export function PesmaIgra({
     // `pokusaj` menja adresu klipa, pa se plejer vezuje ponovo.
   }, [datum, itemId, javi, limitMs, pocetnoMs, sada, pokusaj]);
 
-  // Kad igrač ode sa pitanja (sledeće pitanje, kraj segmenta), muzika staje.
-  useEffect(() => {
+  /**
+   * Tvrdo gašenje: na Androidu `pause()` ponekad ne uhvati klip koji se tek pustio,
+   * pa se muzika prelivala u sledeću rundu. Zato se izvor i skida sa plejera.
+   */
+  const ugasiZvuk = useCallback(() => {
     const a = audio.current;
-    return () => a?.pause();
+    if (!a) return;
+    try {
+      a.pause();
+      a.currentTime = 0;
+      a.removeAttribute("src");
+      a.load();
+    } catch {
+      /* plejer je već sklonjen */
+    }
   }, []);
+
+  // Kad igrač ode sa pitanja (sledeće pitanje, kraj segmenta), muzika staje.
+  useEffect(() => ugasiZvuk, [ugasiZvuk]);
 
   const pustiIliPauziraj = useCallback(() => {
     const a = audio.current;
@@ -491,9 +509,12 @@ export function PesmaIgra({
             type="button"
             className="btn btn-lg g-dole"
             onClick={() => {
-              if (!otkriveno) return;
+              if (!otkriveno || odlazi.current) return;
+              odlazi.current = true;
               sfx.klik();
-              naDalje();
+              ugasiZvuk();
+              // Kratka tišina, da se stara pesma ne prelije u sledeću rundu.
+              setTimeout(naDalje, TISINA_MS);
             }}
             aria-disabled={zakljucano || !otkriveno}
             autoFocus

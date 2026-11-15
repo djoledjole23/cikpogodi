@@ -36,19 +36,12 @@ async function Sadrzaj({ searchParams }: Pick<PageProps<"/prijava">, "searchPara
       )}
       <div className="stack">
         <PrijavaForma next={next} />
-        <p className="center">
-          <Link href="/zaboravljena-sifra" className="text-link tap">
-            Zaboravio sam šifru
-          </Link>
-        </p>
       </div>
       <OAuthRazdvojnik tekst="ili" />
       <OAuthDugmad next={next} />
-      <p className="center">
-        <Link href={`/registracija?next=${encodeURIComponent(next)}`} className="text-link tap">
-          Nemam nalog → Napravi ga
-        </Link>
-      </p>
+      <Link href={`/registracija?next=${encodeURIComponent(next)}`} className="btn btn-ghost">
+        Nemaš nalog? Napravi ga
+      </Link>
     </div>
   );
 }

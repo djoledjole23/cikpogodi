@@ -415,7 +415,7 @@ describe("segment 1: pogodi pesmu", () => {
     const ja = gost();
     const uvod = await zapocniIgru(db, ja, POCETAK);
     expect(uvod.trenutno).toMatchObject({ segment: 1, ukupno: 5, faza: "uvod" });
-    expect(uvod.segmenti.map((s) => [s.n, s.pitanja, s.max])).toEqual([[1, 5, 100], [2, 10, 100], [3, 8, 40]]);
+    expect(uvod.segmenti.map((s) => [s.n, s.pitanja, s.max])).toEqual([[1, 5, 100], [2, 5, 100], [3, 5, 40]]);
     const plan = planPesama(katalog.pesme, POCETAK, 1)[0].pesme;
     let poslednji;
     for (const pesma of plan) {

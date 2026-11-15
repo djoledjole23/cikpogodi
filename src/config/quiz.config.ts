@@ -39,8 +39,8 @@ export const SEGMENTI: SegmentConfig[] = [
     key: "cena",
     naziv: "Pogodi cenu",
     pravilo: "Upiši koliko košta artikal. Što bliže pravoj ceni, to bolje.",
-    bodovanje: "10 artikala · promašiš do 10%: 10, do 15%: 5",
-    pitanja: 10,
+    bodovanje: "5 artikala · promašiš do 10%: 20, do 15%: 10",
+    pitanja: 5,
     max: 100,
     limitS: 20,
   },
@@ -49,8 +49,8 @@ export const SEGMENTI: SegmentConfig[] = [
     key: "gugla",
     naziv: "Šta se više gugla",
     pravilo: "Tapni pojam koji se u Srbiji više guglao.",
-    bodovanje: "8 parova · tačno: 5",
-    pitanja: 8,
+    bodovanje: "5 parova · tačno: 8",
+    pitanja: 5,
     max: 40,
     limitS: 10,
   },
@@ -95,11 +95,11 @@ export const PESMA_PRAGOVI: { doMs: number; poeni: number }[] = [
  * Cena: poeni po odstupanju u procentima (granica uključena: tačno 10% je još uvek 10).
  */
 export const CENA_PRAGOVI: { doProcenata: number; poeni: number }[] = [
-  { doProcenata: 10, poeni: 10 },
-  { doProcenata: 15, poeni: 5 },
+  { doProcenata: 10, poeni: 20 },
+  { doProcenata: 15, poeni: 10 },
 ];
 
-export const GUGLA_POENI = 5;
+export const GUGLA_POENI = 8;
 export const FILM_POENI = 20;
 export const JOKER_POENI = 50;
 
@@ -107,4 +107,4 @@ export const JOKER_POENI = 50;
 export const TOLERANCIJA_MREZE_MS = 1500;
 
 export const KORISNICKO_IME = { min: 3, max: 20 } as const;
-export const SIFRA_MIN = 8;
+export const SIFRA_MIN = 6;

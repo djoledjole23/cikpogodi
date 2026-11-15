@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
         .eq("id", data.user.id)
         .maybeSingle();
       // Nalog preko Google/Apple nema korisničko ime dok ga igrač ne izabere.
-      const cilj = profil?.username ? next : `/nalog/korisnicko-ime?next=${encodeURIComponent(next)}`;
+      const cilj = profil?.username ? next : "/nalog";
       return NextResponse.redirect(`${origin}${cilj}`);
     }
   }

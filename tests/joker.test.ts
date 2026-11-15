@@ -25,7 +25,7 @@ const json = (ime: string) => JSON.parse(readFileSync(join(koren, "data", ime), 
 const ucitani = ucitajJokere(json("joker.json"), postojeceSlikeJokera(koren));
 /** Dan koji ima Jokera i dan posle njega (bez Jokera). */
 const SA = "2026-11-14";
-const BEZ = "2026-11-15";
+const BEZ = "2026-11-22";
 
 let db: Db;
 let brojac = 0;
@@ -46,7 +46,7 @@ beforeAll(async () => {
     jokeri: ucitani.pitanja,
     trendovi: ucitajTrendove(json("trends.json")),
     pocetak: SA,
-    dana: 2,
+    dana: 9,
   });
   await pg.exec(seed);
   await pg.exec(seed); // drugi put: bez duplikata i bez greške
