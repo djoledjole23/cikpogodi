@@ -122,7 +122,7 @@ export function proveriKorisnickoIme(ime: string): string | null {
 }
 
 /**
- * Interna adresa naloga. Igrač se prijavljuje nadimkom i šifrom, a Supabase iznutra traži mejl,
+ * Interna adresa naloga. Igrač se prijavljuje nadimkom i lozinkom, a Supabase iznutra traži mejl,
  * pa se on pravi od nadimka. Nikad se ne prikazuje i na njega se ništa ne šalje.
  * Dva nadimka koja se razlikuju samo po kvačicama ili veličini slova daju istu adresu — to su isti nalog.
  */

@@ -44,7 +44,7 @@ export default function UsloviKoriscenja() {
           <span className="todo">[IME I PREZIME ILI FIRMA]</span>.
         </p>
 
-        <p className="muted small">Poslednja izmena: <span className="todo">[DATUM]</span></p>
+        <p className="muted small">Poslednja izmena: 15. novembra 2026.</p>
       </div>
     </Page>
   );

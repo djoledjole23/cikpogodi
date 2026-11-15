@@ -29,7 +29,7 @@ async function Sadrzaj({ searchParams }: Pick<PageProps<"/nalog">, "searchParams
     <div className="stack-lg">
       {sp.sifra === "promenjena" && (
         <p className="form-ok" role="status">
-          Šifra je promenjena.
+          Lozinka je promenjena.
         </p>
       )}
       <div className="card stack">
@@ -48,11 +48,11 @@ async function Sadrzaj({ searchParams }: Pick<PageProps<"/nalog">, "searchParams
 
       <section className="stack" aria-labelledby="promena-sifre">
         <h2 id="promena-sifre" className="h2">
-          Promeni šifru
+          Promeni lozinku
         </h2>
         <p className="muted">
           <Link href="/nova-sifra" className="text-link tap">
-            Postavi novu šifru
+            Postavi novu lozinku
           </Link>
         </p>
       </section>

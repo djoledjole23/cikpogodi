@@ -18,7 +18,7 @@ export type StanjeForme = {
   greska?: string;
   /** Greške po poljima (ključ = name polja). */
   polja?: Record<string, string>;
-  /** Šta je korisnik uneo, da ne kuca ponovo posle greške (šifre se ne vraćaju). */
+  /** Šta je korisnik uneo, da ne kuca ponovo posle greške (lozinke se ne vraćaju). */
   vrednosti?: Record<string, string>;
   /** Poruka o uspehu. */
   ok?: string;
@@ -34,14 +34,14 @@ function tekst(formData: FormData, polje: string): string {
 function porukaGreske(error: AuthError): string {
   switch (error.code) {
     case "invalid_credentials":
-      return "Pogrešno ime ili šifra. Probaj opet.";
+      return "Pogrešno ime ili lozinka. Probaj opet.";
     case "user_already_exists":
     case "email_exists":
       return ZAUZETO;
     case "weak_password":
-      return `Šifra je preslaba. Treba bar ${SIFRA_MIN} znakova.`;
+      return `Lozinka je preslaba. Treba bar ${SIFRA_MIN} znakova.`;
     case "same_password":
-      return "Nova šifra mora da se razlikuje od stare.";
+      return "Nova lozinka mora da se razlikuje od stare.";
     case "over_request_rate_limit":
       return "Previše pokušaja za kratko vreme. Sačekaj minut pa probaj ponovo.";
     case "signup_disabled":
@@ -68,7 +68,7 @@ async function sacuvajGostujucuIgru(userId: string) {
 // ───────────────────────── Registracija ─────────────────────────
 
 /**
- * Nadimak + šifra i nalog je gotov: nema mejla, nema potvrde, odmah je prijavljen
+ * Nadimak + lozinka i nalog je gotov: nema mejla, nema potvrde, odmah je prijavljen
  * i njegov rezultat ulazi na rang listu.
  */
 export async function registracija(_pre: StanjeForme, formData: FormData): Promise<StanjeForme> {
@@ -80,7 +80,7 @@ export async function registracija(_pre: StanjeForme, formData: FormData): Promi
   const polja: Record<string, string> = {};
   const greskaImena = proveriKorisnickoIme(username);
   if (greskaImena) polja.username = greskaImena;
-  if (sifra.length < SIFRA_MIN) polja.sifra = `Šifra mora da ima bar ${SIFRA_MIN} znakova.`;
+  if (sifra.length < SIFRA_MIN) polja.sifra = `Lozinka mora da ima bar ${SIFRA_MIN} znakova.`;
   if (Object.keys(polja).length) return { polja, vrednosti };
 
   if (!supabasePodesen() || !adminPodesen()) return { greska: PORUKA_NIJE_PODESENO, vrednosti };
@@ -127,7 +127,7 @@ export async function prijava(_pre: StanjeForme, formData: FormData): Promise<St
   const next = bezbedanNext(formData.get("next"));
   const vrednosti = { username };
 
-  if (!username || !sifra) return { greska: "Upiši ime i šifru.", vrednosti };
+  if (!username || !sifra) return { greska: "Upiši ime i lozinku.", vrednosti };
   if (!supabasePodesen()) return { greska: PORUKA_NIJE_PODESENO, vrednosti };
 
   const supabase = await createClient();
@@ -155,25 +155,25 @@ export async function odjava() {
   redirect("/");
 }
 
-// ───────────────────────── Šifra ─────────────────────────
+// ───────────────────────── Lozinka ─────────────────────────
 
-/** Menja šifru prijavljenom igraču. Zaboravljena šifra se ne može vratiti: nema mejla. */
+/** Menja lozinku prijavljenom igraču. Zaboravljena lozinka se ne može vratiti: nema mejla. */
 export async function postaviNovuSifru(_pre: StanjeForme, formData: FormData): Promise<StanjeForme> {
   const stara = String(formData.get("stara") ?? "");
   const sifra = String(formData.get("sifra") ?? "");
-  if (sifra.length < SIFRA_MIN) return { polja: { sifra: `Šifra mora da ima bar ${SIFRA_MIN} znakova.` } };
+  if (sifra.length < SIFRA_MIN) return { polja: { sifra: `Lozinka mora da ima bar ${SIFRA_MIN} znakova.` } };
   if (!supabasePodesen()) return { greska: PORUKA_NIJE_PODESENO };
 
   const supabase = await createClient();
   const { data: korisnik } = await supabase.auth.getUser();
   if (!korisnik.user?.email) redirect("/prijava?next=/nalog");
 
-  // Stara šifra se traži da neko ko sedne za tuđ telefon ne može da preuzme nalog.
+  // Stara lozinka se traži da neko ko sedne za tuđ telefon ne može da preuzme nalog.
   const { error: greskaStare } = await supabase.auth.signInWithPassword({
     email: korisnik.user.email,
     password: stara,
   });
-  if (greskaStare) return { polja: { stara: "Stara šifra nije tačna." } };
+  if (greskaStare) return { polja: { stara: "Stara lozinka nije tačna." } };
 
   const { error } = await supabase.auth.updateUser({ password: sifra });
   if (error) return { greska: porukaGreske(error) };

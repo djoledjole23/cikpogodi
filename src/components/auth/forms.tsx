@@ -111,7 +111,7 @@ export function RegistracijaForma({ next = "/" }: { next?: string }) {
       <Field
         name="sifra"
         type="password"
-        label="\u0160ifra"
+        label="Lozinka"
         hint={`Bar ${SIFRA_MIN} znakova.`}
         error={stanje.polja?.sifra}
         autoComplete="new-password"
@@ -121,7 +121,7 @@ export function RegistracijaForma({ next = "/" }: { next?: string }) {
         {ceka ? "Pravim nalog\u2026" : "Napravi nalog"}
       </button>
       <p className="small muted center">
-        Nema mejla i nema potvr\u0111ivanja \u2014 zapamti nadimak i \u0161ifru, jer zaboravljena \u0161ifra ne mo\u017ee da se vrati.
+        Nema mejla i nema potvr\u0111ivanja \u2014 zapamti nadimak i lozinku, jer zaboravljena lozinka ne mo\u017ee da se vrati.
       </p>
       <p className="small muted center">
         Pravljenjem naloga prihvata\u0161 <Link href="/uslovi-koriscenja">uslove kori\u0161\u0107enja</Link> i{" "}
@@ -149,7 +149,7 @@ export function PrijavaForma({ next = "/" }: { next?: string }) {
         maxLength={KORISNICKO_IME.max}
         required
       />
-      <Field name="sifra" type="password" label="\u0160ifra" autoComplete="current-password" required />
+      <Field name="sifra" type="password" label="Lozinka" autoComplete="current-password" required />
       <button type="submit" className="btn" disabled={ceka}>
         {ceka ? "Prijavljujem\u2026" : "Prijavi se"}
       </button>
@@ -157,7 +157,7 @@ export function PrijavaForma({ next = "/" }: { next?: string }) {
   );
 }
 
-// ───────────────────────── Promena šifre ─────────────────────────
+// ───────────────────────── Promena lozinke ─────────────────────────
 
 export function NovaSifraForma() {
   const [stanje, akcija, ceka] = useActionState(postaviNovuSifru, PRAZNO);
@@ -167,7 +167,7 @@ export function NovaSifraForma() {
       <Field
         name="stara"
         type="password"
-        label="Sada\u0161nja \u0161ifra"
+        label="Sada\u0161nja lozinka"
         error={stanje.polja?.stara}
         autoComplete="current-password"
         required
@@ -175,14 +175,14 @@ export function NovaSifraForma() {
       <Field
         name="sifra"
         type="password"
-        label="Nova \u0161ifra"
+        label="Nova lozinka"
         hint={`Bar ${SIFRA_MIN} znakova.`}
         error={stanje.polja?.sifra}
         autoComplete="new-password"
         required
       />
       <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "\u010cuvam\u2026" : "Sa\u010duvaj novu \u0161ifru"}
+        {ceka ? "\u010cuvam\u2026" : "Sa\u010duvaj novu lozinku"}
       </button>
     </form>
   );
