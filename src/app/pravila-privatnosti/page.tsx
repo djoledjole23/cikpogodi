@@ -42,13 +42,16 @@ export default function PravilaPrivatnosti() {
         <h2>Kolačići</h2>
         <p>
           Koristimo samo neophodne: za prijavu i za oznaku uređaja. Izbor zvuka i potvrdu ovog obaveštenja pamti
-          tvoj pregledač. Nema analitičkih ni reklamnih kolačića.
+          tvoj pregledač. Nema reklamnih kolačića, a ni brojanje poseta ne koristi kolačiće.
         </p>
 
         <h2>Ko još obrađuje podatke</h2>
         <ul>
           <li>Supabase: baza i nalozi (serveri u Irskoj, Evropska unija).</li>
-          <li>Vercel: hosting sajta (server u Frankfurtu, Nemačka).</li>
+          <li>
+            Vercel: hosting sajta (server u Frankfurtu, Nemačka) i brojanje poseta. Broji se koliko je puta koja
+            strana otvorena, bez kolačića i bez praćenja pojedinačnog posetioca.
+          </li>
           <li>
             Deezer: muzički klipovi i omoti albuma se učitavaju sa njihovih servera, pa oni pritom vide tvoju IP
             adresu.

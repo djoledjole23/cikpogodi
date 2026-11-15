@@ -5,6 +5,7 @@ import "@fontsource/nunito/600.css";
 import "@fontsource/nunito/700.css";
 import "@fontsource/nunito/800.css";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { CookieBanner } from "@/components/CookieBanner";
 
 const SAJT = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cikpogodi.online";
@@ -42,6 +43,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         {children}
         <CookieBanner />
+        {/* Brojanje poseta na Vercelu: bez kolačića i bez praćenja pojedinačnog igrača. */}
+        <Analytics />
       </body>
     </html>
   );
