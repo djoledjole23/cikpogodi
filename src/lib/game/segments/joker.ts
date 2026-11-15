@@ -10,6 +10,7 @@ export type SnapshotJoker = {
   odgovor: string;
   alias: string[];
   slika: string | null;
+  slikaPitanja?: string | null;
   broj: string | null;
   natpis: string | null;
 };
@@ -48,8 +49,9 @@ export const joker: Rukovalac = {
   maxPoena: JOKER_POENI,
 
   javno(snapshot): PitanjeJoker {
-    // Samo tekst pitanja: odgovor, fotografija i broj se šalju tek sa ocenom.
-    return { vrsta: "joker", pitanje: (snapshot as SnapshotJoker).pitanje };
+    // Tekst pitanja i (ako je ima) fotografija uz pitanje. Odgovor, fotografija otkrića i broj idu tek sa ocenom.
+    const s = snapshot as SnapshotJoker;
+    return { vrsta: "joker", pitanje: s.pitanje, slika: s.slikaPitanja ?? null };
   },
 
   oceni(snapshot, odgovor, { istek }): { ocena: Ocena; sacuvaj: SacuvanoJoker } {

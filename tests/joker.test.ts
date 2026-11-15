@@ -25,7 +25,7 @@ const json = (ime: string) => JSON.parse(readFileSync(join(koren, "data", ime), 
 const ucitani = ucitajJokere(json("joker.json"), postojeceSlikeJokera(koren));
 /** Dan koji ima Jokera i dan posle njega (bez Jokera). */
 const SA = "2026-11-14";
-const BEZ = "2026-11-22";
+const BEZ = "2026-11-23";
 
 let db: Db;
 let brojac = 0;
@@ -46,7 +46,7 @@ beforeAll(async () => {
     jokeri: ucitani.pitanja,
     trendovi: ucitajTrendove(json("trends.json")),
     pocetak: SA,
-    dana: 9,
+    dana: 10,
   });
   await pg.exec(seed);
   await pg.exec(seed); // drugi put: bez duplikata i bez greške
@@ -99,8 +99,15 @@ describe("ocena odgovora", () => {
   const snapshot = { pitanje: "Ko?", odgovor: "Entoni", alias: ["Anthony"], slika: "/joker/a.webp", broj: "92", natpis: "body count" };
   const oceni = (odgovor: unknown, istek = false) => joker.oceni(snapshot, odgovor, { protekloMs: 1000, istek }).ocena;
 
+  it("slika uz pitanje ide u browser, odgovor i otkri\u0107e ne", () => {
+    const sa = { ...snapshot, slikaPitanja: "/joker/abc123.webp" };
+    const javno = joker.javno(sa);
+    expect(javno).toEqual({ vrsta: "joker", pitanje: "Ko?", slika: "/joker/abc123.webp" });
+    expect(JSON.stringify(javno)).not.toMatch(/odgovor|resenje|broj|natpis/i);
+  });
+
   it("u browser ide samo tekst pitanja", () => {
-    expect(joker.javno(snapshot)).toEqual({ vrsta: "joker", pitanje: "Ko?" });
+    expect(joker.javno(snapshot)).toEqual({ vrsta: "joker", pitanje: "Ko?", slika: null });
   });
 
   it("tačno: Entoni i Anthony, bez obzira na slova, pismo i jednu omašku; nosi 50", () => {
@@ -140,7 +147,7 @@ describe("u igri", () => {
     const predJokera = s.score;
 
     s = await posaljiPitanje(db, ja, SA);
-    expect(s.trenutno!.pitanje).toEqual({ vrsta: "joker", pitanje: "Ko je od učesnika Love Island Adria imao najveći body count?" });
+    expect(s.trenutno!.pitanje).toEqual({ vrsta: "joker", pitanje: "Ko je od učesnika Love Island Adria imao najveći body count?", slika: null });
     expect(s.trenutno!.limitMs).toBe(30000);
     // ništa o odgovoru ne sme da procuri pre odgovora
     expect(JSON.stringify(s)).not.toMatch(/entoni|anthony|92|\/joker\//i);

@@ -300,6 +300,7 @@ export function seedSql(opcije: {
   created_at timestamptz not null default now()
 );`,
     "alter table public.joker_questions enable row level security;",
+    "alter table public.joker_questions add column if not exists question_image_url text;",
     "alter table public.daily_quiz_items add column if not exists film_still_id bigint references public.film_stills (id);",
     "alter table public.daily_quiz_items add column if not exists joker_id bigint references public.joker_questions (id);",
     "alter table public.daily_quiz_items drop constraint if exists stavka_odgovara_segmentu;",
@@ -448,12 +449,20 @@ export function seedSql(opcije: {
     for (const j of uPeriodu) {
       const alias = j.alias.length ? `array[${j.alias.map(q).join(", ")}]::text[]` : "'{}'::text[]";
       const ili = (x: string | null) => (x === null ? "null" : q(x));
-      const snapshot = { pitanje: j.pitanje, odgovor: j.odgovor, alias: j.alias, slika: j.slika, broj: j.broj, natpis: j.natpis };
+      const snapshot = {
+        pitanje: j.pitanje,
+        odgovor: j.odgovor,
+        alias: j.alias,
+        slika: j.slika,
+        slikaPitanja: j.slikaPitanja,
+        broj: j.broj,
+        natpis: j.natpis,
+      };
       redovi.push(
-        `insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
-  values (${q(j.pitanje)}, ${q(j.odgovor)}, ${alias}, ${ili(j.slika)}, ${ili(j.broj)}, ${ili(j.natpis)})
+        `insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values (${q(j.pitanje)}, ${q(j.odgovor)}, ${alias}, ${ili(j.slika)}, ${ili(j.slikaPitanja)}, ${ili(j.broj)}, ${ili(j.natpis)})
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
-    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;`,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;`,
         `insert into public.daily_quiz (quiz_date, status, published_at) values (${q(j.datum)}, 'published', now())
   on conflict (quiz_date) do nothing;`,
         `insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)

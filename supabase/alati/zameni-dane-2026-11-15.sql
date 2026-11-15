@@ -1,5 +1,5 @@
 -- ───────────────────────────────────────────────────────────────
--- ZAMENA PITANJA: kraći dani (5 artikala umesto 10, 5 parova umesto 8)
+-- ZAMENA PITANJA: kraći dani (5 artikala umesto 10, 5 parova umesto 8) + nova Joker pitanja
 --
 -- Šta radi: briše pitanja i odigrane igre od DANAS nadalje, pa upisuje nove dane.
 -- Dani pre današnjeg ostaju netaknuti.
@@ -42,6 +42,7 @@ create table if not exists public.joker_questions (
   created_at timestamptz not null default now()
 );
 alter table public.joker_questions enable row level security;
+alter table public.joker_questions add column if not exists question_image_url text;
 alter table public.daily_quiz_items add column if not exists film_still_id bigint references public.film_stills (id);
 alter table public.daily_quiz_items add column if not exists joker_id bigint references public.joker_questions (id);
 alter table public.daily_quiz_items drop constraint if exists stavka_odgovara_segmentu;
@@ -2647,73 +2648,83 @@ insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id
   on conflict (quiz_date, segment, position) do nothing;
 
 -- Dnevni kviz: segment 5 (Joker pitanje). Dan koji već ima Jokera se ne dira.
-insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
-  values ('Ko je režirao film „Ko to tamo peva”?', 'Slobodan Šijan', array['Šijan', 'Sijan']::text[], null, '1980', 'godina premijere')
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Koja srpska starleta je učestvovala u Survivoru?', 'Stanija', array['Stanija Dobrojević', 'Dobrojević']::text[], '/joker/7a4788f53ff0db.webp', null, null, null)
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
-    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-15', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
-  select '2026-11-15', 5, 1, id, '{"pitanje":"Ko je režirao film „Ko to tamo peva”?","odgovor":"Slobodan Šijan","alias":["Šijan","Sijan"],"slika":null,"broj":"1980","natpis":"godina premijere"}'::jsonb
-  from public.joker_questions where question = 'Ko je režirao film „Ko to tamo peva”?'
+  select '2026-11-15', 5, 1, id, '{"pitanje":"Koja srpska starleta je učestvovala u Survivoru?","odgovor":"Stanija","alias":["Stanija Dobrojević","Dobrojević"],"slika":"/joker/7a4788f53ff0db.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Koja srpska starleta je učestvovala u Survivoru?'
   on conflict (quiz_date, segment, position) do nothing;
-insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
-  values ('Ko je glumio Šurdu u seriji „Vruć vetar”?', 'Ljubiša Samardžić', array['Samardžić', 'Samardzic']::text[], null, '1980', 'godina serije')
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Šta povezuje Dragomira Despića i šumara?', 'Motorna testera', array['testera', 'motorka']::text[], '/joker/103bbf66b12f94.webp', null, null, null)
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
-    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-16', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
-  select '2026-11-16', 5, 1, id, '{"pitanje":"Ko je glumio Šurdu u seriji „Vruć vetar”?","odgovor":"Ljubiša Samardžić","alias":["Samardžić","Samardzic"],"slika":null,"broj":"1980","natpis":"godina serije"}'::jsonb
-  from public.joker_questions where question = 'Ko je glumio Šurdu u seriji „Vruć vetar”?'
+  select '2026-11-16', 5, 1, id, '{"pitanje":"Šta povezuje Dragomira Despića i šumara?","odgovor":"Motorna testera","alias":["testera","motorka"],"slika":"/joker/103bbf66b12f94.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Šta povezuje Dragomira Despića i šumara?'
   on conflict (quiz_date, segment, position) do nothing;
-insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
-  values ('Koji je najviši vrh Srbije?', 'Midžor', array['Midzor']::text[], null, '2169', 'metara')
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Kako se zove čovek koji je na poznatom jutjub snimku eksirao vinjak i posle toga izgovorio čuveno „MRK” u kameru?', 'Srećko', array['Srećko Mrk', 'Mrk']::text[], '/joker/9efbc008ba617a.webp', null, null, null)
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
-    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-17', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
-  select '2026-11-17', 5, 1, id, '{"pitanje":"Koji je najviši vrh Srbije?","odgovor":"Midžor","alias":["Midzor"],"slika":null,"broj":"2169","natpis":"metara"}'::jsonb
-  from public.joker_questions where question = 'Koji je najviši vrh Srbije?'
+  select '2026-11-17', 5, 1, id, '{"pitanje":"Kako se zove čovek koji je na poznatom jutjub snimku eksirao vinjak i posle toga izgovorio čuveno „MRK” u kameru?","odgovor":"Srećko","alias":["Srećko Mrk","Mrk"],"slika":"/joker/9efbc008ba617a.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Kako se zove čovek koji je na poznatom jutjub snimku eksirao vinjak i posle toga izgovorio čuveno „MRK” u kameru?'
   on conflict (quiz_date, segment, position) do nothing;
-insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
-  values ('Koji domaći film je 1995. osvojio Zlatnu palmu u Kanu?', 'Underground', array['Podzemlje']::text[], null, '1995', 'Zlatna palma')
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Koja pevačica je bila pratilja na maturi jutjubera 2016?', 'Sandra Afrika', array['Afrika']::text[], '/joker/adb8edf7649b14.webp', null, null, null)
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
-    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-18', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
-  select '2026-11-18', 5, 1, id, '{"pitanje":"Koji domaći film je 1995. osvojio Zlatnu palmu u Kanu?","odgovor":"Underground","alias":["Podzemlje"],"slika":null,"broj":"1995","natpis":"Zlatna palma"}'::jsonb
-  from public.joker_questions where question = 'Koji domaći film je 1995. osvojio Zlatnu palmu u Kanu?'
+  select '2026-11-18', 5, 1, id, '{"pitanje":"Koja pevačica je bila pratilja na maturi jutjubera 2016?","odgovor":"Sandra Afrika","alias":["Afrika"],"slika":"/joker/adb8edf7649b14.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Koja pevačica je bila pratilja na maturi jutjubera 2016?'
   on conflict (quiz_date, segment, position) do nothing;
-insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
-  values ('Koliko gradskih opština ima Beograd?', '17', array['sedamnaest']::text[], null, '17', 'gradskih opština')
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Ko je vodio emisiju „48 sati svadba”?', 'Miki Đuričić', array['Đuričić', 'Miki']::text[], '/joker/ef2766e699645a.webp', null, null, null)
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
-    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-19', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
-  select '2026-11-19', 5, 1, id, '{"pitanje":"Koliko gradskih opština ima Beograd?","odgovor":"17","alias":["sedamnaest"],"slika":null,"broj":"17","natpis":"gradskih opština"}'::jsonb
-  from public.joker_questions where question = 'Koliko gradskih opština ima Beograd?'
+  select '2026-11-19', 5, 1, id, '{"pitanje":"Ko je vodio emisiju „48 sati svadba”?","odgovor":"Miki Đuričić","alias":["Đuričić","Miki"],"slika":"/joker/ef2766e699645a.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Ko je vodio emisiju „48 sati svadba”?'
   on conflict (quiz_date, segment, position) do nothing;
-insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
-  values ('Ko je napisao roman „Na Drini ćuprija”?', 'Ivo Andrić', array['Andrić', 'Andric']::text[], null, '1961', 'Nobelova nagrada')
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Kako se zove kafić iz „Lud, zbunjen, normalan”?', 'San Remo', array['Sanremo']::text[], '/joker/7f4374133fcd9c.webp', null, null, null)
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
-    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-20', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
-  select '2026-11-20', 5, 1, id, '{"pitanje":"Ko je napisao roman „Na Drini ćuprija”?","odgovor":"Ivo Andrić","alias":["Andrić","Andric"],"slika":null,"broj":"1961","natpis":"Nobelova nagrada"}'::jsonb
-  from public.joker_questions where question = 'Ko je napisao roman „Na Drini ćuprija”?'
+  select '2026-11-20', 5, 1, id, '{"pitanje":"Kako se zove kafić iz „Lud, zbunjen, normalan”?","odgovor":"San Remo","alias":["Sanremo"],"slika":"/joker/7f4374133fcd9c.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Kako se zove kafić iz „Lud, zbunjen, normalan”?'
   on conflict (quiz_date, segment, position) do nothing;
-insert into public.joker_questions (question, answer, aliases, image_url, reveal_number, reveal_label)
-  values ('Koja grupa peva „Lutka sa naslovne strane”?', 'Riblja Čorba', array['Riblja Corba', 'Čorba']::text[], null, '1981', 'godina pesme')
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Kako se zove konj Nikole Jokića?', 'Dream Catcher', array['Drim Kečer', 'Dreamcatcher', 'Drim Kecer']::text[], '/joker/07370ab3fefdcc.webp', null, null, null)
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
-    reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-21', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
-  select '2026-11-21', 5, 1, id, '{"pitanje":"Koja grupa peva „Lutka sa naslovne strane”?","odgovor":"Riblja Čorba","alias":["Riblja Corba","Čorba"],"slika":null,"broj":"1981","natpis":"godina pesme"}'::jsonb
-  from public.joker_questions where question = 'Koja grupa peva „Lutka sa naslovne strane”?'
+  select '2026-11-21', 5, 1, id, '{"pitanje":"Kako se zove konj Nikole Jokića?","odgovor":"Dream Catcher","alias":["Drim Kečer","Dreamcatcher","Drim Kecer"],"slika":"/joker/07370ab3fefdcc.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Kako se zove konj Nikole Jokića?'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Kako se zvala politička partija Srećka Šojića?', 'Stranka zdravog razuma', array['Zdrav razum', 'zdravog razuma', 'SZR']::text[], '/joker/59bebcb996ba5c.webp', null, null, null)
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-22', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-11-22', 5, 1, id, '{"pitanje":"Kako se zvala politička partija Srećka Šojića?","odgovor":"Stranka zdravog razuma","alias":["Zdrav razum","zdravog razuma","SZR"],"slika":"/joker/59bebcb996ba5c.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Kako se zvala politička partija Srećka Šojića?'
   on conflict (quiz_date, segment, position) do nothing;

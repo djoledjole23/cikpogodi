@@ -39,6 +39,12 @@ export function JokerPitanje({
           <IconJoker size={18} />
           Joker · +50
         </span>
+        {pitanje.slika && (
+          <div className="g-joker-foto g-joker-foto-pitanje">
+            {/* eslint-disable-next-line @next/next/no-img-element -- fotografija je već pripremljena (webp, do 960 px) */}
+            <img src={pitanje.slika} alt="Fotografija uz pitanje" decoding="async" />
+          </div>
+        )}
         <p className="g-joker-pitanje">{pitanje.pitanje}</p>
       </div>
       <div className="g-film-unos">

@@ -1,5 +1,5 @@
 {
-  "napomena": "Joker pitanja (segment 5, bonus +50). Jedno pitanje po danu, vezano za datum; dan bez pitanja nema Jokera. Pitanje, odgovor i podatak za otkrivanje daje vlasnik sajta. alias su drugi oblici odgovora koji se priznaju. slika i otkrice (veliki broj + natpis) se prikazuju tek posle odgovora; ime fajla slike ne sme da odaje odgovor. Pitanja oznacena \"privremeno\": true su rezerva koju je upisao Claude dok vlasnik ne posalje svoja — slobodno ih zameni.",
+  "napomena": "Joker pitanja (segment 5, bonus +50). Jedno pitanje po danu, vezano za datum; dan bez pitanja nema Jokera. Pitanje, odgovor i podatak za otkrivanje daje vlasnik sajta. alias su drugi oblici odgovora koji se priznaju. slika i otkrice (veliki broj + natpis) se prikazuju tek posle odgovora; slikaPitanja se vidi UZ pitanje (za „pogodi čoveka sa slike”). Ime fajla slike ne sme da odaje odgovor.",
   "pitanja": [
     {
       "datum": "2026-11-14",
@@ -17,112 +17,131 @@
     },
     {
       "datum": "2026-11-15",
-      "pitanje": "Ko je režirao film „Ko to tamo peva”?",
-      "odgovor": "Slobodan Šijan",
+      "pitanje": "Koja srpska starleta je učestvovala u Survivoru?",
+      "odgovor": "Stanija",
       "alias": [
-        "Šijan",
-        "Sijan"
+        "Stanija Dobrojević",
+        "Dobrojević"
       ],
-      "slika": null,
+      "slika": "/joker/7a4788f53ff0db.webp",
+      "slikaPitanja": null,
       "otkrice": {
-        "broj": "1980",
-        "natpis": "godina premijere"
+        "broj": null,
+        "natpis": null
       },
-      "privremeno": true,
-      "izvor": "Opštepoznat podatak; privremeno pitanje dok ne stignu prava."
+      "izvor": "Pitanje i fotografiju dao vlasnik sajta."
     },
     {
       "datum": "2026-11-16",
-      "pitanje": "Ko je glumio Šurdu u seriji „Vruć vetar”?",
-      "odgovor": "Ljubiša Samardžić",
+      "pitanje": "Šta povezuje Dragomira Despića i šumara?",
+      "odgovor": "Motorna testera",
       "alias": [
-        "Samardžić",
-        "Samardzic"
+        "testera",
+        "motorka"
       ],
-      "slika": null,
+      "slika": "/joker/103bbf66b12f94.webp",
+      "slikaPitanja": null,
       "otkrice": {
-        "broj": "1980",
-        "natpis": "godina serije"
+        "broj": null,
+        "natpis": null
       },
-      "privremeno": true,
-      "izvor": "Opštepoznat podatak; privremeno pitanje dok ne stignu prava."
+      "izvor": "Pitanje i fotografiju dao vlasnik sajta."
     },
     {
       "datum": "2026-11-17",
-      "pitanje": "Koji je najviši vrh Srbije?",
-      "odgovor": "Midžor",
+      "pitanje": "Kako se zove čovek koji je na poznatom jutjub snimku eksirao vinjak i posle toga izgovorio čuveno „MRK” u kameru?",
+      "odgovor": "Srećko",
       "alias": [
-        "Midzor"
+        "Srećko Mrk",
+        "Mrk"
       ],
-      "slika": null,
+      "slika": "/joker/9efbc008ba617a.webp",
+      "slikaPitanja": null,
       "otkrice": {
-        "broj": "2169",
-        "natpis": "metara"
+        "broj": null,
+        "natpis": null
       },
-      "privremeno": true,
-      "izvor": "Opštepoznat podatak; privremeno pitanje dok ne stignu prava."
+      "izvor": "Pitanje i fotografiju dao vlasnik sajta."
     },
     {
       "datum": "2026-11-18",
-      "pitanje": "Koji domaći film je 1995. osvojio Zlatnu palmu u Kanu?",
-      "odgovor": "Underground",
+      "pitanje": "Koja pevačica je bila pratilja na maturi jutjubera 2016?",
+      "odgovor": "Sandra Afrika",
       "alias": [
-        "Podzemlje"
+        "Afrika"
       ],
-      "slika": null,
+      "slika": "/joker/adb8edf7649b14.webp",
+      "slikaPitanja": null,
       "otkrice": {
-        "broj": "1995",
-        "natpis": "Zlatna palma"
+        "broj": null,
+        "natpis": null
       },
-      "privremeno": true,
-      "izvor": "Opštepoznat podatak; privremeno pitanje dok ne stignu prava."
+      "izvor": "Pitanje i fotografiju dao vlasnik sajta."
     },
     {
       "datum": "2026-11-19",
-      "pitanje": "Koliko gradskih opština ima Beograd?",
-      "odgovor": "17",
+      "pitanje": "Ko je vodio emisiju „48 sati svadba”?",
+      "odgovor": "Miki Đuričić",
       "alias": [
-        "sedamnaest"
+        "Đuričić",
+        "Miki"
       ],
-      "slika": null,
+      "slika": "/joker/ef2766e699645a.webp",
+      "slikaPitanja": null,
       "otkrice": {
-        "broj": "17",
-        "natpis": "gradskih opština"
+        "broj": null,
+        "natpis": null
       },
-      "privremeno": true,
-      "izvor": "Opštepoznat podatak; privremeno pitanje dok ne stignu prava."
+      "izvor": "Pitanje i fotografiju dao vlasnik sajta."
     },
     {
       "datum": "2026-11-20",
-      "pitanje": "Ko je napisao roman „Na Drini ćuprija”?",
-      "odgovor": "Ivo Andrić",
+      "pitanje": "Kako se zove kafić iz „Lud, zbunjen, normalan”?",
+      "odgovor": "San Remo",
       "alias": [
-        "Andrić",
-        "Andric"
+        "Sanremo"
       ],
-      "slika": null,
+      "slika": "/joker/7f4374133fcd9c.webp",
+      "slikaPitanja": null,
       "otkrice": {
-        "broj": "1961",
-        "natpis": "Nobelova nagrada"
+        "broj": null,
+        "natpis": null
       },
-      "privremeno": true,
-      "izvor": "Opštepoznat podatak; privremeno pitanje dok ne stignu prava."
+      "izvor": "Pitanje i fotografiju dao vlasnik sajta."
     },
     {
       "datum": "2026-11-21",
-      "pitanje": "Koja grupa peva „Lutka sa naslovne strane”?",
-      "odgovor": "Riblja Čorba",
+      "pitanje": "Kako se zove konj Nikole Jokića?",
+      "odgovor": "Dream Catcher",
       "alias": [
-        "Riblja Corba",
-        "Čorba"
+        "Drim Kečer",
+        "Dreamcatcher",
+        "Drim Kecer"
       ],
-      "slika": null,
+      "slika": "/joker/07370ab3fefdcc.webp",
+      "slikaPitanja": null,
       "otkrice": {
-        "broj": "1981",
-        "natpis": "godina pesme"
+        "broj": null,
+        "natpis": null
       },
-      "privremeno": true,
-      "izvor": "Opštepoznat podatak; privremeno pitanje dok ne stignu prava."
+      "izvor": "Pitanje i fotografiju dao vlasnik sajta."
+    },
+    {
+      "datum": "2026-11-22",
+      "pitanje": "Kako se zvala politička partija Srećka Šojića?",
+      "odgovor": "Stranka zdravog razuma",
+      "alias": [
+        "Zdrav razum",
+        "zdravog razuma",
+        "SZR"
+      ],
+      "slika": "/joker/59bebcb996ba5c.webp",
+      "slikaPitanja": null,
+      "otkrice": {
+        "broj": null,
+        "natpis": null
+      },
+      "izvor": "Pitanje i fotografiju dao vlasnik sajta."
     }
   ]
 }

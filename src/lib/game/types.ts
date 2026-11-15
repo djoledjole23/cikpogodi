@@ -37,7 +37,7 @@ export type PitanjePesma = { vrsta: "pesma" };
 export type PitanjeFilm = { vrsta: "film"; slika: string };
 
 /** Joker: samo tekst pitanja. Odgovor, fotografija i broj za otkrivanje ostaju na serveru. */
-export type PitanjeJoker = { vrsta: "joker"; pitanje: string };
+export type PitanjeJoker = { vrsta: "joker"; pitanje: string; slika?: string | null };
 
 export type Pitanje = PitanjePesma | PitanjeCena | PitanjeGugla | PitanjeFilm | PitanjeJoker;
 
