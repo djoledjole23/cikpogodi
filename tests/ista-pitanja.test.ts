@@ -12,7 +12,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { ucitajFilmove } from "@/lib/content/films";
 import { ucitajJokere } from "@/lib/content/joker";
 import { ucitajProizvode } from "@/lib/content/products";
-import { seedSql } from "@/lib/content/seed";
+import { planCena, planFilmova, planGugla, planPesama, seedSql } from "@/lib/content/seed";
 import { ucitajPesme } from "@/lib/content/songs";
 import { postojeceSlikeJokera, postojeciKadrovi, sopstveneSlike } from "@/lib/content/slike";
 import { ucitajTrendove } from "@/lib/content/trends";
@@ -91,6 +91,26 @@ describe("isti dan, ista pitanja", () => {
 });
 
 describe("pravljenje pitanja", () => {
+  it("isti dan dobija ista pitanja bez obzira na to od kad je seed napravljen", () => {
+    // Ovo je štitilo od greške kad je novi seed krenuo od početka spiska
+    // i danas podelio pesme koje su se već vrtele prethodnih dana.
+    const dan = "2026-12-01";
+    const izProzora = (pocetak: string, dana: number) => {
+      const u = { ...ulaz(), pocetak, dana };
+      return {
+        pesme: planPesama(u.pesme, pocetak, dana).find((x) => x.datum === dan)!.pesme.map((p) => p.deezerId),
+        cene: planCena(u.proizvodi, pocetak, dana).find((x) => x.datum === dan)!.artikli.map((a) => a.barkod),
+        filmovi: planFilmova(u.filmovi, pocetak, dana).find((x) => x.datum === dan)!.filmovi.map((f) => f.slika),
+        gugla: planGugla(u.trendovi, pocetak, dana).find((x) => x.datum === dan)!.dueli.map((d) => `${d.a}|${d.b}`),
+      };
+    };
+    const a = izProzora("2026-11-20", 20);
+    const b = izProzora("2026-12-01", 5);
+    const c = izProzora("2026-11-15", 30);
+    expect(b).toEqual(a);
+    expect(c).toEqual(a);
+  });
+
   it("ponovljivo je: isti podaci daju isti SQL, slovo u slovo", () => {
     expect(seedSql(ulaz())).toBe(seedSql(ulaz()));
   });

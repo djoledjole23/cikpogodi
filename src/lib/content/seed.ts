@@ -43,11 +43,55 @@ function semeIzTeksta(tekst: string): number {
 export type DnevniPlan = { datum: string; artikli: Proizvod[] };
 
 /**
+ * Pitanja za jedan dan ne smeju da zavise od toga kad je seed napravljen.
+ * Zato se plan uvek računa od istog sidra, pa se iseče traženi deo: seed napravljen danas
+ * i seed napravljen za mesec dana daju istom datumu ista pitanja.
+ */
+const SIDRO = "2026-11-01";
+
+function uMs(datum: string): number {
+  const [g, m, d] = datum.split("-").map(Number);
+  return Date.UTC(g, m - 1, d);
+}
+
+/** Koliko dana ima od jednog datuma do drugog (može i negativno). */
+function razmakDana(od: string, dod: string): number {
+  return Math.round((uMs(dod) - uMs(od)) / 86_400_000);
+}
+
+/** Pusti `napravi` od sidra pa vrati samo tražene dane. */
+function odSidra<T>(pocetak: string, dana: number, napravi: (odakle: string, koliko: number) => T[]): T[] {
+  const pre = razmakDana(SIDRO, pocetak);
+  if (pre <= 0) return napravi(pocetak, dana);
+  return napravi(SIDRO, pre + dana).slice(pre);
+}
+
+export function planCena(proizvodi: Proizvod[], pocetak: string, dana: number): DnevniPlan[] {
+  return odSidra(pocetak, dana, (o, k) => planCenaOd(proizvodi, o, k));
+}
+
+export function planGugla(
+  trendovi: Pick<UcitaniTrendovi, "pojmovi" | "period" | "preuzeto">,
+  pocetak: string,
+  dana: number,
+): DnevniPlanGugla[] {
+  return odSidra(pocetak, dana, (o, k) => planGuglaOd(trendovi, o, k));
+}
+
+export function planPesama(pesme: Pesma[], pocetak: string, dana: number): DnevniPlanPesama[] {
+  return odSidra(pocetak, dana, (o, k) => planPesamaOd(pesme, o, k));
+}
+
+export function planFilmova(filmovi: Film[], pocetak: string, dana: number): DnevniPlanFilmova[] {
+  return odSidra(pocetak, dana, (o, k) => planFilmovaOd(filmovi, o, k));
+}
+
+/**
  * Za svaki dan bira 10 artikala:
  * prvo oni koji su najmanje puta bili, bez istog naziva dvaput u danu (npr. dva Smokija),
  * najviše 4 iz iste kategorije i, kad može, bez ponavljanja od juče.
  */
-export function planCena(proizvodi: Proizvod[], pocetak: string, dana: number): DnevniPlan[] {
+function planCenaOd(proizvodi: Proizvod[], pocetak: string, dana: number): DnevniPlan[] {
   if (proizvodi.length < PO_DANU) {
     throw new Error(`Za dnevni kviz treba bar ${PO_DANU} artikala sa slikom i cenom, a ima ih ${proizvodi.length}.`);
   }
@@ -100,7 +144,7 @@ const POBEDE_IZAZIVACA = { cilj: 4, najmanje: 3, najvise: 5 };
  * Svih 9 pojmova u danu je iz različitih tema, svaki duel ima jasnog pobednika (vidi `ferDuel`)
  * i nijedan duel se ne ponavlja u celom periodu.
  */
-export function planGugla(
+function planGuglaOd(
   trendovi: Pick<UcitaniTrendovi, "pojmovi" | "period" | "preuzeto">,
   pocetak: string,
   dana: number,
@@ -164,7 +208,7 @@ export type DnevniPlanPesama = { datum: string; pesme: Pesma[] };
  * Pesme sa spiska vlasnika sajta (prioritet) idu pre ostalih, a pesma se ne ponavlja
  * dok ima neiskorišćenih u tom žanru.
  */
-export function planPesama(pesme: Pesma[], pocetak: string, dana: number): DnevniPlanPesama[] {
+function planPesamaOd(pesme: Pesma[], pocetak: string, dana: number): DnevniPlanPesama[] {
   const koriscena = new Map<number, number>(pesme.map((p) => [p.deezerId, 0]));
   const peti: Zanr[] = ["folk", "rok", "pop"];
   const plan: DnevniPlanPesama[] = [];
@@ -212,7 +256,7 @@ export type DnevniPlanFilmova = { datum: string; filmovi: Film[] };
  * Za svaki dan bira 3 kadra: prvo filmovi koji su najmanje puta bili, nasumično među jednakima.
  * Film se ne ponavlja dok ima neiskorišćenih, a kad se krug završi, ne ponavlja se onaj od juče.
  */
-export function planFilmova(filmovi: Film[], pocetak: string, dana: number): DnevniPlanFilmova[] {
+function planFilmovaOd(filmovi: Film[], pocetak: string, dana: number): DnevniPlanFilmova[] {
   if (filmovi.length < FILMOVA_PO_DANU) throw new Error("Premalo filmova za jedan dan.");
   const koriscen = new Map<string, number>(filmovi.map((f) => [f.slika, 0]));
   let juce = new Set<string>();

@@ -19,7 +19,7 @@ let db: Db;
 const koren = join(__dirname, "..");
 const ucitani = ucitajProizvode(JSON.parse(readFileSync(join(koren, "data/products.json"), "utf8")));
 const trendovi = ucitajTrendove(JSON.parse(readFileSync(join(koren, "data/trends.json"), "utf8")));
-const POCETAK = "2026-11-14";
+const POCETAK = "2026-11-01";
 const SEED = () =>
   seedSql({ proizvodi: ucitani.proizvodi, datumCenovnika: ucitani.datumCenovnika, trendovi, pocetak: POCETAK, dana: 14 });
 /** Dan sa samo jednim segmentom (gugla), sa poznatim indeksima. */
@@ -100,8 +100,8 @@ describe("products.json i seed", () => {
   it("14 dana po 5 različitih artikala, bez istog naziva dvaput u danu", () => {
     const plan = planCena(ucitani.proizvodi, POCETAK, 14);
     expect(plan.length).toBe(14);
-    expect(plan[0].datum).toBe("2026-11-14");
-    expect(plan[13].datum).toBe("2026-11-27");
+    expect(plan[0].datum).toBe("2026-11-01");
+    expect(plan[13].datum).toBe("2026-11-14");
     const koriscenje = new Map<string, number>();
     plan.forEach((dan, i) => {
       expect(dan.artikli.length).toBe(5);
@@ -131,7 +131,7 @@ describe("products.json i seed", () => {
     await pg.exec(SEED());
     const [p] = await db.query<{ n: number }>("select count(*)::int as n from public.products");
     const [i] = await db.query<{ n: number }>(
-      "select count(*)::int as n from public.daily_quiz_items where quiz_date between '2026-11-14' and '2026-11-27'",
+      "select count(*)::int as n from public.daily_quiz_items where quiz_date between '2026-11-01' and '2026-11-14'",
     );
     expect(p.n).toBe(76);
     expect(i.n).toBe(70 + 70); // 14 × (5 cena + 5 parova)

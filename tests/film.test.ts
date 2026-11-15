@@ -15,7 +15,7 @@ import { normalizuj } from "@/lib/match";
 const koren = join(__dirname, "..");
 const json = (ime: string) => JSON.parse(readFileSync(join(koren, "data", ime), "utf8"));
 const ucitani = ucitajFilmove(json("films.json"), postojeciKadrovi(koren));
-const POCETAK = "2026-11-14";
+const POCETAK = "2026-11-01";
 /** Dan samo sa filmovima, sa poznatim sadržajem. */
 const DAN = "2030-04-04";
 

@@ -1,10 +1,11 @@
 -- ───────────────────────────────────────────────────────────────
--- ZAMENA PITANJA: kraći dani (5 artikala umesto 10, 5 parova umesto 8) + nova Joker pitanja
+-- ZAMENA PITANJA: kraći dani, nova Joker pitanja, sveže pesme i artikli
 --
 -- Šta radi: briše pitanja i odigrane igre od DANAS nadalje, pa upisuje nove dane.
 -- Dani pre današnjeg ostaju netaknuti.
 --
--- Kako: Supabase → SQL Editor → New query → nalepi CEO ovaj fajl → Run.
+-- Najlakše: dupli klik na azuriraj-pitanja.bat u glavnom folderu.
+-- Ručno: Supabase → SQL Editor → New query → nalepi CEO ovaj fajl → Run.
 -- ───────────────────────────────────────────────────────────────
 
 delete from public.plays
@@ -718,152 +719,152 @@ insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_ur
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-15', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-15', 1, 1, id, '{"izvodjac":"Tea Tairović","naslov":"Hajde","alias":[],"deezerId":3769786922,"itunesId":1868457590,"omot":"https://cdn-images.dzcdn.net/images/cover/996740b19e3858696a09c2476d5b273e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3769786922
+  select '2026-11-15', 1, 1, id, '{"izvodjac":"Saša Matić","naslov":"Kralj izgubljenih stvari","alias":[],"deezerId":458531552,"itunesId":1578121642,"omot":"https://cdn-images.dzcdn.net/images/cover/05f89d971445de93c26a2ab7981c0864/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 458531552
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-15', 1, 2, id, '{"izvodjac":"Kerber","naslov":"Seobe","alias":[],"deezerId":1523410982,"itunesId":1590828710,"omot":"https://cdn-images.dzcdn.net/images/cover/8f5c589408e426f6b63cd14ca4a8f292/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1523410982
+  select '2026-11-15', 1, 2, id, '{"izvodjac":"S.A.R.S.","naslov":"Perspektiva","alias":[],"deezerId":448247912,"itunesId":1479062918,"omot":"https://cdn-images.dzcdn.net/images/cover/b5c7bf612232dd7a5d0165fc4c2abc58/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 448247912
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-15', 1, 3, id, '{"izvodjac":"Indira Radić","naslov":"Zmaj","alias":[],"deezerId":1530384162,"itunesId":1578094304,"omot":"https://cdn-images.dzcdn.net/images/cover/56ac6941cc780e278c465c7eb0c3afef/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1530384162
+  select '2026-11-15', 1, 3, id, '{"izvodjac":"Toše Proeski","naslov":"Pratim te","alias":[],"deezerId":543699482,"itunesId":1578045655,"omot":"https://cdn-images.dzcdn.net/images/cover/84330e650a3a382fec6bd5ab1936ac5e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 543699482
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-15', 1, 4, id, '{"izvodjac":"Željko Joksimović","naslov":"Lane moje","alias":[],"deezerId":543692512,"itunesId":1534307934,"omot":"https://cdn-images.dzcdn.net/images/cover/256eae96a498483a488a87f6aceb2339/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 543692512
+  select '2026-11-15', 1, 4, id, '{"izvodjac":"Teya Dora","naslov":"Džanum","alias":[],"deezerId":2393291385,"itunesId":1700644621,"omot":"https://cdn-images.dzcdn.net/images/cover/87aa5284a23bc8622f2fd44364454975/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2393291385
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-15', 1, 5, id, '{"izvodjac":"Jala Brat","naslov":"Mlada i luda","alias":[],"deezerId":2826870432,"itunesId":1869456199,"omot":"https://cdn-images.dzcdn.net/images/cover/7f75828e945cf7d96394cc16b5d8c33e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2826870432
+  select '2026-11-15', 1, 5, id, '{"izvodjac":"Nikolija","naslov":"Opasna igra","alias":[],"deezerId":3585357171,"itunesId":1578171020,"omot":"https://cdn-images.dzcdn.net/images/cover/f157da565f7decc3d4a773857aef0061/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3585357171
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-16', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-16', 1, 1, id, '{"izvodjac":"Milica Pavlović","naslov":"Tango","alias":[],"deezerId":3577739961,"itunesId":1578109034,"omot":"https://cdn-images.dzcdn.net/images/cover/7f737d4d72ee6e7eca098fc04879a06a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3577739961
+  select '2026-11-16', 1, 1, id, '{"izvodjac":"Indira Radić","naslov":"Lopov","alias":[],"deezerId":1530383982,"itunesId":1591493897,"omot":"https://cdn-images.dzcdn.net/images/cover/50604a8c23db2078d29ecc7cb8a99b6c/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1530383982
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-16', 1, 2, id, '{"izvodjac":"Generacija 5","naslov":"Dolazim za pet minuta","alias":["Dolazim za 5 minuta"],"deezerId":3194092551,"itunesId":1665669373,"omot":"https://cdn-images.dzcdn.net/images/cover/54c6ff4a139c08aa9f1f44df9ef0911e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3194092551
+  select '2026-11-16', 1, 2, id, '{"izvodjac":"Mile Kitić","naslov":"Kilo dole, kilo gore","alias":[],"deezerId":1820167077,"itunesId":1633892109,"omot":"https://cdn-images.dzcdn.net/images/cover/adee76b22456817d1863183121472e70/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1820167077
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-16', 1, 3, id, '{"izvodjac":"Jala Brat & Buba Corelli","naslov":"Ona''e","alias":["Ona e"],"deezerId":2826274332,"itunesId":1869454361,"omot":"https://cdn-images.dzcdn.net/images/cover/30b661dc562993894dbfbb5ce318fd4c/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2826274332
+  select '2026-11-16', 1, 3, id, '{"izvodjac":"Marčelo","naslov":"Pegla","alias":[],"deezerId":126398043,"itunesId":1122634973,"omot":"https://cdn-images.dzcdn.net/images/cover/aec32e8015c2b22615ba2d97a2c6ac3b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 126398043
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-16', 1, 4, id, '{"izvodjac":"Partibrejkers","naslov":"Hoću da znam","alias":[],"deezerId":584345352,"itunesId":1057660792,"omot":"https://cdn-images.dzcdn.net/images/cover/0e25a548d7ed6531a0b1b943c1b9102a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 584345352
+  select '2026-11-16', 1, 4, id, '{"izvodjac":"YU Grupa","naslov":"Čudna šuma","alias":[],"deezerId":93131246,"itunesId":507745455,"omot":"https://cdn-images.dzcdn.net/images/cover/da08dde9b45fcf2e04473f0329dd68a9/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 93131246
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-16', 1, 5, id, '{"izvodjac":"Toše Proeski","naslov":"Igra bez granica","alias":[],"deezerId":529457751,"itunesId":1578045026,"omot":"https://cdn-images.dzcdn.net/images/cover/14e51589c6a8b335d1eb35a8ce48855d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 529457751
+  select '2026-11-16', 1, 5, id, '{"izvodjac":"Nataša Bekvalac","naslov":"Dobro moje","alias":[],"deezerId":543688932,"itunesId":1578025575,"omot":"https://cdn-images.dzcdn.net/images/cover/953fbf662c9e1503c278933273640980/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 543688932
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-17', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-17', 1, 1, id, '{"izvodjac":"Vlado Georgiev","naslov":"Anđele","alias":[],"deezerId":3735395272,"itunesId":1863655384,"omot":"https://cdn-images.dzcdn.net/images/cover/86e118efbbf40f163867d2899a62f09e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3735395272
+  select '2026-11-17', 1, 1, id, '{"izvodjac":"Emina Jahović","naslov":"Da l'' ona zna","alias":["Da li ona zna"],"deezerId":529455441,"itunesId":1578000002,"omot":"https://cdn-images.dzcdn.net/images/cover/9b8f2e85f1699b9c3f2bb6400be9322f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 529455441
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-17', 1, 2, id, '{"izvodjac":"Idoli","naslov":"Maljčiki","alias":[],"deezerId":23797711,"itunesId":385266437,"omot":"https://cdn-images.dzcdn.net/images/cover/2081e7a65262a095d8c3296e572b4bb6/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 23797711
+  select '2026-11-17', 1, 2, id, '{"izvodjac":"Bajaga i Instruktori","naslov":"Moji drugovi","alias":[],"deezerId":2619832862,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/97755b9dade374e5265ec215db465e81/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2619832862
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-17', 1, 3, id, '{"izvodjac":"Jelena Rozga","naslov":"Bižuterija","alias":[],"deezerId":719863962,"itunesId":488074409,"omot":"https://cdn-images.dzcdn.net/images/cover/4c05862d7a15651ad52d513ddf6689c7/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 719863962
+  select '2026-11-17', 1, 3, id, '{"izvodjac":"Smak","naslov":"Daire","alias":[],"deezerId":1189113232,"itunesId":1673511043,"omot":"https://cdn-images.dzcdn.net/images/cover/d551c7f7f3e9738741cafa9dd69e695f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1189113232
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-17', 1, 4, id, '{"izvodjac":"Jala Brat, Buba Corelli & Rasta","naslov":"Benga po snijegu","alias":["Benga po snegu"],"deezerId":2826274312,"itunesId":1869456476,"omot":"https://cdn-images.dzcdn.net/images/cover/30b661dc562993894dbfbb5ce318fd4c/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2826274312
+  select '2026-11-17', 1, 4, id, '{"izvodjac":"Nikolija","naslov":"Ćao zdravo","alias":[],"deezerId":3585357191,"itunesId":1843876410,"omot":"https://cdn-images.dzcdn.net/images/cover/f157da565f7decc3d4a773857aef0061/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3585357191
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-17', 1, 5, id, '{"izvodjac":"Ceca","naslov":"Beograd","alias":[],"deezerId":3918486731,"itunesId":897490637,"omot":"https://cdn-images.dzcdn.net/images/cover/7a4bbba6ddbc251eb2e4fec99da317db/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3918486731
+  select '2026-11-17', 1, 5, id, '{"izvodjac":"Aleksandra Prijović","naslov":"Za nas kasno je","alias":[],"deezerId":2727125451,"itunesId":1741510715,"omot":"https://cdn-images.dzcdn.net/images/cover/3da89f7f3ae4fd006211f84edfa9ff1e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2727125451
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-18', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-18', 1, 1, id, '{"izvodjac":"Ceca","naslov":"Kukavica","alias":[],"deezerId":4100565851,"itunesId":6781846676,"omot":"https://cdn-images.dzcdn.net/images/cover/f2759717a185d0d126ec4ddcca8fbe89/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 4100565851
+  select '2026-11-18', 1, 1, id, '{"izvodjac":"Ministarke","naslov":"Moje jedino","alias":[],"deezerId":136282042,"itunesId":1177057642,"omot":"https://cdn-images.dzcdn.net/images/cover/5aeea2ec7785de8477ddd10c2a4bd86c/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 136282042
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-18', 1, 2, id, '{"izvodjac":"Ana Nikolić","naslov":"Romale, romali","alias":[],"deezerId":529454551,"itunesId":1863649027,"omot":"https://cdn-images.dzcdn.net/images/cover/fbf4b170d50755cf14a9962c907c550b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 529454551
+  select '2026-11-18', 1, 2, id, '{"izvodjac":"Dragana Mirković","naslov":"Plači zemljo","alias":[],"deezerId":4262262541,"itunesId":1530131660,"omot":"https://cdn-images.dzcdn.net/images/cover/3b3a2d12b24a8be40862b8799614e1d1/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 4262262541
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-18', 1, 3, id, '{"izvodjac":"Riblja Čorba","naslov":"Ostani đubre do kraja","alias":[],"deezerId":3112807371,"itunesId":1708114196,"omot":"https://cdn-images.dzcdn.net/images/cover/4f01059cab768911ce47ec33dc0f9e82/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3112807371
+  select '2026-11-18', 1, 3, id, '{"izvodjac":"Riblja Čorba","naslov":"Dva dinara, druže","alias":["2 dinara druže"],"deezerId":3030816441,"itunesId":1772667606,"omot":"https://cdn-images.dzcdn.net/images/cover/fa409f8b415268365a412f2758797489/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3030816441
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-18', 1, 4, id, '{"izvodjac":"Rasta","naslov":"Hotel","alias":[],"deezerId":2874735722,"itunesId":1755400371,"omot":"https://cdn-images.dzcdn.net/images/cover/9909b68e9509fb11a3e9ab7fc7e61ebe/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2874735722
+  select '2026-11-18', 1, 4, id, '{"izvodjac":"Bad Copy","naslov":"Uno due tre","alias":[],"deezerId":3259803621,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/d016ccf63f7b59d5085da70e19936678/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3259803621
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-18', 1, 5, id, '{"izvodjac":"Nataša Bekvalac","naslov":"Nikotin","alias":[],"deezerId":572082382,"itunesId":1578038327,"omot":"https://cdn-images.dzcdn.net/images/cover/133979e36499dff7b58ad7a2cb7c4fec/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 572082382
+  select '2026-11-18', 1, 5, id, '{"izvodjac":"Aleksandra Radović","naslov":"Čuvam te","alias":[],"deezerId":724771892,"itunesId":1577968457,"omot":"https://cdn-images.dzcdn.net/images/cover/c5fc18b55056ab0e7eaf24497bff3520/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 724771892
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-19', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-19', 1, 1, id, '{"izvodjac":"Colonia","naslov":"Za tvoje snene oči","alias":["Za tvoje snene oci"],"deezerId":3524461661,"itunesId":380344238,"omot":"https://cdn-images.dzcdn.net/images/cover/03e11f678a397ae09f824831141f31ec/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3524461661
+  select '2026-11-19', 1, 1, id, '{"izvodjac":"Goca Tržan","naslov":"Gluve usne","alias":[],"deezerId":900803272,"itunesId":1502376359,"omot":"https://cdn-images.dzcdn.net/images/cover/2c37b562f9464b831107a70c611cb69e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 900803272
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-19', 1, 2, id, '{"izvodjac":"Piloti","naslov":"Kao ptica na mom dlanu","alias":[],"deezerId":2136800977,"itunesId":1670154957,"omot":"https://cdn-images.dzcdn.net/images/cover/07892c80eee21cb133e03743ea56da54/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2136800977
+  select '2026-11-19', 1, 2, id, '{"izvodjac":"Marinko Rokvić","naslov":"Skitnica","alias":[],"deezerId":457472742,"itunesId":1578103918,"omot":"https://cdn-images.dzcdn.net/images/cover/c15764ffa29dac54fd413a6aa45cbf6d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 457472742
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-19', 1, 3, id, '{"izvodjac":"Senidah","naslov":"Slađana","alias":[],"deezerId":1448120402,"itunesId":1358425136,"omot":"https://cdn-images.dzcdn.net/images/cover/5ef77d9cff1c57cd4e78b7f05889d9e3/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1448120402
+  select '2026-11-19', 1, 3, id, '{"izvodjac":"Elitni Odredi","naslov":"Kao kokain","alias":[],"deezerId":1151090292,"itunesId":1578161009,"omot":"https://cdn-images.dzcdn.net/images/cover/dd0ca35fe681011e1f9884404d488ac3/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1151090292
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-19', 1, 4, id, '{"izvodjac":"Električni Orgazam","naslov":"Igra rok''en''rol cela Jugoslavija","alias":["Igra rokenrol cela Jugoslavija","Igra rock and roll cela Jugoslavija","Igra rock''n''roll cela Jugoslavija","Igra rok end rol cela Jugoslavija"],"deezerId":2997909791,"itunesId":381727354,"omot":"https://cdn-images.dzcdn.net/images/cover/a1daef37893c7371a79c1d084a8aed13/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2997909791
+  select '2026-11-19', 1, 4, id, '{"izvodjac":"Električni Orgazam","naslov":"Bejbe, ti nisi tu","alias":[],"deezerId":2997909771,"itunesId":505135793,"omot":"https://cdn-images.dzcdn.net/images/cover/a1daef37893c7371a79c1d084a8aed13/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2997909771
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-19', 1, 5, id, '{"izvodjac":"Aca Lukas","naslov":"Kuda idu ljudi kao ja","alias":[],"deezerId":898922622,"itunesId":1794183990,"omot":"https://cdn-images.dzcdn.net/images/cover/1586b6461b881d4fdbb6f159414f2926/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 898922622
+  select '2026-11-19', 1, 5, id, '{"izvodjac":"Mitar Mirić","naslov":"Ne može nam niko ništa","alias":[],"deezerId":15620002,"itunesId":1877161517,"omot":"https://cdn-images.dzcdn.net/images/cover/d72ac926caf3ca020cd716b445803900/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 15620002
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-20', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-20', 1, 1, id, '{"izvodjac":"Tanja Savić","naslov":"Tako mlada","alias":[],"deezerId":3577739411,"itunesId":1578130745,"omot":"https://cdn-images.dzcdn.net/images/cover/7f737d4d72ee6e7eca098fc04879a06a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3577739411
+  select '2026-11-20', 1, 1, id, '{"izvodjac":"Lepa Brena","naslov":"Luda za tobom","alias":[],"deezerId":1056591462,"itunesId":1578099903,"omot":"https://cdn-images.dzcdn.net/images/cover/760738cd4fe6b8693c7ad03772a8db96/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1056591462
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-20', 1, 2, id, '{"izvodjac":"Flamingosi","naslov":"Ludi letnji ples","alias":[],"deezerId":529456911,"itunesId":1578005436,"omot":"https://cdn-images.dzcdn.net/images/cover/0c19f0a49425d3c1b48a3a9a2144b966/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 529456911
+  select '2026-11-20', 1, 2, id, '{"izvodjac":"Rambo Amadeus","naslov":"Balkan boj","alias":[],"deezerId":3200983881,"itunesId":1792096613,"omot":"https://cdn-images.dzcdn.net/images/cover/692a2d9d46134a262bfd5f049480499d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3200983881
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-20', 1, 3, id, '{"izvodjac":"Jala Brat, Buba Corelli & Devito","naslov":"Roze","alias":[],"deezerId":2826469112,"itunesId":1869458408,"omot":"https://cdn-images.dzcdn.net/images/cover/72997513f3c5926f05168759909990f4/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2826469112
+  select '2026-11-20', 1, 3, id, '{"izvodjac":"Voyage & Breskvica","naslov":"Budi tu","alias":[],"deezerId":3026502121,"itunesId":1770864844,"omot":"https://cdn-images.dzcdn.net/images/cover/e26a759066d37ce15e40bade657a5020/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3026502121
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-20', 1, 4, id, '{"izvodjac":"Marija Šerifović","naslov":"Molitva","alias":[],"deezerId":1841884507,"itunesId":1578027079,"omot":"https://cdn-images.dzcdn.net/images/cover/e095600104ae7adc6560384c44e74e7a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1841884507
+  select '2026-11-20', 1, 4, id, '{"izvodjac":"Zdravko Čolić","naslov":"Jedina","alias":[],"deezerId":2995450631,"itunesId":1768453462,"omot":"https://cdn-images.dzcdn.net/images/cover/6ea8f083fd4774d807baf0eb2eb30db2/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2995450631
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-20', 1, 5, id, '{"izvodjac":"Van Gogh","naslov":"Neko te ima","alias":[],"deezerId":416407382,"itunesId":1295901266,"omot":"https://cdn-images.dzcdn.net/images/cover/d3d29c706cb790d1d8d012a70cc7e88d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 416407382
+  select '2026-11-20', 1, 5, id, '{"izvodjac":"Piloti","naslov":"Ne veruj u idole","alias":[],"deezerId":3020679851,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/580fc7b2b1ba75ed6afd50b21390245b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3020679851
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-21', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-21', 1, 1, id, '{"izvodjac":"Negative","naslov":"Ja bih te sanjala","alias":[],"deezerId":1097617292,"itunesId":342452460,"omot":"https://cdn-images.dzcdn.net/images/cover/6a24c1d12b8ad6b3b2a1d0f61d9f99f5/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1097617292
+  select '2026-11-21', 1, 1, id, '{"izvodjac":"U Škripcu","naslov":"Siđi do reke","alias":[],"deezerId":93538110,"itunesId":555295020,"omot":"https://cdn-images.dzcdn.net/images/cover/da3456422c95889d66d3ad006091172e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 93538110
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-21', 1, 2, id, '{"izvodjac":"Mitar Mirić","naslov":"Ne može nam niko ništa","alias":[],"deezerId":15620002,"itunesId":1877161517,"omot":"https://cdn-images.dzcdn.net/images/cover/d72ac926caf3ca020cd716b445803900/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 15620002
+  select '2026-11-21', 1, 2, id, '{"izvodjac":"Sara Jo","naslov":"Mili, mili","alias":[],"deezerId":1458276022,"itunesId":1485997194,"omot":"https://cdn-images.dzcdn.net/images/cover/5c32fe082b74da88e2f70874158a7434/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1458276022
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-21', 1, 3, id, '{"izvodjac":"Voyage","naslov":"Euforija","alias":[],"deezerId":1524834902,"itunesId":1590822353,"omot":"https://cdn-images.dzcdn.net/images/cover/3e2caab42106c745671878d679678914/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1524834902
+  select '2026-11-21', 1, 3, id, '{"izvodjac":"Beogradski Sindikat","naslov":"Balada disidenta","alias":[],"deezerId":1621917272,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/60e3ad80c9381a32abecf019afb0f07b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1621917272
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-21', 1, 4, id, '{"izvodjac":"Knez","naslov":"Dal'' si ikada mene voljela","alias":["Da li si ikada mene voljela","Dal si ikada mene volela"],"deezerId":569467032,"itunesId":1779524665,"omot":"https://cdn-images.dzcdn.net/images/cover/d2e8819830c005d290436ff45cd3e100/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 569467032
+  select '2026-11-21', 1, 4, id, '{"izvodjac":"Saša Kovačević","naslov":"Slučajno","alias":[],"deezerId":3265960921,"itunesId":1800492251,"omot":"https://cdn-images.dzcdn.net/images/cover/4c260d27762770c4c6b020f7baea355a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3265960921
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-11-21', 1, 5, id, '{"izvodjac":"Milica Todorović","naslov":"Tri čaše","alias":[],"deezerId":464556372,"itunesId":1578147923,"omot":"https://cdn-images.dzcdn.net/images/cover/70f9546a52fbbe77edd2a85c8727f13a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -876,20 +877,20 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 1097490802
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-22', 1, 2, id, '{"izvodjac":"Bajaga i Instruktori","naslov":"Godine prolaze","alias":[],"deezerId":2619831532,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/876f6e3b5a47da8258356260596a69ab/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2619831532
+  select '2026-11-22', 1, 2, id, '{"izvodjac":"Sinan Sakić","naslov":"Ej, od kad sam se rodio","alias":[],"deezerId":1302228482,"itunesId":1738171628,"omot":"https://cdn-images.dzcdn.net/images/cover/21ae99ba2b4baeb63160ca7203c78457/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1302228482
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-22', 1, 3, id, '{"izvodjac":"Smak","naslov":"Crna dama","alias":[],"deezerId":1189113242,"itunesId":1673511045,"omot":"https://cdn-images.dzcdn.net/images/cover/d551c7f7f3e9738741cafa9dd69e695f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1189113242
+  select '2026-11-22', 1, 3, id, '{"izvodjac":"Dejan Cukić","naslov":"Ruža ispod pepela","alias":[],"deezerId":3314918891,"itunesId":1812622351,"omot":"https://cdn-images.dzcdn.net/images/cover/fd85e9d6799380a9d7f69973d1e46dcd/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3314918891
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-22', 1, 4, id, '{"izvodjac":"Severina","naslov":"Gas, gas","alias":[],"deezerId":66239087,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/b05932fbca6d5492ec27197ed2b84c38/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 66239087
+  select '2026-11-22', 1, 4, id, '{"izvodjac":"Oliver Mandić","naslov":"Poludeću","alias":[],"deezerId":669667832,"itunesId":1578033120,"omot":"https://cdn-images.dzcdn.net/images/cover/98507abe8cc3f9c8128a23af891a1790/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 669667832
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-22', 1, 5, id, '{"izvodjac":"Elitni Odredi","naslov":"Ne koči","alias":[],"deezerId":367409741,"itunesId":1578161233,"omot":"https://cdn-images.dzcdn.net/images/cover/803813f492547a845a0e773fe5a18f87/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 367409741
+  select '2026-11-22', 1, 5, id, '{"izvodjac":"Buba Corelli","naslov":"Balenciaga","alias":[],"deezerId":2826423592,"itunesId":1869456343,"omot":"https://cdn-images.dzcdn.net/images/cover/755122dbe831587019a0ff9596c38b31/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2826423592
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-23', 'published', now())
   on conflict (quiz_date) do nothing;
@@ -898,130 +899,130 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 2874736332
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-23', 1, 2, id, '{"izvodjac":"Van Gogh","naslov":"Za godine tvoje","alias":[],"deezerId":416410952,"itunesId":1296178804,"omot":"https://cdn-images.dzcdn.net/images/cover/66b0517f8a4e19b9ce7d99b49243700a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 416410952
+  select '2026-11-23', 1, 2, id, '{"izvodjac":"Đorđe Balašević","naslov":"Priča o Vasi Ladačkom","alias":[],"deezerId":3933438781,"itunesId":1885825448,"omot":"https://cdn-images.dzcdn.net/images/cover/e79b6ef15974e508aab915a4716cbb5a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3933438781
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-23', 1, 3, id, '{"izvodjac":"Jelena Rozga","naslov":"Nirvana","alias":[],"deezerId":2998009921,"itunesId":632120047,"omot":"https://cdn-images.dzcdn.net/images/cover/4b108ec75e2bd830d4f5552c36d17ded/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2998009921
+  select '2026-11-23', 1, 3, id, '{"izvodjac":"Riblja Čorba","naslov":"Lutka sa naslovne strane","alias":[],"deezerId":2464031485,"itunesId":1708115106,"omot":"https://cdn-images.dzcdn.net/images/cover/a75eb24f5925b3374a9e44f3236ba53f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2464031485
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-11-23', 1, 4, id, '{"izvodjac":"Sinan Sakić","naslov":"Lepa do bola","alias":[],"deezerId":1148816532,"itunesId":1541356044,"omot":"https://cdn-images.dzcdn.net/images/cover/d18891c57626dc413055ba40cde08701/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 1148816532
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-23', 1, 5, id, '{"izvodjac":"Tijana Dapčević","naslov":"Sve je isto, samo njega nema","alias":["Sve je isto samo njega nema"],"deezerId":669816782,"itunesId":1578048136,"omot":"https://cdn-images.dzcdn.net/images/cover/0f63522949f5600757c9685fae420efd/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 669816782
+  select '2026-11-23', 1, 5, id, '{"izvodjac":"Željko Samardžić","naslov":"9000 metara","alias":["Devet hiljada metara"],"deezerId":458468242,"itunesId":1578134286,"omot":"https://cdn-images.dzcdn.net/images/cover/bd90f01cb0edb6a944408d7ab9361916/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 458468242
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-24', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-24', 1, 1, id, '{"izvodjac":"Osvajači","naslov":"Možda nebo zna","alias":[],"deezerId":91190723,"itunesId":1361362425,"omot":"https://cdn-images.dzcdn.net/images/cover/3405b159010872ae2842ace1ca1a03b4/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 91190723
+  select '2026-11-24', 1, 1, id, '{"izvodjac":"Đorđe Balašević","naslov":"Ne lomite mi bagrenje","alias":[],"deezerId":3933464011,"itunesId":1885963818,"omot":"https://cdn-images.dzcdn.net/images/cover/9fed900e0042c875191498d5383ec431/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3933464011
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-24', 1, 2, id, '{"izvodjac":"Stoja","naslov":"Evropa","alias":[],"deezerId":3515146491,"itunesId":1834143575,"omot":"https://cdn-images.dzcdn.net/images/cover/4d6ab6c1df27a2b5f700554549ecb360/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3515146491
+  select '2026-11-24', 1, 2, id, '{"izvodjac":"Toma Zdravković","naslov":"Dotak''o sam dno života","alias":["Dotakao sam dno života"],"deezerId":4365851661,"itunesId":6825577391,"omot":"https://cdn-images.dzcdn.net/images/cover/7b454ec0c776dab98843ea8bd2cb84ab/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 4365851661
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-11-24', 1, 3, id, '{"izvodjac":"Željko Samardžić","naslov":"Grlica","alias":[],"deezerId":730630702,"itunesId":1690799736,"omot":"https://cdn-images.dzcdn.net/images/cover/5710206419be4921023ac329d20c707b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 730630702
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-24', 1, 4, id, '{"izvodjac":"Aco Pejović","naslov":"Jelena","alias":[],"deezerId":1070202102,"itunesId":1578077479,"omot":"https://cdn-images.dzcdn.net/images/cover/baa426af2590acf757d71dbaf70e931d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1070202102
+  select '2026-11-24', 1, 4, id, '{"izvodjac":"Đogani","naslov":"Idemo na Mars","alias":[],"deezerId":1524827632,"itunesId":1578052439,"omot":"https://cdn-images.dzcdn.net/images/cover/319281deac498cf8a51f7b5aae08f326/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1524827632
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-24', 1, 5, id, '{"izvodjac":"Marčelo","naslov":"Pegla","alias":[],"deezerId":126398043,"itunesId":1122634973,"omot":"https://cdn-images.dzcdn.net/images/cover/aec32e8015c2b22615ba2d97a2c6ac3b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 126398043
+  select '2026-11-24', 1, 5, id, '{"izvodjac":"Senidah","naslov":"Mišići","alias":[],"deezerId":3746732432,"itunesId":1865193687,"omot":"https://cdn-images.dzcdn.net/images/cover/fdfe462880f608273af5d73eb8fdbd92/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3746732432
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-25', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-25', 1, 1, id, '{"izvodjac":"Đorđe Balašević","naslov":"Ringišpil","alias":[],"deezerId":775360092,"itunesId":1483596245,"omot":"https://cdn-images.dzcdn.net/images/cover/ff2ba6e22337997fd05523f46015b15e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 775360092
+  select '2026-11-25', 1, 1, id, '{"izvodjac":"Lexington","naslov":"Dobro da nije veće zlo","alias":[],"deezerId":583784202,"itunesId":1578010629,"omot":"https://cdn-images.dzcdn.net/images/cover/1e9ef340a9b56b96d2d3b4b7d21e84f7/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 583784202
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-11-25', 1, 2, id, '{"izvodjac":"Dara Bubamara","naslov":"Kraj i tačka","alias":[],"deezerId":76953700,"itunesId":853807117,"omot":"https://cdn-images.dzcdn.net/images/cover/39969f9ae6ee3e7e45b3504aaa96e5dc/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 76953700
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-25', 1, 3, id, '{"izvodjac":"Aleksandra Radović","naslov":"Čuvam te","alias":[],"deezerId":724771892,"itunesId":1577968457,"omot":"https://cdn-images.dzcdn.net/images/cover/c5fc18b55056ab0e7eaf24497bff3520/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 724771892
+  select '2026-11-25', 1, 3, id, '{"izvodjac":"Daniel Popović","naslov":"Džuli","alias":[],"deezerId":994777892,"itunesId":381023337,"omot":"https://cdn-images.dzcdn.net/images/cover/daaefcbea471f512871fe4f85e3b2531/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 994777892
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-25', 1, 4, id, '{"izvodjac":"Nikolija","naslov":"Opasna igra","alias":[],"deezerId":3585357171,"itunesId":1578171020,"omot":"https://cdn-images.dzcdn.net/images/cover/f157da565f7decc3d4a773857aef0061/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3585357171
+  select '2026-11-25', 1, 4, id, '{"izvodjac":"Jala Brat & Buba Corelli","naslov":"Mafia","alias":[],"deezerId":2826823872,"itunesId":1869456254,"omot":"https://cdn-images.dzcdn.net/images/cover/8f8ead150449d7d5584b476495cecfd9/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2826823872
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-25', 1, 5, id, '{"izvodjac":"Galija","naslov":"Dodirni me","alias":[],"deezerId":1029768162,"itunesId":1524533589,"omot":"https://cdn-images.dzcdn.net/images/cover/90332e72f902bd26deb0a195ea735fd6/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1029768162
+  select '2026-11-25', 1, 5, id, '{"izvodjac":"Babe","naslov":"Noć bez sna","alias":[],"deezerId":1097594332,"itunesId":676766334,"omot":"https://cdn-images.dzcdn.net/images/cover/95ab8f39e8cf7c9d010c9e247df02893/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1097594332
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-26', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-26', 1, 1, id, '{"izvodjac":"Vesna Zmijanac","naslov":"Idem preko zemlje Srbije","alias":[],"deezerId":1070199542,"itunesId":1530116401,"omot":"https://cdn-images.dzcdn.net/images/cover/e3e1493645800a176ebb64ce25626611/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1070199542
+  select '2026-11-26', 1, 1, id, '{"izvodjac":"Darko Lazić","naslov":"Godinu dana 300 kafana","alias":["Godinu dana trista kafana"],"deezerId":3364966471,"itunesId":1578085998,"omot":"https://cdn-images.dzcdn.net/images/cover/c60e8d6d629589dd4127f975dec3ea9b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3364966471
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-11-26', 1, 2, id, '{"izvodjac":"Sunshine","naslov":"Kokane","alias":[],"deezerId":74220640,"itunesId":1591697553,"omot":"https://cdn-images.dzcdn.net/images/cover/addfca3b309c6ea81ad769b448f00cca/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 74220640
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-26', 1, 3, id, '{"izvodjac":"Ekatarina Velika","naslov":"Par godina za nas","alias":[],"deezerId":2178288577,"itunesId":1676062744,"omot":"https://cdn-images.dzcdn.net/images/cover/c9f573b1c326b7612b65ba29b18b9830/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2178288577
+  select '2026-11-26', 1, 3, id, '{"izvodjac":"Van Gogh","naslov":"Klatno","alias":[],"deezerId":416410242,"itunesId":1295930977,"omot":"https://cdn-images.dzcdn.net/images/cover/61d3ba6e2992d5d906b999483ef4d241/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 416410242
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-26', 1, 4, id, '{"izvodjac":"Zdravko Čolić","naslov":"Jedina","alias":[],"deezerId":2995450631,"itunesId":1768453462,"omot":"https://cdn-images.dzcdn.net/images/cover/6ea8f083fd4774d807baf0eb2eb30db2/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2995450631
+  select '2026-11-26', 1, 4, id, '{"izvodjac":"Bajaga i Instruktori","naslov":"Verujem, ne verujem","alias":[],"deezerId":2619831592,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/876f6e3b5a47da8258356260596a69ab/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2619831592
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-26', 1, 5, id, '{"izvodjac":"Željko Samardžić","naslov":"9000 metara","alias":["Devet hiljada metara"],"deezerId":458468242,"itunesId":1578134286,"omot":"https://cdn-images.dzcdn.net/images/cover/bd90f01cb0edb6a944408d7ab9361916/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 458468242
+  select '2026-11-26', 1, 5, id, '{"izvodjac":"Severina","naslov":"Italiana","alias":[],"deezerId":71437750,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/31e88f73ba6d1ac2c29c8d7842cba3a3/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 71437750
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-27', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-27', 1, 1, id, '{"izvodjac":"Sara Jo","naslov":"Mili, mili","alias":[],"deezerId":1458276022,"itunesId":1485997194,"omot":"https://cdn-images.dzcdn.net/images/cover/5c32fe082b74da88e2f70874158a7434/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1458276022
+  select '2026-11-27', 1, 1, id, '{"izvodjac":"Colonia","naslov":"Plamen od ljubavi","alias":[],"deezerId":3524465801,"itunesId":380344263,"omot":"https://cdn-images.dzcdn.net/images/cover/b4ccb8ec7fa8f2febc8ef4e1b1793065/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3524465801
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-27', 1, 2, id, '{"izvodjac":"Šaban Šaulić","naslov":"Sneg je opet, Snežana","alias":[],"deezerId":3293842061,"itunesId":1833465638,"omot":"https://cdn-images.dzcdn.net/images/cover/5cf4e70b4164ea2a5890e28234dec13a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3293842061
+  select '2026-11-27', 1, 2, id, '{"izvodjac":"Aleksandra Prijović","naslov":"Dam dam dam","alias":[],"deezerId":2342297565,"itunesId":1694278577,"omot":"https://cdn-images.dzcdn.net/images/cover/9c3baeb9c3252c493bea73402bc8ba9b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2342297565
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-11-27', 1, 3, id, '{"izvodjac":"Teodora","naslov":"Voli me, voli me","alias":[],"deezerId":1337899422,"itunesId":1578179364,"omot":"https://cdn-images.dzcdn.net/images/cover/53e871ea0321a0b3806556170a0b3209/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 1337899422
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-27', 1, 4, id, '{"izvodjac":"Neverne Bebe","naslov":"Dvoje","alias":[],"deezerId":1246526562,"itunesId":1553971637,"omot":"https://cdn-images.dzcdn.net/images/cover/7efd9db31e140595b23ee660d7f90dbf/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1246526562
+  select '2026-11-27', 1, 4, id, '{"izvodjac":"Bajaga i Instruktori","naslov":"Tišina","alias":[],"deezerId":3265454081,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/773908c4ad7bd859a9fd036880c16a28/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3265454081
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-27', 1, 5, id, '{"izvodjac":"Džej Ramadanovski","naslov":"Upalite za mnom sveće","alias":["Upalite za mnom svijeće"],"deezerId":3538539621,"itunesId":1787133566,"omot":"https://cdn-images.dzcdn.net/images/cover/6eaadab518195ebd3b64a865049cbbbe/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3538539621
+  select '2026-11-27', 1, 5, id, '{"izvodjac":"Zdravko Čolić","naslov":"Ti si mi u krvi","alias":[],"deezerId":2617677792,"itunesId":1768453720,"omot":"https://cdn-images.dzcdn.net/images/cover/bf26d15f675db78c90d435621f94d88b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2617677792
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-28', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-28', 1, 1, id, '{"izvodjac":"Mile Kitić","naslov":"Šampanjac","alias":[],"deezerId":458533222,"itunesId":1578107934,"omot":"https://cdn-images.dzcdn.net/images/cover/082ecbf653a76b56346640f914ab5d20/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 458533222
+  select '2026-11-28', 1, 1, id, '{"izvodjac":"Šaban Šaulić","naslov":"Dajte mi utjehu","alias":["Dajte mi utehu"],"deezerId":2160334507,"itunesId":291506273,"omot":"https://cdn-images.dzcdn.net/images/cover/fa61c937eca4bb4360b237e4f071b7d9/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2160334507
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-28', 1, 2, id, '{"izvodjac":"Piloti","naslov":"Ne veruj u idole","alias":[],"deezerId":3020679851,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/580fc7b2b1ba75ed6afd50b21390245b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3020679851
+  select '2026-11-28', 1, 2, id, '{"izvodjac":"Ana Bekuta","naslov":"Kralj ponoći","alias":[],"deezerId":473686002,"itunesId":1618909883,"omot":"https://cdn-images.dzcdn.net/images/cover/1197780efc4c44c6729adace6872d7eb/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 473686002
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-28', 1, 3, id, '{"izvodjac":"Oliver Mandić","naslov":"Poludeću","alias":[],"deezerId":669667832,"itunesId":1578033120,"omot":"https://cdn-images.dzcdn.net/images/cover/98507abe8cc3f9c8128a23af891a1790/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 669667832
+  select '2026-11-28', 1, 3, id, '{"izvodjac":"Jelena Tomašević","naslov":"Oro","alias":[],"deezerId":548422182,"itunesId":1578004843,"omot":"https://cdn-images.dzcdn.net/images/cover/cef8b42cbd09b82220ea7aa687ff3d10/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 548422182
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-28', 1, 4, id, '{"izvodjac":"YU Grupa","naslov":"Crni leptir","alias":[],"deezerId":93131256,"itunesId":1768883648,"omot":"https://cdn-images.dzcdn.net/images/cover/da08dde9b45fcf2e04473f0329dd68a9/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 93131256
+  select '2026-11-28', 1, 4, id, '{"izvodjac":"Partibrejkers","naslov":"Kreni prema meni","alias":[],"deezerId":3059311951,"itunesId":593942049,"omot":"https://cdn-images.dzcdn.net/images/cover/f435aa3327ce69c3eef695aff519dd7f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3059311951
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-28', 1, 5, id, '{"izvodjac":"Rasta","naslov":"Kavasaki","alias":[],"deezerId":2874736532,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/7c21ac45103f62c74a981e9860f0a2f3/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2874736532
+  select '2026-11-28', 1, 5, id, '{"izvodjac":"Mimi Mercedez","naslov":"Kleopatra","alias":[],"deezerId":3304073171,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/7baea02c4635231c7e7abdf66bd1be9f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3304073171
   on conflict (quiz_date, segment, position) do nothing;
 
 -- Artikli (products.json). Postojeći se osvežavaju po barkodu.
@@ -1500,134 +1501,134 @@ insert into public.products (barcode, name, size, image_url, price_avg, price_mi
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-15', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 1, id, '{"naziv":"Zlatiborac čvarci","kolicina":"150 g","slika":"/artikli/8606106822403.webp","cena":470,"min":436.99,"max":499.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606106822403'
+  select '2026-11-15', 2, 1, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"0,5 l","slika":"/artikli/8600037000312.webp","cena":55,"min":49.99,"max":57.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600037000312'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 2, id, '{"naziv":"Neoplanta Pipi pileća viršla","kolicina":"205 g","slika":"/artikli/8600763655244.webp","cena":194,"min":182.99,"max":209.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600763655244'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 3, id, '{"naziv":"Štark Piškote","kolicina":"105 g","slika":"/artikli/8600939130841.webp","cena":107,"min":96.99,"max":122.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939130841'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 4, id, '{"naziv":"Plazma keks","kolicina":"400 g","slika":"/artikli/8600043039788.webp","cena":388,"min":369.99,"max":401.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-15', 2, 2, id, '{"naziv":"Plazma keks","kolicina":"400 g","slika":"/artikli/8600043039788.webp","cena":388,"min":369.99,"max":401.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600043039788'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-15', 2, 5, id, '{"naziv":"Smoki","kolicina":"250 g","slika":"/artikli/8600939507025.webp","cena":185,"min":171.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939507025'
+  select '2026-11-15', 2, 3, id, '{"naziv":"Moja Kravica kisela pavlaka 20%","kolicina":"400 g","slika":"/artikli/8601500112419.webp","cena":187,"min":179.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500112419'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-15', 2, 4, id, '{"naziv":"Frikom pomfrit","kolicina":"1 kg","slika":"/artikli/8606006081252.webp","cena":389,"min":382.99,"max":399.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006081252'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-15', 2, 5, id, '{"naziv":"Chipsy Domaćinski kajmak","kolicina":"145 g","slika":"/artikli/8606033742416.webp","cena":195,"min":184.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606033742416'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-16', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 1, id, '{"naziv":"Carnex mesni narezak","kolicina":"150 g","slika":"/artikli/8600012700183.webp","cena":213,"min":174.99,"max":229.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600012700183'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 2, id, '{"naziv":"Frikom Čoko Moko","kolicina":"52 g","slika":"/artikli/8606006080095.webp","cena":80,"min":79.99,"max":81.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606006080095'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 3, id, '{"naziv":"Štark Menaž čokolada za kuvanje","kolicina":"100 g","slika":"/artikli/8600939303115.webp","cena":202,"min":192.99,"max":211.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939303115'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 4, id, '{"naziv":"Dijamant majonez","kolicina":"285 ml","slika":"/artikli/8600498176359.webp","cena":192,"min":189.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-16', 2, 1, id, '{"naziv":"Dijamant majonez","kolicina":"285 ml","slika":"/artikli/8600498176359.webp","cena":192,"min":189.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600498176359'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-16', 2, 5, id, '{"naziv":"Ella sveži sir","kolicina":"400 g","slika":"/artikli/8601500126492.webp","cena":282,"min":262.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-16', 2, 2, id, '{"naziv":"Štark Bananica 5 kom","kolicina":"125 g","slika":"/artikli/8600939365472.webp","cena":139,"min":134.99,"max":141.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939365472'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-16', 2, 3, id, '{"naziv":"Ella sveži sir","kolicina":"400 g","slika":"/artikli/8601500126492.webp","cena":282,"min":262.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8601500126492'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-16', 2, 4, id, '{"naziv":"Plazma od srca lešnik","kolicina":"100 g","slika":"/artikli/8600043036794.webp","cena":197,"min":184.99,"max":205.7,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043036794'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-16', 2, 5, id, '{"naziv":"Smoki","kolicina":"80 g","slika":"/artikli/8600939508190.webp","cena":74,"min":69.99,"max":76.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939508190'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-17', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 1, id, '{"naziv":"Neoplanta pizza šunka","kolicina":"330 g","slika":"/artikli/8600763036777.webp","cena":349,"min":284.99,"max":379.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600763036777'
+  select '2026-11-17', 2, 1, id, '{"naziv":"Frikom Macho sladoled","kolicina":"75 ml","slika":"/artikli/8606006080064.webp","cena":150,"min":148.99,"max":153.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080064'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 2, id, '{"naziv":"Plazma Kocka napolitanke","kolicina":"135 g","slika":"/artikli/8600043028263.webp","cena":206,"min":183.99,"max":219.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043028263'
+  select '2026-11-17', 2, 2, id, '{"naziv":"Smoki","kolicina":"150 g","slika":"/artikli/8600939506936.webp","cena":129,"min":127.99,"max":129.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939506936'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 3, id, '{"naziv":"Knjaz Miloš staklo","kolicina":"0,25 l","slika":"/artikli/8600037008011.webp","cena":83,"min":77.99,"max":89.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037008011'
+  select '2026-11-17', 2, 3, id, '{"naziv":"Carnex sarma","kolicina":"400 g","slika":"/artikli/8600012700336.webp","cena":496,"min":469.99,"max":521.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600012700336'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 4, id, '{"naziv":"Carnex jetrena pašteta","kolicina":"75 g","slika":"/artikli/86002783.webp","cena":89,"min":79.99,"max":99.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '86002783'
+  select '2026-11-17', 2, 4, id, '{"naziv":"Doncafe Moment kafa","kolicina":"200 g","slika":"/artikli/8600101521439.webp","cena":471,"min":449.99,"max":483.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600101521439'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-17', 2, 5, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"200 g","slika":"/artikli/8600939313701.webp","cena":382,"min":364.99,"max":389.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939313701'
+  select '2026-11-17', 2, 5, id, '{"naziv":"Pardon štapići sa kikirikijem","kolicina":"210 g","slika":"/artikli/8606017378822.webp","cena":159,"min":137.99,"max":169.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606017378822'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-18', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 1, id, '{"naziv":"Zlatiborac kulen slajs","kolicina":"100 g","slika":"/artikli/8606100145775.webp","cena":271,"min":207.49,"max":309.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-18', 2, 1, id, '{"naziv":"Pionir mix Negro i Karamela lešnik","kolicina":"250 g","slika":"/artikli/8602300233229.webp","cena":264,"min":252.99,"max":286.16,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8602300233229'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-18', 2, 2, id, '{"naziv":"Zaječarsko pivo limenka","kolicina":"0,5 l","slika":"/artikli/8600649000427.webp","cena":96,"min":89.99,"max":104.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600649000427'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-18', 2, 3, id, '{"naziv":"Moja Kravica krem sir","kolicina":"200 g","slika":"/artikli/8601500119609.webp","cena":194,"min":179.99,"max":201.49,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500119609'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-18', 2, 4, id, '{"naziv":"Zlatiborac kulen slajs","kolicina":"100 g","slika":"/artikli/8606100145775.webp","cena":271,"min":207.49,"max":309.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8606100145775'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 2, id, '{"naziv":"Yuhor Levački štapići","kolicina":"200 g","slika":"/artikli/8600084005612.webp","cena":594,"min":557.99,"max":639.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-18', 2, 5, id, '{"naziv":"Yuhor Levački štapići","kolicina":"200 g","slika":"/artikli/8600084005612.webp","cena":594,"min":557.99,"max":639.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600084005612'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 3, id, '{"naziv":"Frikom Quattro Plazma","kolicina":"1,5 l","slika":"/artikli/8606029612204.webp","cena":651,"min":599.99,"max":699.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606029612204'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 4, id, '{"naziv":"Grand 3u1 Najlepše želje","kolicina":"18 g","slika":"/artikli/8606018312276.webp","cena":33,"min":28.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606018312276'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-18', 2, 5, id, '{"naziv":"Pionir Medeno srce","kolicina":"150 g","slika":"/artikli/8602300236022.webp","cena":146,"min":139.99,"max":153.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8602300236022'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-19', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 1, id, '{"naziv":"Pardon perece","kolicina":"95 g","slika":"/artikli/8606017370048.webp","cena":81,"min":74.99,"max":88.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606017370048'
+  select '2026-11-19', 2, 1, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"0,5 l","slika":"/artikli/8600037000312.webp","cena":55,"min":49.99,"max":57.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600037000312'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-11-19', 2, 2, id, '{"naziv":"Pionir zeleni mentol bombone","kolicina":"100 g","slika":"/artikli/8602300200245.webp","cena":67,"min":59.99,"max":74.72,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8602300200245'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 3, id, '{"naziv":"Dijamant suncokretovo ulje","kolicina":"1 l","slika":"/artikli/8600498170029.webp","cena":202,"min":195.66,"max":214.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498170029'
+  select '2026-11-19', 2, 3, id, '{"naziv":"Dijamant majonez","kolicina":"285 ml","slika":"/artikli/8600498176359.webp","cena":192,"min":189.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600498176359'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 4, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"0,5 l","slika":"/artikli/8600037000312.webp","cena":55,"min":49.99,"max":57.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037000312'
+  select '2026-11-19', 2, 4, id, '{"naziv":"Plazma keks","kolicina":"150 g","slika":"/artikli/8600043000016.webp","cena":158,"min":152.99,"max":159.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043000016'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-19', 2, 5, id, '{"naziv":"Dijamant stoni margarin","kolicina":"250 g","slika":"/artikli/8600498172115.webp","cena":115,"min":104.99,"max":124.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600498172115'
+  select '2026-11-19', 2, 5, id, '{"naziv":"Eurocrem Euro blok","kolicina":"100 g","slika":"/artikli/8601900502100.webp","cena":121,"min":99.99,"max":137.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601900502100'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-20', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 1, id, '{"naziv":"Jaffa keks","kolicina":"300 g","slika":"/artikli/8600114000211.webp","cena":252,"min":249.69,"max":258.32,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114000211'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 2, id, '{"naziv":"Grand Gold kafa","kolicina":"500 g","slika":"/artikli/8600103056250.webp","cena":1104,"min":999.99,"max":1159.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600103056250'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 3, id, '{"naziv":"Frikom Sneško","kolicina":"46 g","slika":"/artikli/8606006080040.webp","cena":76,"min":65.99,"max":80.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-20', 2, 1, id, '{"naziv":"Frikom Sneško","kolicina":"46 g","slika":"/artikli/8606006080040.webp","cena":76,"min":65.99,"max":80.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8606006080040'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 4, id, '{"naziv":"Plazma keks","kolicina":"150 g","slika":"/artikli/8600043000016.webp","cena":158,"min":152.99,"max":159.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043000016'
+  select '2026-11-20', 2, 2, id, '{"naziv":"Plazma Kocka napolitanke","kolicina":"135 g","slika":"/artikli/8600043028263.webp","cena":206,"min":183.99,"max":219.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043028263'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-20', 2, 5, id, '{"naziv":"Zaječarsko pivo PET","kolicina":"2 l","slika":"/artikli/8606105157360.webp","cena":305,"min":279.99,"max":316.66,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-20', 2, 3, id, '{"naziv":"Zaječarsko pivo PET","kolicina":"2 l","slika":"/artikli/8606105157360.webp","cena":305,"min":279.99,"max":316.66,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8606105157360'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-20', 2, 4, id, '{"naziv":"Jaffa keks","kolicina":"300 g","slika":"/artikli/8600114000211.webp","cena":252,"min":249.69,"max":258.32,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114000211'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-20', 2, 5, id, '{"naziv":"Plazma keks","kolicina":"300 g","slika":"/artikli/8600043000023.webp","cena":289,"min":279.99,"max":294.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043000023'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-21', 'published', now())
   on conflict (quiz_date) do nothing;
@@ -1658,82 +1659,82 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
   from public.products where barcode = '86006675'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 2, id, '{"naziv":"Plazma od srca lešnik","kolicina":"100 g","slika":"/artikli/8600043036794.webp","cena":197,"min":184.99,"max":205.7,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043036794'
+  select '2026-11-22', 2, 2, id, '{"naziv":"Ella sveži sir","kolicina":"400 g","slika":"/artikli/8601500126492.webp","cena":282,"min":262.99,"max":299.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8601500126492'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 3, id, '{"naziv":"Frikom Kapri sladoled","kolicina":"70 ml","slika":"/artikli/8606006080088.webp","cena":99,"min":89.99,"max":102.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-22', 2, 3, id, '{"naziv":"Štark Menaž čokolada za kuvanje","kolicina":"100 g","slika":"/artikli/8600939303115.webp","cena":202,"min":192.99,"max":211.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939303115'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-22', 2, 4, id, '{"naziv":"Frikom Kapri sladoled","kolicina":"70 ml","slika":"/artikli/8606006080088.webp","cena":99,"min":89.99,"max":102.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8606006080088'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 4, id, '{"naziv":"Bonito tamno pržena kafa","kolicina":"200 g","slika":"/artikli/8606106464078.webp","cena":457,"min":429.99,"max":507.68,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606106464078'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-22', 2, 5, id, '{"naziv":"Carnex delikates viršla","kolicina":"205 g","slika":"/artikli/8600012502510.webp","cena":211,"min":196.99,"max":229.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600012502510'
+  select '2026-11-22', 2, 5, id, '{"naziv":"Plazma od srca lešnik","kolicina":"100 g","slika":"/artikli/8600043036794.webp","cena":197,"min":184.99,"max":205.7,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043036794'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-23', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 1, id, '{"naziv":"Eurocrem činija","kolicina":"500 g","slika":"/artikli/8601900503411.webp","cena":480,"min":399.99,"max":543.32,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601900503411'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 2, id, '{"naziv":"Moja Kravica jogurt 2,8%","kolicina":"1,75 kg","slika":"/artikli/8601500138495.webp","cena":233,"min":224.99,"max":240.09,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-23', 2, 1, id, '{"naziv":"Moja Kravica jogurt 2,8%","kolicina":"1,75 kg","slika":"/artikli/8601500138495.webp","cena":233,"min":224.99,"max":240.09,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8601500138495'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 3, id, '{"naziv":"Jaffa keks","kolicina":"150 g","slika":"/artikli/8600114000013.webp","cena":144,"min":139.99,"max":146.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114000013'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 4, id, '{"naziv":"Štark Čajni keksići","kolicina":"800 g","slika":"/artikli/8600939841204.webp","cena":322,"min":309.99,"max":349.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-23', 2, 2, id, '{"naziv":"Štark Čajni keksići","kolicina":"800 g","slika":"/artikli/8600939841204.webp","cena":322,"min":309.99,"max":349.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600939841204'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-23', 2, 5, id, '{"naziv":"Aqua Heba gazirana","kolicina":"1,5 l","slika":"/artikli/8606002170066.webp","cena":65,"min":61.99,"max":69.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606002170066'
+  select '2026-11-23', 2, 3, id, '{"naziv":"Bonito tamno pržena kafa","kolicina":"200 g","slika":"/artikli/8606106464078.webp","cena":457,"min":429.99,"max":507.68,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606106464078'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-23', 2, 4, id, '{"naziv":"Grand 3u1 Najlepše želje","kolicina":"18 g","slika":"/artikli/8606018312276.webp","cena":33,"min":28.99,"max":39.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606018312276'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-23', 2, 5, id, '{"naziv":"Jaffa keks","kolicina":"150 g","slika":"/artikli/8600114000013.webp","cena":144,"min":139.99,"max":146.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114000013'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-24', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 1, id, '{"naziv":"Pardon štapići sa kikirikijem","kolicina":"210 g","slika":"/artikli/8606017378822.webp","cena":159,"min":137.99,"max":169.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606017378822'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 2, id, '{"naziv":"Smoki","kolicina":"80 g","slika":"/artikli/8600939508190.webp","cena":74,"min":69.99,"max":76.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939508190'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 3, id, '{"naziv":"Moja Kravica krem sir","kolicina":"200 g","slika":"/artikli/8601500119609.webp","cena":194,"min":179.99,"max":201.49,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-24', 2, 1, id, '{"naziv":"Moja Kravica krem sir","kolicina":"200 g","slika":"/artikli/8601500119609.webp","cena":194,"min":179.99,"max":201.49,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8601500119609'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 4, id, '{"naziv":"Zaječarsko pivo limenka","kolicina":"0,5 l","slika":"/artikli/8600649000427.webp","cena":96,"min":89.99,"max":104.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600649000427'
+  select '2026-11-24', 2, 2, id, '{"naziv":"Jaffa napolitanke šlag i čokolada","kolicina":"187 g","slika":"/artikli/8600114006626.webp","cena":122,"min":109.99,"max":139.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600114006626'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-24', 2, 5, id, '{"naziv":"Jaffa napolitanke šlag i čokolada","kolicina":"187 g","slika":"/artikli/8600114006626.webp","cena":122,"min":109.99,"max":139.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600114006626'
+  select '2026-11-24', 2, 3, id, '{"naziv":"Pionir zeleni mentol bombone","kolicina":"100 g","slika":"/artikli/8602300200245.webp","cena":67,"min":59.99,"max":74.72,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8602300200245'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-24', 2, 4, id, '{"naziv":"Carnex mesni narezak","kolicina":"150 g","slika":"/artikli/8600012700183.webp","cena":213,"min":174.99,"max":229.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600012700183'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-24', 2, 5, id, '{"naziv":"Zaječarsko pivo limenka","kolicina":"0,5 l","slika":"/artikli/8600649000427.webp","cena":96,"min":89.99,"max":104.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600649000427'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-25', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 1, id, '{"naziv":"Carnex sarma","kolicina":"400 g","slika":"/artikli/8600012700336.webp","cena":496,"min":469.99,"max":521.66,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600012700336'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 2, id, '{"naziv":"Plazma Rolsi lešnik","kolicina":"130 g","slika":"/artikli/8600043041484.webp","cena":186,"min":170.99,"max":212.49,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600043041484'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 3, id, '{"naziv":"Eurocrem Euro blok","kolicina":"50 g","slika":"/artikli/8601900502032.webp","cena":67,"min":59.99,"max":74.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-25', 2, 1, id, '{"naziv":"Eurocrem Euro blok","kolicina":"50 g","slika":"/artikli/8601900502032.webp","cena":67,"min":59.99,"max":74.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8601900502032'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-25', 2, 4, id, '{"naziv":"Chipsy Domaćinski kajmak","kolicina":"145 g","slika":"/artikli/8606033742416.webp","cena":195,"min":184.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606033742416'
+  select '2026-11-25', 2, 2, id, '{"naziv":"Frikom Quattro Plazma","kolicina":"1,5 l","slika":"/artikli/8606029612204.webp","cena":651,"min":599.99,"max":699.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606029612204'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-25', 2, 3, id, '{"naziv":"Plazma Rolsi lešnik","kolicina":"130 g","slika":"/artikli/8600043041484.webp","cena":186,"min":170.99,"max":212.49,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043041484'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-25', 2, 4, id, '{"naziv":"Zlatiborac kulen slajs","kolicina":"100 g","slika":"/artikli/8606100145775.webp","cena":271,"min":207.49,"max":309.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606100145775'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-11-25', 2, 5, id, '{"naziv":"Najlepše želje crna sa bananicom","kolicina":"184 g","slika":"/artikli/8600939334171.webp","cena":367,"min":349.99,"max":389.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
@@ -1742,30 +1743,30 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-26', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 1, id, '{"naziv":"Eurocrem Euro blok","kolicina":"100 g","slika":"/artikli/8601900502100.webp","cena":121,"min":99.99,"max":137.99,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8601900502100'
+  select '2026-11-26', 2, 1, id, '{"naziv":"Frikom Macho sladoled","kolicina":"75 ml","slika":"/artikli/8606006080064.webp","cena":150,"min":148.99,"max":153.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8606006080064'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-11-26', 2, 2, id, '{"naziv":"Plazma keks","kolicina":"300 g","slika":"/artikli/8600043000023.webp","cena":289,"min":279.99,"max":294.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600043000023'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 3, id, '{"naziv":"Frikom Macho sladoled","kolicina":"75 ml","slika":"/artikli/8606006080064.webp","cena":150,"min":148.99,"max":153.99,"najjeftinije":"Maxi","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8606006080064'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 4, id, '{"naziv":"Dijamant ajvar blagi","kolicina":"680 g","slika":"/artikli/8600498151479.webp","cena":470,"min":449.55,"max":514.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-26', 2, 3, id, '{"naziv":"Dijamant ajvar blagi","kolicina":"680 g","slika":"/artikli/8600498151479.webp","cena":470,"min":449.55,"max":514.99,"najjeftinije":"Idea","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600498151479'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-26', 2, 5, id, '{"naziv":"Dijamant kečap blagi","kolicina":"500 g","slika":"/artikli/8600498150083.webp","cena":161,"min":147.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  select '2026-11-26', 2, 4, id, '{"naziv":"Dijamant kečap blagi","kolicina":"500 g","slika":"/artikli/8600498150083.webp","cena":161,"min":147.99,"max":179.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
   from public.products where barcode = '8600498150083'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
+  select '2026-11-26', 2, 5, id, '{"naziv":"Smoki","kolicina":"250 g","slika":"/artikli/8600939507025.webp","cena":185,"min":171.99,"max":199.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939507025'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-27', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-27', 2, 1, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"90 g","slika":"/artikli/8600939313602.webp","cena":193,"min":189.99,"max":198.32,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939313602'
+  select '2026-11-27', 2, 1, id, '{"naziv":"Carnex jetrena pašteta","kolicina":"75 g","slika":"/artikli/86002783.webp","cena":89,"min":79.99,"max":99.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '86002783'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-11-27', 2, 2, id, '{"naziv":"Jelen pivo flaša","kolicina":"0,5 l","slika":"/artikli/86027618.webp","cena":91,"min":89.99,"max":94.99,"najjeftinije":"Gomex","datumCenovnika":"2026-11-13"}'::jsonb
@@ -1798,12 +1799,12 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
   from public.products where barcode = '8602300233229'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-28', 2, 4, id, '{"naziv":"Knjaz Miloš gazirana voda","kolicina":"1,75 l","slika":"/artikli/8600037005133.webp","cena":65,"min":62.99,"max":65.59,"najjeftinije":"Lidl","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600037005133'
+  select '2026-11-28', 2, 4, id, '{"naziv":"Plazma keks","kolicina":"400 g","slika":"/artikli/8600043039788.webp","cena":388,"min":369.99,"max":401.66,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600043039788'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
-  select '2026-11-28', 2, 5, id, '{"naziv":"Štark Bananica 5 kom","kolicina":"125 g","slika":"/artikli/8600939365472.webp","cena":139,"min":134.99,"max":141.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-13"}'::jsonb
-  from public.products where barcode = '8600939365472'
+  select '2026-11-28', 2, 5, id, '{"naziv":"Najlepše želje mlečna čokolada","kolicina":"90 g","slika":"/artikli/8600939313602.webp","cena":193,"min":189.99,"max":198.32,"najjeftinije":"Aman","datumCenovnika":"2026-11-13"}'::jsonb
+  from public.products where barcode = '8600939313602'
   on conflict (quiz_date, segment, position) do nothing;
 
 -- Isto što i migracija 0002: ponovljeno ovde da seed radi i ako ona nije puštena.
@@ -1811,238 +1812,238 @@ create unique index if not exists trend_pairs_par_idx on public.trend_pairs (ter
 
 -- Dueli pojmova (trends.json). Postojeći se osvežavaju.
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Srpski jezik', 'Krompir', 25, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Srpski jezik', 'Nikola Jokić', 46, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Vino', 'Krompir', 100, 74, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Kopaonik', 'Nikola Jokić', 100, 55, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Vino', 'Nikola Jokić', 100, 40, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Kopaonik', 'BMW', 33, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Vino', 'Horoskop', 55, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Paradajz', 'BMW', 29, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Košarka', 'Horoskop', 100, 67, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Subotica', 'BMW', 100, 67, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
   values ('Baklava', 'Burek', 77, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Viber', 'Burek', 100, 34, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Šljiva', 'Burek', 100, 34, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Viber', 'Musaka', 100, 29, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Šljiva', 'WhatsApp', 55, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Viber', 'BMW', 23, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Čaj', 'WhatsApp', 100, 62, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('iPhone', 'BMW', 100, 64, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Čaj', 'Matematika', 100, 26, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Turska', 'Šljiva', 100, 32, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Gibanica', 'Ribarska Banja', 100, 77, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Turska', 'KupujemProdajem', 22, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Gibanica', 'Orhideja', 69, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Novi Sad', 'KupujemProdajem', 100, 47, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Bogdan Bogdanović', 'Orhideja', 70, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Novi Sad', 'Fudbal', 100, 36, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Grožđe', 'Orhideja', 100, 55, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Novi Sad', 'Facebook', 100, 50, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Grožđe', 'Halo oglasi', 32, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Stara planina', 'Grožđe', 55, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Stara planina', 'Kupus', 28, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Palačinke', 'Grožđe', 100, 52, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Mercedes', 'Kupus', 100, 34, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Palačinke', 'Frižider', 45, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Mercedes', 'Rakija', 100, 55, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Škoda', 'Frižider', 67, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Mercedes', 'Polovni automobili', 32, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Hrvatska', 'Frižider', 100, 42, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Facebook', 'Polovni automobili', 100, 53, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Aleksandar Mitrović', 'Božur', 30, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Punjene paprike', 'Baklava', 53, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Fruška gora', 'Božur', 100, 30, '14.11.2025 – 14.11.2026', '2026-11-14')
-  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
-insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Fruška gora', 'Klima', 24, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
-  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
-insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Sokobanja', 'Klima', 57, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
-  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
-insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Čačak', 'Klima', 100, 34, '14.11.2025 – 14.11.2026', '2026-11-14')
-  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
-insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Punjene paprike', 'Tulumbe', 100, 33, '14.11.2025 – 14.11.2026', '2026-11-14')
-  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
-insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Punjene paprike', 'Ćevapi', 44, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
-  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
-insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Matematika', 'Ćevapi', 100, 42, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Matematika', 'Baklava', 100, 35, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
   values ('Matematika', 'Usisivač', 38, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Zlatibor', 'Usisivač', 100, 48, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Škoda', 'Usisivač', 69, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Mercedes', 'Huawei', 100, 31, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Xiaomi', 'Usisivač', 100, 68, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Mercedes', 'Kragujevac', 31, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Prolom Banja', 'Gulaš', 26, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Vremenska prognoza', 'Kragujevac', 100, 30, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Dušan Tadić', 'Gulaš', 20, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Vremenska prognoza', 'Instagram', 100, 33, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Ceca', 'Gulaš', 100, 45, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Vremenska prognoza', 'Polovni automobili', 100, 29, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Ceca', 'Paradajz', 59, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Krastavac', 'Prolom Banja', 100, 23, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Mercedes', 'Paradajz', 100, 49, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Krastavac', 'Ceca', 52, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Vanilice', 'Sarma', 52, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Halo oglasi', 'Ceca', 100, 51, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Istorija', 'Sarma', 100, 34, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Halo oglasi', 'Xiaomi', 52, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Istorija', 'Zaječar', 37, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Crna Gora', 'Xiaomi', 100, 71, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Hrvatska', 'Zaječar', 100, 32, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Aca Lukas', 'Egipat', 25, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Hrvatska', 'Instagram', 53, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Loto', 'Egipat', 100, 47, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Ljubičica', 'Geografija', 30, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Loto', 'Kupus', 100, 34, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Palačinke', 'Geografija', 100, 22, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Loto', 'Subotica', 40, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Palačinke', 'Opel', 42, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Facebook', 'Subotica', 100, 42, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Košarka', 'Opel', 100, 40, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Lepa Brena', 'Paprika', 43, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Košarka', 'Crna Gora', 100, 74, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Zaječar', 'Paprika', 100, 49, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Podvarak', 'Aleksandar Mitrović', 100, 39, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Zaječar', 'Samsung', 33, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Podvarak', 'Božur', 75, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('KupujemProdajem', 'Samsung', 100, 32, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Burek', 'Božur', 100, 43, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('KupujemProdajem', 'Vremenska prognoza', 52, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Burek', 'Huawei', 42, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Banja Koviljača', 'Kurs evra', 28, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Vaterpolo', 'Huawei', 100, 61, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('TikTok', 'Kurs evra', 100, 25, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Viber', 'Nokia', 100, 30, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('TikTok', 'Grčka', 78, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Viber', 'Klima', 49, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Opel', 'Grčka', 43, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Grčka', 'Klima', 100, 41, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Fudbal', 'Grčka', 100, 45, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Grčka', 'Polovni automobili', 61, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Zdravko Čolić', 'Orhideja', 100, 59, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Tenis', 'Polovni automobili', 36, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Zdravko Čolić', 'Lubenica', 100, 69, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Tulumbe', 'Lala', 26, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Zdravko Čolić', 'Odbojka', 28, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Lubenica', 'Lala', 100, 61, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Vrnjačka Banja', 'Odbojka', 100, 75, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Lubenica', 'Krastavac', 76, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Vrnjačka Banja', 'Audi', 58, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Divčibare', 'Krastavac', 100, 46, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Čaj', 'Limundo', 100, 30, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Divčibare', 'Pasulj', 100, 44, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Čaj', 'Horoskop', 80, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Punjene paprike', 'Stara planina', 55, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Paradajz', 'Horoskop', 35, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Limundo', 'Stara planina', 100, 29, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Čačak', 'Horoskop', 100, 61, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Limundo', 'TikTok', 23, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Čačak', 'Instagram', 65, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('iPhone', 'TikTok', 100, 57, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Dušan Vlahović', 'Istorija', 58, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('iPhone', 'Vremenska prognoza', 25, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Ribarska Banja', 'Istorija', 24, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Pivo', 'Sokobanja', 100, 77, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Veš mašina', 'Istorija', 100, 36, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Pivo', 'Horoskop', 41, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Veš mašina', 'Kafa', 52, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Halo oglasi', 'Horoskop', 41, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
-  values ('Zlatibor', 'Kafa', 100, 77, '14.11.2025 – 14.11.2026', '2026-11-14')
+  values ('Facebook', 'Horoskop', 100, 24, '14.11.2025 – 14.11.2026', '2026-11-14')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Facebook', 'Novi Sad', 50, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Dušan Vlahović', 'Veš mašina', 20, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vrnjačka Banja', 'Veš mašina', 100, 78, '14.11.2025 – 14.11.2026', '2026-11-14')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Vrnjačka Banja', 'Turska', 66, 100, '14.11.2025 – 14.11.2026', '2026-11-14')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Samsung', 'Turska', 100, 66, '14.11.2025 – 14.11.2026', '2026-11-14')
+  on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
+insert into public.trend_pairs (term_a, term_b, index_a, index_b, period, fetched_on)
+  values ('Samsung', 'Vino', 100, 43, '14.11.2025 – 14.11.2026', '2026-11-14')
   on conflict (term_a, term_b, period) do update set index_a = excluded.index_a, index_b = excluded.index_b, fetched_on = excluded.fetched_on;
 
 -- Dnevni kviz: segment 3 (Šta se više gugla). Pobednik duela ostaje i u sledećem.
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-15', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-15', 3, 1, id, '{"a":"Srpski jezik","b":"Krompir","indeksA":25,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Srpski jezik' and term_b = 'Krompir' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-15', 3, 1, id, '{"a":"Srpski jezik","b":"Nikola Jokić","indeksA":46,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Srpski jezik' and term_b = 'Nikola Jokić' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-15', 3, 2, id, '{"a":"Vino","b":"Krompir","indeksA":100,"indeksB":74,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Vino' and term_b = 'Krompir' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-15', 3, 2, id, '{"a":"Kopaonik","b":"Nikola Jokić","indeksA":100,"indeksB":55,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Kopaonik' and term_b = 'Nikola Jokić' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-15', 3, 3, id, '{"a":"Vino","b":"Nikola Jokić","indeksA":100,"indeksB":40,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Vino' and term_b = 'Nikola Jokić' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-15', 3, 3, id, '{"a":"Kopaonik","b":"BMW","indeksA":33,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Kopaonik' and term_b = 'BMW' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-15', 3, 4, id, '{"a":"Vino","b":"Horoskop","indeksA":55,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Vino' and term_b = 'Horoskop' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-15', 3, 4, id, '{"a":"Paradajz","b":"BMW","indeksA":29,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Paradajz' and term_b = 'BMW' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-15', 3, 5, id, '{"a":"Košarka","b":"Horoskop","indeksA":100,"indeksB":67,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Košarka' and term_b = 'Horoskop' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-15', 3, 5, id, '{"a":"Subotica","b":"BMW","indeksA":100,"indeksB":67,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Subotica' and term_b = 'BMW' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-16', 'published', now())
   on conflict (quiz_date) do nothing;
@@ -2051,284 +2052,284 @@ insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id
   from public.trend_pairs where term_a = 'Baklava' and term_b = 'Burek' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-16', 3, 2, id, '{"a":"Viber","b":"Burek","indeksA":100,"indeksB":34,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Viber' and term_b = 'Burek' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-16', 3, 2, id, '{"a":"Šljiva","b":"Burek","indeksA":100,"indeksB":34,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Šljiva' and term_b = 'Burek' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-16', 3, 3, id, '{"a":"Viber","b":"Musaka","indeksA":100,"indeksB":29,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Viber' and term_b = 'Musaka' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-16', 3, 3, id, '{"a":"Šljiva","b":"WhatsApp","indeksA":55,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Šljiva' and term_b = 'WhatsApp' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-16', 3, 4, id, '{"a":"Viber","b":"BMW","indeksA":23,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Viber' and term_b = 'BMW' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-16', 3, 4, id, '{"a":"Čaj","b":"WhatsApp","indeksA":100,"indeksB":62,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Čaj' and term_b = 'WhatsApp' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-16', 3, 5, id, '{"a":"iPhone","b":"BMW","indeksA":100,"indeksB":64,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'iPhone' and term_b = 'BMW' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-16', 3, 5, id, '{"a":"Čaj","b":"Matematika","indeksA":100,"indeksB":26,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Čaj' and term_b = 'Matematika' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-17', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-17', 3, 1, id, '{"a":"Turska","b":"Šljiva","indeksA":100,"indeksB":32,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Turska' and term_b = 'Šljiva' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-17', 3, 1, id, '{"a":"Gibanica","b":"Ribarska Banja","indeksA":100,"indeksB":77,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Gibanica' and term_b = 'Ribarska Banja' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-17', 3, 2, id, '{"a":"Turska","b":"KupujemProdajem","indeksA":22,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Turska' and term_b = 'KupujemProdajem' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-17', 3, 2, id, '{"a":"Gibanica","b":"Orhideja","indeksA":69,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Gibanica' and term_b = 'Orhideja' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-17', 3, 3, id, '{"a":"Novi Sad","b":"KupujemProdajem","indeksA":100,"indeksB":47,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Novi Sad' and term_b = 'KupujemProdajem' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-17', 3, 3, id, '{"a":"Bogdan Bogdanović","b":"Orhideja","indeksA":70,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Bogdan Bogdanović' and term_b = 'Orhideja' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-17', 3, 4, id, '{"a":"Novi Sad","b":"Fudbal","indeksA":100,"indeksB":36,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Novi Sad' and term_b = 'Fudbal' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-17', 3, 4, id, '{"a":"Grožđe","b":"Orhideja","indeksA":100,"indeksB":55,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Grožđe' and term_b = 'Orhideja' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-17', 3, 5, id, '{"a":"Novi Sad","b":"Facebook","indeksA":100,"indeksB":50,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Novi Sad' and term_b = 'Facebook' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-17', 3, 5, id, '{"a":"Grožđe","b":"Halo oglasi","indeksA":32,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Grožđe' and term_b = 'Halo oglasi' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-18', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-18', 3, 1, id, '{"a":"Stara planina","b":"Grožđe","indeksA":55,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Stara planina' and term_b = 'Grožđe' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-18', 3, 1, id, '{"a":"Stara planina","b":"Kupus","indeksA":28,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Stara planina' and term_b = 'Kupus' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-18', 3, 2, id, '{"a":"Palačinke","b":"Grožđe","indeksA":100,"indeksB":52,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Palačinke' and term_b = 'Grožđe' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-18', 3, 2, id, '{"a":"Mercedes","b":"Kupus","indeksA":100,"indeksB":34,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Mercedes' and term_b = 'Kupus' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-18', 3, 3, id, '{"a":"Palačinke","b":"Frižider","indeksA":45,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Palačinke' and term_b = 'Frižider' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-18', 3, 3, id, '{"a":"Mercedes","b":"Rakija","indeksA":100,"indeksB":55,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Mercedes' and term_b = 'Rakija' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-18', 3, 4, id, '{"a":"Škoda","b":"Frižider","indeksA":67,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Škoda' and term_b = 'Frižider' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-18', 3, 4, id, '{"a":"Mercedes","b":"Polovni automobili","indeksA":32,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Mercedes' and term_b = 'Polovni automobili' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-18', 3, 5, id, '{"a":"Hrvatska","b":"Frižider","indeksA":100,"indeksB":42,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Hrvatska' and term_b = 'Frižider' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-18', 3, 5, id, '{"a":"Facebook","b":"Polovni automobili","indeksA":100,"indeksB":53,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Facebook' and term_b = 'Polovni automobili' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-19', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-19', 3, 1, id, '{"a":"Aleksandar Mitrović","b":"Božur","indeksA":30,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Aleksandar Mitrović' and term_b = 'Božur' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-19', 3, 1, id, '{"a":"Punjene paprike","b":"Baklava","indeksA":53,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Punjene paprike' and term_b = 'Baklava' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-19', 3, 2, id, '{"a":"Fruška gora","b":"Božur","indeksA":100,"indeksB":30,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Fruška gora' and term_b = 'Božur' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-19', 3, 2, id, '{"a":"Matematika","b":"Baklava","indeksA":100,"indeksB":35,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Matematika' and term_b = 'Baklava' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-19', 3, 3, id, '{"a":"Fruška gora","b":"Klima","indeksA":24,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Fruška gora' and term_b = 'Klima' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-19', 3, 3, id, '{"a":"Matematika","b":"Usisivač","indeksA":38,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Matematika' and term_b = 'Usisivač' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-19', 3, 4, id, '{"a":"Sokobanja","b":"Klima","indeksA":57,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Sokobanja' and term_b = 'Klima' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-19', 3, 4, id, '{"a":"Škoda","b":"Usisivač","indeksA":69,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Škoda' and term_b = 'Usisivač' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-19', 3, 5, id, '{"a":"Čačak","b":"Klima","indeksA":100,"indeksB":34,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Čačak' and term_b = 'Klima' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-19', 3, 5, id, '{"a":"Xiaomi","b":"Usisivač","indeksA":100,"indeksB":68,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Xiaomi' and term_b = 'Usisivač' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-20', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-20', 3, 1, id, '{"a":"Punjene paprike","b":"Tulumbe","indeksA":100,"indeksB":33,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Punjene paprike' and term_b = 'Tulumbe' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-20', 3, 1, id, '{"a":"Prolom Banja","b":"Gulaš","indeksA":26,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Prolom Banja' and term_b = 'Gulaš' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-20', 3, 2, id, '{"a":"Punjene paprike","b":"Ćevapi","indeksA":44,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Punjene paprike' and term_b = 'Ćevapi' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-20', 3, 2, id, '{"a":"Dušan Tadić","b":"Gulaš","indeksA":20,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Dušan Tadić' and term_b = 'Gulaš' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-20', 3, 3, id, '{"a":"Matematika","b":"Ćevapi","indeksA":100,"indeksB":42,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Matematika' and term_b = 'Ćevapi' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-20', 3, 3, id, '{"a":"Ceca","b":"Gulaš","indeksA":100,"indeksB":45,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Ceca' and term_b = 'Gulaš' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-20', 3, 4, id, '{"a":"Matematika","b":"Usisivač","indeksA":38,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Matematika' and term_b = 'Usisivač' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-20', 3, 4, id, '{"a":"Ceca","b":"Paradajz","indeksA":59,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Ceca' and term_b = 'Paradajz' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-20', 3, 5, id, '{"a":"Zlatibor","b":"Usisivač","indeksA":100,"indeksB":48,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Zlatibor' and term_b = 'Usisivač' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-20', 3, 5, id, '{"a":"Mercedes","b":"Paradajz","indeksA":100,"indeksB":49,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Mercedes' and term_b = 'Paradajz' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-21', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-21', 3, 1, id, '{"a":"Mercedes","b":"Huawei","indeksA":100,"indeksB":31,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Mercedes' and term_b = 'Huawei' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-21', 3, 1, id, '{"a":"Vanilice","b":"Sarma","indeksA":52,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Vanilice' and term_b = 'Sarma' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-21', 3, 2, id, '{"a":"Mercedes","b":"Kragujevac","indeksA":31,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Mercedes' and term_b = 'Kragujevac' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-21', 3, 2, id, '{"a":"Istorija","b":"Sarma","indeksA":100,"indeksB":34,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Istorija' and term_b = 'Sarma' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-21', 3, 3, id, '{"a":"Vremenska prognoza","b":"Kragujevac","indeksA":100,"indeksB":30,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Vremenska prognoza' and term_b = 'Kragujevac' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-21', 3, 3, id, '{"a":"Istorija","b":"Zaječar","indeksA":37,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Istorija' and term_b = 'Zaječar' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-21', 3, 4, id, '{"a":"Vremenska prognoza","b":"Instagram","indeksA":100,"indeksB":33,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Vremenska prognoza' and term_b = 'Instagram' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-21', 3, 4, id, '{"a":"Hrvatska","b":"Zaječar","indeksA":100,"indeksB":32,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Hrvatska' and term_b = 'Zaječar' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-21', 3, 5, id, '{"a":"Vremenska prognoza","b":"Polovni automobili","indeksA":100,"indeksB":29,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Vremenska prognoza' and term_b = 'Polovni automobili' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-21', 3, 5, id, '{"a":"Hrvatska","b":"Instagram","indeksA":53,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Hrvatska' and term_b = 'Instagram' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-22', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-22', 3, 1, id, '{"a":"Krastavac","b":"Prolom Banja","indeksA":100,"indeksB":23,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Krastavac' and term_b = 'Prolom Banja' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-22', 3, 1, id, '{"a":"Ljubičica","b":"Geografija","indeksA":30,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Ljubičica' and term_b = 'Geografija' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-22', 3, 2, id, '{"a":"Krastavac","b":"Ceca","indeksA":52,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Krastavac' and term_b = 'Ceca' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-22', 3, 2, id, '{"a":"Palačinke","b":"Geografija","indeksA":100,"indeksB":22,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Palačinke' and term_b = 'Geografija' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-22', 3, 3, id, '{"a":"Halo oglasi","b":"Ceca","indeksA":100,"indeksB":51,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Halo oglasi' and term_b = 'Ceca' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-22', 3, 3, id, '{"a":"Palačinke","b":"Opel","indeksA":42,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Palačinke' and term_b = 'Opel' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-22', 3, 4, id, '{"a":"Halo oglasi","b":"Xiaomi","indeksA":52,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Halo oglasi' and term_b = 'Xiaomi' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-22', 3, 4, id, '{"a":"Košarka","b":"Opel","indeksA":100,"indeksB":40,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Košarka' and term_b = 'Opel' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-22', 3, 5, id, '{"a":"Crna Gora","b":"Xiaomi","indeksA":100,"indeksB":71,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Crna Gora' and term_b = 'Xiaomi' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-22', 3, 5, id, '{"a":"Košarka","b":"Crna Gora","indeksA":100,"indeksB":74,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Košarka' and term_b = 'Crna Gora' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-23', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-23', 3, 1, id, '{"a":"Aca Lukas","b":"Egipat","indeksA":25,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Aca Lukas' and term_b = 'Egipat' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-23', 3, 1, id, '{"a":"Podvarak","b":"Aleksandar Mitrović","indeksA":100,"indeksB":39,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Podvarak' and term_b = 'Aleksandar Mitrović' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-23', 3, 2, id, '{"a":"Loto","b":"Egipat","indeksA":100,"indeksB":47,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Loto' and term_b = 'Egipat' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-23', 3, 2, id, '{"a":"Podvarak","b":"Božur","indeksA":75,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Podvarak' and term_b = 'Božur' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-23', 3, 3, id, '{"a":"Loto","b":"Kupus","indeksA":100,"indeksB":34,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Loto' and term_b = 'Kupus' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-23', 3, 3, id, '{"a":"Burek","b":"Božur","indeksA":100,"indeksB":43,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Burek' and term_b = 'Božur' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-23', 3, 4, id, '{"a":"Loto","b":"Subotica","indeksA":40,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Loto' and term_b = 'Subotica' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-23', 3, 4, id, '{"a":"Burek","b":"Huawei","indeksA":42,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Burek' and term_b = 'Huawei' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-23', 3, 5, id, '{"a":"Facebook","b":"Subotica","indeksA":100,"indeksB":42,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Facebook' and term_b = 'Subotica' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-23', 3, 5, id, '{"a":"Vaterpolo","b":"Huawei","indeksA":100,"indeksB":61,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Vaterpolo' and term_b = 'Huawei' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-24', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-24', 3, 1, id, '{"a":"Lepa Brena","b":"Paprika","indeksA":43,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Lepa Brena' and term_b = 'Paprika' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-24', 3, 1, id, '{"a":"Viber","b":"Nokia","indeksA":100,"indeksB":30,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Viber' and term_b = 'Nokia' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-24', 3, 2, id, '{"a":"Zaječar","b":"Paprika","indeksA":100,"indeksB":49,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Zaječar' and term_b = 'Paprika' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-24', 3, 2, id, '{"a":"Viber","b":"Klima","indeksA":49,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Viber' and term_b = 'Klima' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-24', 3, 3, id, '{"a":"Zaječar","b":"Samsung","indeksA":33,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Zaječar' and term_b = 'Samsung' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-24', 3, 3, id, '{"a":"Grčka","b":"Klima","indeksA":100,"indeksB":41,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Grčka' and term_b = 'Klima' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-24', 3, 4, id, '{"a":"KupujemProdajem","b":"Samsung","indeksA":100,"indeksB":32,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'KupujemProdajem' and term_b = 'Samsung' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-24', 3, 4, id, '{"a":"Grčka","b":"Polovni automobili","indeksA":61,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Grčka' and term_b = 'Polovni automobili' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-24', 3, 5, id, '{"a":"KupujemProdajem","b":"Vremenska prognoza","indeksA":52,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'KupujemProdajem' and term_b = 'Vremenska prognoza' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-24', 3, 5, id, '{"a":"Tenis","b":"Polovni automobili","indeksA":36,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Tenis' and term_b = 'Polovni automobili' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-25', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-25', 3, 1, id, '{"a":"Banja Koviljača","b":"Kurs evra","indeksA":28,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Banja Koviljača' and term_b = 'Kurs evra' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-25', 3, 1, id, '{"a":"Tulumbe","b":"Lala","indeksA":26,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Tulumbe' and term_b = 'Lala' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-25', 3, 2, id, '{"a":"TikTok","b":"Kurs evra","indeksA":100,"indeksB":25,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'TikTok' and term_b = 'Kurs evra' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-25', 3, 2, id, '{"a":"Lubenica","b":"Lala","indeksA":100,"indeksB":61,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Lubenica' and term_b = 'Lala' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-25', 3, 3, id, '{"a":"TikTok","b":"Grčka","indeksA":78,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'TikTok' and term_b = 'Grčka' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-25', 3, 3, id, '{"a":"Lubenica","b":"Krastavac","indeksA":76,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Lubenica' and term_b = 'Krastavac' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-25', 3, 4, id, '{"a":"Opel","b":"Grčka","indeksA":43,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Opel' and term_b = 'Grčka' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-25', 3, 4, id, '{"a":"Divčibare","b":"Krastavac","indeksA":100,"indeksB":46,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Divčibare' and term_b = 'Krastavac' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-25', 3, 5, id, '{"a":"Fudbal","b":"Grčka","indeksA":100,"indeksB":45,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Fudbal' and term_b = 'Grčka' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-25', 3, 5, id, '{"a":"Divčibare","b":"Pasulj","indeksA":100,"indeksB":44,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Divčibare' and term_b = 'Pasulj' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-26', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-26', 3, 1, id, '{"a":"Zdravko Čolić","b":"Orhideja","indeksA":100,"indeksB":59,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Zdravko Čolić' and term_b = 'Orhideja' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-26', 3, 1, id, '{"a":"Punjene paprike","b":"Stara planina","indeksA":55,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Punjene paprike' and term_b = 'Stara planina' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-26', 3, 2, id, '{"a":"Zdravko Čolić","b":"Lubenica","indeksA":100,"indeksB":69,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Zdravko Čolić' and term_b = 'Lubenica' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-26', 3, 2, id, '{"a":"Limundo","b":"Stara planina","indeksA":100,"indeksB":29,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Limundo' and term_b = 'Stara planina' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-26', 3, 3, id, '{"a":"Zdravko Čolić","b":"Odbojka","indeksA":28,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Zdravko Čolić' and term_b = 'Odbojka' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-26', 3, 3, id, '{"a":"Limundo","b":"TikTok","indeksA":23,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Limundo' and term_b = 'TikTok' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-26', 3, 4, id, '{"a":"Vrnjačka Banja","b":"Odbojka","indeksA":100,"indeksB":75,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Vrnjačka Banja' and term_b = 'Odbojka' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-26', 3, 4, id, '{"a":"iPhone","b":"TikTok","indeksA":100,"indeksB":57,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'iPhone' and term_b = 'TikTok' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-26', 3, 5, id, '{"a":"Vrnjačka Banja","b":"Audi","indeksA":58,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Vrnjačka Banja' and term_b = 'Audi' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-26', 3, 5, id, '{"a":"iPhone","b":"Vremenska prognoza","indeksA":25,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'iPhone' and term_b = 'Vremenska prognoza' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-27', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-27', 3, 1, id, '{"a":"Čaj","b":"Limundo","indeksA":100,"indeksB":30,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Čaj' and term_b = 'Limundo' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-27', 3, 1, id, '{"a":"Pivo","b":"Sokobanja","indeksA":100,"indeksB":77,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Pivo' and term_b = 'Sokobanja' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-27', 3, 2, id, '{"a":"Čaj","b":"Horoskop","indeksA":80,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Čaj' and term_b = 'Horoskop' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-27', 3, 2, id, '{"a":"Pivo","b":"Horoskop","indeksA":41,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Pivo' and term_b = 'Horoskop' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-27', 3, 3, id, '{"a":"Paradajz","b":"Horoskop","indeksA":35,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Paradajz' and term_b = 'Horoskop' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-27', 3, 3, id, '{"a":"Halo oglasi","b":"Horoskop","indeksA":41,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Halo oglasi' and term_b = 'Horoskop' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-27', 3, 4, id, '{"a":"Čačak","b":"Horoskop","indeksA":100,"indeksB":61,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Čačak' and term_b = 'Horoskop' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-27', 3, 4, id, '{"a":"Facebook","b":"Horoskop","indeksA":100,"indeksB":24,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Facebook' and term_b = 'Horoskop' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-27', 3, 5, id, '{"a":"Čačak","b":"Instagram","indeksA":65,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Čačak' and term_b = 'Instagram' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-27', 3, 5, id, '{"a":"Facebook","b":"Novi Sad","indeksA":50,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Facebook' and term_b = 'Novi Sad' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-28', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-28', 3, 1, id, '{"a":"Dušan Vlahović","b":"Istorija","indeksA":58,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Dušan Vlahović' and term_b = 'Istorija' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-28', 3, 1, id, '{"a":"Dušan Vlahović","b":"Veš mašina","indeksA":20,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Dušan Vlahović' and term_b = 'Veš mašina' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-28', 3, 2, id, '{"a":"Ribarska Banja","b":"Istorija","indeksA":24,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Ribarska Banja' and term_b = 'Istorija' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-28', 3, 2, id, '{"a":"Vrnjačka Banja","b":"Veš mašina","indeksA":100,"indeksB":78,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Vrnjačka Banja' and term_b = 'Veš mašina' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-28', 3, 3, id, '{"a":"Veš mašina","b":"Istorija","indeksA":100,"indeksB":36,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Veš mašina' and term_b = 'Istorija' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-28', 3, 3, id, '{"a":"Vrnjačka Banja","b":"Turska","indeksA":66,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Vrnjačka Banja' and term_b = 'Turska' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-28', 3, 4, id, '{"a":"Veš mašina","b":"Kafa","indeksA":52,"indeksB":100,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Veš mašina' and term_b = 'Kafa' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-28', 3, 4, id, '{"a":"Samsung","b":"Turska","indeksA":100,"indeksB":66,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Samsung' and term_b = 'Turska' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, trend_pair_id, snapshot)
-  select '2026-11-28', 3, 5, id, '{"a":"Zlatibor","b":"Kafa","indeksA":100,"indeksB":77,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
-  from public.trend_pairs where term_a = 'Zlatibor' and term_b = 'Kafa' and period = '14.11.2025 – 14.11.2026'
+  select '2026-11-28', 3, 5, id, '{"a":"Samsung","b":"Vino","indeksA":100,"indeksB":43,"period":"14.11.2025 – 14.11.2026","preuzeto":"2026-11-14"}'::jsonb
+  from public.trend_pairs where term_a = 'Samsung' and term_b = 'Vino' and period = '14.11.2025 – 14.11.2026'
   on conflict (quiz_date, segment, position) do nothing;
 
 -- Filmovi i serije (films.json) i njihovi kadrovi.
@@ -2449,44 +2450,44 @@ insert into public.film_stills (film_id, image_url) select id, '/kadrovi/0b6135f
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-15', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-15', 4, 1, id, '{"naslov":"Zona Zamfirova","alias":["Zona"],"slika":"/kadrovi/0b6135f7ced4ae.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/0b6135f7ced4ae.webp'
+  select '2026-11-15', 4, 1, id, '{"naslov":"Mali Budo","alias":[],"slika":"/kadrovi/8d3472b446bb96.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/8d3472b446bb96.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-15', 4, 2, id, '{"naslov":"Varljivo leto ''68","alias":["Varljivo leto"],"slika":"/kadrovi/69d278902e4c57.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/69d278902e4c57.webp'
+  select '2026-11-15', 4, 2, id, '{"naslov":"Montevideo, Bog te video!","alias":["Montevideo"],"slika":"/kadrovi/c9bf06d591b178.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/c9bf06d591b178.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-15', 4, 3, id, '{"naslov":"Svadba","alias":[],"slika":"/kadrovi/3f44ee5376ac8f.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/3f44ee5376ac8f.webp'
+  select '2026-11-15', 4, 3, id, '{"naslov":"Apsolutnih sto","alias":["Apsolutnih 100"],"slika":"/kadrovi/d9743ac1239e02.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/d9743ac1239e02.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-16', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-16', 4, 1, id, '{"naslov":"Mali Budo","alias":[],"slika":"/kadrovi/8d3472b446bb96.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/8d3472b446bb96.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-16', 4, 2, id, '{"naslov":"Sedam i po","alias":["7 i po"],"slika":"/kadrovi/51593cb69f6231.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/51593cb69f6231.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-16', 4, 3, id, '{"naslov":"Nedelja","alias":[],"slika":"/kadrovi/3a05c0c3d6723a.webp"}'::jsonb
+  select '2026-11-16', 4, 1, id, '{"naslov":"Nedelja","alias":[],"slika":"/kadrovi/3a05c0c3d6723a.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/3a05c0c3d6723a.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-16', 4, 2, id, '{"naslov":"Kad porastem biću Kengur","alias":["Kengur"],"slika":"/kadrovi/2342208e45e0d5.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/2342208e45e0d5.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-16', 4, 3, id, '{"naslov":"Južni vetar","alias":[],"slika":"/kadrovi/b54ac478dd9f9e.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/b54ac478dd9f9e.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-17', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-17', 4, 1, id, '{"naslov":"Ko to tamo peva","alias":[],"slika":"/kadrovi/dfd186e39dc288.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/dfd186e39dc288.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-17', 4, 2, id, '{"naslov":"Ubice mog oca","alias":["Ubice moga oca"],"slika":"/kadrovi/ce43a77331335f.webp"}'::jsonb
+  select '2026-11-17', 4, 1, id, '{"naslov":"Ubice mog oca","alias":["Ubice moga oca"],"slika":"/kadrovi/ce43a77331335f.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/ce43a77331335f.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-17', 4, 3, id, '{"naslov":"Maratonci trče počasni krug","alias":["Maratonci"],"slika":"/kadrovi/26fcfdf6ce0b4e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/26fcfdf6ce0b4e.webp'
+  select '2026-11-17', 4, 2, id, '{"naslov":"Lepa sela lepo gore","alias":["Lepa sela"],"slika":"/kadrovi/27aca52c471053.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/27aca52c471053.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-17', 4, 3, id, '{"naslov":"Zlatni dečko","alias":[],"slika":"/kadrovi/e21b6c218911f0.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/e21b6c218911f0.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-18', 'published', now())
   on conflict (quiz_date) do nothing;
@@ -2495,96 +2496,96 @@ insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id
   from public.film_stills where image_url = '/kadrovi/051f731cbbfa6a.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-18', 4, 2, id, '{"naslov":"Lepa sela lepo gore","alias":["Lepa sela"],"slika":"/kadrovi/27aca52c471053.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/27aca52c471053.webp'
+  select '2026-11-18', 4, 2, id, '{"naslov":"Valter brani Sarajevo","alias":["Valter"],"slika":"/kadrovi/aea6ef7f9e918e.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/aea6ef7f9e918e.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-18', 4, 3, id, '{"naslov":"Munje!","alias":[],"slika":"/kadrovi/b78562811e4dfd.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/b78562811e4dfd.webp'
+  select '2026-11-18', 4, 3, id, '{"naslov":"Mrtav ''ladan","alias":["Mrtav hladan"],"slika":"/kadrovi/8cbcf42b3b8c7c.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/8cbcf42b3b8c7c.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-19', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-19', 4, 1, id, '{"naslov":"Apsolutnih sto","alias":["Apsolutnih 100"],"slika":"/kadrovi/d9743ac1239e02.webp"}'::jsonb
+  select '2026-11-19', 4, 1, id, '{"naslov":"Balkanski špijun","alias":[],"slika":"/kadrovi/266f47b4bf4330.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/266f47b4bf4330.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-19', 4, 2, id, '{"naslov":"Lajanje na zvezde","alias":[],"slika":"/kadrovi/910755bdb2d3ed.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/910755bdb2d3ed.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-19', 4, 3, id, '{"naslov":"Apsolutnih sto","alias":["Apsolutnih 100"],"slika":"/kadrovi/d9743ac1239e02.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/d9743ac1239e02.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-19', 4, 2, id, '{"naslov":"Parada","alias":[],"slika":"/kadrovi/5d7b9193da21b5.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/5d7b9193da21b5.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-19', 4, 3, id, '{"naslov":"Nož","alias":[],"slika":"/kadrovi/0f95a920c25413.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/0f95a920c25413.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-20', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-20', 4, 1, id, '{"naslov":"Balkanski špijun","alias":[],"slika":"/kadrovi/266f47b4bf4330.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/266f47b4bf4330.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-20', 4, 2, id, '{"naslov":"Kad porastem biću Kengur","alias":["Kengur"],"slika":"/kadrovi/2342208e45e0d5.webp"}'::jsonb
+  select '2026-11-20', 4, 1, id, '{"naslov":"Kad porastem biću Kengur","alias":["Kengur"],"slika":"/kadrovi/2342208e45e0d5.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/2342208e45e0d5.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-20', 4, 3, id, '{"naslov":"Lajanje na zvezde","alias":[],"slika":"/kadrovi/910755bdb2d3ed.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/910755bdb2d3ed.webp'
+  select '2026-11-20', 4, 2, id, '{"naslov":"Nedelja","alias":[],"slika":"/kadrovi/3a05c0c3d6723a.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/3a05c0c3d6723a.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-20', 4, 3, id, '{"naslov":"Tesna koža","alias":[],"slika":"/kadrovi/3888635e9b8672.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/3888635e9b8672.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-21', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-21', 4, 1, id, '{"naslov":"Montevideo, Bog te video!","alias":["Montevideo"],"slika":"/kadrovi/c9bf06d591b178.webp"}'::jsonb
+  select '2026-11-21', 4, 1, id, '{"naslov":"Zona Zamfirova","alias":["Zona"],"slika":"/kadrovi/0b6135f7ced4ae.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/0b6135f7ced4ae.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-21', 4, 2, id, '{"naslov":"Balkanski špijun","alias":[],"slika":"/kadrovi/266f47b4bf4330.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/266f47b4bf4330.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-21', 4, 3, id, '{"naslov":"Montevideo, Bog te video!","alias":["Montevideo"],"slika":"/kadrovi/c9bf06d591b178.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/c9bf06d591b178.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-21', 4, 2, id, '{"naslov":"Zlatni dečko","alias":[],"slika":"/kadrovi/e21b6c218911f0.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/e21b6c218911f0.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-21', 4, 3, id, '{"naslov":"Toma","alias":[],"slika":"/kadrovi/35d341e7bddb04.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/35d341e7bddb04.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-22', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-22', 4, 1, id, '{"naslov":"Valter brani Sarajevo","alias":["Valter"],"slika":"/kadrovi/aea6ef7f9e918e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/aea6ef7f9e918e.webp'
+  select '2026-11-22', 4, 1, id, '{"naslov":"Nož","alias":[],"slika":"/kadrovi/0f95a920c25413.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/0f95a920c25413.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-22', 4, 2, id, '{"naslov":"Senke nad Balkanom","alias":[],"slika":"/kadrovi/99e6fa37dacc76.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/99e6fa37dacc76.webp'
+  select '2026-11-22', 4, 2, id, '{"naslov":"Munje!","alias":[],"slika":"/kadrovi/b78562811e4dfd.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/b78562811e4dfd.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-22', 4, 3, id, '{"naslov":"Južni vetar","alias":[],"slika":"/kadrovi/b54ac478dd9f9e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/b54ac478dd9f9e.webp'
+  select '2026-11-22', 4, 3, id, '{"naslov":"Maratonci trče počasni krug","alias":["Maratonci"],"slika":"/kadrovi/26fcfdf6ce0b4e.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/26fcfdf6ce0b4e.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-23', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-23', 4, 1, id, '{"naslov":"Ivkova slava","alias":[],"slika":"/kadrovi/64db2b1fcfaceb.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/64db2b1fcfaceb.webp'
+  select '2026-11-23', 4, 1, id, '{"naslov":"Južni vetar","alias":[],"slika":"/kadrovi/b54ac478dd9f9e.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/b54ac478dd9f9e.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-23', 4, 2, id, '{"naslov":"Tesna koža","alias":[],"slika":"/kadrovi/3888635e9b8672.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/3888635e9b8672.webp'
+  select '2026-11-23', 4, 2, id, '{"naslov":"Ubice mog oca","alias":["Ubice moga oca"],"slika":"/kadrovi/ce43a77331335f.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/ce43a77331335f.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-23', 4, 3, id, '{"naslov":"Mrtav ''ladan","alias":["Mrtav hladan"],"slika":"/kadrovi/8cbcf42b3b8c7c.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/8cbcf42b3b8c7c.webp'
+  select '2026-11-23', 4, 3, id, '{"naslov":"Lajanje na zvezde","alias":[],"slika":"/kadrovi/910755bdb2d3ed.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/910755bdb2d3ed.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-24', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-24', 4, 1, id, '{"naslov":"Greh njene majke","alias":[],"slika":"/kadrovi/98c04ce7ffd86f.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/98c04ce7ffd86f.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-24', 4, 2, id, '{"naslov":"Svadba","alias":[],"slika":"/kadrovi/3f44ee5376ac8f.webp"}'::jsonb
+  select '2026-11-24', 4, 1, id, '{"naslov":"Svadba","alias":[],"slika":"/kadrovi/3f44ee5376ac8f.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/3f44ee5376ac8f.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-24', 4, 3, id, '{"naslov":"Maratonci trče počasni krug","alias":["Maratonci"],"slika":"/kadrovi/26fcfdf6ce0b4e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/26fcfdf6ce0b4e.webp'
+  select '2026-11-24', 4, 2, id, '{"naslov":"Ko to tamo peva","alias":[],"slika":"/kadrovi/dfd186e39dc288.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/dfd186e39dc288.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-24', 4, 3, id, '{"naslov":"Senke nad Balkanom","alias":[],"slika":"/kadrovi/99e6fa37dacc76.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/99e6fa37dacc76.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-25', 'published', now())
   on conflict (quiz_date) do nothing;
@@ -2607,12 +2608,12 @@ insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id
   from public.film_stills where image_url = '/kadrovi/aea6ef7f9e918e.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-26', 4, 2, id, '{"naslov":"Južni vetar","alias":[],"slika":"/kadrovi/b54ac478dd9f9e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/b54ac478dd9f9e.webp'
+  select '2026-11-26', 4, 2, id, '{"naslov":"Sedam i po","alias":["7 i po"],"slika":"/kadrovi/51593cb69f6231.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/51593cb69f6231.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-26', 4, 3, id, '{"naslov":"Kad porastem biću Kengur","alias":["Kengur"],"slika":"/kadrovi/2342208e45e0d5.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/2342208e45e0d5.webp'
+  select '2026-11-26', 4, 3, id, '{"naslov":"Toma","alias":[],"slika":"/kadrovi/35d341e7bddb04.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/35d341e7bddb04.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-27', 'published', now())
   on conflict (quiz_date) do nothing;
@@ -2621,26 +2622,26 @@ insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id
   from public.film_stills where image_url = '/kadrovi/5d7b9193da21b5.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-27', 4, 2, id, '{"naslov":"Nedelja","alias":[],"slika":"/kadrovi/3a05c0c3d6723a.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/3a05c0c3d6723a.webp'
+  select '2026-11-27', 4, 2, id, '{"naslov":"Greh njene majke","alias":[],"slika":"/kadrovi/98c04ce7ffd86f.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/98c04ce7ffd86f.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-27', 4, 3, id, '{"naslov":"Lajanje na zvezde","alias":[],"slika":"/kadrovi/910755bdb2d3ed.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/910755bdb2d3ed.webp'
+  select '2026-11-27', 4, 3, id, '{"naslov":"Mali Budo","alias":[],"slika":"/kadrovi/8d3472b446bb96.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/8d3472b446bb96.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-28', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-28', 4, 1, id, '{"naslov":"Munje!","alias":[],"slika":"/kadrovi/b78562811e4dfd.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/b78562811e4dfd.webp'
+  select '2026-11-28', 4, 1, id, '{"naslov":"Varljivo leto ''68","alias":["Varljivo leto"],"slika":"/kadrovi/69d278902e4c57.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/69d278902e4c57.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-28', 4, 2, id, '{"naslov":"Nož","alias":[],"slika":"/kadrovi/0f95a920c25413.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/0f95a920c25413.webp'
+  select '2026-11-28', 4, 2, id, '{"naslov":"Zlatni dečko","alias":[],"slika":"/kadrovi/e21b6c218911f0.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/e21b6c218911f0.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-28', 4, 3, id, '{"naslov":"Ubice mog oca","alias":["Ubice moga oca"],"slika":"/kadrovi/ce43a77331335f.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/ce43a77331335f.webp'
+  select '2026-11-28', 4, 3, id, '{"naslov":"Mrtav ''ladan","alias":["Mrtav hladan"],"slika":"/kadrovi/8cbcf42b3b8c7c.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/8cbcf42b3b8c7c.webp'
   on conflict (quiz_date, segment, position) do nothing;
 
 -- Dnevni kviz: segment 5 (Joker pitanje). Dan koji već ima Jokera se ne dira.

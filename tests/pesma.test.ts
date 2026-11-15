@@ -15,7 +15,7 @@ import { normalizuj, pretraziKatalog, razdaljina, slicno, tacniObliciPesme } fro
 const koren = join(__dirname, "..");
 const json = (ime: string) => JSON.parse(readFileSync(join(koren, "data", ime), "utf8"));
 const katalog = ucitajPesme(json("songs.json"));
-const POCETAK = "2026-11-14";
+const POCETAK = "2026-11-01";
 /** Dan samo sa pesmama, sa poznatim sadržajem. */
 const DAN = "2030-03-03";
 
