@@ -34,6 +34,9 @@ export function omotajPglite(pg: PGlite): Db {
       const r = await izvor.query<T>(tekst, params);
       return r.rows;
     },
+    async exec(skript: string) {
+      await izvor.exec(skript);
+    },
     async transaction<T>(fn: (tx: Db) => Promise<T>) {
       if (uTransakciji) return fn(omotaj(izvor, true));
       return (izvor as PGlite).transaction((tx) => fn(omotaj(tx, true))) as Promise<T>;

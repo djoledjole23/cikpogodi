@@ -23,6 +23,15 @@ export function napraviPostgres(url: string): Db {
         throw e;
       }
     },
+    async exec(skript: string) {
+      try {
+        // „simple” protokol: jedino tako može više naredbi u jednom upitu.
+        await izvor.unsafe(skript).simple();
+      } catch (e) {
+        objasni(e);
+        throw e;
+      }
+    },
     async transaction<T>(fn: (tx: Db) => Promise<T>) {
       // Već smo u transakciji: nastavi u istoj.
       if (izvor !== sql) return fn(omotaj(izvor));

@@ -12,6 +12,8 @@ export type Param = string | number | boolean | null;
 
 export type Db = {
   query<T = Record<string, unknown>>(sql: string, params?: Param[]): Promise<T[]>;
+  /** Pusti ceo SQL skript odjednom (više naredbi, bez parametara). Za seed i migracije. */
+  exec(sql: string): Promise<void>;
   /** Sve unutar `fn` je jedna transakcija: ili prođe sve, ili ništa. */
   transaction<T>(fn: (tx: Db) => Promise<T>): Promise<T>;
 };
