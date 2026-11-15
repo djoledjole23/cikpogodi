@@ -7,15 +7,11 @@
 -- Kako: Supabase → SQL Editor → New query → nalepi CEO ovaj fajl → Run.
 -- ───────────────────────────────────────────────────────────────
 
-begin;
-
 delete from public.plays
  where quiz_date >= (now() at time zone 'Europe/Belgrade')::date;
 
 delete from public.daily_quiz
  where quiz_date >= (now() at time zone 'Europe/Belgrade')::date;
-
-commit;
 
 -- Čik Pogodi! seed: 14 dana od 2026-11-15. Cenovnik od 2026-11-13.
 -- Napravljeno komandom: npm run seed -- 2026-11-15 14
