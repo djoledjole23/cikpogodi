@@ -4,7 +4,6 @@ import { Page } from "@/components/Page";
 
 export const metadata: Metadata = { title: "Pravila privatnosti" };
 
-// NACRT: pre puštanja sajta popuni obeležena mesta i daj pravniku da pogleda.
 export default function PravilaPrivatnosti() {
   return (
     <Page>
@@ -17,8 +16,8 @@ export default function PravilaPrivatnosti() {
 
         <h2>Ko upravlja podacima</h2>
         <p>
-          <span className="todo">[IME I PREZIME ILI FIRMA, ADRESA]</span>, kontakt:{" "}
-          <span className="todo">[MEJL ZA KONTAKT]</span>.
+          Djordje Ilic, fizicko lice, Srbija. Kontakt:{" "}
+          <a href="mailto:djordjeilic02@gmail.com">djordjeilic02@gmail.com</a>.
         </p>
 
         <h2>Šta čuvamo</h2>

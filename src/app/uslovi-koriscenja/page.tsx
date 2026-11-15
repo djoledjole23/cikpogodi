@@ -40,8 +40,7 @@ export default function UsloviKoriscenja() {
         <h2>Izmene i kontakt</h2>
         <p>
           Pravila možemo da menjamo, a nova važe od objave na ovoj strani. Pitanja šalji na{" "}
-          <span className="todo">[MEJL ZA KONTAKT]</span>. Sajtom upravlja{" "}
-          <span className="todo">[IME I PREZIME ILI FIRMA]</span>.
+          <a href="mailto:djordjeilic02@gmail.com">djordjeilic02@gmail.com</a>. Sajtom upravlja Djordje Ilic.
         </p>
 
         <p className="muted small">Poslednja izmena: 15. novembra 2026.</p>
