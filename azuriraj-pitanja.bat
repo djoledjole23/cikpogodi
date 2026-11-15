@@ -9,7 +9,10 @@ echo.
 
 where node >nul 2>nul
 if not errorlevel 1 goto imanode
-if exist "%ProgramFiles%\nodejs\node.exe" set "PATH=%ProgramFiles%\nodejs;%PATH%" & goto imanode
+if exist "%ProgramFiles%\nodejs\node.exe" (
+  set "PATH=%ProgramFiles%\nodejs;%PATH%"
+  goto imanode
+)
 echo Node.js nije instaliran. Prvo pokreni pokreni.bat, on ce ga instalirati.
 goto kraj
 
