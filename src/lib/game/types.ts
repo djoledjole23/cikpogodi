@@ -206,6 +206,8 @@ export type Stanje = {
   lista?: StanjeListe;
   /** Mesto na današnjoj listi (samo kad je rezultat na listi). */
   mesto?: number | null;
+  /** Koliko je ljudi danas odigralo do kraja (gosti i nalozi). Samo kad je igra završena. */
+  igralo?: number;
   /** Da li je igrač prijavljen i da li nalozi uopšte rade (Supabase povezan). Dodaje ih API ruta. */
   prijavljen?: boolean;
   nalozi?: boolean;

@@ -254,17 +254,20 @@ export function KrajSegmenta({ segment, naDalje }: { segment: SegmentStanje; naD
 
 // ───────────────────────── rezultat ─────────────────────────
 
-/** Da li je rezultat na rang listi, čeka potvrdu mejla ili nije sačuvan. */
+/**
+ * Odmah ispod poena: veliko dugme ka rang listi.
+ * Ko je na listi vidi svoje mesto, gost dobija poziv da sačuva rezultat.
+ */
 function StatusListe({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => void }) {
   if (stanje.lista === "counted") {
     return (
-      <div className="g-obavestenje dobro">
-        <p>
-          <strong>{stanje.mesto ? `Ti si ${stanje.mesto}. na današnjoj listi.` : "Rezultat je na rang listi."}</strong>
-        </p>
-        <Link href="/rang-lista" className="text-link tap">
-          Vidi rang listu
+      <div className="stack">
+        <Link href="/rang-lista" className="btn btn-lg g-cta-lista" onClick={() => sfx.klik()}>
+          Pogledaj rang listu
         </Link>
+        <p className="small muted center">
+          {stanje.mesto ? `Danas si ${stanje.mesto}. na listi.` : "Rezultat je na rang listi."}
+        </p>
       </div>
     );
   }
@@ -272,22 +275,31 @@ function StatusListe({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => v
     return (
       <div className="g-obavestenje">
         <p>
-          <strong>Rezultat čeka potvrdu mejla.</strong> Klikni na link koji smo ti poslali i ulaziš na rang listu.
+          <strong>Rezultat čeka potvrdu.</strong>
         </p>
       </div>
     );
   }
   return (
-    <div className="g-obavestenje">
-      <p>
-        <strong>Ovaj rezultat nije na rang listi.</strong>
-        {stanje.nalozi ? " Napravi nalog ili se prijavi da uđe." : " Nalozi još nisu povezani."}
-      </p>
+    <div className="stack">
       {stanje.nalozi && (
-        <button type="button" className="g-tekst-dugme" onClick={naSacuvaj}>
-          Sačuvaj rezultat
+        <button
+          type="button"
+          className="btn btn-lg g-cta-lista"
+          onClick={() => {
+            sfx.klik();
+            naSacuvaj();
+          }}
+        >
+          Uđi na rang listu
         </button>
       )}
+      <p className="small muted center">
+        Ovaj rezultat još nije na listi.{" "}
+        <Link href="/rang-lista" className="text-link tap">
+          Samo pogledaj listu
+        </Link>
+      </p>
     </div>
   );
 }
@@ -366,7 +378,7 @@ export function Kraj({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => v
         </div>
       ))}
 
-      <Link href="/" className="btn">
+      <Link href="/" className="btn btn-ghost">
         Na početnu
       </Link>
     </section>

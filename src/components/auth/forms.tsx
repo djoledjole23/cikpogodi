@@ -90,7 +90,7 @@ export function OAuthRazdvojnik({ tekst = "ili mejlom" }: { tekst?: string }) {
 
 // ───────────────────────── Registracija ─────────────────────────
 
-export function RegistracijaForma({ next = "/" }: { next?: string }) {
+export function RegistracijaForma({ next = "/", dugme = "Napravi nalog" }: { next?: string; dugme?: string }) {
   const [stanje, akcija, ceka] = useActionState(registracija, PRAZNO);
   return (
     <form action={akcija} className="form" noValidate>
@@ -118,7 +118,7 @@ export function RegistracijaForma({ next = "/" }: { next?: string }) {
         required
       />
       <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "Pravim nalog\u2026" : "Napravi nalog"}
+        {ceka ? "Pravim nalog\u2026" : dugme}
       </button>
       <p className="small muted center">
         Nema mejla i nema potvr\u0111ivanja \u2014 zapamti nadimak i lozinku, jer zaboravljena lozinka ne mo\u017ee da se vrati.

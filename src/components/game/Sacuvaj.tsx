@@ -3,31 +3,45 @@
 import Link from "next/link";
 import { OAuthDugmad, OAuthRazdvojnik, RegistracijaForma } from "@/components/auth/forms";
 import type { Stanje } from "@/lib/game/types";
+import { kolikoIgralo } from "@/lib/padezi";
 import { sfx } from "@/lib/sound";
 
+/** Ispod ovog broja ne pišemo koliko je ljudi igralo: „igralo 2 čoveka” više odbija nego što privlači. */
+const PRIKAZI_OD = 5;
+
 /**
- * Posle poslednjeg pitanja, pre rezultata: „Sačuvaj rezultat i uđi na rang listu”.
+ * Kraj igre za gosta: rezultat je zamagljen, a odmah ispod je registracija
+ * (nadimak + lozinka) i veliko dugme koje vodi pravo na rang listu.
  * Ko je već prijavljen ovaj ekran ne vidi (rezultat mu se čuva sam).
- * Posle registracije ili prijave igrač se vraća na /igra, gde ga čeka rezultat.
  */
 export function SacuvajRezultat({ stanje, naPreskoci }: { stanje: Stanje; naPreskoci: () => void }) {
+  const max = stanje.segmenti.reduce((z, s) => z + s.max, 0);
+  const igralo = stanje.igralo ?? 0;
   return (
     <section className="stack-lg g-sacuvaj">
-      <div className="stack">
-        <p className="g-uvod-broj">Gotovo za danas</p>
-        <h1 className="h1">Sačuvaj rezultat i uđi na rang listu</h1>
-        <p className="lead">
-          Imaš {stanje.score} {stanje.score % 10 === 1 && stanje.score % 100 !== 11 ? "poen" : "poena"}. Napravi nalog da ne propadnu, pa vidi ko je danas
-          bolji od tebe.
+      <p className="g-uvod-broj">Gotovo za danas</p>
+
+      <div className="g-zakljucan">
+        <p className="g-veliki-zbir g-zamagljeno" aria-hidden="true">
+          {stanje.score}
+          <small> / {max}</small>
         </p>
+        <p className="g-zakljucan-natpis">
+          <span aria-hidden="true">🔒</span> Rezultat te čeka
+        </p>
+      </div>
+
+      <div className="stack">
+        <h1 className="h1">Upiši nadimak i vidi gde si na rang listi</h1>
+        {igralo >= PRIKAZI_OD && <p className="lead">{kolikoIgralo(igralo)}</p>}
       </div>
 
       {stanje.nalozi ? (
         <>
-          <OAuthDugmad next="/igra" />
+          <OAuthDugmad next="/rang-lista" />
           <OAuthRazdvojnik />
-          <RegistracijaForma next="/igra" />
-          <Link href="/prijava?next=/igra" className="btn btn-ghost">
+          <RegistracijaForma next="/rang-lista" dugme="Pogledaj rang listu" />
+          <Link href="/prijava?next=/rang-lista" className="btn btn-ghost">
             Već imaš nalog? Prijavi se
           </Link>
         </>
@@ -53,7 +67,7 @@ export function SacuvajRezultat({ stanje, naPreskoci }: { stanje: Stanje; naPres
           naPreskoci();
         }}
       >
-        Preskoči, samo mi pokaži rezultat
+        Ne sada, samo mi pokaži poene
       </button>
     </section>
   );
