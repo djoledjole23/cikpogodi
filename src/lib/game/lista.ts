@@ -40,12 +40,12 @@ export function granicePerioda(period: Period, danas: string): { od: string | nu
 }
 
 /** Prvih 50 i, ako je prijavljen, red igrača čak i kad nije među njima. */
-export async function rangLista(db: Db, period: Period, danas: string, userId: string | null): Promise<RedListe[]> {
+export async function rangLista(db: Db, period: Period, danas: string, userId: string | null, najvise = NAJVISE_NA_LISTI): Promise<RedListe[]> {
   const { od, do: doDana } = granicePerioda(period, danas);
   const redovi = await db.query<{ rank: number; user_id: string; username: string; score: number; ms: number; games: number }>(
     `select rank::int as rank, user_id::text as user_id, username, score::int as score, total_answer_ms::float8 as ms, games::int as games
      from public.leaderboard($1::date, $2::date, $3::int, $4::uuid)`,
-    [od, doDana, NAJVISE_NA_LISTI, userId],
+    [od, doDana, najvise, userId],
   );
   return redovi.map((r) => ({
     mesto: r.rank,

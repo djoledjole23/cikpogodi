@@ -12,6 +12,9 @@ import { beogradskiDatum } from "@/lib/time";
 
 export const metadata: Metadata = { title: "Rang lista" };
 
+/** Dnevna lista je duža: svi botovi i do 200 pravih igrača (koliko baza najviše daje). */
+const NA_DNEVNOJ_LISTI = 200;
+
 export default function RangLista({ searchParams }: PageProps<"/rang-lista">) {
   return (
     <Page>
@@ -44,7 +47,7 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
   let greska = false;
   if (db) {
     try {
-      redovi = await rangLista(db, period, beogradskiDatum(), igrac?.id ?? null);
+      redovi = await rangLista(db, period, beogradskiDatum(), igrac?.id ?? null, period === "danas" ? NA_DNEVNOJ_LISTI : NAJVISE_NA_LISTI);
     } catch (e) {
       console.error("[rang lista]", e);
       greska = true;
@@ -52,7 +55,7 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
   }
   // Botovi su samo na dnevnoj listi; jasno su obeleženi i imaju svoje mesto.
   const botovi: Bot[] = period === "danas" && db && !greska ? botoviZaDan(beogradskiDatum()) : [];
-  const { vrh, ja: jaIspodVrha } = listaSaBotovima(redovi, botovi, NAJVISE_NA_LISTI);
+  const { vrh, ja: jaIspodVrha } = listaSaBotovima(redovi, botovi, period === "danas" ? NA_DNEVNOJ_LISTI + botovi.length : NAJVISE_NA_LISTI);
   const ja = redovi.find((r) => r.ja);
 
   // Samo lokalna proba (pokreni.bat): na listi su izmišljeni nalozi, da se vidi kako izgleda.

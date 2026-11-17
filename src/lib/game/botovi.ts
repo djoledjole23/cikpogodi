@@ -20,24 +20,79 @@ const OSNOVNA_IMENA = [
 ] as const;
 
 
-const PRVI = ["brzi", "ludi", "mali", "veliki", "tihi", "ljuti", "srecni", "pametni", "zeleni", "plavi", "crveni", "stari", "mladi", "hrabri", "lenji", "gladni", "snalazljivi", "veseli", "kul", "zlatni"];
-const DRUGI = ["Mile", "Zoki", "Gile", "Paja", "Steva", "Joca", "Laza", "Bata", "Cane", "Dule", "Raka", "Sima", "Vuk", "Zeka", "Lisac", "Medo", "Soko", "Orao", "Mrgud", "Kum"];
+/** Mali deterministički generator slučajnih brojeva (mulberry32): imena su ista pri svakom pokretanju. */
+function prng(seme: number): () => number {
+  let a = seme >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
-/** 500 imena botova: 100 ručno izmišljenih i 400 složenih (npr. brzi_Mile7). Uvek istim redom. */
-export const IMENA_BOTOVA: readonly string[] = (() => {
-  const imena: string[] = [...OSNOVNA_IMENA];
-  for (let i = 0; imena.length < 500; i++) {
-    imena.push(`${PRVI[i % PRVI.length]}_${DRUGI[Math.floor(i / PRVI.length) % DRUGI.length]}${i >= PRVI.length * DRUGI.length ? i : ""}`);
+const IMENA = ["marko", "nikola", "stefan", "luka", "milos", "nemanja", "aleksa", "uros", "filip", "vuk", "djordje", "petar", "lazar", "ognjen", "dusan", "jovan", "bogdan", "andrija", "mihajlo", "strahinja", "dragan", "zoran", "goran", "branko", "milan", "sasa", "dejan", "ivan", "ana", "jelena", "milica", "jovana", "teodora", "sara", "marija", "katarina", "ivana", "tamara", "nina", "kristina", "dragana", "snezana", "vesna", "maja", "tijana", "andjela", "sofija", "nevena", "ljilja", "gordana", "bojana", "sanja", "danica", "mina", "iva", "lena", "zoki", "gile", "cone", "bane", "boki", "peca", "sone", "mile", "raka", "dule", "joca", "zare", "kole", "mica", "beba", "seka", "goca", "ceca", "jeca", "buba", "caca", "lela"];
+const PREZIMENA = ["petrovic", "jovanovic", "nikolic", "markovic", "djordjevic", "stojanovic", "ilic", "pavlovic", "milosevic", "stankovic", "todorovic", "kostic", "popovic", "zivkovic", "mitic", "ristic", "savic", "lazic", "simic", "jankovic"];
+const RECI = ["burek", "kafa", "rakija", "sarma", "ajvar", "kajmak", "gibanica", "cevap", "pljeska", "mekika", "krofna", "kifla", "pekmez", "paprika", "sljiva", "dunja", "jabuka", "lubenica", "trotinet", "fica", "yugo", "zastava", "kombi", "traktor", "bicikla", "gitara", "harmonika", "truba", "frula", "lopta", "kocka", "sah", "remi", "tabla", "kviz", "slagalica", "mozak", "znalac", "pogadjac", "lisica", "vuk", "medved", "soko", "orao", "maca", "kuca", "jez", "zeka", "kornjaca", "puz", "pile", "patak", "gusan", "magarac", "konj", "sova", "svraka", "vrabac"];
+const PRIDEVI = ["ludi", "brzi", "mali", "veliki", "tihi", "ljuti", "srecni", "pametni", "stari", "mladi", "hrabri", "lenji", "gladni", "veseli", "zlatni", "crni", "beli", "divlji", "pospani", "nervozni", "ponosni", "tajni", "slatki", "zli", "dobri"];
+const GRADOVI = ["bg", "ns", "nis", "kg", "zajecar", "cacak", "uzice", "valjevo", "pirot", "vranje", "sabac", "smederevo", "kraljevo", "krusevac", "subotica", "zrenjanin", "pancevo", "leskovac", "bor", "negotin", "sombor", "loznica", "jagodina", "paracin", "novipazar", "prokuplje", "pozarevac", "kikinda", "vrsac", "obrenovac"];
+
+const velikoPrvo = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
+
+/** 400 imena u raznim stilovima, kao što ih ljudi stvarno smišljaju. */
+function slozenaImena(koliko: number, zauzeto: Set<string>): string[] {
+  const r = prng(20261117);
+  const iz = <T,>(niz: readonly T[]) => niz[Math.floor(r() * niz.length)];
+  const broj = () => {
+    const v = r();
+    if (v < 0.35) return String(1960 + Math.floor(r() * 50));
+    if (v < 0.6) return String(Math.floor(r() * 100)).padStart(2, "0");
+    if (v < 0.75) return String(Math.floor(r() * 1000));
+    return String(1 + Math.floor(r() * 9));
+  };
+  const obrasci: Array<() => string> = [
+    () => iz(IMENA) + broj(),
+    () => `${iz(IMENA)}_${broj()}`,
+    () => velikoPrvo(iz(IMENA)) + velikoPrvo(iz(PREZIMENA)).slice(0, 1 + Math.floor(r() * 5)),
+    () => `${iz(IMENA)}_${iz(PREZIMENA)}`,
+    () => `${iz(IMENA)}_${iz(GRADOVI)}`,
+    () => iz(IMENA) + iz(GRADOVI),
+    () => velikoPrvo(iz(PRIDEVI)) + velikoPrvo(iz(RECI)),
+    () => `${iz(PRIDEVI)}_${iz(RECI)}`,
+    () => iz(RECI) + broj(),
+    () => `${iz(RECI)}_${iz(GRADOVI)}`,
+    () => iz(RECI) + velikoPrvo(iz(RECI)),
+    () => `${iz(IMENA)}${iz(IMENA).slice(-1).repeat(2 + Math.floor(r() * 3))}`,
+    () => `${iz(["the", "mr", "gospodin", "kralj", "car", "sef", "doktor", "majstor", "baja"])}_${iz(IMENA)}`,
+    () => `${iz(IMENA)}${iz(["xd", "lol", "kg", "pro", "car", "brt", "bg", "fan", "jr"])}`,
+    () => iz(PREZIMENA) + broj(),
+    () => velikoPrvo(iz(IMENA)) + broj(),
+    () => `${iz(RECI)}${iz(["majstor", "lover", "king", "fan", "dzija", "car", "boss"])}`,
+  ];
+  const izlaz: string[] = [];
+  while (izlaz.length < koliko) {
+    const ime = iz(obrasci)().slice(0, 20);
+    const kljuc = ime.toLowerCase();
+    if (ime.length < 3 || zauzeto.has(kljuc)) continue;
+    zauzeto.add(kljuc);
+    izlaz.push(ime);
   }
-  return imena;
+  return izlaz;
+}
+
+/** 500 imena botova: 100 ručno izmišljenih i 400 složenih u raznim stilovima. Uvek ista. */
+export const IMENA_BOTOVA: readonly string[] = (() => {
+  const zauzeto = new Set(OSNOVNA_IMENA.map((x) => x.toLowerCase()));
+  return [...OSNOVNA_IMENA, ...slozenaImena(500 - OSNOVNA_IMENA.length, zauzeto)];
 })();
 
-export const BOT_POENI_OD = 50;
-export const BOT_POENI_DO = 110;
+export const BOT_POENI_OD = 20;
+export const BOT_POENI_DO = 220;
 
 export type Bot = { ime: string; poeni: number; vremeMs: number };
 
-/** Mali stabilan heš (FNV-1a): isti bot istog dana uvek ima iste poene. */
+/** Mali stabilan heš (FNV-1a): isti dan uvek daje isti raspored. */
 function hes(tekst: string): number {
   let h = 0x811c9dc5;
   for (let i = 0; i < tekst.length; i++) {
@@ -47,16 +102,21 @@ function hes(tekst: string): number {
   return h >>> 0;
 }
 
-/** Svi botovi za jedan dan, od najviše poena naniže. */
+/**
+ * Svi botovi za jedan dan, od najviše poena naniže. Poeni su ravnomerno raspoređeni od 220 do 20
+ * (svaki broj poena ima najviše dva-tri bota), a ko dobija koje mesto menja se svaki dan.
+ */
 export function botoviZaDan(datum: string): Bot[] {
-  return IMENA_BOTOVA.map((ime) => {
-    const h = hes(`${datum}|${ime}`);
-    return {
+  const r = prng(hes(datum));
+  const izmesano = IMENA_BOTOVA.map((ime) => ({ ime, k: r() })).sort((a, b) => a.k - b.k);
+  const n = izmesano.length;
+  return izmesano
+    .map(({ ime }, i) => ({
       ime,
-      poeni: BOT_POENI_OD + (h % (BOT_POENI_DO - BOT_POENI_OD + 1)),
-      vremeMs: 120_000 + ((h >>> 8) % 150_000),
-    };
-  }).sort((a, b) => b.poeni - a.poeni || a.vremeMs - b.vremeMs);
+      poeni: Math.round(BOT_POENI_DO - (i * (BOT_POENI_DO - BOT_POENI_OD)) / (n - 1)),
+      vremeMs: 70_000 + Math.floor(r() * 200_000),
+    }))
+    .sort((a, b) => b.poeni - a.poeni || a.vremeMs - b.vremeMs);
 }
 
 /** Koliko botova je ispred igrača sa ovim brojem poena (kod istog broja poena pravi igrač ide ispred). */
@@ -83,7 +143,7 @@ export function listaSaBotovima<T extends { mesto: number; poeni: number; ja: bo
     red,
   }));
   const sve: RedSaBotom<T>[] = [...ljudi, ...masine].sort((a, b) => a.mesto - b.mesto || Number(a.bot) - Number(b.bot));
-  const vrh = sve.filter((r) => r.mesto <= najvise).slice(0, najvise + 10);
+  const vrh = sve.filter((r) => r.mesto <= najvise).slice(0, najvise);
   const moj = ljudi.find((r) => r.red.ja) ?? null;
   return { vrh, ja: moj && !vrh.includes(moj) ? moj : null };
 }

@@ -1,11 +1,14 @@
 import { describe, it, expect } from "vitest";
 import { IMENA_BOTOVA as PROBNA_IMENA } from "@/lib/game/botovi";
-import { USERNAME_REGEX } from "@/lib/username";
+import { USERNAME_REGEX, imaPsovku } from "@/lib/username";
 describe("probna imena", () => {
   it("500 jedinstvenih, ispravnih imena", () => {
     expect(PROBNA_IMENA.length).toBe(500);
     expect(new Set(PROBNA_IMENA.map((x) => x.toLowerCase())).size).toBe(500);
-    for (const ime of PROBNA_IMENA) expect(ime, ime).toMatch(USERNAME_REGEX);
+    for (const ime of PROBNA_IMENA) {
+      expect(ime, ime).toMatch(USERNAME_REGEX);
+      expect(imaPsovku(ime), ime).toBe(false);
+    }
   });
 });
 
@@ -19,6 +22,12 @@ describe("botovi", () => {
       expect(b.poeni).toBeGreaterThanOrEqual(BOT_POENI_OD);
       expect(b.poeni).toBeLessThanOrEqual(BOT_POENI_DO);
     }
+  });
+  it("poeni su raznoliki: nijedan broj poena nema više od 3 bota", () => {
+    const brojac = new Map<number, number>();
+    for (const b of botoviZaDan("2026-11-17")) brojac.set(b.poeni, (brojac.get(b.poeni) ?? 0) + 1);
+    expect(Math.max(...brojac.values())).toBeLessThanOrEqual(3);
+    expect(botoviZaDan("2026-11-17")[0].ime).not.toBe(botoviZaDan("2026-11-18")[0].ime);
   });
   it("mesta: botovi i ljudi zajedno, ljudi ispred kod istog broja poena", () => {
     const botovi = [{ ime: "b1", poeni: 100, vremeMs: 1 }, { ime: "b2", poeni: 80, vremeMs: 1 }];
