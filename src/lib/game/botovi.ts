@@ -90,7 +90,7 @@ export const IMENA_BOTOVA: readonly string[] = (() => {
 export const BOT_POENI_OD = 20;
 export const BOT_POENI_DO = 220;
 
-export type Bot = { ime: string; poeni: number; vremeMs: number };
+export type Bot = { ime: string; poeni: number; vremeMs: number; igara?: number };
 
 /** Mali stabilan heš (FNV-1a): isti dan uvek daje isti raspored. */
 function hes(tekst: string): number {
@@ -117,6 +117,28 @@ export function botoviZaDan(datum: string): Bot[] {
       vremeMs: 70_000 + Math.floor(r() * 200_000),
     }))
     .sort((a, b) => b.poeni - a.poeni || a.vremeMs - b.vremeMs);
+}
+
+/** Od ovog dana botovi „igraju”: nedeljna i ukupna lista sabiraju njihove dane od tada. */
+export const POCETAK_BOTOVA = "2026-11-17";
+
+/** Zbir botova za period (nedelja ili ukupno): svaki dan od `od` (ali ne pre POCETAK_BOTOVA) do `doDana`. */
+export function botoviZaPeriod(od: string | null, doDana: string): Bot[] {
+  let dan = od && od > POCETAK_BOTOVA ? od : POCETAK_BOTOVA;
+  const zbir = new Map<string, Bot>();
+  while (dan <= doDana) {
+    for (const b of botoviZaDan(dan)) {
+      const z = zbir.get(b.ime);
+      if (z) {
+        z.poeni += b.poeni;
+        z.vremeMs += b.vremeMs;
+        z.igara = (z.igara ?? 0) + 1;
+      } else zbir.set(b.ime, { ...b, igara: 1 });
+    }
+    const [g, m, d] = dan.split("-").map(Number);
+    dan = new Date(Date.UTC(g, m - 1, d + 1)).toISOString().slice(0, 10);
+  }
+  return [...zbir.values()].sort((a, b) => b.poeni - a.poeni || a.vremeMs - b.vremeMs);
 }
 
 /** Koliko botova je ispred igrača sa ovim brojem poena (kod istog broja poena pravi igrač ide ispred). */

@@ -6,8 +6,8 @@ import { Avatar } from "@/components/Avatar";
 import { Page } from "@/components/Page";
 import { getIgrac } from "@/lib/auth";
 import { getDb } from "@/lib/db";
-import { botoviZaDan, listaSaBotovima, type Bot, type RedSaBotom } from "@/lib/game/botovi";
-import { jePeriod, NAJVISE_NA_LISTI, NAZIV_PERIODA, PERIODI, rangLista, type Period, type RedListe } from "@/lib/game/lista";
+import { botoviZaDan, botoviZaPeriod, listaSaBotovima, type Bot, type RedSaBotom } from "@/lib/game/botovi";
+import { granicePerioda, jePeriod, NAZIV_PERIODA, PERIODI, rangLista, type Period, type RedListe } from "@/lib/game/lista";
 import { beogradskiDatum } from "@/lib/time";
 
 export const metadata: Metadata = { title: "Rang lista" };
@@ -47,15 +47,16 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
   let greska = false;
   if (db) {
     try {
-      redovi = await rangLista(db, period, beogradskiDatum(), igrac?.id ?? null, period === "danas" ? NA_DNEVNOJ_LISTI : NAJVISE_NA_LISTI);
+      redovi = await rangLista(db, period, beogradskiDatum(), igrac?.id ?? null, NA_DNEVNOJ_LISTI);
     } catch (e) {
       console.error("[rang lista]", e);
       greska = true;
     }
   }
-  // Botovi su samo na dnevnoj listi; jasno su obeleženi i imaju svoje mesto.
-  const botovi: Bot[] = period === "danas" && db && !greska ? botoviZaDan(beogradskiDatum()) : [];
-  const { vrh, ja: jaIspodVrha } = listaSaBotovima(redovi, botovi, period === "danas" ? NA_DNEVNOJ_LISTI + botovi.length : NAJVISE_NA_LISTI);
+  // Botovi imaju svoje mesto; na nedeljnoj i ukupnoj listi sabiraju se njihovi dani.
+  const danas = beogradskiDatum();
+  const botovi: Bot[] = !db || greska ? [] : period === "danas" ? botoviZaDan(danas) : botoviZaPeriod(granicePerioda(period, danas).od, danas);
+  const { vrh, ja: jaIspodVrha } = listaSaBotovima(redovi, botovi, NA_DNEVNOJ_LISTI + botovi.length);
   const ja = redovi.find((r) => r.ja);
 
   // Samo lokalna proba (pokreni.bat): na listi su izmišljeni nalozi, da se vidi kako izgleda.
@@ -119,7 +120,28 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
   );
 }
 
+/** Bot na nedeljnoj i ukupnoj listi: obeležen oznakom BOT. */
+function RedBota({ bot: b, mesto }: { bot: Bot; mesto: number }) {
+  const igara = b.igara ?? 1;
+  return (
+    <li className="rang-red bot">
+      <span className="rang-mesto">{mesto}.</span>
+      <Avatar seme={`bot:${b.ime}`} size={40} />
+      <span className="rang-ime">
+        <strong>
+          {b.ime} <span className="rang-bot">bot</span>
+        </strong>
+        <small>
+          {igara} {igara === 1 ? "igra" : igara % 10 >= 2 && igara % 10 <= 4 && (igara % 100 < 10 || igara % 100 >= 20) ? "igre" : "igara"}
+        </small>
+      </span>
+      <span className="rang-poeni">{b.poeni}</span>
+    </li>
+  );
+}
+
 function Red({ red: s, period }: { red: RedSaBotom<RedListe>; period: Period }) {
+  if (s.bot && period !== "danas") return <RedBota bot={s.red} mesto={s.mesto} />;
   if (s.bot) {
     const b = s.red;
     return (

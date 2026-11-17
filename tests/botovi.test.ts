@@ -45,3 +45,15 @@ describe("botovi", () => {
     expect(ja).toMatchObject({ mesto: 3 });
   });
 });
+
+import { botoviZaPeriod, POCETAK_BOTOVA } from "@/lib/game/botovi";
+describe("botovi za period", () => {
+  it("sabira dane od početka botova", () => {
+    const dva = botoviZaPeriod(null, "2026-11-18");
+    const a = botoviZaDan(POCETAK_BOTOVA).find((b) => b.ime === "tastaturaratnik")!;
+    const b = botoviZaDan("2026-11-18").find((b) => b.ime === "tastaturaratnik")!;
+    expect(dva.find((x) => x.ime === "tastaturaratnik")).toMatchObject({ poeni: a.poeni + b.poeni, igara: 2 });
+    expect(dva).toHaveLength(500);
+    expect(botoviZaPeriod("2026-11-16", "2026-11-17")[0].igara).toBe(1);
+  });
+});
