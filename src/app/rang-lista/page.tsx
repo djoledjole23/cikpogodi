@@ -129,7 +129,7 @@ function RedBota({ bot: b, mesto }: { bot: Bot; mesto: number }) {
       <Avatar seme={`bot:${b.ime}`} size={40} />
       <span className="rang-ime">
         <strong>
-         <strong>{b.ime}</strong>
+        <strong>{b.ime}</strong>
         </strong>
         <small>
           {igara} {igara === 1 ? "igra" : igara % 10 >= 2 && igara % 10 <= 4 && (igara % 100 < 10 || igara % 100 >= 20) ? "igre" : "igara"}
