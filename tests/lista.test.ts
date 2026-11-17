@@ -1,3 +1,4 @@
+import { botoviZaDan, botovaIspred } from "@/lib/game/botovi";
 /**
  * Čuvanje rezultata i rang lista:
  *  - gost: rezultat nije na listi; prijavljen sa potvrđenim mejlom: odmah na listi; nepotvrđen: „na čekanju”
@@ -82,7 +83,8 @@ describe("čuvanje rezultata", () => {
     const id = await nalog("Mile");
     const ja: Identitet = { userId: id, deviceId: uredjaj() };
     const s = await dopuniStanje(db, ja, await odigraj(ja, DAN), true);
-    expect(s).toMatchObject({ lista: "counted", prijavljen: true, mesto: 1 });
+    // Na dnevnoj listi su i botovi: mesto = 1 među ljudima + botovi sa više poena.
+    expect(s).toMatchObject({ lista: "counted", prijavljen: true, mesto: 1 + botovaIspred(botoviZaDan(DAN), s.score) });
     expect(await mestoNaListi(db, id, DAN)).toBe(1);
   });
 

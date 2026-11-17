@@ -6,6 +6,7 @@ import { Avatar } from "@/components/Avatar";
 import { Page } from "@/components/Page";
 import { getIgrac } from "@/lib/auth";
 import { getDb } from "@/lib/db";
+import { botoviZaDan, listaSaBotovima, type Bot, type RedSaBotom } from "@/lib/game/botovi";
 import { jePeriod, NAJVISE_NA_LISTI, NAZIV_PERIODA, PERIODI, rangLista, type Period, type RedListe } from "@/lib/game/lista";
 import { beogradskiDatum } from "@/lib/time";
 
@@ -49,9 +50,10 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
       greska = true;
     }
   }
-  const vrh = redovi.filter((r) => r.mesto <= NAJVISE_NA_LISTI);
+  // Botovi su samo na dnevnoj listi; jasno su obeleženi i imaju svoje mesto.
+  const botovi: Bot[] = period === "danas" && db && !greska ? botoviZaDan(beogradskiDatum()) : [];
+  const { vrh, ja: jaIspodVrha } = listaSaBotovima(redovi, botovi, NAJVISE_NA_LISTI);
   const ja = redovi.find((r) => r.ja);
-  const jaIspodVrha = ja && !vrh.includes(ja) ? ja : null;
 
   // Samo lokalna proba (pokreni.bat): na listi su izmišljeni nalozi, da se vidi kako izgleda.
   const proba = process.env.CP_PROBNA_LISTA === "1" && !process.env.DATABASE_URL;
@@ -79,7 +81,7 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
       ) : (
         <ol className="rang">
           {vrh.map((r) => (
-            <Red key={r.userId} red={r} period={period} />
+            <Red key={r.bot ? `bot:${r.red.ime}` : r.red.userId} red={r} period={period} />
           ))}
           {jaIspodVrha && (
             <>
@@ -114,10 +116,27 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
   );
 }
 
-function Red({ red: r, period }: { red: RedListe; period: Period }) {
+function Red({ red: s, period }: { red: RedSaBotom<RedListe>; period: Period }) {
+  if (s.bot) {
+    const b = s.red;
+    return (
+      <li className="rang-red bot">
+        <span className="rang-mesto">{s.mesto}.</span>
+        <Avatar seme={`bot:${b.ime}`} size={40} />
+        <span className="rang-ime">
+          <strong>
+            {b.ime} <span className="rang-bot">bot</span>
+          </strong>
+          <small>{vreme(b.vremeMs)} odgovaranja</small>
+        </span>
+        <span className="rang-poeni">{b.poeni}</span>
+      </li>
+    );
+  }
+  const r = s.red;
   return (
     <li className={r.ja ? "rang-red ja" : "rang-red"} aria-current={r.ja ? "true" : undefined}>
-      <span className={r.mesto <= 3 ? `rang-mesto top${r.mesto}` : "rang-mesto"}>{r.mesto}.</span>
+      <span className={s.mesto <= 3 ? `rang-mesto top${s.mesto}` : "rang-mesto"}>{s.mesto}.</span>
       <Avatar seme={r.userId} size={40} />
       <span className="rang-ime">
         <strong>{r.username}</strong>

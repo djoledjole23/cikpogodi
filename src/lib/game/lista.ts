@@ -1,4 +1,5 @@
 import type { Db } from "@/lib/db/types";
+import { botoviZaDan, botovaIspred } from "./botovi";
 import { dodajDane, pocetakNedelje } from "@/lib/time";
 import type { Identitet, Stanje } from "./types";
 
@@ -70,7 +71,9 @@ export async function mestoNaListi(db: Db, userId: string, datum: string): Promi
 export async function dopuniStanje(db: Db, ident: Identitet, stanje: Stanje, nalozi: boolean, probnaBaza = false): Promise<Stanje> {
   const dopunjeno: Stanje = { ...stanje, prijavljen: Boolean(ident.userId), nalozi, probnaBaza };
   if (stanje.status === "zavrseno" && stanje.lista === "counted" && ident.userId) {
-    dopunjeno.mesto = await mestoNaListi(db, ident.userId, stanje.datum);
+    const mesto = await mestoNaListi(db, ident.userId, stanje.datum);
+    // Isto mesto kao na dnevnoj listi, gde su i botovi.
+    dopunjeno.mesto = mesto === null ? null : mesto + botovaIspred(botoviZaDan(stanje.datum), stanje.score);
   }
   if (stanje.status === "zavrseno") {
     const [red] = await db.query<{ n: number }>(
