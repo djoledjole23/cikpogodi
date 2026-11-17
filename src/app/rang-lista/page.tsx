@@ -128,7 +128,7 @@ function Red({ red: s, period }: { red: RedSaBotom<RedListe>; period: Period }) 
         <Avatar seme={`bot:${b.ime}`} size={40} />
         <span className="rang-ime">
           <strong>
-            {b.ime}
+            <strong>{b.ime}</strong>
           </strong>
           <small>{vreme(b.vremeMs)} odgovaranja</small>
         </span>
