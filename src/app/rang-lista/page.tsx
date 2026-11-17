@@ -120,7 +120,7 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
   );
 }
 
-/** Bot na nedeljnoj i ukupnoj listi: obeležen oznakom BOT. */
+/** Prikaz virtuelnog igrača na nedeljnoj i ukupnoj listi. */
 function RedBota({ bot: b, mesto }: { bot: Bot; mesto: number }) {
   const igara = b.igara ?? 1;
   return (
