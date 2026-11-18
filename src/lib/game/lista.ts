@@ -77,5 +77,7 @@ export async function dopuniStanje(db: Db, ident: Identitet, stanje: Stanje, nal
     dopunjeno.mesto = mesto === null ? null : mesto + botovaIspred(botoviZaDan(stanje.datum), stanje.score);
   }
   if (stanje.status === "zavrseno") dopunjeno.niz = await nizDana(db, ident, stanje.datum);
+  // Gost ne dobija pregled odgovora dok ne napravi nalog ili se ne prijavi (kad nalozi rade).
+  if (stanje.status === "zavrseno" && !ident.userId && nalozi) delete dopunjeno.rezultat;
   return dopunjeno;
 }

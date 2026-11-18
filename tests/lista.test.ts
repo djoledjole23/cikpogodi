@@ -239,3 +239,17 @@ describe("pregled na kraju igre", () => {
     expect(posle.rezultat!.filter((r) => r.prikaz.vrsta !== "cena").every((r) => !r.istek)).toBe(true);
   });
 });
+
+describe("gost bez naloga", () => {
+  it("ne dobija pregled odgovora kad nalozi rade, a dobija ga posle prijave", async () => {
+    const gost: Identitet = { userId: null, deviceId: uredjaj() };
+    const kraj = await odigraj(gost, PONEDELJAK);
+    expect((await dopuniStanje(db, gost, kraj, true)).rezultat).toBeUndefined();
+    // Lokalno, bez Supabase-a (nema naloga), pregled ostaje da bi igra mogla da se proba.
+    expect((await dopuniStanje(db, gost, kraj, false)).rezultat?.length).toBeGreaterThan(0);
+
+    const ja: Identitet = { userId: await nalog("Gost2"), deviceId: gost.deviceId };
+    const posle = await dopuniStanje(db, ja, await stanjeIgre(db, ja, PONEDELJAK), true);
+    expect(posle.rezultat?.length).toBeGreaterThan(0);
+  });
+});

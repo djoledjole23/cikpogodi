@@ -26,6 +26,7 @@ export function Zaglavlje({
   tok,
   niz = 0,
   zbir,
+  sakrijZbir = false,
 }: {
   segment?: number;
   pozicija?: number;
@@ -33,6 +34,8 @@ export function Zaglavlje({
   tok?: (0 | 1 | 2)[];
   niz?: number;
   zbir: number;
+  /** Gost na kraju igre: poeni se ne vide dok ne napravi nalog. */
+  sakrijZbir?: boolean;
 }) {
   const prikaz = useBrojac(zbir);
   const [skok, setSkok] = useState(false);
@@ -83,10 +86,12 @@ export function Zaglavlje({
             <IconVatra size={16} strokeWidth={2.8} />x{niz}
           </span>
         )}
-        <p id="g-zbir" className={skok ? "g-zbir skok" : "g-zbir"} aria-live="polite">
-          <span className="sr-only">Zbir: </span>
-          <strong>{broj(prikaz)}</strong> <span>poena</span>
-        </p>
+        {!sakrijZbir && (
+          <p id="g-zbir" className={skok ? "g-zbir skok" : "g-zbir"} aria-live="polite">
+            <span className="sr-only">Zbir: </span>
+            <strong>{broj(prikaz)}</strong> <span>poena</span>
+          </p>
+        )}
       </div>
       <SoundToggle />
     </header>
@@ -259,7 +264,7 @@ export function KrajSegmenta({ segment, naDalje }: { segment: SegmentStanje; naD
  * Odmah ispod poena: veliko dugme ka rang listi.
  * Ko je na listi vidi svoje mesto, gost dobija poziv da sačuva rezultat.
  */
-function StatusListe({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => void }) {
+function StatusListe({ stanje }: { stanje: Stanje }) {
   if (stanje.lista === "counted") {
     return (
       <div className="stack">
@@ -281,28 +286,8 @@ function StatusListe({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => v
       </div>
     );
   }
-  return (
-    <div className="stack">
-      {stanje.nalozi && (
-        <button
-          type="button"
-          className="btn btn-lg g-cta-lista"
-          onClick={() => {
-            sfx.klik();
-            naSacuvaj();
-          }}
-        >
-          Uđi na rang listu
-        </button>
-      )}
-      <p className="small muted center">
-        Ovaj rezultat još nije na listi.{" "}
-        <Link href="/rang-lista" className="text-link tap">
-          Samo pogledaj listu
-        </Link>
-      </p>
-    </div>
-  );
+  // Gost bez naloga ovde stiže samo kad nalozi ne rade (lokalno, bez Supabase-a).
+  return null;
 }
 
 /** „Podeli”: tekst sa kvadratićima kao kod Wordle-a. Telefon otvara deljenje, računar kopira tekst. */
@@ -341,7 +326,7 @@ function Podeli({ stanje }: { stanje: Stanje }) {
   );
 }
 
-export function Kraj({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => void }) {
+export function Kraj({ stanje }: { stanje: Stanje }) {
   const max = stanje.segmenti.reduce((z, s) => z + s.max, 0);
   return (
     <section className="stack-lg">
@@ -355,7 +340,7 @@ export function Kraj({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => v
 
       {stanje.niz && <NizDanaKartica niz={stanje.niz} datum={stanje.datum} />}
 
-      <StatusListe stanje={stanje} naSacuvaj={naSacuvaj} />
+      <StatusListe stanje={stanje} />
       <Podeli stanje={stanje} />
 
       {stanje.segmenti.map((seg) => (
