@@ -187,6 +187,13 @@ export type StavkaRezultata = {
 /** none: rezultat nije na rang listi (gost) · pending: čeka potvrdu mejla · counted: na listi */
 export type StanjeListe = "none" | "pending" | "counted";
 
+/** Koliko dana zaredom je igrač završio kviz (zaključno sa današnjim). */
+export type NizDana = {
+  dana: number;
+  /** Prvi dan novog niza, a igrač je igrao i ranije (niz je pukao). */
+  vracanje: boolean;
+};
+
 export type Stanje = {
   status:
     | "nije_povezano" // nema baze
@@ -204,10 +211,10 @@ export type Stanje = {
   rezultat?: StavkaRezultata[];
   /** Samo kad je igra završena: da li je rezultat na rang listi. */
   lista?: StanjeListe;
+  /** Niz dana zaredom (samo kad je igra završena). Dodaje ga API ruta. */
+  niz?: NizDana;
   /** Mesto na današnjoj listi (samo kad je rezultat na listi). */
   mesto?: number | null;
-  /** Koliko je ljudi danas odigralo do kraja (gosti i nalozi). Samo kad je igra završena. */
-  igralo?: number;
   /** Da li je igrač prijavljen i da li nalozi uopšte rade (Supabase povezan). Dodaje ih API ruta. */
   prijavljen?: boolean;
   nalozi?: boolean;

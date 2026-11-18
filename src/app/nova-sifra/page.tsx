@@ -12,7 +12,7 @@ export default function NovaSifra() {
     <Page>
       <div className="stack">
         <h1 className="h1">Promeni lozinku</h1>
-        <p className="lead">Smisli novu, pa je ovaj put negde i zapi\u0161i.</p>
+        <p className="lead">Smisli novu, pa je ovaj put negde i zapiši.</p>
       </div>
       <Suspense fallback={<div className="skeleton" style={{ height: 220 }} aria-hidden="true" />}>
         <Sadrzaj />

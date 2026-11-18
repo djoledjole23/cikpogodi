@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { IconCena, IconStikla } from "@/components/icons";
-import { din } from "@/lib/format";
+import { din, ocistiUnosCene, procitajCenu } from "@/lib/format";
 import type { Ocena, PitanjeCena, PrikazCena } from "@/lib/game/types";
 import { sfx } from "@/lib/sound";
 import { Konfete, Nalepnica, Pecat, smanjenoKretanje, useBrojac } from "./efekti";
@@ -56,8 +56,8 @@ export function CenaPitanje({
     polje.current?.focus({ preventScroll: true });
   }, []);
 
-  const unos = Number(vrednost);
-  const mozeDaPosalje = vrednost !== "" && unos > 0 && !zakljucano;
+  const unos = procitajCenu(vrednost);
+  const mozeDaPosalje = Number.isFinite(unos) && unos > 0 && !zakljucano;
 
   return (
     <section className="g-pitanje">
@@ -80,14 +80,16 @@ export function CenaPitanje({
               ref={polje}
               id="g-cena"
               type="text"
-              inputMode="numeric"
-              pattern="[0-9]*"
+              inputMode="decimal"
               autoComplete="off"
               enterKeyHint="done"
               placeholder="0"
               value={vrednost}
               disabled={zakljucano}
-              onChange={(e) => setVrednost(e.target.value.replace(/\D/g, "").replace(/^0+/, "").slice(0, NAJVISE_CIFARA))}
+              onChange={(e) => {
+                const ocisceno = ocistiUnosCene(e.target.value, NAJVISE_CIFARA);
+                if (ocisceno !== null) setVrednost(ocisceno);
+              }}
             />
             <span aria-hidden="true">din</span>
           </div>

@@ -6,6 +6,7 @@ import { Avatar } from "@/components/Avatar";
 import { Page } from "@/components/Page";
 import { getIgrac } from "@/lib/auth";
 import { getDb } from "@/lib/db";
+import { supabasePodesen } from "@/lib/supabase/env";
 import { botoviZaDan, botoviZaPeriod, listaSaBotovima, type Bot, type RedSaBotom } from "@/lib/game/botovi";
 import { granicePerioda, jePeriod, NAZIV_PERIODA, PERIODI, rangLista, type Period, type RedListe } from "@/lib/game/lista";
 import { beogradskiDatum } from "@/lib/time";
@@ -41,6 +42,8 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
   const trazeno = (await searchParams).period;
   const period: Period = jePeriod(trazeno) ? trazeno : "danas";
   const igrac = await getIgrac();
+  // Rang lista je samo za igrače sa nalogom (kad nalozi rade). Gost dobija poziv da napravi nalog.
+  if (!igrac && supabasePodesen()) return <SamoZaNaloge />;
   const db = await getDb();
 
   let redovi: RedListe[] = [];
@@ -115,6 +118,22 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
 
       <Link href="/" className="btn btn-ghost">
         Nazad na početnu
+      </Link>
+    </div>
+  );
+}
+
+/** Gost bez naloga: umesto liste, poziv da se prijavi ili napravi nalog. */
+function SamoZaNaloge() {
+  return (
+    <div className="stack-lg">
+      <p className="lead">
+        <span aria-hidden="true">🔒</span> Rang listu vide samo igrači sa nalogom. Treba ti samo nadimak i lozinka, bez mejla.</p>
+      <Link href="/registracija?next=/rang-lista" className="btn btn-lg">
+        Napravi nalog
+      </Link>
+      <Link href="/prijava?next=/rang-lista" className="btn btn-ghost">
+        Već imaš nalog? Prijavi se
       </Link>
     </div>
   );

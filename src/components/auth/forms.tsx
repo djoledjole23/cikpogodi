@@ -37,7 +37,7 @@ const PROVAJDERI: Provajder[] = [
 ];
 
 const NAZIV: Record<Provajder, string> = { google: "Nastavi sa Google", apple: "Nastavi sa Apple" };
-const CEKA: Record<Provajder, string> = { google: "Otvaram Google\u2026", apple: "Otvaram Apple\u2026" };
+const CEKA: Record<Provajder, string> = { google: "Otvaram Google…", apple: "Otvaram Apple…" };
 
 export function oauthUkljucen() {
   return PROVAJDERI.length > 0;
@@ -50,7 +50,7 @@ export function OAuthDugmad({ next = "/" }: { next?: string }) {
   async function nastavi(provider: Provajder) {
     setGreska(null);
     if (!supabasePodesen()) {
-      setGreska("Prijava preko Google i Apple naloga jo\u0161 nije povezana.");
+      setGreska("Prijava preko Google i Apple naloga još nije povezana.");
       return;
     }
     setCeka(provider);
@@ -99,7 +99,7 @@ export function RegistracijaForma({ next = "/", dugme = "Napravi nalog" }: { nex
       <Field
         name="username"
         label="Nadimak"
-        hint={`${KORISNICKO_IME.min}\u2013${KORISNICKO_IME.max} znakova. Ovim se prijavljuje\u0161 i ovo se vidi na rang listi.`}
+        hint={`${KORISNICKO_IME.min}–${KORISNICKO_IME.max} znakova. Ovim se prijavljuješ i ovo se vidi na rang listi.`}
         error={stanje.polja?.username}
         defaultValue={stanje.vrednosti?.username}
         autoComplete="username"
@@ -118,13 +118,13 @@ export function RegistracijaForma({ next = "/", dugme = "Napravi nalog" }: { nex
         required
       />
       <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "Pravim nalog\u2026" : dugme}
+        {ceka ? "Pravim nalog…" : dugme}
       </button>
       <p className="small muted center">
-        Nema mejla i nema potvr\u0111ivanja \u2014 zapamti nadimak i lozinku, jer zaboravljena lozinka ne mo\u017ee da se vrati.
+        Nema mejla i nema potvrđivanja — zapamti nadimak i lozinku, jer zaboravljena lozinka ne može da se vrati.
       </p>
       <p className="small muted center">
-        Pravljenjem naloga prihvata\u0161 <Link href="/uslovi-koriscenja">uslove kori\u0161\u0107enja</Link> i{" "}
+        Pravljenjem naloga prihvataš <Link href="/uslovi-koriscenja">uslove korišćenja</Link> i{" "}
         <Link href="/pravila-privatnosti">pravila privatnosti</Link>.
       </p>
     </form>
@@ -151,7 +151,7 @@ export function PrijavaForma({ next = "/" }: { next?: string }) {
       />
       <Field name="sifra" type="password" label="Lozinka" autoComplete="current-password" required />
       <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "Prijavljujem\u2026" : "Prijavi se"}
+        {ceka ? "Prijavljujem…" : "Prijavi se"}
       </button>
     </form>
   );
@@ -167,7 +167,7 @@ export function NovaSifraForma() {
       <Field
         name="stara"
         type="password"
-        label="Sada\u0161nja lozinka"
+        label="Sadašnja lozinka"
         error={stanje.polja?.stara}
         autoComplete="current-password"
         required
@@ -182,7 +182,7 @@ export function NovaSifraForma() {
         required
       />
       <button type="submit" className="btn" disabled={ceka}>
-        {ceka ? "\u010cuvam\u2026" : "Sa\u010duvaj novu lozinku"}
+        {ceka ? "Čuvam…" : "Sačuvaj novu lozinku"}
       </button>
     </form>
   );

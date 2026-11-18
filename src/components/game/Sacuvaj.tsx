@@ -3,20 +3,16 @@
 import Link from "next/link";
 import { OAuthDugmad, OAuthRazdvojnik, RegistracijaForma } from "@/components/auth/forms";
 import type { Stanje } from "@/lib/game/types";
-import { kolikoIgralo } from "@/lib/padezi";
-import { sfx } from "@/lib/sound";
-
-/** Ispod ovog broja ne pišemo koliko je ljudi igralo: „igralo 2 čoveka” više odbija nego što privlači. */
-const PRIKAZI_OD = 5;
+import { NizDanaKartica } from "./Niz";
 
 /**
  * Kraj igre za gosta: rezultat je zamagljen, a odmah ispod je registracija
- * (nadimak + lozinka) i veliko dugme koje vodi pravo na rang listu.
+ * (nadimak + lozinka) i veliko dugme koje vodi pravo na rang listu. Preskakanja nema:
+ * bez naloga nema ni poena ni rang liste.
  * Ko je već prijavljen ovaj ekran ne vidi (rezultat mu se čuva sam).
  */
-export function SacuvajRezultat({ stanje, naPreskoci }: { stanje: Stanje; naPreskoci: () => void }) {
+export function SacuvajRezultat({ stanje }: { stanje: Stanje }) {
   const max = stanje.segmenti.reduce((z, s) => z + s.max, 0);
-  const igralo = stanje.igralo ?? 0;
   return (
     <section className="stack-lg g-sacuvaj">
       <p className="g-uvod-broj">Gotovo za danas</p>
@@ -31,9 +27,10 @@ export function SacuvajRezultat({ stanje, naPreskoci }: { stanje: Stanje; naPres
         </p>
       </div>
 
+      {stanje.niz && <NizDanaKartica niz={stanje.niz} datum={stanje.datum} />}
+
       <div className="stack">
         <h1 className="h1">Upiši nadimak i vidi gde si na rang listi</h1>
-        {igralo >= PRIKAZI_OD && <p className="lead">{kolikoIgralo(igralo)}</p>}
       </div>
 
       {stanje.nalozi ? (
@@ -59,16 +56,6 @@ export function SacuvajRezultat({ stanje, naPreskoci }: { stanje: Stanje; naPres
         </p>
       )}
 
-      <button
-        type="button"
-        className="g-tekst-dugme"
-        onClick={() => {
-          sfx.klik();
-          naPreskoci();
-        }}
-      >
-        Ne sada, samo mi pokaži poene
-      </button>
     </section>
   );
 }
