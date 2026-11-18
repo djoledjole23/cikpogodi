@@ -212,3 +212,30 @@ describe("tekst za deljenje", () => {
     );
   });
 });
+
+describe("pregled na kraju igre", () => {
+  it("pokazuje šta je igrač odgovorio, i za stare odgovore sačuvane kao JSON tekst", async () => {
+    const ja: Identitet = { userId: null, deviceId: uredjaj() };
+    const kraj = await odigraj(ja, SUTRA);
+    const cene = () => kraj.rezultat!.filter((r) => r.prikaz.vrsta === "cena");
+    expect(cene().every((r) => r.prikaz.vrsta === "cena" && r.prikaz.unos === 1)).toBe(true);
+
+    // Ovako su odgovori završavali u Supabase-u pre ispravke: jsonb string umesto objekta.
+    await pg.query(
+      `update public.play_answers set answer = to_jsonb(answer::text)
+       where play_id = (select id from public.plays where device_id = $1::uuid and quiz_date = $2::date)`,
+      [ja.deviceId, SUTRA],
+    );
+    const { rows } = await pg.query<{ t: string }>(
+      `select distinct jsonb_typeof(answer) as t from public.play_answers a join public.plays p on p.id = a.play_id
+       where p.device_id = $1::uuid`,
+      [ja.deviceId],
+    );
+    expect(rows).toEqual([{ t: "string" }]);
+
+    const posle = await stanjeIgre(db, ja, SUTRA);
+    const prikazi = posle.rezultat!.map((r) => r.prikaz);
+    expect(prikazi.filter((p) => p.vrsta === "cena").every((p) => p.vrsta === "cena" && p.unos === 1)).toBe(true);
+    expect(posle.rezultat!.filter((r) => r.prikaz.vrsta !== "cena").every((r) => !r.istek)).toBe(true);
+  });
+});

@@ -88,7 +88,21 @@ async function ucitajStavke(db: Db, datum: string, playId: string | null): Promi
     [datum, playId],
   );
   // Segmenti koji još nemaju rukovaoca se preskaču.
-  return redovi.filter((r) => RUKOVAOCI[r.segment]);
+  return redovi.filter((r) => RUKOVAOCI[r.segment]).map((r) => ({ ...r, answer: procitajJson(r.answer) }));
+}
+
+/**
+ * Stariji odgovori su u bazi sačuvani kao JSON tekst unutar jsonb („"{\"unos\":220}"”),
+ * jer je postgres drajver tekst sam još jednom pretvorio u JSON. Ovde se raspakuju, pa i stare igre
+ * na kraju pokazuju šta je igrač odgovorio.
+ */
+function procitajJson(vrednost: unknown): unknown {
+  if (typeof vrednost !== "string") return vrednost;
+  try {
+    return JSON.parse(vrednost);
+  } catch {
+    return vrednost;
+  }
 }
 
 /**
@@ -203,7 +217,7 @@ async function zatvoriIstekla(db: Db, playId: string, stavke: RedStavke[]): Prom
   await db.query(
     `update public.play_answers
        set answered_at = case when $5::boolean then now() else served_at + ($3::int * interval '1 millisecond') end,
-           answer = $4::jsonb, is_correct = false, points = 0, answer_ms = $3::int,
+           answer = $4::text::jsonb, is_correct = false, points = 0, answer_ms = $3::int,
            listened_ms = case when $5::boolean then $3::int else listened_ms end, playing_since = null
      where play_id = $1::uuid and item_id = $2::int and answered_at is null`,
     [playId, tekuca.id, limit, JSON.stringify(sacuvaj), slusanje],
@@ -443,7 +457,7 @@ export function odgovori(
 
     await tx.query(
       `update public.play_answers
-         set answered_at = now(), answer = $3::jsonb, is_correct = $4::boolean, points = $5::int, answer_ms = $6::int,
+         set answered_at = now(), answer = $3::text::jsonb, is_correct = $4::boolean, points = $5::int, answer_ms = $6::int,
              listened_ms = case when $7::boolean then $6::int else listened_ms end, playing_since = null
        where play_id = $1::uuid and item_id = $2::int and answered_at is null`,
       [igra.id, tekuca.id, JSON.stringify(sacuvaj), ocena.tacno, ocena.poeni, protekloMs, slusanje],

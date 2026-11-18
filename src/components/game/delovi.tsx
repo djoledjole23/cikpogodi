@@ -11,6 +11,7 @@ import { tekstZaDeljenje } from "@/lib/game/podeli";
 import type { Prikaz, SegmentStanje, Stanje } from "@/lib/game/types";
 import { sfx } from "@/lib/sound";
 import { brojZvezdica, Konfete, smanjenoKretanje, useBrojac, Zvezde } from "./efekti";
+import { NizDanaKartica } from "./Niz";
 
 // ───────────────────────── zaglavlje igre ─────────────────────────
 
@@ -351,6 +352,8 @@ export function Kraj({ stanje, naSacuvaj }: { stanje: Stanje; naSacuvaj: () => v
           <small> / {max}</small>
         </p>
       </div>
+
+      {stanje.niz && <NizDanaKartica niz={stanje.niz} datum={stanje.datum} />}
 
       <StatusListe stanje={stanje} naSacuvaj={naSacuvaj} />
       <Podeli stanje={stanje} />

@@ -5,7 +5,8 @@
  *
  * Pravila za upite, da oba drajvera vrate isto:
  * - brojeve vraćaj sa `::int` ili `::float8`, datume sa `::text`
- * - jsonb parametre šalji kao JSON tekst uz `$n::jsonb`
+ * - jsonb parametre šalji kao JSON tekst uz `$n::text::jsonb` (sa samim `$n::jsonb` postgres drajver
+ *   tekst još jednom pretvori u JSON, pa se u bazi nađe string umesto objekta)
  * - bez nizova kao parametara
  */
 export type Param = string | number | boolean | null;

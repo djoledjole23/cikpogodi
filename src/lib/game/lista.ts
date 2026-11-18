@@ -1,5 +1,6 @@
 import type { Db } from "@/lib/db/types";
 import { botoviZaDan, botovaIspred } from "./botovi";
+import { nizDana } from "./niz";
 import { dodajDane, pocetakNedelje } from "@/lib/time";
 import type { Identitet, Stanje } from "./types";
 
@@ -75,12 +76,6 @@ export async function dopuniStanje(db: Db, ident: Identitet, stanje: Stanje, nal
     // Isto mesto kao na dnevnoj listi, gde su i botovi.
     dopunjeno.mesto = mesto === null ? null : mesto + botovaIspred(botoviZaDan(stanje.datum), stanje.score);
   }
-  if (stanje.status === "zavrseno") {
-    const [red] = await db.query<{ n: number }>(
-      "select count(*)::int as n from public.plays where quiz_date = $1::date and status = 'finished'",
-      [stanje.datum],
-    );
-    dopunjeno.igralo = red?.n ?? 0;
-  }
+  if (stanje.status === "zavrseno") dopunjeno.niz = await nizDana(db, ident, stanje.datum);
   return dopunjeno;
 }
