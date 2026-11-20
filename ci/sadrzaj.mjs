@@ -195,5 +195,12 @@ async function slike() {
   console.log(`slike: ${Object.values(rez).filter((x) => typeof x === "object").length} novih`);
 }
 
-const KORACI = { "kandidati-cene": kandidatiCene, pesme, slike };
+async function updateCene() {
+  const { execFileSync } = await import("node:child_process");
+  const izlaz = execFileSync("node", ["scripts/update-cene.mjs"], { cwd: KOREN, env: { ...process.env, BEZ_SLIKA: "1" }, encoding: "utf8", maxBuffer: 1 << 26 });
+  writeFileSync(join(IZLAZ, "update-cene.txt"), izlaz);
+  console.log(izlaz.slice(-3000));
+}
+
+const KORACI = { "kandidati-cene": kandidatiCene, pesme, slike, "update-cene": updateCene };
 for (const k of zadatak.koraci) { console.log(`── ${k}`); await KORACI[k](); }
