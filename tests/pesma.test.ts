@@ -120,23 +120,23 @@ describe("tolerantno poređenje", () => {
     expect(nadji("")).toEqual([]);
     // naslov koji počinje ukucanim ide pre izvođača koji tako počinje
     expect(nadji("beograd")[0]).toBe("Ceca – Beograd");
-    expect(nadji("ceca").length).toBe(3);
+    expect(nadji("ceca").length).toBe(4); // i „Vojko V – Ceca u Parizu”
     expect(nadji("jala").length).toBe(5);
   });
 });
 
 describe("songs.json i raspored", () => {
   it("katalog: mnogo više od 50 pesama, svaka sa potvrđenim klipom, bez duplikata", () => {
-    expect(katalog.pesme.length).toBe(165);
+    expect(katalog.pesme.length).toBe(212);
     expect(katalog.izbaceni).toEqual([]);
-    expect(new Set(katalog.pesme.map((p) => p.deezerId)).size).toBe(165);
-    expect(new Set(katalog.pesme.map((p) => normalizuj(`${p.izvodjac} ${p.naslov}`))).size).toBe(165);
+    expect(new Set(katalog.pesme.map((p) => p.deezerId)).size).toBe(212);
+    expect(new Set(katalog.pesme.map((p) => normalizuj(`${p.izvodjac} ${p.naslov}`))).size).toBe(212);
     for (const p of katalog.pesme) {
       expect(p.omot.startsWith("https://cdn-images.dzcdn.net/images/cover/")).toBe(true);
       expect(Number.isInteger(p.deezerId) && p.deezerId > 0).toBe(true);
     }
     const broj = (z: string) => katalog.pesme.filter((p) => p.zanr === z).length;
-    expect([broj("folk"), broj("rok"), broj("pop"), broj("trep")]).toEqual([50, 46, 37, 32]);
+    expect([broj("folk"), broj("rok"), broj("pop"), broj("trep")]).toEqual([55, 53, 52, 52]);
     // 34 pesme sa spiska + 10 dodatih rok pesama
     expect(katalog.pesme.filter((p) => p.prioritet).length).toBe(44);
     for (const naziv of ["Ceca – Kukavica", "Jala Brat, Buba Corelli & Rasta – Benga po snijegu", "Voyage – Euforija", "Jala Brat – Mlada i luda"]) {
@@ -194,7 +194,7 @@ describe("songs.json i raspored", () => {
 
   it("seed upisuje katalog i dnevne pesme, i može da se pusti ponovo", async () => {
     const [pre] = await db.query<{ n: number }>(`select count(*)::int as n from public.songs where deezer_id < 900000 or deezer_id > 900100`);
-    expect(pre.n).toBe(165);
+    expect(pre.n).toBe(212);
     const stavke = await db.query<{ n: number; dana: number }>(
       `select count(*)::int as n, count(distinct quiz_date)::int as dana from public.daily_quiz_items where segment = 1 and quiz_date < '2030-01-01'`,
     );

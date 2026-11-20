@@ -162,6 +162,17 @@ odgovara podacima (posle svake izmene u `data/` pusti `npm run seed` ponovo, ina
 
 Pitanja za dan koji je već počeo ne menjaj: ko je već igrao, igrao je stara.
 
+**Kad se doda novi sadržaj za dane koji su već u bazi** (npr. novi artikli i pesme), `npm run seed` ih ne
+dira. Za to služi `scripts/preplaniraj.ts`: polazi od onoga što je stvarno bilo u igri (izvoz iz
+`daily_quiz_items`, npr. `supabase/seed/istorija-do-2026-11-20.json`) i ponovo pravi segmente 1 i 2 tako da
+prvo ide ono što nikad nije bilo, pa ono što je najdavnije bilo. Dan koji je bilo ko već igrao SQL ne menja.
+
+```bash
+npx tsx scripts/preplaniraj.ts supabase/seed/istorija-do-2026-11-20.json 2026-11-21 30
+```
+
+Skripta na kraju ispiše šta bi se ponovilo i kad je poslednji put bilo.
+
 ## Joker pitanje
 
 Peti segment je jedno pitanje dnevno za bonus (+50 preko osnovnih 300). Igrač kuca odgovor, ima 30 sekundi, a poredi
@@ -194,7 +205,7 @@ iz `alias`). Tačno nosi 20 poena, sve ostalo 0.
 
 ## Pesme
 
-`data/songs.json` su pesme koje se **puštaju** u „Pogodi pesmu” (165 komada, mnogo više nego što treba za dve nedelje).
+`data/songs.json` su pesme koje se **puštaju** u „Pogodi pesmu” (212 komada; 47 dodato 20.11.2026, proverene na Deezeru).
 
 `data/katalog.json` je **spisak za biranje odgovora**: oko 6.700 pesama (do 30 najslušanijih od svakog izvođača
 iz kviza i do 20 od još dvestotinak domaćih izvođača). Te pesme se nikad ne puštaju. Služe da izbor bude težak:
@@ -232,7 +243,7 @@ O pesmama koje se puštaju (`songs.json`):
 ## Cene
 
 `data/products.json` je jedini izvor cena. U igru ulaze samo artikli koji imaju i sliku i cenu
-(trenutno svih 94). Cena u igri je `cena_rsd`: prosek redovnih cena između lanaca, zaokružen na dinar.
+(trenutno 176: 82 dodata 20.11.2026, sa zvaničnim fotografijama iz Maxi prodavnice po barkodu). Cena u igri je `cena_rsd`: prosek redovnih cena između lanaca, zaokružen na dinar.
 
 **Fotografije.** Za svaki artikal postoji fotografija pakovanja u `public/artikli/<barkod>.webp` (bela pozadina,
 najviše 640 px). Preuzete su skriptom, isključivo po barkodu, pa slika ne može da bude od druge gramaže ili ukusa:

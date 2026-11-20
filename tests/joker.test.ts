@@ -23,7 +23,7 @@ import type { Identitet, Ocena, PrikazCena, PrikazJoker, Stanje } from "@/lib/ga
 const koren = join(__dirname, "..");
 const json = (ime: string) => JSON.parse(readFileSync(join(koren, "data", ime), "utf8"));
 const ucitani = ucitajJokere(json("joker.json"), postojeceSlikeJokera(koren));
-/** Dan koji ima Jokera i dan posle njega (bez Jokera). */
+/** Dan koji ima Jokera i dan za koji se u ovom testu Joker namerno izostavlja. */
 const SA = "2026-11-14";
 const BEZ = "2026-11-23";
 
@@ -43,7 +43,7 @@ beforeAll(async () => {
     datumCenovnika: proizvodi.datumCenovnika,
     pesme: ucitajPesme(json("songs.json")).pesme,
     filmovi: ucitajFilmove(json("films.json"), postojeciKadrovi(koren)).filmovi,
-    jokeri: ucitani.pitanja,
+    jokeri: ucitani.pitanja.filter((j) => j.datum !== BEZ),
     trendovi: ucitajTrendove(json("trends.json")),
     pocetak: SA,
     dana: 10,
