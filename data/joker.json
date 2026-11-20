@@ -456,21 +456,23 @@
     },
     {
       "datum": "2026-12-11",
-      "pitanje": "Kako se zove direktor koji je dao ostavku posle kiss cam snimka sa koncerta Coldplay-a?",
-      "odgovor": "Andy Byron",
+      "pitanje": "Kako se zove bivši direktor NVIDIE koji je u novembru 2026. otišao sa čela kompanije posle skandala sa vanbračnim aferama?",
+      "odgovor": "Jensen Huang",
       "alias": [
-        "Byron",
-        "Endi Bajron",
-        "Bajron",
-        "Andi Bajron"
+        "Huang",
+        "Džensen Huang",
+        "Jensen",
+        "Dzensen Huang",
+        "Hjuang",
+        "Džensen"
       ],
       "slika": null,
       "slikaPitanja": null,
       "otkrice": {
-        "broj": null,
-        "natpis": null
+        "broj": "33",
+        "natpis": "godine na čelu NVIDIE"
       },
-      "izvor": "Pitanje i odgovor dao vlasnik sajta. Andy Byron, direktor firme Astronomer (ne NVIDIA), dao je ostavku jul 2025 (Khaleej Times, NBC News)."
+      "izvor": "Pitanje dao vlasnik sajta. Huang je napustio mesto direktora 12.11.2026, posle 33 godine (Bloomberg, Variety, Silicon UK)."
     },
     {
       "datum": "2026-12-12",

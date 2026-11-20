@@ -182,14 +182,14 @@ insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, sna
   from public.joker_questions where question = 'Kako se zvao poznati majmun iz jagodinskog zoološkog vrta?'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
-  values ('Kako se zove direktor koji je dao ostavku posle kiss cam snimka sa koncerta Coldplay-a?', 'Andy Byron', array['Byron', 'Endi Bajron', 'Bajron', 'Andi Bajron']::text[], null, null, null, null)
+  values ('Kako se zove bivši direktor NVIDIE koji je u novembru 2026. otišao sa čela kompanije posle skandala sa vanbračnim aferama?', 'Jensen Huang', array['Huang', 'Džensen Huang', 'Jensen', 'Dzensen Huang', 'Hjuang', 'Džensen']::text[], null, null, '33', 'godine na čelu NVIDIE')
   on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
     question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-11', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
-  select '2026-12-11', 5, 1, id, '{"pitanje":"Kako se zove direktor koji je dao ostavku posle kiss cam snimka sa koncerta Coldplay-a?","odgovor":"Andy Byron","alias":["Byron","Endi Bajron","Bajron","Andi Bajron"],"slika":null,"slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
-  from public.joker_questions where question = 'Kako se zove direktor koji je dao ostavku posle kiss cam snimka sa koncerta Coldplay-a?'
+  select '2026-12-11', 5, 1, id, '{"pitanje":"Kako se zove bivši direktor NVIDIE koji je u novembru 2026. otišao sa čela kompanije posle skandala sa vanbračnim aferama?","odgovor":"Jensen Huang","alias":["Huang","Džensen Huang","Jensen","Dzensen Huang","Hjuang","Džensen"],"slika":null,"slikaPitanja":null,"broj":"33","natpis":"godine na čelu NVIDIE"}'::jsonb
+  from public.joker_questions where question = 'Kako se zove bivši direktor NVIDIE koji je u novembru 2026. otišao sa čela kompanije posle skandala sa vanbračnim aferama?'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
   values ('Dara Bubamara se pohvalila da je vodila ljubav od 4 do...?', 'pola 7', array['pola sedam', '6 i 30', 'šest i trideset', 'sest i trideset', '18:30', '6:30']::text[], null, null, null, null)
