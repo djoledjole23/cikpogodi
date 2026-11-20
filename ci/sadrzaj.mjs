@@ -60,7 +60,8 @@ function procitajSve(tekst) {
   const zag = podeliRed(redovi[0], sep).map((h) => h.toLowerCase());
   const k = (re) => zag.findIndex((h) => re.test(h));
   const iB = k(/barkod|bar-kod|bar kod/), iR = k(/redovna cena/), iV = k(/vrsta/), iD = k(/datum cenovnika/);
-  const iN = k(/naziv proizvoda|^naziv$|naziv artikla|naziv/), iK = k(/kategorij/), iM = k(/marka|brend/), iJ = k(/jedinica|kolicin|količin|neto/);
+  const prvi = (...re) => re.map(k).find((i) => i >= 0) ?? -1;
+  const iN = prvi(/naziv proizvoda/, /naziv artikla/, /^naziv$/), iK = prvi(/naziv kategorije/, /kategorij/), iM = k(/marka|brend/), iJ = k(/jedinica|kolicin|količin|neto/), iJC = k(/cena po jedinici/);
   if (iB < 0 || iR < 0) throw new Error(`zaglavlje: ${zag.join(" | ")}`);
   let podaci = redovi.slice(1).map((r) => podeliRed(r, sep));
   if (iV >= 0 && podaci.some((r) => /va[zž]e[cć]i/i.test(r[iV] || ""))) podaci = podaci.filter((r) => /va[zž]e[cć]i/i.test(r[iV] || ""));
