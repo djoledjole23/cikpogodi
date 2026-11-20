@@ -1,0 +1,254 @@
+{
+ "pesme": [
+  {
+   "zanr": "trep",
+   "izvodjac": "Breskvica",
+   "naslov": "Gnezdo orlovo"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Devito",
+   "naslov": "Koketa"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Vojko V",
+   "naslov": "Cilit beng"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Vojko V",
+   "naslov": "Ceca u Parizu"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Senidah",
+   "naslov": "Lanci ljubavi"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Buba Corelli",
+   "naslov": "Irina shayk"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Coby",
+   "naslov": "Mami"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Voyage",
+   "naslov": "Tango"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Nikolija",
+   "naslov": "Afera"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Zera",
+   "naslov": "Iz subote u petak"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Desingerica",
+   "naslov": "Ccokolada"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Sajsi MC",
+   "naslov": "Meni se ne udaje"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Mc Yankoo",
+   "naslov": "Igra"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Fox",
+   "naslov": "Med i mleko"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Teodora",
+   "naslov": "Karma"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Mimi Mercedez",
+   "naslov": "Jača nego ikad"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Maya Berović",
+   "naslov": "Djevojačko prezime"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Tea Tairović",
+   "naslov": "Bonita"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Henny",
+   "naslov": "Neka neka"
+  },
+  {
+   "zanr": "trep",
+   "izvodjac": "Sky Wikluh",
+   "naslov": "Nedeljno jutro"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Jelena Karleuša",
+   "naslov": "Casino"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Jelena Karleuša",
+   "naslov": "Gili gili"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Severina",
+   "naslov": "Grad bez ljudi"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Tony Cetinski",
+   "naslov": "Ako to se zove ljubav"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Nina Badrić",
+   "naslov": "Moja ljubav"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Doris Dragović",
+   "naslov": "Marija magdalena"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Hari Mata Hari",
+   "naslov": "Lejla"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Dino Merlin",
+   "naslov": "Kad si rekla da me voliš"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Sergej Ćetković",
+   "naslov": "Moje si sve"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Magazin",
+   "naslov": "Minus i plus"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Novi Fosili",
+   "naslov": "Milena"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Vlado Georgiev",
+   "naslov": "Bolesni od ljubavi"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Marija Šerifović",
+   "naslov": "Bol do ludila"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Konstrakta",
+   "naslov": "Mekano"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Oliver Dragojević",
+   "naslov": "Cesarica"
+  },
+  {
+   "zanr": "pop",
+   "izvodjac": "Tijana Dapčević",
+   "naslov": "Ljubi mi se"
+  },
+  {
+   "zanr": "folk",
+   "izvodjac": "Halid Bešlić",
+   "naslov": "Miljacka"
+  },
+  {
+   "zanr": "folk",
+   "izvodjac": "Haris Džinović",
+   "naslov": "Dajte vina hoću lom"
+  },
+  {
+   "zanr": "folk",
+   "izvodjac": "Dragan Kojić Keba",
+   "naslov": "Ljiljana"
+  },
+  {
+   "zanr": "folk",
+   "izvodjac": "Viki Miljković",
+   "naslov": "Mariš li"
+  },
+  {
+   "zanr": "folk",
+   "izvodjac": "Halid Muslimović",
+   "naslov": "Mama ne da da te diram"
+  },
+  {
+   "zanr": "folk",
+   "izvodjac": "Dženan Lončarević",
+   "naslov": "Kosa do ramena"
+  },
+  {
+   "zanr": "rok",
+   "izvodjac": "Bijelo Dugme",
+   "naslov": "Lipe cvatu, sve je isto ko i lani"
+  },
+  {
+   "zanr": "rok",
+   "izvodjac": "Bijelo Dugme",
+   "naslov": "Hajdemo u planine"
+  },
+  {
+   "zanr": "rok",
+   "izvodjac": "Parni Valjak",
+   "naslov": "Jesen u meni"
+  },
+  {
+   "zanr": "rok",
+   "izvodjac": "Prljavo Kazalište",
+   "naslov": "Mi plešemo"
+  },
+  {
+   "zanr": "rok",
+   "izvodjac": "Plavi Orkestar",
+   "naslov": "Bolje biti pijan nego star"
+  },
+  {
+   "zanr": "rok",
+   "izvodjac": "Zabranjeno Pušenje",
+   "naslov": "Fikreta"
+  },
+  {
+   "zanr": "rok",
+   "izvodjac": "Kerber",
+   "naslov": "Hajde da se volimo"
+  },
+  {
+   "zanr": "rok",
+   "izvodjac": "Električni Orgazam",
+   "naslov": "Kako bubanj kaže"
+  }
+ ]
+}
