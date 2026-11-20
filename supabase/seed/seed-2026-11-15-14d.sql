@@ -3307,3 +3307,63 @@ insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, sna
   select '2026-11-22', 5, 1, id, '{"pitanje":"Kako se zvala politička partija Srećka Šojića?","odgovor":"Stranka zdravog razuma","alias":["Zdrav razum","zdravog razuma","SZR"],"slika":"/joker/59bebcb996ba5c.webp","slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
   from public.joker_questions where question = 'Kako se zvala politička partija Srećka Šojića?'
   on conflict (quiz_date, segment, position) do nothing;
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Koji fudbaler je ugrizao protivnika na Svetskom prvenstvu 2014. godine?', 'Luis Suárez', array['Suarez', 'Luis Suarez', 'Suares', 'Luis Suares']::text[], null, null, '2014', 'Suárez ugrizao Kjelinija')
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-23', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-11-23', 5, 1, id, '{"pitanje":"Koji fudbaler je ugrizao protivnika na Svetskom prvenstvu 2014. godine?","odgovor":"Luis Suárez","alias":["Suarez","Luis Suarez","Suares","Luis Suares"],"slika":null,"slikaPitanja":null,"broj":"2014","natpis":"Suárez ugrizao Kjelinija"}'::jsonb
+  from public.joker_questions where question = 'Koji fudbaler je ugrizao protivnika na Svetskom prvenstvu 2014. godine?'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Kako se zove splav koji je potonuo tokom dočeka Nove 2023. godine u Beogradu?', 'Freestyler', array['Fristajler', 'Free styler', 'Fri stajler']::text[], null, null, '400+', 'gostiju na splavu za 220')
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-24', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-11-24', 5, 1, id, '{"pitanje":"Kako se zove splav koji je potonuo tokom dočeka Nove 2023. godine u Beogradu?","odgovor":"Freestyler","alias":["Fristajler","Free styler","Fri stajler"],"slika":null,"slikaPitanja":null,"broj":"400+","natpis":"gostiju na splavu za 220"}'::jsonb
+  from public.joker_questions where question = 'Kako se zove splav koji je potonuo tokom dočeka Nove 2023. godine u Beogradu?'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Koji glumac je poznat po memu da ostavi devojku čim ona napuni 25 godina?', 'Leonardo DiCaprio', array['DiCaprio', 'Dikaprio', 'Leonardo Dikaprio', 'Leo']::text[], null, null, null, null)
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-25', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-11-25', 5, 1, id, '{"pitanje":"Koji glumac je poznat po memu da ostavi devojku čim ona napuni 25 godina?","odgovor":"Leonardo DiCaprio","alias":["DiCaprio","Dikaprio","Leonardo Dikaprio","Leo"],"slika":null,"slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Koji glumac je poznat po memu da ostavi devojku čim ona napuni 25 godina?'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Kako se zvala stranka Ljubiše Preletačevića Belog?', 'Sarmu probo nisi', array['SPN', 'Sarmu probo nisi (SPN)', 'Sarmu proba nisi']::text[], null, null, null, null)
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-26', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-11-26', 5, 1, id, '{"pitanje":"Kako se zvala stranka Ljubiše Preletačevića Belog?","odgovor":"Sarmu probo nisi","alias":["SPN","Sarmu probo nisi (SPN)","Sarmu proba nisi"],"slika":null,"slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Kako se zvala stranka Ljubiše Preletačevića Belog?'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Na čijem koncertu je kiss cam 2025. godine otkrio jednu od najpraćenijih ljubavnih afera godine?', 'Coldplay', array['Koldplej', 'Cold play']::text[], null, null, '2025', 'godina skandala')
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-27', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-11-27', 5, 1, id, '{"pitanje":"Na čijem koncertu je kiss cam 2025. godine otkrio jednu od najpraćenijih ljubavnih afera godine?","odgovor":"Coldplay","alias":["Koldplej","Cold play"],"slika":null,"slikaPitanja":null,"broj":"2025","natpis":"godina skandala"}'::jsonb
+  from public.joker_questions where question = 'Na čijem koncertu je kiss cam 2025. godine otkrio jednu od najpraćenijih ljubavnih afera godine?'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Koji poznati milijarder je kupio društvenu mrežu Twitter i promenio joj naziv u X?', 'Elon Musk', array['Musk', 'Ilon Mask', 'Elon Mask', 'Mask']::text[], null, null, null, null)
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-28', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-11-28', 5, 1, id, '{"pitanje":"Koji poznati milijarder je kupio društvenu mrežu Twitter i promenio joj naziv u X?","odgovor":"Elon Musk","alias":["Musk","Ilon Mask","Elon Mask","Mask"],"slika":null,"slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Koji poznati milijarder je kupio društvenu mrežu Twitter i promenio joj naziv u X?'
+  on conflict (quiz_date, segment, position) do nothing;
