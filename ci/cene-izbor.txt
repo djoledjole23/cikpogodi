@@ -1,0 +1,90 @@
+5900951311505|Snickers|50 g|Slatkiši
+5900951311321|Mars|51 g|Slatkiši
+8000500003787|Ferrero Rocher|200 g|Slatkiši
+80052760|Kinder Bueno|43 g|Slatkiši
+8000500023976|Raffaello|150 g|Slatkiši
+3850102230044|Kraš Bajadera|200 g|Slatkiši
+3850102516704|Kraš Ki-Ki karamele|100 g|Slatkiši
+7622210765932|Oreo keks|110 g|Slatkiši
+8600462042536|Noblice keks|222 g|Slatkiši
+5000159504355|M&M's kikiriki|82 g|Slatkiši
+7613035365414|KitKat|41,5 g|Slatkiši
+8602300219681|Pionir Negro bombone|200 g|Slatkiši
+4014400901191|Merci bombonjera|250 g|Slatkiši
+3850102117215|Kraš Dorina sa ledenim punjenjem|100 g|Slatkiši
+80052043|Tic Tac mint|18 g|Slatkiši
+7622201389505|7 Days kroasan kakao|110 g|Slatkiši
+3850104267116|Lino Lada Duo|350 g|Slatkiši
+8000500328545|Kinder Choco fresh|41 g|Slatkiši
+5053990101573|Pringles Original|165 g|Grickalice
+8606017379393|Doritos Nacho Cheese|90 g|Grickalice
+8606107718699|Čačanski čips classic|90 g|Grickalice
+8606107223131|Gricko flips|100 g|Grickalice
+8600462020985|Banini Trik štapići|200 g|Grickalice
+5410041435702|TUC krekeri original|100 g|Grickalice
+8606015852638|Florida kikiriki jumbo|180 g|Grickalice
+8606108282601|Čačanske kokice|100 g|Grickalice
+5449000000286|Coca-Cola|2 l|Pića
+3838471032537|Cockta|1,5 l|Pića
+8600037998749|Pepsi|2 l|Pića
+5449000214805|Fanta narandža limenka|0,33 l|Pića
+9002490100070|Red Bull|0,25 l|Pića
+8600037000442|Guarana limenka|0,5 l|Pića
+8600037003269|Knjaz Miloš sa limunom|1,25 l|Pića
+5449000245045|Rosa negazirana voda|1,5 l|Pića
+5449000235985|Fuze Tea breskva i hibiskus|1,5 l|Pića
+3850322014882|Cedevita narandža|455 g|Pića
+8600102672291|Tuborg pivo limenka|0,5 l|Alkohol
+8600105001678|Nikšićko pivo limenka|0,5 l|Alkohol
+8606105157513|Amstel pivo limenka|0,5 l|Alkohol
+8606106174564|Somersby kruška|0,33 l|Alkohol
+3899003001001|13. jul Vranac|0,75 l|Alkohol
+8600102938076|Čoka Ždrepčeva krv|1 l|Alkohol
+8606001830992|Gorki list|1 l|Alkohol
+8600074211924|Vinjak Rubin|1 l|Alkohol
+5011007003005|Jameson viski|0,7 l|Alkohol
+8002230000302|Aperol|0,7 l|Alkohol
+5410316994019|Smirnoff votka|0,7 l|Alkohol
+8606107267593|Erdevik Tri roze koze|0,75 l|Alkohol
+8607100564429|C kafa mlevena|200 g|Kafa
+7891000254912|Nescafé Classic limenka|250 g|Kafa
+8711000892749|Jacobs Monarch tradicionalna|200 g|Kafa
+3858881085589|Franck Jubilarna|175 g|Kafa
+8606018311750|Grand Strong Gold|200 g|Kafa
+8606002110536|Dukatos grčki jogurt|150 g|Mlečno
+8601500124252|Grekos šumsko voće|150 g|Mlečno
+8600742000706|Sirko sirni namaz|200 g|Mlečno
+8600742010361|Ala kajmak|250 g|Mlečno
+3859888858336|ABC sveži krem sir|200 g|Mlečno
+8601500135067|Moja Kravica milk šejk vanila|235 ml|Mlečno
+8601500136699|Moja Kravica puding vanila|125 g|Mlečno
+3838975567009|Argeta kokošija pašteta|95 g|Meso
+3838975567061|Argeta tuna pašteta|95 g|Meso
+8008110002107|Wudy sa sirom|150 g|Meso
+8606102242212|Perutnina Ptuj pileća viršla|200 g|Meso
+8600763038313|Neoplanta pileće grudi Mini egal|330 g|Meso
+8606018046416|Zlatiborac čajna kobasica|290 g|Meso
+8606018041855|Zlatiborac dimljeni vrat slajs|125 g|Meso
+8600012503975|Carnex domaća kobasica|310 g|Meso
+8606107664941|Zlatiborac mortadela slajs|125 g|Meso
+8076800195057|Barilla špagete br. 5|500 g|Namirnice
+3850104260872|Vegeta|400 g|Namirnice
+8607100510433|C začin|500 g|Namirnice
+8606011030344|Bakina tajna džem od jagode|375 g|Namirnice
+3858890178678|Thomy majonez|280 ml|Namirnice
+8606108584132|Indomie nudle govedina 5 kom|350 g|Namirnice
+8600947042136|Aleva začin za sarmu i punjenu papriku|60 g|Namirnice
+8601300046006|Danubius brašno T-500|1 kg|Namirnice
+8606018730384|Tvojih 5 minuta tost classic|500 g|Namirnice
+8606006083140|Frikom Quattro čokolada|1,65 l|Smrznuto
+8606029610026|Frikom ruska salata|400 g|Smrznuto
+8606017431596|Frikom Plazma sendvič sladoled|129 ml|Smrznuto
+5054563949936|Parodontax pasta za zube|75 ml|Kozmetika
+4005808760435|Nivea Soft krema|100 ml|Kozmetika
+8720182264664|Dove sapun|90 g|Kozmetika
+4000388669000|Rexona Men dezodorans|150 ml|Kozmetika
+9000101801989|Persil kapsule|35 kom|Kućna hemija
+8700216550734|Fairy limun|900 ml|Kućna hemija
+8606015846880|Duel omekšivač|1,6 l|Kućna hemija
+8718951278486|Ajax za podove|1 l|Kućna hemija
+4009175111449|Erdal krema za obuću crna|55 ml|Kućna hemija
