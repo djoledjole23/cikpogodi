@@ -527,6 +527,23 @@
         "natpis": null
       },
       "izvor": "Pitanje i odgovor dao vlasnik sajta."
+    },
+    {
+      "datum": "2026-12-15",
+      "pitanje": "Kako se zove metalni jezičak na limenci koji povučeš da je otvoriš?",
+      "odgovor": "sntntn",
+      "alias": [
+        "sntntn",
+        "sntnt",
+        "sntntntn"
+      ],
+      "slika": null,
+      "slikaPitanja": null,
+      "otkrice": {
+        "broj": null,
+        "natpis": null
+      },
+      "izvor": "Pitanje i odgovor dao vlasnik sajta (internet šala; tako ga zovu na mrežama)."
     }
   ]
 }

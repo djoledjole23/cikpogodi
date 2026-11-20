@@ -1,4 +1,4 @@
--- Joker pitanja za 23.11–14.12.2026 (iz data/joker.json). Dan koji već ima Jokera se ne dira.
+-- Joker pitanja za 23.11–15.12.2026 (iz data/joker.json). Dan koji već ima Jokera se ne dira.
 begin;
 -- Dnevni kviz: segment 5 (Joker pitanje). Dan koji već ima Jokera se ne dira.
 insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
@@ -220,5 +220,15 @@ insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12
 insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
   select '2026-12-14', 5, 1, id, '{"pitanje":"Koji reper, pored Wiz Khalife, glumi u filmu „Mac & Devin Go to High School”?","odgovor":"Snoop Dogg","alias":["Snoop","Snup Dog","Snoop Dog","Snup"],"slika":null,"slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
   from public.joker_questions where question = 'Koji reper, pored Wiz Khalife, glumi u filmu „Mac & Devin Go to High School”?'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.joker_questions (question, answer, aliases, image_url, question_image_url, reveal_number, reveal_label)
+  values ('Kako se zove metalni jezičak na limenci koji povučeš da je otvoriš?', 'sntntn', array['sntntn', 'sntnt', 'sntntntn']::text[], null, null, null, null)
+  on conflict (question) do update set answer = excluded.answer, aliases = excluded.aliases, image_url = excluded.image_url,
+    question_image_url = excluded.question_image_url, reveal_number = excluded.reveal_number, reveal_label = excluded.reveal_label;
+insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-15', 'published', now())
+  on conflict (quiz_date) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, joker_id, snapshot)
+  select '2026-12-15', 5, 1, id, '{"pitanje":"Kako se zove metalni jezičak na limenci koji povučeš da je otvoriš?","odgovor":"sntntn","alias":["sntntn","sntnt","sntntntn"],"slika":null,"slikaPitanja":null,"broj":null,"natpis":null}'::jsonb
+  from public.joker_questions where question = 'Kako se zove metalni jezičak na limenci koji povučeš da je otvoriš?'
   on conflict (quiz_date, segment, position) do nothing;
 commit;
