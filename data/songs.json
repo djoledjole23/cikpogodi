@@ -1473,14 +1473,6 @@
       "itunes_id": 1578174378
     },
     {
-      "izvodjac": "Mc Yankoo",
-      "naslov": "Igra",
-      "zanr": "trep",
-      "deezer_id": 941900872,
-      "omot": "https://cdn-images.dzcdn.net/images/cover/b102cdfa16c6efdf39363a9a2835263d/250x250-000000-80-0-0.jpg",
-      "itunes_id": 1579192320
-    },
-    {
       "izvodjac": "Fox",
       "naslov": "Med i mleko",
       "zanr": "trep",
@@ -1526,14 +1518,6 @@
       "deezer_id": 4170273902,
       "omot": "https://cdn-images.dzcdn.net/images/cover/0d3914c4246d6463943b8588d801d900/250x250-000000-80-0-0.jpg",
       "itunes_id": 6793555937
-    },
-    {
-      "izvodjac": "Sky Wikluh",
-      "naslov": "Nedeljno jutro",
-      "zanr": "trep",
-      "deezer_id": 3527795001,
-      "omot": "https://cdn-images.dzcdn.net/images/cover/a0276d1619c0aa61a91e458e12ed280d/250x250-000000-80-0-0.jpg",
-      "itunes_id": 1566420671
     },
     {
       "izvodjac": "Jelena Karleuša",
@@ -1664,14 +1648,6 @@
       "itunes_id": 1745064686
     },
     {
-      "izvodjac": "Dragan Kojić Keba",
-      "naslov": "Ljiljana",
-      "zanr": "folk",
-      "deezer_id": 15899512,
-      "omot": "https://cdn-images.dzcdn.net/images/cover/8dc11045892d8ea2ca36d3a8e4df211d/250x250-000000-80-0-0.jpg",
-      "itunes_id": 491095249
-    },
-    {
       "izvodjac": "Viki Miljković",
       "naslov": "Mariš li",
       "zanr": "folk",
@@ -1750,6 +1726,30 @@
       "deezer_id": 23648731,
       "omot": "https://cdn-images.dzcdn.net/images/cover/1bc71d46e2635206baf4f0f648c5e4d5/250x250-000000-80-0-0.jpg",
       "itunes_id": 505135797
+    },
+    {
+      "izvodjac": "Jala Brat",
+      "naslov": "Ajkula",
+      "zanr": "trep",
+      "deezer_id": 3991260501,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/acb4e11962d9ecee31354dfb648c1124/250x250-000000-80-0-0.jpg",
+      "itunes_id": 6764452931
+    },
+    {
+      "izvodjac": "Elena",
+      "naslov": "Laži",
+      "zanr": "trep",
+      "deezer_id": 1496970082,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/f66fd83df21e9904febe66c49914546e/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1586334843
+    },
+    {
+      "izvodjac": "Aca Lukas",
+      "naslov": "Daleko si",
+      "zanr": "folk",
+      "deezer_id": 572081772,
+      "omot": "https://cdn-images.dzcdn.net/images/cover/3b5428512253cd36786be74b73657a25/250x250-000000-80-0-0.jpg",
+      "itunes_id": 1577967053
     }
   ]
 }

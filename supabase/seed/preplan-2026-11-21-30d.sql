@@ -712,10 +712,6 @@ insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_ur
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
-  values ('Mc Yankoo', 'Igra', '{}'::text[], 941900872, 1579192320, 'https://cdn-images.dzcdn.net/images/cover/b102cdfa16c6efdf39363a9a2835263d/250x250-000000-80-0-0.jpg', 'trep')
-  on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
-    itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
-insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
   values ('Fox', 'Med i mleko', '{}'::text[], 1831254437, 1635394397, 'https://cdn-images.dzcdn.net/images/cover/4487b1d0eee64f72f820274400985d53/250x250-000000-80-0-0.jpg', 'trep')
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
@@ -737,10 +733,6 @@ insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_ur
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
   values ('Henny', 'Neka neka', '{}'::text[], 4170273902, 6793555937, 'https://cdn-images.dzcdn.net/images/cover/0d3914c4246d6463943b8588d801d900/250x250-000000-80-0-0.jpg', 'trep')
-  on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
-    itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
-insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
-  values ('Sky Wikluh', 'Nedeljno jutro', '{}'::text[], 3527795001, 1566420671, 'https://cdn-images.dzcdn.net/images/cover/a0276d1619c0aa61a91e458e12ed280d/250x250-000000-80-0-0.jpg', 'trep')
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
@@ -808,10 +800,6 @@ insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_ur
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
-  values ('Dragan Kojić Keba', 'Ljiljana', '{}'::text[], 15899512, 491095249, 'https://cdn-images.dzcdn.net/images/cover/8dc11045892d8ea2ca36d3a8e4df211d/250x250-000000-80-0-0.jpg', 'folk')
-  on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
-    itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
-insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
   values ('Viki Miljković', 'Mariš li', '{}'::text[], 1458112122, 1578151710, 'https://cdn-images.dzcdn.net/images/cover/fae5d2666bdba41f52c2180cf71613b0/250x250-000000-80-0-0.jpg', 'folk')
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
@@ -849,6 +837,18 @@ insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_ur
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
   values ('Električni Orgazam', 'Kako bubanj kaže', '{}'::text[], 23648731, 505135797, 'https://cdn-images.dzcdn.net/images/cover/1bc71d46e2635206baf4f0f648c5e4d5/250x250-000000-80-0-0.jpg', 'rok')
+  on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
+    itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
+insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
+  values ('Jala Brat', 'Ajkula', '{}'::text[], 3991260501, 6764452931, 'https://cdn-images.dzcdn.net/images/cover/acb4e11962d9ecee31354dfb648c1124/250x250-000000-80-0-0.jpg', 'trep')
+  on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
+    itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
+insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
+  values ('Elena', 'Laži', '{}'::text[], 1496970082, 1586334843, 'https://cdn-images.dzcdn.net/images/cover/f66fd83df21e9904febe66c49914546e/250x250-000000-80-0-0.jpg', 'trep')
+  on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
+    itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
+insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
+  values ('Aca Lukas', 'Daleko si', '{}'::text[], 572081772, 1577967053, 'https://cdn-images.dzcdn.net/images/cover/3b5428512253cd36786be74b73657a25/250x250-000000-80-0-0.jpg', 'folk')
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.products (barcode, name, size, image_url, price_avg, price_min, price_max, cheapest_chain, price_date)
@@ -2104,8 +2104,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 3265960921 and not exists (select 1 from public.plays where quiz_date = '2026-11-29')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-11-29', 1, 5, id, '{"izvodjac":"Vojko V","naslov":"Cilit beng","alias":[],"deezerId":3014936831,"itunesId":1770357348,"omot":"https://cdn-images.dzcdn.net/images/cover/292d45122560e4b10bc93afbecacdaa3/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3014936831 and not exists (select 1 from public.plays where quiz_date = '2026-11-29')
+  select '2026-11-29', 1, 5, id, '{"izvodjac":"Elena","naslov":"Laži","alias":[],"deezerId":1496970082,"itunesId":1586334843,"omot":"https://cdn-images.dzcdn.net/images/cover/f66fd83df21e9904febe66c49914546e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1496970082 and not exists (select 1 from public.plays where quiz_date = '2026-11-29')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-11-29', 2, 1, id, '{"naziv":"Lino Lada Duo","kolicina":"350 g","slika":"/artikli/3850104267116.webp","cena":473,"min":449.99,"max":499.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-20"}'::jsonb
@@ -2176,20 +2176,20 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-01', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-01' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-01');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-01', 1, 1, id, '{"izvodjac":"Sinan Sakić","naslov":"Lepa do bola","alias":[],"deezerId":1148816532,"itunesId":1541356044,"omot":"https://cdn-images.dzcdn.net/images/cover/d18891c57626dc413055ba40cde08701/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  select '2026-12-01', 1, 1, id, '{"izvodjac":"Viki Miljković","naslov":"Mariš li","alias":[],"deezerId":1458112122,"itunesId":1578151710,"omot":"https://cdn-images.dzcdn.net/images/cover/fae5d2666bdba41f52c2180cf71613b0/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1458112122 and not exists (select 1 from public.plays where quiz_date = '2026-12-01')
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
+  select '2026-12-01', 1, 2, id, '{"izvodjac":"Doris Dragović","naslov":"Marija magdalena","alias":[],"deezerId":1014394102,"itunesId":1770595050,"omot":"https://cdn-images.dzcdn.net/images/cover/7c18db702f482e6b382ef82f6638a789/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1014394102 and not exists (select 1 from public.plays where quiz_date = '2026-12-01')
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
+  select '2026-12-01', 1, 3, id, '{"izvodjac":"Henny","naslov":"Neka neka","alias":[],"deezerId":4170273902,"itunesId":6793555937,"omot":"https://cdn-images.dzcdn.net/images/cover/0d3914c4246d6463943b8588d801d900/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 4170273902 and not exists (select 1 from public.plays where quiz_date = '2026-12-01')
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
+  select '2026-12-01', 1, 4, id, '{"izvodjac":"Sinan Sakić","naslov":"Lepa do bola","alias":[],"deezerId":1148816532,"itunesId":1541356044,"omot":"https://cdn-images.dzcdn.net/images/cover/d18891c57626dc413055ba40cde08701/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 1148816532 and not exists (select 1 from public.plays where quiz_date = '2026-12-01')
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-01', 1, 2, id, '{"izvodjac":"Tony Cetinski","naslov":"Ako to se zove ljubav","alias":[],"deezerId":66429248,"itunesId":509534403,"omot":"https://cdn-images.dzcdn.net/images/cover/0b959c90add736fc2cc0c9117fc7b2f5/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 66429248 and not exists (select 1 from public.plays where quiz_date = '2026-12-01')
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-01', 1, 3, id, '{"izvodjac":"Tea Tairović","naslov":"Bonita","alias":[],"deezerId":4016727801,"itunesId":6768663057,"omot":"https://cdn-images.dzcdn.net/images/cover/014f3ada4c9c543175a0ff1d51c2f609/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 4016727801 and not exists (select 1 from public.plays where quiz_date = '2026-12-01')
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-01', 1, 4, id, '{"izvodjac":"Dženan Lončarević","naslov":"Kosa do ramena","alias":[],"deezerId":548433942,"itunesId":1577987690,"omot":"https://cdn-images.dzcdn.net/images/cover/6a42211803bbb67e4ef1bbe446c62aea/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 548433942 and not exists (select 1 from public.plays where quiz_date = '2026-12-01')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-01', 1, 5, id, '{"izvodjac":"Đorđe Balašević","naslov":"Ringišpil","alias":[],"deezerId":775360092,"itunesId":1483596245,"omot":"https://cdn-images.dzcdn.net/images/cover/ff2ba6e22337997fd05523f46015b15e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2268,8 +2268,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 584345352 and not exists (select 1 from public.plays where quiz_date = '2026-12-03')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-03', 1, 2, id, '{"izvodjac":"Hari Mata Hari","naslov":"Lejla","alias":[],"deezerId":2155165937,"itunesId":1663291933,"omot":"https://cdn-images.dzcdn.net/images/cover/11d42f75864e2ff32856e7361194f928/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2155165937 and not exists (select 1 from public.plays where quiz_date = '2026-12-03')
+  select '2026-12-03', 1, 2, id, '{"izvodjac":"Sergej Ćetković","naslov":"Moje si sve","alias":[],"deezerId":730632182,"itunesId":1578050207,"omot":"https://cdn-images.dzcdn.net/images/cover/29538440bec932a65ae1bf6ad8ea67b7/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 730632182 and not exists (select 1 from public.plays where quiz_date = '2026-12-03')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-03', 1, 3, id, '{"izvodjac":"Milica Todorović","naslov":"Tri čaše","alias":[],"deezerId":464556372,"itunesId":1578147923,"omot":"https://cdn-images.dzcdn.net/images/cover/70f9546a52fbbe77edd2a85c8727f13a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2280,8 +2280,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 3304073171 and not exists (select 1 from public.plays where quiz_date = '2026-12-03')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-03', 1, 5, id, '{"izvodjac":"Magazin","naslov":"Minus i plus","alias":[],"deezerId":1006925662,"itunesId":488074453,"omot":"https://cdn-images.dzcdn.net/images/cover/9382f18da0cc7fbbcbcb9ce5c80ea7b1/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1006925662 and not exists (select 1 from public.plays where quiz_date = '2026-12-03')
+  select '2026-12-03', 1, 5, id, '{"izvodjac":"Vlado Georgiev","naslov":"Bolesni od ljubavi","alias":[],"deezerId":3735395362,"itunesId":1863655702,"omot":"https://cdn-images.dzcdn.net/images/cover/308fdfe7a27a4ca7ab4e2785f4c8ac5c/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3735395362 and not exists (select 1 from public.plays where quiz_date = '2026-12-03')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-12-03', 2, 1, id, '{"naziv":"Pionir Negro bombone","kolicina":"200 g","slika":"/artikli/8602300219681.webp","cena":231,"min":216.99,"max":251.18,"najjeftinije":"Lidl","datumCenovnika":"2026-11-20"}'::jsonb
@@ -2308,20 +2308,20 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-04', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-04' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-04');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-04', 1, 1, id, '{"izvodjac":"Dragan Kojić Keba","naslov":"Ljiljana","alias":[],"deezerId":15899512,"itunesId":491095249,"omot":"https://cdn-images.dzcdn.net/images/cover/8dc11045892d8ea2ca36d3a8e4df211d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 15899512 and not exists (select 1 from public.plays where quiz_date = '2026-12-04')
+  select '2026-12-04', 1, 1, id, '{"izvodjac":"Aca Lukas","naslov":"Daleko si","alias":[],"deezerId":572081772,"itunesId":1577967053,"omot":"https://cdn-images.dzcdn.net/images/cover/3b5428512253cd36786be74b73657a25/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 572081772 and not exists (select 1 from public.plays where quiz_date = '2026-12-04')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-04', 1, 2, id, '{"izvodjac":"Električni Orgazam","naslov":"Kako bubanj kaže","alias":[],"deezerId":23648731,"itunesId":505135797,"omot":"https://cdn-images.dzcdn.net/images/cover/1bc71d46e2635206baf4f0f648c5e4d5/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 23648731 and not exists (select 1 from public.plays where quiz_date = '2026-12-04')
+  select '2026-12-04', 1, 2, id, '{"izvodjac":"Galija","naslov":"Još uvek sanjam","alias":[],"deezerId":1029767952,"itunesId":1524533481,"omot":"https://cdn-images.dzcdn.net/images/cover/90332e72f902bd26deb0a195ea735fd6/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1029767952 and not exists (select 1 from public.plays where quiz_date = '2026-12-04')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-04', 1, 3, id, '{"izvodjac":"Zorica Brunclik","naslov":"A tebe nema","alias":[],"deezerId":1267209572,"itunesId":1785561136,"omot":"https://cdn-images.dzcdn.net/images/cover/dd714c76af7b5a1a51369b0b5ec826ba/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 1267209572 and not exists (select 1 from public.plays where quiz_date = '2026-12-04')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-04', 1, 4, id, '{"izvodjac":"Tijana Dapčević","naslov":"Ljubi mi se","alias":[],"deezerId":2311433625,"itunesId":1578063047,"omot":"https://cdn-images.dzcdn.net/images/cover/e5527d9e0912b335ac1e06928c56aac1/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2311433625 and not exists (select 1 from public.plays where quiz_date = '2026-12-04')
+  select '2026-12-04', 1, 4, id, '{"izvodjac":"Zdravko Čolić","naslov":"Ti si mi u krvi","alias":[],"deezerId":2617677792,"itunesId":1768453720,"omot":"https://cdn-images.dzcdn.net/images/cover/bf26d15f675db78c90d435621f94d88b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2617677792 and not exists (select 1 from public.plays where quiz_date = '2026-12-04')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-04', 1, 5, id, '{"izvodjac":"Nikolija","naslov":"Afera","alias":[],"deezerId":3295650701,"itunesId":1804573103,"omot":"https://cdn-images.dzcdn.net/images/cover/a622900d163f3e82ad4740af8f1f7941/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2352,8 +2352,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-05', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-05' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-05');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-05', 1, 1, id, '{"izvodjac":"Bijelo Dugme","naslov":"Hajdemo u planine","alias":[],"deezerId":2944232721,"itunesId":1534030335,"omot":"https://cdn-images.dzcdn.net/images/cover/e3fd54413b08a6a79a54d20d5332d008/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2944232721 and not exists (select 1 from public.plays where quiz_date = '2026-12-05')
+  select '2026-12-05', 1, 1, id, '{"izvodjac":"Plavi Orkestar","naslov":"Bolje biti pijan nego star","alias":[],"deezerId":2995426691,"itunesId":380612350,"omot":"https://cdn-images.dzcdn.net/images/cover/3ace58415594894c1dc27d86bf2ef59f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2995426691 and not exists (select 1 from public.plays where quiz_date = '2026-12-05')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-05', 1, 2, id, '{"izvodjac":"Laki Pingvini","naslov":"Šizika","alias":[],"deezerId":2534294791,"itunesId":1730957841,"omot":"https://cdn-images.dzcdn.net/images/cover/56504dc3f81ed06b9b272eaab5fdfbb1/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2396,24 +2396,24 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-06', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-06' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-06');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-06', 1, 1, id, '{"izvodjac":"Vlado Georgiev","naslov":"Bolesni od ljubavi","alias":[],"deezerId":3735395362,"itunesId":1863655702,"omot":"https://cdn-images.dzcdn.net/images/cover/308fdfe7a27a4ca7ab4e2785f4c8ac5c/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3735395362 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
+  select '2026-12-06', 1, 1, id, '{"izvodjac":"Konstrakta","naslov":"Mekano","alias":[],"deezerId":3283924601,"itunesId":1804422689,"omot":"https://cdn-images.dzcdn.net/images/cover/7d79c4d331a81930390d8149681850f9/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3283924601 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-06', 1, 2, id, '{"izvodjac":"Fox","naslov":"Med i mleko","alias":[],"deezerId":1831254437,"itunesId":1635394397,"omot":"https://cdn-images.dzcdn.net/images/cover/4487b1d0eee64f72f820274400985d53/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1831254437 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
+  select '2026-12-06', 1, 2, id, '{"izvodjac":"Teodora","naslov":"Karma","alias":[],"deezerId":2894937281,"itunesId":1757907832,"omot":"https://cdn-images.dzcdn.net/images/cover/82ce379f18e5ecbdfe4958c8dacc36c9/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2894937281 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-06', 1, 3, id, '{"izvodjac":"Sergej Ćetković","naslov":"Moje si sve","alias":[],"deezerId":730632182,"itunesId":1578050207,"omot":"https://cdn-images.dzcdn.net/images/cover/29538440bec932a65ae1bf6ad8ea67b7/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 730632182 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
+  select '2026-12-06', 1, 3, id, '{"izvodjac":"Novi Fosili","naslov":"Milena","alias":[],"deezerId":714874232,"itunesId":382774596,"omot":"https://cdn-images.dzcdn.net/images/cover/b4952ad09b711675c61ee10cbe4b66d4/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 714874232 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-06', 1, 4, id, '{"izvodjac":"Lepa Brena","naslov":"Jugoslovenka","alias":[],"deezerId":995385502,"itunesId":1573972496,"omot":"https://cdn-images.dzcdn.net/images/cover/556f4f80e7caffdda0164e3f06ccff3e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 995385502 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-06', 1, 5, id, '{"izvodjac":"Prljavo Kazalište","naslov":"Mi plešemo","alias":[],"deezerId":928567582,"itunesId":1524440040,"omot":"https://cdn-images.dzcdn.net/images/cover/99065d103e923d88404b441efbf85de6/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 928567582 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
+  select '2026-12-06', 1, 5, id, '{"izvodjac":"Parni Valjak","naslov":"Jesen u meni","alias":[],"deezerId":3020609441,"itunesId":1805023586,"omot":"https://cdn-images.dzcdn.net/images/cover/07cb8373f4064a1517f69937dd4b4217/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3020609441 and not exists (select 1 from public.plays where quiz_date = '2026-12-06')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-12-06', 2, 1, id, '{"naziv":"Carnex domaća kobasica","kolicina":"310 g","slika":"/artikli/8600012503975.webp","cena":321,"min":272.49,"max":359.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-20"}'::jsonb
@@ -2444,16 +2444,16 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 3538539621 and not exists (select 1 from public.plays where quiz_date = '2026-12-07')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-07', 1, 2, id, '{"izvodjac":"Partibrejkers","naslov":"Kreni prema meni","alias":[],"deezerId":3059311951,"itunesId":593942049,"omot":"https://cdn-images.dzcdn.net/images/cover/f435aa3327ce69c3eef695aff519dd7f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3059311951 and not exists (select 1 from public.plays where quiz_date = '2026-12-07')
+  select '2026-12-07', 1, 2, id, '{"izvodjac":"Bijelo Dugme","naslov":"Lipe cvatu, sve je isto ko i lani","alias":[],"deezerId":69403518,"itunesId":1534027712,"omot":"https://cdn-images.dzcdn.net/images/cover/f757bf3ecc5d3f8472581002746cdba4/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 69403518 and not exists (select 1 from public.plays where quiz_date = '2026-12-07')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-07', 1, 3, id, '{"izvodjac":"Viki Miljković","naslov":"Mariš li","alias":[],"deezerId":1458112122,"itunesId":1578151710,"omot":"https://cdn-images.dzcdn.net/images/cover/fae5d2666bdba41f52c2180cf71613b0/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1458112122 and not exists (select 1 from public.plays where quiz_date = '2026-12-07')
+  select '2026-12-07', 1, 3, id, '{"izvodjac":"Lepa Lukić","naslov":"Srce je moje violina","alias":[],"deezerId":1578104222,"itunesId":1598866554,"omot":"https://cdn-images.dzcdn.net/images/cover/d57da09e8c6bc94c2ee0e825a77b4b4d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1578104222 and not exists (select 1 from public.plays where quiz_date = '2026-12-07')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-07', 1, 4, id, '{"izvodjac":"Konstrakta","naslov":"Mekano","alias":[],"deezerId":3283924601,"itunesId":1804422689,"omot":"https://cdn-images.dzcdn.net/images/cover/7d79c4d331a81930390d8149681850f9/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3283924601 and not exists (select 1 from public.plays where quiz_date = '2026-12-07')
+  select '2026-12-07', 1, 4, id, '{"izvodjac":"Tijana Dapčević","naslov":"Ljubi mi se","alias":[],"deezerId":2311433625,"itunesId":1578063047,"omot":"https://cdn-images.dzcdn.net/images/cover/e5527d9e0912b335ac1e06928c56aac1/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2311433625 and not exists (select 1 from public.plays where quiz_date = '2026-12-07')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-07', 1, 5, id, '{"izvodjac":"Buba Corelli","naslov":"Balenciaga","alias":[],"deezerId":2826423592,"itunesId":1869456343,"omot":"https://cdn-images.dzcdn.net/images/cover/755122dbe831587019a0ff9596c38b31/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2492,8 +2492,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 3293842061 and not exists (select 1 from public.plays where quiz_date = '2026-12-08')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-08', 1, 3, id, '{"izvodjac":"Plavi Orkestar","naslov":"Bolje biti pijan nego star","alias":[],"deezerId":2995426691,"itunesId":380612350,"omot":"https://cdn-images.dzcdn.net/images/cover/3ace58415594894c1dc27d86bf2ef59f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2995426691 and not exists (select 1 from public.plays where quiz_date = '2026-12-08')
+  select '2026-12-08', 1, 3, id, '{"izvodjac":"Ekatarina Velika","naslov":"Krug","alias":[],"deezerId":2178288537,"itunesId":1676062737,"omot":"https://cdn-images.dzcdn.net/images/cover/c9f573b1c326b7612b65ba29b18b9830/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2178288537 and not exists (select 1 from public.plays where quiz_date = '2026-12-08')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-08', 1, 4, id, '{"izvodjac":"Konstrakta","naslov":"In corpore sano","alias":[],"deezerId":1655110372,"itunesId":1610103739,"omot":"https://cdn-images.dzcdn.net/images/cover/fee2ed6185e41649eaa2382f0c076bf7/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2528,8 +2528,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-09', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-09' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-09');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-09', 1, 1, id, '{"izvodjac":"Dino Merlin","naslov":"Kad si rekla da me voliš","alias":[],"deezerId":23638701,"itunesId":1354468333,"omot":"https://cdn-images.dzcdn.net/images/cover/94a89a05b683fa85f3eefc09e9a5b155/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 23638701 and not exists (select 1 from public.plays where quiz_date = '2026-12-09')
+  select '2026-12-09', 1, 1, id, '{"izvodjac":"Magazin","naslov":"Minus i plus","alias":[],"deezerId":1006925662,"itunesId":488074453,"omot":"https://cdn-images.dzcdn.net/images/cover/9382f18da0cc7fbbcbcb9ce5c80ea7b1/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1006925662 and not exists (select 1 from public.plays where quiz_date = '2026-12-09')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-09', 1, 2, id, '{"izvodjac":"Željko Samardžić","naslov":"9000 metara","alias":["Devet hiljada metara"],"deezerId":458468242,"itunesId":1578134286,"omot":"https://cdn-images.dzcdn.net/images/cover/bd90f01cb0edb6a944408d7ab9361916/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2580,8 +2580,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 1246517092 and not exists (select 1 from public.plays where quiz_date = '2026-12-10')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-10', 1, 3, id, '{"izvodjac":"Henny","naslov":"Neka neka","alias":[],"deezerId":4170273902,"itunesId":6793555937,"omot":"https://cdn-images.dzcdn.net/images/cover/0d3914c4246d6463943b8588d801d900/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 4170273902 and not exists (select 1 from public.plays where quiz_date = '2026-12-10')
+  select '2026-12-10', 1, 3, id, '{"izvodjac":"Jala Brat","naslov":"Ajkula","alias":[],"deezerId":3991260501,"itunesId":6764452931,"omot":"https://cdn-images.dzcdn.net/images/cover/acb4e11962d9ecee31354dfb648c1124/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3991260501 and not exists (select 1 from public.plays where quiz_date = '2026-12-10')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-10', 1, 4, id, '{"izvodjac":"Željko Joksimović","naslov":"Ljubavi","alias":[],"deezerId":543692302,"itunesId":1578062227,"omot":"https://cdn-images.dzcdn.net/images/cover/256eae96a498483a488a87f6aceb2339/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2620,16 +2620,16 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 3524465801 and not exists (select 1 from public.plays where quiz_date = '2026-12-11')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-11', 1, 2, id, '{"izvodjac":"Zana","naslov":"Vejte snegovi","alias":[],"deezerId":3084062441,"itunesId":1778693977,"omot":"https://cdn-images.dzcdn.net/images/cover/3d8ddab6e5bdf73d549723a9e43ee125/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3084062441 and not exists (select 1 from public.plays where quiz_date = '2026-12-11')
+  select '2026-12-11', 1, 2, id, '{"izvodjac":"Bijelo Dugme","naslov":"Hajdemo u planine","alias":[],"deezerId":2944232721,"itunesId":1534030335,"omot":"https://cdn-images.dzcdn.net/images/cover/e3fd54413b08a6a79a54d20d5332d008/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 2944232721 and not exists (select 1 from public.plays where quiz_date = '2026-12-11')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-11', 1, 3, id, '{"izvodjac":"Breskvica","naslov":"Gnezdo orlovo","alias":[],"deezerId":2633403092,"itunesId":1727602018,"omot":"https://cdn-images.dzcdn.net/images/cover/4906bdcdd71f3d9ba01b45bd06a5101e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 2633403092 and not exists (select 1 from public.plays where quiz_date = '2026-12-11')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-11', 1, 4, id, '{"izvodjac":"Bajaga i Instruktori","naslov":"Tišina","alias":[],"deezerId":3265454081,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/773908c4ad7bd859a9fd036880c16a28/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3265454081 and not exists (select 1 from public.plays where quiz_date = '2026-12-11')
+  select '2026-12-11', 1, 4, id, '{"izvodjac":"Zana","naslov":"Vejte snegovi","alias":[],"deezerId":3084062441,"itunesId":1778693977,"omot":"https://cdn-images.dzcdn.net/images/cover/3d8ddab6e5bdf73d549723a9e43ee125/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3084062441 and not exists (select 1 from public.plays where quiz_date = '2026-12-11')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-11', 1, 5, id, '{"izvodjac":"Dara Bubamara","naslov":"Kraj i tačka","alias":[],"deezerId":76953700,"itunesId":853807117,"omot":"https://cdn-images.dzcdn.net/images/cover/39969f9ae6ee3e7e45b3504aaa96e5dc/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2660,8 +2660,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-12', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-12' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-12');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-12', 1, 1, id, '{"izvodjac":"Marija Šerifović","naslov":"Bol do ludila","alias":[],"deezerId":543705752,"itunesId":1578021817,"omot":"https://cdn-images.dzcdn.net/images/cover/a4ba12f349f6e58537ac9b90adc75ebc/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 543705752 and not exists (select 1 from public.plays where quiz_date = '2026-12-12')
+  select '2026-12-12', 1, 1, id, '{"izvodjac":"Oliver Dragojević","naslov":"Cesarica","alias":[],"deezerId":913359072,"itunesId":1860043542,"omot":"https://cdn-images.dzcdn.net/images/cover/b647ab5afc0abba741a8514db92096c1/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 913359072 and not exists (select 1 from public.plays where quiz_date = '2026-12-12')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-12', 1, 2, id, '{"izvodjac":"Senidah","naslov":"Behute","alias":[],"deezerId":1638064402,"itunesId":1607524195,"omot":"https://cdn-images.dzcdn.net/images/cover/93b6ff1e82ee0b56b201d4ad2ef0927c/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2704,24 +2704,24 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-13', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-13' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-13');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-13', 1, 1, id, '{"izvodjac":"Parni Valjak","naslov":"Jesen u meni","alias":[],"deezerId":3020609441,"itunesId":1805023586,"omot":"https://cdn-images.dzcdn.net/images/cover/07cb8373f4064a1517f69937dd4b4217/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3020609441 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
+  select '2026-12-13', 1, 1, id, '{"izvodjac":"Kerber","naslov":"Hajde da se volimo","alias":[],"deezerId":1523410942,"itunesId":1590828706,"omot":"https://cdn-images.dzcdn.net/images/cover/8f5c589408e426f6b63cd14ca4a8f292/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1523410942 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-13', 1, 2, id, '{"izvodjac":"Ceca","naslov":"Pile","alias":[],"deezerId":1556613902,"itunesId":1596088430,"omot":"https://cdn-images.dzcdn.net/images/cover/1213cb13846dfb0e563b1c60ee4c9e72/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1556613902 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-13', 1, 3, id, '{"izvodjac":"Lexington","naslov":"Dobro da nije veće zlo","alias":[],"deezerId":583784202,"itunesId":1578010629,"omot":"https://cdn-images.dzcdn.net/images/cover/1e9ef340a9b56b96d2d3b4b7d21e84f7/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  select '2026-12-13', 1, 2, id, '{"izvodjac":"Lexington","naslov":"Dobro da nije veće zlo","alias":[],"deezerId":583784202,"itunesId":1578010629,"omot":"https://cdn-images.dzcdn.net/images/cover/1e9ef340a9b56b96d2d3b4b7d21e84f7/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 583784202 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-13', 1, 4, id, '{"izvodjac":"Sky Wikluh","naslov":"Nedeljno jutro","alias":[],"deezerId":3527795001,"itunesId":1566420671,"omot":"https://cdn-images.dzcdn.net/images/cover/a0276d1619c0aa61a91e458e12ed280d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3527795001 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
+  select '2026-12-13', 1, 3, id, '{"izvodjac":"Halid Bešlić","naslov":"Miljacka","alias":[],"deezerId":1251889,"itunesId":1745064686,"omot":"https://cdn-images.dzcdn.net/images/cover/d290176d38d7f6fe336a43ea6d36c8d4/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1251889 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-13', 1, 5, id, '{"izvodjac":"Oliver Dragojević","naslov":"Cesarica","alias":[],"deezerId":913359072,"itunesId":1860043542,"omot":"https://cdn-images.dzcdn.net/images/cover/b647ab5afc0abba741a8514db92096c1/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 913359072 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
+  select '2026-12-13', 1, 4, id, '{"izvodjac":"Maya Berović","naslov":"Harem","alias":[],"deezerId":548432642,"itunesId":1578019371,"omot":"https://cdn-images.dzcdn.net/images/cover/2a04ba540fe6348ce1e56b0eb81ab139/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 548432642 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
+  select '2026-12-13', 1, 5, id, '{"izvodjac":"Jelena Karleuša","naslov":"Casino","alias":[],"deezerId":529458471,"itunesId":1578003439,"omot":"https://cdn-images.dzcdn.net/images/cover/af89681374eb5c26655685501498c266/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 529458471 and not exists (select 1 from public.plays where quiz_date = '2026-12-13')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-12-13', 2, 1, id, '{"naziv":"Dijamant suncokretovo ulje","kolicina":"1 l","slika":"/artikli/8600498170029.webp","cena":201,"min":195.66,"max":214.99,"najjeftinije":"Univerexport","datumCenovnika":"2026-11-20"}'::jsonb
@@ -2760,12 +2760,12 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 3746732432 and not exists (select 1 from public.plays where quiz_date = '2026-12-14')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-14', 1, 4, id, '{"izvodjac":"Ekatarina Velika","naslov":"Krug","alias":[],"deezerId":2178288537,"itunesId":1676062737,"omot":"https://cdn-images.dzcdn.net/images/cover/c9f573b1c326b7612b65ba29b18b9830/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 2178288537 and not exists (select 1 from public.plays where quiz_date = '2026-12-14')
+  select '2026-12-14', 1, 4, id, '{"izvodjac":"Goblini","naslov":"Daleki put","alias":[],"deezerId":591698172,"itunesId":1276248247,"omot":"https://cdn-images.dzcdn.net/images/cover/fb53e64a3602ced0726e63517463852a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 591698172 and not exists (select 1 from public.plays where quiz_date = '2026-12-14')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-14', 1, 5, id, '{"izvodjac":"Novi Fosili","naslov":"Milena","alias":[],"deezerId":714874232,"itunesId":382774596,"omot":"https://cdn-images.dzcdn.net/images/cover/b4952ad09b711675c61ee10cbe4b66d4/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 714874232 and not exists (select 1 from public.plays where quiz_date = '2026-12-14')
+  select '2026-12-14', 1, 5, id, '{"izvodjac":"Marija Šerifović","naslov":"Bol do ludila","alias":[],"deezerId":543705752,"itunesId":1578021817,"omot":"https://cdn-images.dzcdn.net/images/cover/a4ba12f349f6e58537ac9b90adc75ebc/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 543705752 and not exists (select 1 from public.plays where quiz_date = '2026-12-14')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-12-14', 2, 1, id, '{"naziv":"Somersby kruška","kolicina":"0,33 l","slika":"/artikli/8606106174564.webp","cena":162,"min":151.99,"max":171.32,"najjeftinije":"Lidl","datumCenovnika":"2026-11-20"}'::jsonb
@@ -2804,8 +2804,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 669816782 and not exists (select 1 from public.plays where quiz_date = '2026-12-15')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-15', 1, 4, id, '{"izvodjac":"Goblini","naslov":"Daleki put","alias":[],"deezerId":591698172,"itunesId":1276248247,"omot":"https://cdn-images.dzcdn.net/images/cover/fb53e64a3602ced0726e63517463852a/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 591698172 and not exists (select 1 from public.plays where quiz_date = '2026-12-15')
+  select '2026-12-15', 1, 4, id, '{"izvodjac":"Riblja Čorba","naslov":"Kad hodaš","alias":[],"deezerId":93808806,"itunesId":555300330,"omot":"https://cdn-images.dzcdn.net/images/cover/a57f6bccd03536f95bcf75fc1bd4bd84/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 93808806 and not exists (select 1 from public.plays where quiz_date = '2026-12-15')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-15', 1, 5, id, '{"izvodjac":"Hurricane","naslov":"Hasta la vista","alias":[],"deezerId":1403811522,"itunesId":1572121158,"omot":"https://cdn-images.dzcdn.net/images/cover/e91792489b4e003791b884abf6c3c185/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
@@ -2840,20 +2840,20 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 2619831592 and not exists (select 1 from public.plays where quiz_date = '2026-12-16')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-16', 1, 2, id, '{"izvodjac":"Boban Rajović","naslov":"Usne boje vina","alias":[],"deezerId":1097490802,"itunesId":1577984193,"omot":"https://cdn-images.dzcdn.net/images/cover/3d2467e404000ce8672df185747ce77e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1097490802 and not exists (select 1 from public.plays where quiz_date = '2026-12-16')
+  select '2026-12-16', 1, 2, id, '{"izvodjac":"Ceca","naslov":"Pile","alias":[],"deezerId":1556613902,"itunesId":1596088430,"omot":"https://cdn-images.dzcdn.net/images/cover/1213cb13846dfb0e563b1c60ee4c9e72/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1556613902 and not exists (select 1 from public.plays where quiz_date = '2026-12-16')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-16', 1, 3, id, '{"izvodjac":"Rasta","naslov":"Kavasaki","alias":[],"deezerId":2874736532,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/7c21ac45103f62c74a981e9860f0a2f3/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 2874736532 and not exists (select 1 from public.plays where quiz_date = '2026-12-16')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-16', 1, 4, id, '{"izvodjac":"Stoja","naslov":"Evropa","alias":[],"deezerId":3515146491,"itunesId":1834143575,"omot":"https://cdn-images.dzcdn.net/images/cover/4d6ab6c1df27a2b5f700554549ecb360/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 3515146491 and not exists (select 1 from public.plays where quiz_date = '2026-12-16')
+  select '2026-12-16', 1, 4, id, '{"izvodjac":"Dženan Lončarević","naslov":"Kosa do ramena","alias":[],"deezerId":548433942,"itunesId":1577987690,"omot":"https://cdn-images.dzcdn.net/images/cover/6a42211803bbb67e4ef1bbe446c62aea/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 548433942 and not exists (select 1 from public.plays where quiz_date = '2026-12-16')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-16', 1, 5, id, '{"izvodjac":"Jelena Karleuša","naslov":"Gili gili","alias":[],"deezerId":548426692,"itunesId":1578030416,"omot":"https://cdn-images.dzcdn.net/images/cover/e700192c2c74a291b44fb7151a94cb4d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 548426692 and not exists (select 1 from public.plays where quiz_date = '2026-12-16')
+  select '2026-12-16', 1, 5, id, '{"izvodjac":"Nina Badrić","naslov":"Moja ljubav","alias":[],"deezerId":65655353,"itunesId":1422700975,"omot":"https://cdn-images.dzcdn.net/images/cover/3c546353d7894c760714779d4d5ac761/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 65655353 and not exists (select 1 from public.plays where quiz_date = '2026-12-16')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-12-16', 2, 1, id, '{"naziv":"Plazma Stiksi","kolicina":"125 g","slika":"/artikli/8600043029512.webp","cena":250,"min":217.99,"max":270.67,"najjeftinije":"Lidl","datumCenovnika":"2026-11-20"}'::jsonb
@@ -2924,24 +2924,24 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-18', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-18' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-18');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-18', 1, 1, id, '{"izvodjac":"Željko Samardžić","naslov":"Grlica","alias":[],"deezerId":730630702,"itunesId":1690799736,"omot":"https://cdn-images.dzcdn.net/images/cover/5710206419be4921023ac329d20c707b/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 730630702 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
+  select '2026-12-18', 1, 1, id, '{"izvodjac":"Tony Cetinski","naslov":"Ako to se zove ljubav","alias":[],"deezerId":66429248,"itunesId":509534403,"omot":"https://cdn-images.dzcdn.net/images/cover/0b959c90add736fc2cc0c9117fc7b2f5/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 66429248 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-18', 1, 2, id, '{"izvodjac":"Kerber","naslov":"Hajde da se volimo","alias":[],"deezerId":1523410942,"itunesId":1590828706,"omot":"https://cdn-images.dzcdn.net/images/cover/8f5c589408e426f6b63cd14ca4a8f292/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1523410942 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
+  select '2026-12-18', 1, 2, id, '{"izvodjac":"Električni Orgazam","naslov":"Kako bubanj kaže","alias":[],"deezerId":23648731,"itunesId":505135797,"omot":"https://cdn-images.dzcdn.net/images/cover/1bc71d46e2635206baf4f0f648c5e4d5/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 23648731 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-18', 1, 3, id, '{"izvodjac":"Jelena Karleuša","naslov":"Casino","alias":[],"deezerId":529458471,"itunesId":1578003439,"omot":"https://cdn-images.dzcdn.net/images/cover/af89681374eb5c26655685501498c266/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 529458471 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
+  select '2026-12-18', 1, 3, id, '{"izvodjac":"Jelena Karleuša","naslov":"Gili gili","alias":[],"deezerId":548426692,"itunesId":1578030416,"omot":"https://cdn-images.dzcdn.net/images/cover/e700192c2c74a291b44fb7151a94cb4d/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 548426692 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-18', 1, 4, id, '{"izvodjac":"Džej Ramadanovski","naslov":"Nedelja","alias":[],"deezerId":75897511,"itunesId":814036745,"omot":"https://cdn-images.dzcdn.net/images/cover/66c50084acefb4789eb7e05595bfb910/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 75897511 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-18', 1, 5, id, '{"izvodjac":"Maya Berović","naslov":"Djevojačko prezime","alias":[],"deezerId":1524440122,"itunesId":1590557465,"omot":"https://cdn-images.dzcdn.net/images/cover/ac4b1783edfcbb3f1bf58eddff17e49e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1524440122 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
+  select '2026-12-18', 1, 5, id, '{"izvodjac":"Tea Tairović","naslov":"Bonita","alias":[],"deezerId":4016727801,"itunesId":6768663057,"omot":"https://cdn-images.dzcdn.net/images/cover/014f3ada4c9c543175a0ff1d51c2f609/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 4016727801 and not exists (select 1 from public.plays where quiz_date = '2026-12-18')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-12-18', 2, 1, id, '{"naziv":"13. jul Vranac","kolicina":"0,75 l","slika":"/artikli/3899003001001.webp","cena":586,"min":544.99,"max":649.99,"najjeftinije":"Super Vero","datumCenovnika":"2026-11-20"}'::jsonb
@@ -2984,8 +2984,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snap
   from public.songs where deezer_id = 3873062881 and not exists (select 1 from public.plays where quiz_date = '2026-12-19')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-19', 1, 5, id, '{"izvodjac":"U Škripcu","naslov":"Siđi do reke","alias":[],"deezerId":93538110,"itunesId":555295020,"omot":"https://cdn-images.dzcdn.net/images/cover/da3456422c95889d66d3ad006091172e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 93538110 and not exists (select 1 from public.plays where quiz_date = '2026-12-19')
+  select '2026-12-19', 1, 5, id, '{"izvodjac":"Partibrejkers","naslov":"Kreni prema meni","alias":[],"deezerId":3059311951,"itunesId":593942049,"omot":"https://cdn-images.dzcdn.net/images/cover/f435aa3327ce69c3eef695aff519dd7f/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3059311951 and not exists (select 1 from public.plays where quiz_date = '2026-12-19')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-12-19', 2, 1, id, '{"naziv":"Moja Kravica sveže mleko 2,8%","kolicina":"1,75 l","slika":"/artikli/8601500138655.webp","cena":227,"min":219.99,"max":230.62,"najjeftinije":"Aman","datumCenovnika":"2026-11-20"}'::jsonb
@@ -3012,24 +3012,24 @@ insert into public.daily_quiz_items (quiz_date, segment, position, product_id, s
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-12-20', 'published', now()) on conflict (quiz_date) do nothing;
 delete from public.daily_quiz_items where quiz_date = '2026-12-20' and segment in (1, 2) and not exists (select 1 from public.plays where quiz_date = '2026-12-20');
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-20', 1, 1, id, '{"izvodjac":"Galija","naslov":"Još uvek sanjam","alias":[],"deezerId":1029767952,"itunesId":1524533481,"omot":"https://cdn-images.dzcdn.net/images/cover/90332e72f902bd26deb0a195ea735fd6/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1029767952 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
+  select '2026-12-20', 1, 1, id, '{"izvodjac":"Bajaga i Instruktori","naslov":"Tišina","alias":[],"deezerId":3265454081,"itunesId":null,"omot":"https://cdn-images.dzcdn.net/images/cover/773908c4ad7bd859a9fd036880c16a28/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 3265454081 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-20', 1, 2, id, '{"izvodjac":"Bijelo Dugme","naslov":"Lipe cvatu, sve je isto ko i lani","alias":[],"deezerId":69403518,"itunesId":1534027712,"omot":"https://cdn-images.dzcdn.net/images/cover/f757bf3ecc5d3f8472581002746cdba4/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 69403518 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
+  select '2026-12-20', 1, 2, id, '{"izvodjac":"Prljavo Kazalište","naslov":"Mi plešemo","alias":[],"deezerId":928567582,"itunesId":1524440040,"omot":"https://cdn-images.dzcdn.net/images/cover/99065d103e923d88404b441efbf85de6/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 928567582 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-20', 1, 3, id, '{"izvodjac":"Jana","naslov":"Barabar","alias":[],"deezerId":464318182,"itunesId":1578095472,"omot":"https://cdn-images.dzcdn.net/images/cover/04c0112ae74703f7b22a47a7947ed328/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 464318182 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
+  select '2026-12-20', 1, 3, id, '{"izvodjac":"Boban Rajović","naslov":"Usne boje vina","alias":[],"deezerId":1097490802,"itunesId":1577984193,"omot":"https://cdn-images.dzcdn.net/images/cover/3d2467e404000ce8672df185747ce77e/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 1097490802 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
   select '2026-12-20', 1, 4, id, '{"izvodjac":"Buba Corelli","naslov":"Irina shayk","alias":[],"deezerId":2826320292,"itunesId":1869458438,"omot":"https://cdn-images.dzcdn.net/images/cover/4761914e79b106659915fb3cdfa44860/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
   from public.songs where deezer_id = 2826320292 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, song_id, snapshot)
-  select '2026-12-20', 1, 5, id, '{"izvodjac":"Doris Dragović","naslov":"Marija magdalena","alias":[],"deezerId":1014394102,"itunesId":1770595050,"omot":"https://cdn-images.dzcdn.net/images/cover/7c18db702f482e6b382ef82f6638a789/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
-  from public.songs where deezer_id = 1014394102 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
+  select '2026-12-20', 1, 5, id, '{"izvodjac":"Dino Merlin","naslov":"Kad si rekla da me voliš","alias":[],"deezerId":23638701,"itunesId":1354468333,"omot":"https://cdn-images.dzcdn.net/images/cover/94a89a05b683fa85f3eefc09e9a5b155/250x250-000000-80-0-0.jpg"}'::jsonb || jsonb_build_object('songId', id)
+  from public.songs where deezer_id = 23638701 and not exists (select 1 from public.plays where quiz_date = '2026-12-20')
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, product_id, snapshot)
   select '2026-12-20', 2, 1, id, '{"naziv":"Moja Kravica kisela pavlaka 20%","kolicina":"400 g","slika":"/artikli/8601500112419.webp","cena":187,"min":179.99,"max":189.99,"najjeftinije":"Lidl","datumCenovnika":"2026-11-20"}'::jsonb
