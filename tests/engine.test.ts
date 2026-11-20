@@ -69,7 +69,7 @@ async function odigraj(ident: Identitet, datum: string, unos: number) {
 describe("products.json i seed", () => {
   it("izbacuje artikle bez slike ili cene i ništa ne dopunjava", () => {
     expect(ucitani.proizvodi.length).toBe(76);
-    expect(ucitani.izbaceni.length).toBe(18);
+    expect(ucitani.izbaceni.length).toBe(100);
     expect(ucitani.izbaceni.every((x) => x.razlog === "nema sliku")).toBe(true);
     for (const p of ucitani.proizvodi) {
       expect(p.slika.startsWith("https://")).toBe(true);
