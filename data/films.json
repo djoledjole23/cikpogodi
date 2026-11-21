@@ -3,7 +3,9 @@
   "filmovi": [
     {
       "naslov": "Apsolutnih sto",
-      "alias": ["Apsolutnih 100"],
+      "alias": [
+        "Apsolutnih 100"
+      ],
       "slika": "/kadrovi/d9743ac1239e02.webp"
     },
     {
@@ -24,7 +26,9 @@
     },
     {
       "naslov": "Kad porastem biću Kengur",
-      "alias": ["Kengur"],
+      "alias": [
+        "Kengur"
+      ],
       "slika": "/kadrovi/2342208e45e0d5.webp"
     },
     {
@@ -37,7 +41,9 @@
     },
     {
       "naslov": "Lepa sela lepo gore",
-      "alias": ["Lepa sela"],
+      "alias": [
+        "Lepa sela"
+      ],
       "slika": "/kadrovi/27aca52c471053.webp"
     },
     {
@@ -46,17 +52,23 @@
     },
     {
       "naslov": "Maratonci trče počasni krug",
-      "alias": ["Maratonci"],
+      "alias": [
+        "Maratonci"
+      ],
       "slika": "/kadrovi/26fcfdf6ce0b4e.webp"
     },
     {
       "naslov": "Montevideo, Bog te video!",
-      "alias": ["Montevideo"],
+      "alias": [
+        "Montevideo"
+      ],
       "slika": "/kadrovi/c9bf06d591b178.webp"
     },
     {
       "naslov": "Mrtav 'ladan",
-      "alias": ["Mrtav hladan"],
+      "alias": [
+        "Mrtav hladan"
+      ],
       "slika": "/kadrovi/8cbcf42b3b8c7c.webp"
     },
     {
@@ -81,7 +93,9 @@
     },
     {
       "naslov": "Sedam i po",
-      "alias": ["7 i po"],
+      "alias": [
+        "7 i po"
+      ],
       "slika": "/kadrovi/51593cb69f6231.webp"
     },
     {
@@ -102,17 +116,23 @@
     },
     {
       "naslov": "Ubice mog oca",
-      "alias": ["Ubice moga oca"],
+      "alias": [
+        "Ubice moga oca"
+      ],
       "slika": "/kadrovi/ce43a77331335f.webp"
     },
     {
       "naslov": "Valter brani Sarajevo",
-      "alias": ["Valter"],
+      "alias": [
+        "Valter"
+      ],
       "slika": "/kadrovi/aea6ef7f9e918e.webp"
     },
     {
       "naslov": "Varljivo leto '68",
-      "alias": ["Varljivo leto"],
+      "alias": [
+        "Varljivo leto"
+      ],
       "slika": "/kadrovi/69d278902e4c57.webp"
     },
     {
@@ -121,8 +141,353 @@
     },
     {
       "naslov": "Zona Zamfirova",
-      "alias": ["Zona"],
+      "alias": [
+        "Zona"
+      ],
       "slika": "/kadrovi/0b6135f7ced4ae.webp"
+    },
+    {
+      "naslov": "Bure baruta",
+      "slika": "/kadrovi/74b285817c422d.webp"
+    },
+    {
+      "naslov": "Crna mačka, beli mačor",
+      "slika": "/kadrovi/815ef857493258.webp",
+      "alias": [
+        "Crna macka beli macor",
+        "Crna mačka beli mačor"
+      ]
+    },
+    {
+      "naslov": "Rane",
+      "slika": "/kadrovi/c99d5b262921f8.webp"
+    },
+    {
+      "naslov": "Balkan ekspres",
+      "slika": "/kadrovi/40758b744a158d.webp",
+      "alias": [
+        "Balkan express"
+      ]
+    },
+    {
+      "naslov": "Davitelj protiv davitelja",
+      "slika": "/kadrovi/475499fe954c78.webp"
+    },
+    {
+      "naslov": "Specijalno vaspitanje",
+      "slika": "/kadrovi/cf8f4eb466be71.webp"
+    },
+    {
+      "naslov": "Nacionalna klasa",
+      "slika": "/kadrovi/24e7f57eb62a7a.webp",
+      "alias": [
+        "Nacionalna klasa do 785 ccm"
+      ]
+    },
+    {
+      "naslov": "Sabirni centar",
+      "slika": "/kadrovi/96191c6c5dfe01.webp"
+    },
+    {
+      "naslov": "Profesionalac",
+      "slika": "/kadrovi/a0b756ac7d58a6.webp"
+    },
+    {
+      "naslov": "Šešir profesora Koste Vujića",
+      "slika": "/kadrovi/8e4827fa81a5a1.webp",
+      "alias": [
+        "Sesir profesora Koste Vujica",
+        "Šešir profesora Koste Vujića"
+      ]
+    },
+    {
+      "naslov": "Mi nismo anđeli",
+      "slika": "/kadrovi/cb0e6b8b55a0c5.webp",
+      "alias": [
+        "Mi nismo andjeli"
+      ]
+    },
+    {
+      "naslov": "Klopka",
+      "slika": "/kadrovi/fb36900e61d6aa.webp"
+    },
+    {
+      "naslov": "Šišanje",
+      "slika": "/kadrovi/bb91d77d17150f.webp",
+      "alias": [
+        "Sisanje"
+      ]
+    },
+    {
+      "naslov": "Pljačka Trećeg rajha",
+      "slika": "/kadrovi/7b5ddf833ead4f.webp",
+      "alias": [
+        "Pljacka Treceg rajha"
+      ]
+    },
+    {
+      "naslov": "Bićemo prvaci sveta",
+      "slika": "/kadrovi/6608c3c93a6f88.webp",
+      "alias": [
+        "Bicemo prvaci sveta"
+      ]
+    },
+    {
+      "naslov": "Rat uživo",
+      "slika": "/kadrovi/92105c1d5bec10.webp",
+      "alias": [
+        "Rat uzivo"
+      ]
+    },
+    {
+      "naslov": "Tri karte za Holivud",
+      "slika": "/kadrovi/1e435737ce5c41.webp",
+      "alias": [
+        "Tri karte za Hollywood",
+        "3 karte za Holivud"
+      ]
+    },
+    {
+      "naslov": "Tito i ja",
+      "slika": "/kadrovi/af6ba14c599ee1.webp"
+    },
+    {
+      "naslov": "Hajde da se volimo",
+      "slika": "/kadrovi/94d73fc8280f41.webp"
+    },
+    {
+      "naslov": "Bitka na Neretvi",
+      "slika": "/kadrovi/1b462c40f445da.webp"
+    },
+    {
+      "naslov": "Sutjeska",
+      "slika": "/kadrovi/3c79020045efac.webp"
+    },
+    {
+      "naslov": "Do koske",
+      "slika": "/kadrovi/611f72c23394d1.webp"
+    },
+    {
+      "naslov": "Šejtanov ratnik",
+      "slika": "/kadrovi/a27705799c0360.webp",
+      "alias": [
+        "Sejtanov ratnik"
+      ]
+    },
+    {
+      "naslov": "Nebeska udica",
+      "slika": "/kadrovi/49c857d84cf8c5.webp"
+    },
+    {
+      "naslov": "Optimisti",
+      "slika": "/kadrovi/2af1981e962872.webp"
+    },
+    {
+      "naslov": "Sivi kamion crvene boje",
+      "slika": "/kadrovi/caa7dafe578391.webp"
+    },
+    {
+      "naslov": "Kordon",
+      "slika": "/kadrovi/993e6e8ad2a766.webp"
+    },
+    {
+      "naslov": "Crni bombarder",
+      "slika": "/kadrovi/20afe8e5697f5e.webp"
+    },
+    {
+      "naslov": "Dara iz Jasenovca",
+      "slika": "/kadrovi/85cededd2ae9e6.webp",
+      "alias": [
+        "Dara"
+      ]
+    },
+    {
+      "naslov": "Klip",
+      "slika": "/kadrovi/768356be9926e8.webp"
+    },
+    {
+      "naslov": "Žikina dinastija",
+      "slika": "/kadrovi/7caff866e1531a.webp",
+      "alias": [
+        "Zikina dinastija"
+      ]
+    },
+    {
+      "naslov": "Kako je propao rokenrol",
+      "slika": "/kadrovi/ee4e6dfb5ae293.webp",
+      "alias": [
+        "Kako je propao rock and roll",
+        "Kako je propao rokenrol"
+      ]
+    },
+    {
+      "naslov": "Policajac sa Petlovog brda",
+      "slika": "/kadrovi/7f0916c186db67.webp"
+    },
+    {
+      "naslov": "Kamiondžije",
+      "slika": "/kadrovi/590ef52fc7ce0e.webp",
+      "alias": [
+        "Kamiondzije"
+      ]
+    },
+    {
+      "naslov": "Vruć vetar",
+      "slika": "/kadrovi/e0c2b74e66b4fb.webp",
+      "alias": [
+        "Vruc vetar"
+      ]
+    },
+    {
+      "naslov": "Pozorište u kući",
+      "slika": "/kadrovi/90491ad532233f.webp",
+      "alias": [
+        "Pozoriste u kuci"
+      ]
+    },
+    {
+      "naslov": "Grlom u jagode",
+      "slika": "/kadrovi/0f55d2c18c9621.webp"
+    },
+    {
+      "naslov": "Bolji život",
+      "slika": "/kadrovi/5c0d43bd1d2c40.webp",
+      "alias": [
+        "Bolji zivot"
+      ]
+    },
+    {
+      "naslov": "Srećni ljudi",
+      "slika": "/kadrovi/f43da492ce7348.webp",
+      "alias": [
+        "Srecni ljudi"
+      ]
+    },
+    {
+      "naslov": "Porodično blago",
+      "slika": "/kadrovi/60e879f7cad016.webp",
+      "alias": [
+        "Porodicno blago"
+      ]
+    },
+    {
+      "naslov": "Otpisani",
+      "slika": "/kadrovi/b8f13353e4e2da.webp"
+    },
+    {
+      "naslov": "Bela lađa",
+      "slika": "/kadrovi/85f3f207a3824e.webp",
+      "alias": [
+        "Bela ladja"
+      ]
+    },
+    {
+      "naslov": "Ljubav, navika, panika",
+      "slika": "/kadrovi/65012fcfbb7afe.webp",
+      "alias": [
+        "Ljubav navika panika"
+      ]
+    },
+    {
+      "naslov": "Selo gori, a baba se češlja",
+      "slika": "/kadrovi/6f82de1bc35654.webp",
+      "alias": [
+        "Selo gori a baba se češlja",
+        "Selo gori a baba se ceslja",
+        "Selo gori"
+      ]
+    },
+    {
+      "naslov": "Vratiće se rode",
+      "slika": "/kadrovi/9afa3a43af7b67.webp",
+      "alias": [
+        "Vratice se rode"
+      ]
+    },
+    {
+      "naslov": "Sinđelići",
+      "slika": "/kadrovi/e02acc8c48dad1.webp",
+      "alias": [
+        "Sindjelici"
+      ]
+    },
+    {
+      "naslov": "Žigosani u reketu",
+      "slika": "/kadrovi/f036f1bb7a3ecb.webp",
+      "alias": [
+        "Zigosani u reketu"
+      ]
+    },
+    {
+      "naslov": "Jagodići",
+      "slika": "/kadrovi/6292e6931ffa64.webp",
+      "alias": [
+        "Jagodici"
+      ]
+    },
+    {
+      "naslov": "Moj rođak sa sela",
+      "slika": "/kadrovi/eed1aeb8fcddfb.webp",
+      "alias": [
+        "Moj rodjak sa sela"
+      ]
+    },
+    {
+      "naslov": "Folk",
+      "slika": "/kadrovi/a79d33664812e8.webp"
+    },
+    {
+      "naslov": "Klan",
+      "slika": "/kadrovi/d6ed304bf63361.webp"
+    },
+    {
+      "naslov": "Igra sudbine",
+      "slika": "/kadrovi/123f51054e1241.webp"
+    },
+    {
+      "naslov": "Državni službenik",
+      "slika": "/kadrovi/a5ad4f1ef525b8.webp",
+      "alias": [
+        "Drzavni sluzbenik"
+      ]
+    },
+    {
+      "naslov": "Besa",
+      "slika": "/kadrovi/87b39c6b1298a0.webp"
+    },
+    {
+      "naslov": "Miris kiše na Balkanu",
+      "slika": "/kadrovi/b6d5176dccb6d2.webp",
+      "alias": [
+        "Miris kise na Balkanu"
+      ]
+    },
+    {
+      "naslov": "Andrija i Anđelka",
+      "slika": "/kadrovi/cc67547c38c055.webp",
+      "alias": [
+        "Andrija i Andjelka"
+      ]
+    },
+    {
+      "naslov": "Vojna akademija",
+      "slika": "/kadrovi/0bad9e59555c34.webp"
+    },
+    {
+      "naslov": "Nečista krv: Greh predaka",
+      "slika": "/kadrovi/a127d46f4324bc.webp",
+      "alias": [
+        "Nečista krv",
+        "Necista krv",
+        "Necista krv Greh predaka"
+      ]
+    },
+    {
+      "naslov": "Jutro će promeniti sve",
+      "slika": "/kadrovi/9e2d03e0873135.webp",
+      "alias": [
+        "Jutro ce promeniti sve"
+      ]
     }
   ]
 }
