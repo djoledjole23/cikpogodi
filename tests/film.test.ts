@@ -49,15 +49,15 @@ beforeAll(async () => {
 });
 
 describe("films.json i raspored", () => {
-  it("28 kadrova: fajl postoji, a adresa ne odaje naslov", () => {
-    expect(ucitani.filmovi.length).toBe(28);
+  it("87 kadrova: fajl postoji, a adresa ne odaje naslov", () => {
+    expect(ucitani.filmovi.length).toBe(87);
     expect(ucitani.izbaceni).toEqual([]);
-    expect(new Set(ucitani.filmovi.map((f) => f.slika)).size).toBe(28);
+    expect(new Set(ucitani.filmovi.map((f) => f.slika)).size).toBe(87);
     for (const f of ucitani.filmovi) {
       expect(existsSync(join(koren, "public", f.slika)), f.naslov).toBe(true);
       expect(f.slika).toMatch(/^\/kadrovi\/[0-9a-f]{14}\.webp$/);
     }
-    // u folderu nema ničega osim tih 28 slika (da ne ostane fajl sa naslovom u imenu)
+    // u folderu nema ničega osim tih 87 slika (da ne ostane fajl sa naslovom u imenu)
     expect(readdirSync(join(koren, "public/kadrovi")).sort()).toEqual(ucitani.filmovi.map((f) => f.slika.replace("/kadrovi/", "")).sort());
   });
 
@@ -81,8 +81,8 @@ describe("films.json i raspored", () => {
     });
     const broj = new Map<string, number>();
     for (const f of plan.flatMap((d) => d.filmovi)) broj.set(f.slika, (broj.get(f.slika) ?? 0) + 1);
-    expect(broj.size).toBe(28);
-    expect(Math.max(...broj.values())).toBe(2);
+    expect(broj.size).toBe(42);
+    expect(Math.max(...broj.values())).toBe(1);
     expect(planFilmova(ucitani.filmovi, POCETAK, 14)).toEqual(plan);
     expect(() => planFilmova(ucitani.filmovi.slice(0, 2), POCETAK, 1)).toThrow();
   });
@@ -92,7 +92,7 @@ describe("films.json i raspored", () => {
       `select (select count(*) from public.films)::int as filmova, (select count(*) from public.film_stills)::int as kadrova,
               (select count(*) from public.daily_quiz_items where segment = 4 and quiz_date < '2030-01-01')::int as stavki`,
     );
-    expect(n).toEqual({ filmova: 28, kadrova: 28, stavki: 42 });
+    expect(n).toEqual({ filmova: 87, kadrova: 87, stavki: 42 });
     const polise = await db.query<{ policyname: string }>(`select policyname from pg_policies where tablename in ('films', 'film_stills')`);
     expect(polise).toEqual([]);
   });

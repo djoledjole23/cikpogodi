@@ -3027,49 +3027,285 @@ insert into public.films (title, aliases) values ('Zona Zamfirova', array['Zona'
   on conflict (title) do update set aliases = excluded.aliases, active = true;
 insert into public.film_stills (film_id, image_url) select id, '/kadrovi/0b6135f7ced4ae.webp' from public.films where title = 'Zona Zamfirova'
   on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Bure baruta', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/74b285817c422d.webp' from public.films where title = 'Bure baruta'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Crna mačka, beli mačor', array['Crna macka beli macor', 'Crna mačka beli mačor']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/815ef857493258.webp' from public.films where title = 'Crna mačka, beli mačor'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Rane', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/c99d5b262921f8.webp' from public.films where title = 'Rane'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Balkan ekspres', array['Balkan express']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/40758b744a158d.webp' from public.films where title = 'Balkan ekspres'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Davitelj protiv davitelja', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/475499fe954c78.webp' from public.films where title = 'Davitelj protiv davitelja'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Specijalno vaspitanje', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/cf8f4eb466be71.webp' from public.films where title = 'Specijalno vaspitanje'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Nacionalna klasa', array['Nacionalna klasa do 785 ccm']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/24e7f57eb62a7a.webp' from public.films where title = 'Nacionalna klasa'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Sabirni centar', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/96191c6c5dfe01.webp' from public.films where title = 'Sabirni centar'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Profesionalac', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/a0b756ac7d58a6.webp' from public.films where title = 'Profesionalac'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Šešir profesora Koste Vujića', array['Sesir profesora Koste Vujica', 'Šešir profesora Koste Vujića']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/8e4827fa81a5a1.webp' from public.films where title = 'Šešir profesora Koste Vujića'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Mi nismo anđeli', array['Mi nismo andjeli']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/cb0e6b8b55a0c5.webp' from public.films where title = 'Mi nismo anđeli'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Klopka', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/fb36900e61d6aa.webp' from public.films where title = 'Klopka'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Šišanje', array['Sisanje']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/bb91d77d17150f.webp' from public.films where title = 'Šišanje'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Pljačka Trećeg rajha', array['Pljacka Treceg rajha']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/7b5ddf833ead4f.webp' from public.films where title = 'Pljačka Trećeg rajha'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Bićemo prvaci sveta', array['Bicemo prvaci sveta']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/6608c3c93a6f88.webp' from public.films where title = 'Bićemo prvaci sveta'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Rat uživo', array['Rat uzivo']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/92105c1d5bec10.webp' from public.films where title = 'Rat uživo'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Tri karte za Holivud', array['Tri karte za Hollywood', '3 karte za Holivud']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/1e435737ce5c41.webp' from public.films where title = 'Tri karte za Holivud'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Tito i ja', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/af6ba14c599ee1.webp' from public.films where title = 'Tito i ja'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Hajde da se volimo', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/94d73fc8280f41.webp' from public.films where title = 'Hajde da se volimo'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Bitka na Neretvi', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/1b462c40f445da.webp' from public.films where title = 'Bitka na Neretvi'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Sutjeska', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/3c79020045efac.webp' from public.films where title = 'Sutjeska'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Do koske', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/611f72c23394d1.webp' from public.films where title = 'Do koske'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Šejtanov ratnik', array['Sejtanov ratnik']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/a27705799c0360.webp' from public.films where title = 'Šejtanov ratnik'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Nebeska udica', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/49c857d84cf8c5.webp' from public.films where title = 'Nebeska udica'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Optimisti', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/2af1981e962872.webp' from public.films where title = 'Optimisti'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Sivi kamion crvene boje', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/caa7dafe578391.webp' from public.films where title = 'Sivi kamion crvene boje'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Kordon', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/993e6e8ad2a766.webp' from public.films where title = 'Kordon'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Crni bombarder', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/20afe8e5697f5e.webp' from public.films where title = 'Crni bombarder'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Dara iz Jasenovca', array['Dara']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/85cededd2ae9e6.webp' from public.films where title = 'Dara iz Jasenovca'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Klip', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/768356be9926e8.webp' from public.films where title = 'Klip'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Žikina dinastija', array['Zikina dinastija']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/7caff866e1531a.webp' from public.films where title = 'Žikina dinastija'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Kako je propao rokenrol', array['Kako je propao rock and roll', 'Kako je propao rokenrol']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/ee4e6dfb5ae293.webp' from public.films where title = 'Kako je propao rokenrol'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Policajac sa Petlovog brda', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/7f0916c186db67.webp' from public.films where title = 'Policajac sa Petlovog brda'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Kamiondžije', array['Kamiondzije']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/590ef52fc7ce0e.webp' from public.films where title = 'Kamiondžije'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Vruć vetar', array['Vruc vetar']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/e0c2b74e66b4fb.webp' from public.films where title = 'Vruć vetar'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Pozorište u kući', array['Pozoriste u kuci']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/90491ad532233f.webp' from public.films where title = 'Pozorište u kući'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Grlom u jagode', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/0f55d2c18c9621.webp' from public.films where title = 'Grlom u jagode'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Bolji život', array['Bolji zivot']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/5c0d43bd1d2c40.webp' from public.films where title = 'Bolji život'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Srećni ljudi', array['Srecni ljudi']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/f43da492ce7348.webp' from public.films where title = 'Srećni ljudi'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Porodično blago', array['Porodicno blago']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/60e879f7cad016.webp' from public.films where title = 'Porodično blago'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Otpisani', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/b8f13353e4e2da.webp' from public.films where title = 'Otpisani'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Bela lađa', array['Bela ladja']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/85f3f207a3824e.webp' from public.films where title = 'Bela lađa'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Ljubav, navika, panika', array['Ljubav navika panika']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/65012fcfbb7afe.webp' from public.films where title = 'Ljubav, navika, panika'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Selo gori, a baba se češlja', array['Selo gori a baba se češlja', 'Selo gori a baba se ceslja', 'Selo gori']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/6f82de1bc35654.webp' from public.films where title = 'Selo gori, a baba se češlja'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Vratiće se rode', array['Vratice se rode']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/9afa3a43af7b67.webp' from public.films where title = 'Vratiće se rode'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Sinđelići', array['Sindjelici']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/e02acc8c48dad1.webp' from public.films where title = 'Sinđelići'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Žigosani u reketu', array['Zigosani u reketu']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/f036f1bb7a3ecb.webp' from public.films where title = 'Žigosani u reketu'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Jagodići', array['Jagodici']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/6292e6931ffa64.webp' from public.films where title = 'Jagodići'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Moj rođak sa sela', array['Moj rodjak sa sela']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/eed1aeb8fcddfb.webp' from public.films where title = 'Moj rođak sa sela'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Folk', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/a79d33664812e8.webp' from public.films where title = 'Folk'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Klan', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/d6ed304bf63361.webp' from public.films where title = 'Klan'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Igra sudbine', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/123f51054e1241.webp' from public.films where title = 'Igra sudbine'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Državni službenik', array['Drzavni sluzbenik']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/a5ad4f1ef525b8.webp' from public.films where title = 'Državni službenik'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Besa', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/87b39c6b1298a0.webp' from public.films where title = 'Besa'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Miris kiše na Balkanu', array['Miris kise na Balkanu']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/b6d5176dccb6d2.webp' from public.films where title = 'Miris kiše na Balkanu'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Andrija i Anđelka', array['Andrija i Andjelka']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/cc67547c38c055.webp' from public.films where title = 'Andrija i Anđelka'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Vojna akademija', '{}'::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/0bad9e59555c34.webp' from public.films where title = 'Vojna akademija'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Nečista krv: Greh predaka', array['Nečista krv', 'Necista krv', 'Necista krv Greh predaka']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/a127d46f4324bc.webp' from public.films where title = 'Nečista krv: Greh predaka'
+  on conflict (image_url) do nothing;
+insert into public.films (title, aliases) values ('Jutro će promeniti sve', array['Jutro ce promeniti sve']::text[])
+  on conflict (title) do update set aliases = excluded.aliases, active = true;
+insert into public.film_stills (film_id, image_url) select id, '/kadrovi/9e2d03e0873135.webp' from public.films where title = 'Jutro će promeniti sve'
+  on conflict (image_url) do nothing;
 
 -- Dnevni kviz: segment 4 (Pogodi domaći film/seriju). Dan koji već ima stavke se ne dira.
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-15', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-15', 4, 1, id, '{"naslov":"Mali Budo","alias":[],"slika":"/kadrovi/8d3472b446bb96.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/8d3472b446bb96.webp'
+  select '2026-11-15', 4, 1, id, '{"naslov":"Kamiondžije","alias":["Kamiondzije"],"slika":"/kadrovi/590ef52fc7ce0e.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/590ef52fc7ce0e.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-15', 4, 2, id, '{"naslov":"Montevideo, Bog te video!","alias":["Montevideo"],"slika":"/kadrovi/c9bf06d591b178.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/c9bf06d591b178.webp'
+  select '2026-11-15', 4, 2, id, '{"naslov":"Crni bombarder","alias":[],"slika":"/kadrovi/20afe8e5697f5e.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/20afe8e5697f5e.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-15', 4, 3, id, '{"naslov":"Apsolutnih sto","alias":["Apsolutnih 100"],"slika":"/kadrovi/d9743ac1239e02.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/d9743ac1239e02.webp'
+  select '2026-11-15', 4, 3, id, '{"naslov":"Varljivo leto ''68","alias":["Varljivo leto"],"slika":"/kadrovi/69d278902e4c57.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/69d278902e4c57.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-16', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-16', 4, 1, id, '{"naslov":"Nedelja","alias":[],"slika":"/kadrovi/3a05c0c3d6723a.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/3a05c0c3d6723a.webp'
+  select '2026-11-16', 4, 1, id, '{"naslov":"Vratiće se rode","alias":["Vratice se rode"],"slika":"/kadrovi/9afa3a43af7b67.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/9afa3a43af7b67.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-16', 4, 2, id, '{"naslov":"Kad porastem biću Kengur","alias":["Kengur"],"slika":"/kadrovi/2342208e45e0d5.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/2342208e45e0d5.webp'
+  select '2026-11-16', 4, 2, id, '{"naslov":"Bure baruta","alias":[],"slika":"/kadrovi/74b285817c422d.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/74b285817c422d.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-16', 4, 3, id, '{"naslov":"Južni vetar","alias":[],"slika":"/kadrovi/b54ac478dd9f9e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/b54ac478dd9f9e.webp'
+  select '2026-11-16', 4, 3, id, '{"naslov":"Do koske","alias":[],"slika":"/kadrovi/611f72c23394d1.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/611f72c23394d1.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-17', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-17', 4, 1, id, '{"naslov":"Ubice mog oca","alias":["Ubice moga oca"],"slika":"/kadrovi/ce43a77331335f.webp"}'::jsonb
+  select '2026-11-17', 4, 1, id, '{"naslov":"Pljačka Trećeg rajha","alias":["Pljacka Treceg rajha"],"slika":"/kadrovi/7b5ddf833ead4f.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/7b5ddf833ead4f.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-17', 4, 2, id, '{"naslov":"Ubice mog oca","alias":["Ubice moga oca"],"slika":"/kadrovi/ce43a77331335f.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/ce43a77331335f.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-17', 4, 2, id, '{"naslov":"Lepa sela lepo gore","alias":["Lepa sela"],"slika":"/kadrovi/27aca52c471053.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/27aca52c471053.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-17', 4, 3, id, '{"naslov":"Zlatni dečko","alias":[],"slika":"/kadrovi/e21b6c218911f0.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/e21b6c218911f0.webp'
+  select '2026-11-17', 4, 3, id, '{"naslov":"Šišanje","alias":["Sisanje"],"slika":"/kadrovi/bb91d77d17150f.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/bb91d77d17150f.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-18', 'published', now())
   on conflict (quiz_date) do nothing;
@@ -3078,68 +3314,68 @@ insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id
   from public.film_stills where image_url = '/kadrovi/051f731cbbfa6a.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-18', 4, 2, id, '{"naslov":"Valter brani Sarajevo","alias":["Valter"],"slika":"/kadrovi/aea6ef7f9e918e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/aea6ef7f9e918e.webp'
+  select '2026-11-18', 4, 2, id, '{"naslov":"Kordon","alias":[],"slika":"/kadrovi/993e6e8ad2a766.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/993e6e8ad2a766.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-18', 4, 3, id, '{"naslov":"Mrtav ''ladan","alias":["Mrtav hladan"],"slika":"/kadrovi/8cbcf42b3b8c7c.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/8cbcf42b3b8c7c.webp'
+  select '2026-11-18', 4, 3, id, '{"naslov":"Nedelja","alias":[],"slika":"/kadrovi/3a05c0c3d6723a.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/3a05c0c3d6723a.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-19', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-19', 4, 1, id, '{"naslov":"Balkanski špijun","alias":[],"slika":"/kadrovi/266f47b4bf4330.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/266f47b4bf4330.webp'
+  select '2026-11-19', 4, 1, id, '{"naslov":"Vruć vetar","alias":["Vruc vetar"],"slika":"/kadrovi/e0c2b74e66b4fb.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/e0c2b74e66b4fb.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-19', 4, 2, id, '{"naslov":"Lajanje na zvezde","alias":[],"slika":"/kadrovi/910755bdb2d3ed.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/910755bdb2d3ed.webp'
+  select '2026-11-19', 4, 2, id, '{"naslov":"Optimisti","alias":[],"slika":"/kadrovi/2af1981e962872.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/2af1981e962872.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-19', 4, 3, id, '{"naslov":"Apsolutnih sto","alias":["Apsolutnih 100"],"slika":"/kadrovi/d9743ac1239e02.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/d9743ac1239e02.webp'
+  select '2026-11-19', 4, 3, id, '{"naslov":"Andrija i Anđelka","alias":["Andrija i Andjelka"],"slika":"/kadrovi/cc67547c38c055.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/cc67547c38c055.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-20', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-20', 4, 1, id, '{"naslov":"Kad porastem biću Kengur","alias":["Kengur"],"slika":"/kadrovi/2342208e45e0d5.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/2342208e45e0d5.webp'
+  select '2026-11-20', 4, 1, id, '{"naslov":"Balkanski špijun","alias":[],"slika":"/kadrovi/266f47b4bf4330.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/266f47b4bf4330.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-20', 4, 2, id, '{"naslov":"Nedelja","alias":[],"slika":"/kadrovi/3a05c0c3d6723a.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/3a05c0c3d6723a.webp'
+  select '2026-11-20', 4, 2, id, '{"naslov":"Kako je propao rokenrol","alias":["Kako je propao rock and roll","Kako je propao rokenrol"],"slika":"/kadrovi/ee4e6dfb5ae293.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/ee4e6dfb5ae293.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-20', 4, 3, id, '{"naslov":"Tesna koža","alias":[],"slika":"/kadrovi/3888635e9b8672.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/3888635e9b8672.webp'
+  select '2026-11-20', 4, 3, id, '{"naslov":"Jagodići","alias":["Jagodici"],"slika":"/kadrovi/6292e6931ffa64.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/6292e6931ffa64.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-21', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-21', 4, 1, id, '{"naslov":"Zona Zamfirova","alias":["Zona"],"slika":"/kadrovi/0b6135f7ced4ae.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/0b6135f7ced4ae.webp'
+  select '2026-11-21', 4, 1, id, '{"naslov":"Sinđelići","alias":["Sindjelici"],"slika":"/kadrovi/e02acc8c48dad1.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/e02acc8c48dad1.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-21', 4, 2, id, '{"naslov":"Balkanski špijun","alias":[],"slika":"/kadrovi/266f47b4bf4330.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/266f47b4bf4330.webp'
+  select '2026-11-21', 4, 2, id, '{"naslov":"Bitka na Neretvi","alias":[],"slika":"/kadrovi/1b462c40f445da.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/1b462c40f445da.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-21', 4, 3, id, '{"naslov":"Montevideo, Bog te video!","alias":["Montevideo"],"slika":"/kadrovi/c9bf06d591b178.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/c9bf06d591b178.webp'
+  select '2026-11-21', 4, 3, id, '{"naslov":"Sivi kamion crvene boje","alias":[],"slika":"/kadrovi/caa7dafe578391.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/caa7dafe578391.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-22', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-22', 4, 1, id, '{"naslov":"Nož","alias":[],"slika":"/kadrovi/0f95a920c25413.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/0f95a920c25413.webp'
+  select '2026-11-22', 4, 1, id, '{"naslov":"Tri karte za Holivud","alias":["Tri karte za Hollywood","3 karte za Holivud"],"slika":"/kadrovi/1e435737ce5c41.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/1e435737ce5c41.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-22', 4, 2, id, '{"naslov":"Munje!","alias":[],"slika":"/kadrovi/b78562811e4dfd.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/b78562811e4dfd.webp'
+  select '2026-11-22', 4, 2, id, '{"naslov":"Montevideo, Bog te video!","alias":["Montevideo"],"slika":"/kadrovi/c9bf06d591b178.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/c9bf06d591b178.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-22', 4, 3, id, '{"naslov":"Maratonci trče počasni krug","alias":["Maratonci"],"slika":"/kadrovi/26fcfdf6ce0b4e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/26fcfdf6ce0b4e.webp'
+  select '2026-11-22', 4, 3, id, '{"naslov":"Dara iz Jasenovca","alias":["Dara"],"slika":"/kadrovi/85cededd2ae9e6.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/85cededd2ae9e6.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-23', 'published', now())
   on conflict (quiz_date) do nothing;
@@ -3148,8 +3384,8 @@ insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id
   from public.film_stills where image_url = '/kadrovi/b54ac478dd9f9e.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-23', 4, 2, id, '{"naslov":"Ubice mog oca","alias":["Ubice moga oca"],"slika":"/kadrovi/ce43a77331335f.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/ce43a77331335f.webp'
+  select '2026-11-23', 4, 2, id, '{"naslov":"Nebeska udica","alias":[],"slika":"/kadrovi/49c857d84cf8c5.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/49c857d84cf8c5.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
   select '2026-11-23', 4, 3, id, '{"naslov":"Lajanje na zvezde","alias":[],"slika":"/kadrovi/910755bdb2d3ed.webp"}'::jsonb
@@ -3158,72 +3394,72 @@ insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-24', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-24', 4, 1, id, '{"naslov":"Svadba","alias":[],"slika":"/kadrovi/3f44ee5376ac8f.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/3f44ee5376ac8f.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-24', 4, 2, id, '{"naslov":"Ko to tamo peva","alias":[],"slika":"/kadrovi/dfd186e39dc288.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/dfd186e39dc288.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-24', 4, 3, id, '{"naslov":"Senke nad Balkanom","alias":[],"slika":"/kadrovi/99e6fa37dacc76.webp"}'::jsonb
+  select '2026-11-24', 4, 1, id, '{"naslov":"Senke nad Balkanom","alias":[],"slika":"/kadrovi/99e6fa37dacc76.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/99e6fa37dacc76.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-24', 4, 2, id, '{"naslov":"Klan","alias":[],"slika":"/kadrovi/d6ed304bf63361.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/d6ed304bf63361.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-24', 4, 3, id, '{"naslov":"Mali Budo","alias":[],"slika":"/kadrovi/8d3472b446bb96.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/8d3472b446bb96.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-25', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-25', 4, 1, id, '{"naslov":"Ivkova slava","alias":[],"slika":"/kadrovi/64db2b1fcfaceb.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/64db2b1fcfaceb.webp'
+  select '2026-11-25', 4, 1, id, '{"naslov":"Crna mačka, beli mačor","alias":["Crna macka beli macor","Crna mačka beli mačor"],"slika":"/kadrovi/815ef857493258.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/815ef857493258.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-25', 4, 2, id, '{"naslov":"Ranjeni orao","alias":[],"slika":"/kadrovi/051f731cbbfa6a.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/051f731cbbfa6a.webp'
+  select '2026-11-25', 4, 2, id, '{"naslov":"Balkan ekspres","alias":["Balkan express"],"slika":"/kadrovi/40758b744a158d.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/40758b744a158d.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-25', 4, 3, id, '{"naslov":"Lepa sela lepo gore","alias":["Lepa sela"],"slika":"/kadrovi/27aca52c471053.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/27aca52c471053.webp'
+  select '2026-11-25', 4, 3, id, '{"naslov":"Toma","alias":[],"slika":"/kadrovi/35d341e7bddb04.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/35d341e7bddb04.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-26', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-26', 4, 1, id, '{"naslov":"Valter brani Sarajevo","alias":["Valter"],"slika":"/kadrovi/aea6ef7f9e918e.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/aea6ef7f9e918e.webp'
+  select '2026-11-26', 4, 1, id, '{"naslov":"Folk","alias":[],"slika":"/kadrovi/a79d33664812e8.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/a79d33664812e8.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
   select '2026-11-26', 4, 2, id, '{"naslov":"Sedam i po","alias":["7 i po"],"slika":"/kadrovi/51593cb69f6231.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/51593cb69f6231.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-26', 4, 3, id, '{"naslov":"Toma","alias":[],"slika":"/kadrovi/35d341e7bddb04.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/35d341e7bddb04.webp'
+  select '2026-11-26', 4, 3, id, '{"naslov":"Vojna akademija","alias":[],"slika":"/kadrovi/0bad9e59555c34.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/0bad9e59555c34.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-27', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-27', 4, 1, id, '{"naslov":"Parada","alias":[],"slika":"/kadrovi/5d7b9193da21b5.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/5d7b9193da21b5.webp'
+  select '2026-11-27', 4, 1, id, '{"naslov":"Nacionalna klasa","alias":["Nacionalna klasa do 785 ccm"],"slika":"/kadrovi/24e7f57eb62a7a.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/24e7f57eb62a7a.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-27', 4, 2, id, '{"naslov":"Greh njene majke","alias":[],"slika":"/kadrovi/98c04ce7ffd86f.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/98c04ce7ffd86f.webp'
+  select '2026-11-27', 4, 2, id, '{"naslov":"Otpisani","alias":[],"slika":"/kadrovi/b8f13353e4e2da.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/b8f13353e4e2da.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-27', 4, 3, id, '{"naslov":"Mali Budo","alias":[],"slika":"/kadrovi/8d3472b446bb96.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/8d3472b446bb96.webp'
+  select '2026-11-27', 4, 3, id, '{"naslov":"Tesna koža","alias":[],"slika":"/kadrovi/3888635e9b8672.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/3888635e9b8672.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz (quiz_date, status, published_at) values ('2026-11-28', 'published', now())
   on conflict (quiz_date) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-28', 4, 1, id, '{"naslov":"Varljivo leto ''68","alias":["Varljivo leto"],"slika":"/kadrovi/69d278902e4c57.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/69d278902e4c57.webp'
-  on conflict (quiz_date, segment, position) do nothing;
-insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-28', 4, 2, id, '{"naslov":"Zlatni dečko","alias":[],"slika":"/kadrovi/e21b6c218911f0.webp"}'::jsonb
+  select '2026-11-28', 4, 1, id, '{"naslov":"Zlatni dečko","alias":[],"slika":"/kadrovi/e21b6c218911f0.webp"}'::jsonb
   from public.film_stills where image_url = '/kadrovi/e21b6c218911f0.webp'
   on conflict (quiz_date, segment, position) do nothing;
 insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
-  select '2026-11-28', 4, 3, id, '{"naslov":"Mrtav ''ladan","alias":["Mrtav hladan"],"slika":"/kadrovi/8cbcf42b3b8c7c.webp"}'::jsonb
-  from public.film_stills where image_url = '/kadrovi/8cbcf42b3b8c7c.webp'
+  select '2026-11-28', 4, 2, id, '{"naslov":"Državni službenik","alias":["Drzavni sluzbenik"],"slika":"/kadrovi/a5ad4f1ef525b8.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/a5ad4f1ef525b8.webp'
+  on conflict (quiz_date, segment, position) do nothing;
+insert into public.daily_quiz_items (quiz_date, segment, position, film_still_id, snapshot)
+  select '2026-11-28', 4, 3, id, '{"naslov":"Ljubav, navika, panika","alias":["Ljubav navika panika"],"slika":"/kadrovi/65012fcfbb7afe.webp"}'::jsonb
+  from public.film_stills where image_url = '/kadrovi/65012fcfbb7afe.webp'
   on conflict (quiz_date, segment, position) do nothing;
 
 -- Dnevni kviz: segment 5 (Joker pitanje). Dan koji već ima Jokera se ne dira.
