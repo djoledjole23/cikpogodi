@@ -2668,3 +2668,18 @@
     transform: scale(1);
   }
 }
+
+/* ───── desktop: igra u kartici na sredini ekrana (telefon se ne menja) ───── */
+
+@media (min-width: 900px) {
+  .g-shell {
+    max-width: 560px;
+    min-height: min(calc(100dvh - 48px), 940px);
+    margin: 24px auto;
+    padding: 20px 36px 28px;
+    border: 1px solid var(--line);
+    border-radius: 32px;
+    background: var(--bg);
+    box-shadow: 0 32px 90px rgb(0 0 0 / 0.45);
+  }
+}

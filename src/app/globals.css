@@ -779,10 +779,66 @@ body:has(.g-shell) .cookie {
 
 /* ───── desktop ───── */
 
+/* Sve ispod važi samo za široke ekrane; na telefonu se ništa ne menja. */
 @media (min-width: 900px) {
+  body {
+    background:
+      radial-gradient(1000px 560px at 50% -160px, color-mix(in srgb, var(--red) 16%, transparent), transparent 70%),
+      var(--bg);
+  }
+
+  /* Oko kartice sa igrom pozadina je tamnija, da se kartica izdvoji. */
+  body:has(.g-shell) {
+    background:
+      radial-gradient(1000px 560px at 50% -160px, color-mix(in srgb, var(--red) 14%, transparent), transparent 70%),
+      color-mix(in srgb, var(--bg) 62%, black);
+  }
+
   .shell {
     padding-top: 24px;
     padding-bottom: 40px;
+  }
+
+  /* Rang lista ima mesta da diše. */
+  .shell:has(.rang) {
+    max-width: 640px;
+  }
+}
+
+/* Početna: levo naslov i dugme (ostaje na mestu dok se skroluje), desno pravila i bodovanje. */
+@media (min-width: 1000px) {
+  .shell-pocetna {
+    max-width: 1080px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .main-pocetna {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 80px;
+    row-gap: 32px;
+    align-items: start;
+  }
+
+  .main-pocetna > section {
+    grid-column: 2;
+  }
+
+  .main-pocetna > .pocetna-hero {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    position: sticky;
+    top: 40px;
+    padding-top: 32px;
+  }
+
+  .pocetna-hero .logo-pogodi {
+    font-size: 112px;
+  }
+
+  .pocetna-hero .lead {
+    font-size: 20px;
   }
 }
 
