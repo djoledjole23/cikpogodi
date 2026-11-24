@@ -15,7 +15,7 @@ export type Rukovalac = {
   /** Vreme pitanja je preslušano vreme (pusti/pauza), a ne vreme od slanja pitanja. */
   meriSlusanje?: boolean;
   /** Odakle se pušta zvuk (samo segmenti sa zvukom). Ne ide u browser: koristi ga ruta /api/track. */
-  audio?(snapshot: unknown): { deezerId: number | null; itunesId: number | null };
+  audio?(snapshot: unknown): { deezerId: number | null; itunesId: number | null; izvodjac?: string; naslov?: string };
   /** Pitanje bez tačnog odgovora. */
   javno(snapshot: unknown): Pitanje;
   /** Ocenjuje odgovor. `sacuvaj` ide u bazu (play_answers.answer). */

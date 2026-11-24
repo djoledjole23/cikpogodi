@@ -227,7 +227,7 @@ describe("segment 1: pogodi pesmu", () => {
     const prvo = uvod.trenutno!.itemId;
     expect(await audioZaPitanje(db, ja, DAN, prvo)).toBeNull(); // još nije kliknuo „Kreni”
     await posaljiPitanje(db, ja, DAN);
-    expect(await audioZaPitanje(db, ja, DAN, prvo)).toEqual({ deezerId: 900001, itunesId: 77 });
+    expect(await audioZaPitanje(db, ja, DAN, prvo)).toMatchObject({ deezerId: 900001, itunesId: 77 });
     expect(await audioZaPitanje(db, ja, DAN, prvo + 1)).toBeNull(); // sledeće pitanje: ne može unapred
     expect(await audioZaPitanje(db, gost(), DAN, prvo)).toBeNull(); // tuđa igra
     expect(await audioZaPitanje(db, ja, "2030-03-04", prvo)).toBeNull();

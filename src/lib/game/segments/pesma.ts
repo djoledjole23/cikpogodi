@@ -67,7 +67,7 @@ export const pesma: Rukovalac = {
 
   audio(snapshot) {
     const s = snapshot as SnapshotPesma;
-    return { deezerId: s.deezerId ?? null, itunesId: s.itunesId ?? null };
+    return { deezerId: s.deezerId ?? null, itunesId: s.itunesId ?? null, izvodjac: s.izvodjac, naslov: s.naslov };
   },
 
   oceni(snapshot, odgovor, { protekloMs, istek }): { ocena: Ocena; sacuvaj: SacuvanoPesma } {
