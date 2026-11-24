@@ -123,7 +123,7 @@ insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_ur
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
-  values ('Severina', 'Gas, gas', '{}'::text[], 66239087, null, 'https://cdn-images.dzcdn.net/images/cover/b05932fbca6d5492ec27197ed2b84c38/250x250-000000-80-0-0.jpg', 'pop')
+  values ('Severina', 'Gas, gas', '{}'::text[], 595573712, 1578046206, 'https://cdn-images.dzcdn.net/images/cover/b05932fbca6d5492ec27197ed2b84c38/250x250-000000-80-0-0.jpg', 'pop')
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
@@ -591,7 +591,7 @@ insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_ur
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
-  values ('Severina', 'Italiana', '{}'::text[], 71437750, null, 'https://cdn-images.dzcdn.net/images/cover/31e88f73ba6d1ac2c29c8d7842cba3a3/250x250-000000-80-0-0.jpg', 'pop')
+  values ('Severina', 'Italiana', '{}'::text[], 595573432, 1578045666, 'https://cdn-images.dzcdn.net/images/cover/31e88f73ba6d1ac2c29c8d7842cba3a3/250x250-000000-80-0-0.jpg', 'pop')
   on conflict (deezer_id) do update set artist = excluded.artist, title = excluded.title, aliases = excluded.aliases,
     itunes_id = excluded.itunes_id, cover_url = excluded.cover_url, genre = excluded.genre, active = true;
 insert into public.songs (artist, title, aliases, deezer_id, itunes_id, cover_url, genre)
