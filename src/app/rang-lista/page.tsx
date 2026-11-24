@@ -69,10 +69,12 @@ async function Lista({ searchParams }: Pick<PageProps<"/rang-lista">, "searchPar
     <div className="stack-lg">
       {proba && <p className="small muted">Probni podaci: ovi igrači su izmišljeni i vide se samo na tvom računaru.</p>}
       <nav className="tabs" aria-label="Period">
+        {/* Običan link (cela strana se učita iznova), a ne <Link>: prelaz unutar aplikacije je
+            na istoj strani sa drugim ?period ume da ne uradi ništa, pa se činilo da dugme ne radi. */}
         {PERIODI.map((p) => (
-          <Link key={p} href={p === "danas" ? "/rang-lista" : `/rang-lista?period=${p}`} className="tab" aria-current={p === period ? "page" : undefined}>
+          <a key={p} href={p === "danas" ? "/rang-lista" : `/rang-lista?period=${p}`} className="tab" aria-current={p === period ? "page" : undefined}>
             {NAZIV_PERIODA[p]}
-          </Link>
+          </a>
         ))}
       </nav>
 
