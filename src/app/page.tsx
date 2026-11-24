@@ -8,8 +8,8 @@ import { getDanasnjaIgra } from "@/lib/plays";
 
 export default function Pocetna() {
   return (
-    <Page logo={false}>
-      <section className="stack" style={{ gap: 14 }}>
+    <Page logo={false} pocetna>
+      <section className="stack pocetna-hero" style={{ gap: 14 }}>
         <h1 className="logo">
           <span className="logo-cik">ČIK</span>
           <span className="logo-pogodi">Pogodi!</span>
